@@ -13,7 +13,7 @@ export default class XyPagination extends HTMLElement {
             display:flex;
             font-size:14px;
         }
-        xy-button {
+        c-button {
             margin: 0 .3em;
             width: 2.3em;
             height: 2.3em;
@@ -25,7 +25,7 @@ export default class XyPagination extends HTMLElement {
             width:auto;
             padding:0 .625em;
         }
-        xy-button[tabindex]{
+        c-button[tabindex]{
             justify-content: center;
             align-items: center;
             pointer-events: none;
@@ -33,7 +33,7 @@ export default class XyPagination extends HTMLElement {
         .page-ellipsis xy-icon{
             margin:auto;
         }
-        xy-button[current] {
+        c-button[current] {
             background: var(--themeBackground,var(--themeColor,#42b983));
             border-color: var(--themeColor,#42b983);
             color:#fff;
@@ -47,13 +47,13 @@ export default class XyPagination extends HTMLElement {
             fill: currentColor;
         }
         </style>
-        <xy-button type="flat" id="left" ${this.href?"href=1":""} target="_self">
+        <c-button type="flat" id="left" ${this.href?"href=1":""} target="_self">
             <svg class="icon" viewBox="0 0 1024 1024"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8c-16.4 12.8-16.4 37.5 0 50.3l450.8 352.1c5.3 4.1 12.9 0.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg>
-        </xy-button>
+        </c-button>
         <div class="page" id="page"></div>
-        <xy-button type="flat" id="right" ${this.href?"href=1":""} target="_self">
+        <c-button type="flat" id="right" ${this.href?"href=1":""} target="_self">
             <svg class="icon" viewBox="0 0 1024 1024"><path d="M765.7 486.8L314.9 134.7c-5.3-4.1-12.9-0.4-12.9 6.3v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1c16.4-12.8 16.4-37.6 0-50.4z"></path></svg>
-        </xy-button>
+        </c-button>
         `
     }
 
@@ -115,10 +115,10 @@ export default class XyPagination extends HTMLElement {
         this.count = Math.ceil(total/pagesize);
         const current = Math.min(Math.max(1,this.current),this.count);
         if(this.simple){
-            const html = `<xy-button class="simple-page" tabindex="-1" type="flat">${current} / ${this.count}</xy-button>`;
+            const html = `<c-button class="simple-page" tabindex="-1" type="flat">${current} / ${this.count}</c-button>`;
             this.page.innerHTML = html;
         }else{
-            const html = Array.from({length:this.count},(el,i)=>i).splice(0,9).map(el=>`<xy-button ${this.href?"href="+(el+1):""} target="_self" ${el+1==current?"current":""} type="flat" data-current="${el+1}">${el+1}</xy-button>`).join('');
+            const html = Array.from({length:this.count},(el,i)=>i).splice(0,9).map(el=>`<c-button ${this.href?"href="+(el+1):""} target="_self" ${el+1==current?"current":""} type="flat" data-current="${el+1}">${el+1}</c-button>`).join('');
             this.page.innerHTML = html;
         }
         this.updatePage(current);
@@ -155,7 +155,7 @@ export default class XyPagination extends HTMLElement {
                         place = [1,'pre',current-2,current-1,current,current+1,current+2,'next',this.count];
                         break;
                 }
-                this.page.querySelectorAll('xy-button').forEach((el,i)=>{
+                this.page.querySelectorAll('c-button').forEach((el,i)=>{
                     if( typeof place[i] === 'number'){
                         el.dataset.current = place[i];
                         el.textContent = place[i];
@@ -177,7 +177,7 @@ export default class XyPagination extends HTMLElement {
                     }
                 })
             }else{
-                this.page.querySelectorAll('xy-button').forEach((el,i)=>{
+                this.page.querySelectorAll('c-button').forEach((el,i)=>{
                     if(el.dataset.current==current){
                         el.setAttribute("current","");
                         el.focus();
@@ -199,7 +199,7 @@ export default class XyPagination extends HTMLElement {
         this.$current = this.defaultcurrent;
         this.render(this.pagesize,this.total);
         this.page.addEventListener('click',(ev)=>{
-            const item = ev.target.closest('xy-button');
+            const item = ev.target.closest('c-button');
             if(item){
                 this.current = Number(item.dataset.current);
             }

@@ -55,7 +55,7 @@ class XyDatePane extends HTMLElement {
             .date-switch[disabled]{
                 opacity:1;
             }
-            xy-button {
+            c-button {
                 padding: 1px;
                 font-size: inherit;
                 box-sizing: content-box;
@@ -253,15 +253,15 @@ class XyDatePane extends HTMLElement {
         </style>
         <div class="date-pane" id="date-pane">
             <div class="date-head">
-                <xy-button type="flat" class="prev">
+                <c-button type="flat" class="prev">
                     <svg class="icon" viewBox="0 0 1024 1024"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8c-16.4 12.8-16.4 37.5 0 50.3l450.8 352.1c5.3 4.1 12.9 0.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg>
-                </xy-button>
-                <xy-button type="flat" class="date-switch">
+                </c-button>
+                <c-button type="flat" class="date-switch">
                     2019-08
-                </xy-button>
-                <xy-button type="flat" class="next">
+                </c-button>
+                <c-button type="flat" class="next">
                     <svg class="icon" viewBox="0 0 1024 1024"><path d="M765.7 486.8L314.9 134.7c-5.3-4.1-12.9-0.4-12.9 6.3v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1c16.4-12.8 16.4-37.6 0-50.4z"></path></svg>
-                </xy-button>
+                </c-button>
             </div>
             <div class="date-con" data-type="date">
                 <div class="date-mode date-date">
@@ -978,17 +978,17 @@ export default class XyDatePicker extends HTMLElement {
             justify-content:flex-end;
             padding:0 .8em .8em;
         }
-        .pop-footer xy-button{
+        .pop-footer c-button{
             font-size: .8em;
             margin-left: .8em;
         }
         </style>
         <xy-popover class="date-picker" id="popover" ${this.dir? "dir='"+this.dir+"'" : ""}>
-            <xy-button id="select" ${this.disabled? "disabled" : ""}><span id="datetxt"></span><svg class="icon" viewBox="0 0 1024 1024"><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32z m-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z" p-id="8054"></path></svg></xy-button>
+            <c-button id="select" ${this.disabled? "disabled" : ""}><span id="datetxt"></span><svg class="icon" viewBox="0 0 1024 1024"><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32z m-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z" p-id="8054"></path></svg></c-button>
             <xy-popcon id="popcon" class="date-pane">
                 <div class="pop-footer">
-                    <xy-button autoclose>取 消</xy-button>
-                    <xy-button type="primary" id="btn-submit" autoclose>确 认</xy-button>
+                    <c-button autoclose>取 消</c-button>
+                    <c-button type="primary" id="btn-submit" autoclose>确 认</c-button>
                 </div>
             </xy-popcon>
         </xy-popover>

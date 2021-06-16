@@ -56,7 +56,7 @@ class XyPopcon extends HTMLElement {
             top:10px;
             border:0;
         }
-        .popcon-footer xy-button {
+        .popcon-footer c-button {
             font-size: .8em;
             margin-left: .8em;
         }
@@ -90,13 +90,13 @@ class XyPopcon extends HTMLElement {
             }
             <div class="popcon-content">
                 ${
-                    (type||this.type)!==null?'<div class="popcon-title" id="title">'+this.title+'</div><xy-button class="btn-close" id="btn-close" icon="close"></xy-button>':''
+                    (type||this.type)!==null?'<div class="popcon-title" id="title">'+this.title+'</div><c-button class="btn-close" id="btn-close" icon="close"></c-button>':''
                 }
                 <div class="popcon-body">
                     <slot></slot>
                 </div>
                 ${
-                    (type||this.type)==='confirm'?'<div class="popcon-footer"><xy-button id="btn-cancel">'+this.canceltext+'</xy-button><xy-button id="btn-submit" type="primary">'+this.oktext+'</xy-button></div>':''
+                    (type||this.type)==='confirm'?'<div class="popcon-footer"><c-button id="btn-cancel">'+this.canceltext+'</c-button><c-button id="btn-submit" type="primary">'+this.oktext+'</c-button></div>':''
                 }
             </div>
         `

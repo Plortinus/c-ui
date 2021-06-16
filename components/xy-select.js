@@ -129,7 +129,7 @@ export default class XySelect extends HTMLElement {
         <style id="filter"></style>
         <xy-popover id="root" ${this.search?"accomplish":""}>
             <xy-tips id="tip" type="error">
-                <${this.search?'xy-input':'xy-button'} id="select" debounce="200" readonly ${this.disabled? "disabled" : ""} ${this.type?("type="+this.type):""}>${this.search?"":'<span id="value"></span>'}<svg class="arrow" viewBox="0 0 1024 1024"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3 0.1-12.7-6.4-12.7z"></path></svg></${this.search?'xy-input':'xy-button'}>
+                <${this.search?'xy-input':'c-button'} id="select" debounce="200" readonly ${this.disabled? "disabled" : ""} ${this.type?("type="+this.type):""}>${this.search?"":'<span id="value"></span>'}<svg class="arrow" viewBox="0 0 1024 1024"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3 0.1-12.7-6.4-12.7z"></path></svg></${this.search?'xy-input':'c-button'}>
             </xy-tips>
             <xy-popcon id="options">
                 <slot id="slot"></slot>

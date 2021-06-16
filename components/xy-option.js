@@ -58,7 +58,7 @@ class XyOption extends HTMLElement {
                 color:var(--themeColor,#42b983)
             }
         </style>
-        <xy-button id="option" class="option" type="flat" ${this.disabled?"disabled":""}><slot></slot></xy-button>
+        <c-button id="option" class="option" type="flat" ${this.disabled?"disabled":""}><slot></slot></c-button>
         `
     }
 

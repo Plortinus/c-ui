@@ -82,7 +82,7 @@ class XyDialog extends HTMLElement {
             top:10px;
             border:0;
         }
-        .dialog-footer xy-button {
+        .dialog-footer c-button {
             margin-left:10px;
         }
         .dialog-type{
@@ -120,14 +120,14 @@ class XyDialog extends HTMLElement {
             <xy-icon id="dialog-type" class="dialog-type"></xy-icon>
             <div class="dialog-content">
                 <div class="dialog-title" id="title">${this.title}</div>
-                <xy-button class="btn-close" id="btn-close" icon="close"></xy-button>
+                <c-button class="btn-close" id="btn-close" icon="close"></c-button>
                 <div class="dialog-body">
                     <slot></slot>
                     ${(type||this.type)==="prompt"?"<xy-input></xy-input>":""}
                 </div>
                 <div class="dialog-footer">
-                    <xy-button id="btn-cancel">${this.canceltext}</xy-button>
-                    <xy-button id="btn-submit" type="primary">${this.oktext}</xy-button>
+                    <c-button id="btn-cancel">${this.canceltext}</c-button>
+                    <c-button id="btn-submit" type="primary">${this.oktext}</c-button>
                 </div>
             </div>
         </div>

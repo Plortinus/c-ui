@@ -257,7 +257,7 @@ export default class XyTab extends HTMLElement {
                     if(item.key===null){
                         item.key = index;
                     }
-                    html += `<xy-button class="nav-item ${item.key===this.activekey?'active':''}" icon=${item.icon} ${item.disabled!==null?"disabled":""} data-key=${item.key}>${item.label}</xy-button>`;
+                    html += `<c-button class="nav-item ${item.key===this.activekey?'active':''}" icon=${item.icon} ${item.disabled!==null?"disabled":""} data-key=${item.key}>${item.label}</c-button>`;
                 }
             })
             this.nav.innerHTML = html;
@@ -270,7 +270,7 @@ export default class XyTab extends HTMLElement {
             this.init = true;
         });
         this.nav.addEventListener('click',(ev)=>{
-            const item = ev.target.closest('xy-button');
+            const item = ev.target.closest('c-button');
             if(item){
                 this.activekey = item.dataset.key;
             }

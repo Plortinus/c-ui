@@ -149,7 +149,7 @@ export default class XyInput extends HTMLElement {
             visibility:hidden;
             transition:0s;
         }
-        .btn-number xy-button{
+        .btn-number c-button{
             display: flex;
             color: #999;
             border-radius:0;
@@ -160,11 +160,11 @@ export default class XyInput extends HTMLElement {
             transition:.2s;
         }
 
-        .btn-number xy-button:hover{
+        .btn-number c-button:hover{
             flex:1.5;
         }
 
-        xy-button:not([disabled]):hover,xy-button:not([disabled]):focus-within{
+        c-button:not([disabled]):hover,c-button:not([disabled]):focus-within{
             color:var(--themeColor,#42b983);
         }
 
@@ -198,19 +198,19 @@ export default class XyInput extends HTMLElement {
             }
             ${
                 this.type === 'password'&&!multi?
-                '<xy-button id="btn-pass" class="btn-right" icon="eye-close" type="flat" shape="circle"></xy-button>'
+                '<c-button id="btn-pass" class="btn-right" icon="eye-close" type="flat" shape="circle"></c-button>'
                 :
                 ''
             }
             ${
                 this.type === 'search'&&!multi?
-                '<xy-button id="btn-search" class="btn-right" icon="search" type="flat" shape="circle"></xy-button>'
+                '<c-button id="btn-search" class="btn-right" icon="search" type="flat" shape="circle"></c-button>'
                 :
                 ''
             }
             ${
                 this.type === 'number'&&!multi?
-                '<div class="btn-right btn-number"><xy-button id="btn-add" icon="up" type="flat"></xy-button><xy-button id="btn-sub" icon="down" type="flat"></xy-button></div>'
+                '<div class="btn-right btn-number"><c-button id="btn-add" icon="up" type="flat"></c-button><c-button id="btn-sub" icon="down" type="flat"></c-button></div>'
                 :
                 ''
             }

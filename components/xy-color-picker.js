@@ -530,7 +530,7 @@ export default class XyColorPicker extends HTMLElement {
             justify-content:flex-end;
             padding:0 .8em .8em;
         }
-        .pop-footer xy-button{
+        .pop-footer c-button{
             font-size: .8em;
             margin-left: .8em;
         }
@@ -548,11 +548,11 @@ export default class XyColorPicker extends HTMLElement {
         }
         </style>
         <xy-popover id="popover" ${this.dir? "dir='"+this.dir+"'" : ""}>
-            <xy-button class="color-btn" id="color-btn" ${this.disabled? "disabled" : ""}></xy-button>
+            <c-button class="color-btn" id="color-btn" ${this.disabled? "disabled" : ""}></c-button>
             <xy-popcon id="popcon">
                 <div class="pop-footer">
-                    <xy-button autoclose>取 消</xy-button>
-                    <xy-button type="primary" id="btn-submit" autoclose>确 认</xy-button>
+                    <c-button autoclose>取 消</c-button>
+                    <c-button type="primary" id="btn-submit" autoclose>确 认</c-button>
                 </div>
             </xy-popcon>
         </xy-popover>
