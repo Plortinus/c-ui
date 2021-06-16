@@ -1,4 +1,4 @@
-import './xy-button.js';
+import './c-button.js';
 import './xy-input.js';
 
 class XyDialog extends HTMLElement {

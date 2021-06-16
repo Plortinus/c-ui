@@ -1,5 +1,5 @@
 import './xy-tips.js';
-import './xy-button.js';
+import './c-button.js';
 
 export default class XyInput extends HTMLElement {
 

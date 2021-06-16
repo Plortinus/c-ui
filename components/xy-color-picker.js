@@ -1,4 +1,4 @@
-import './xy-button.js';
+import './c-button.js';
 import './xy-popover.js';
 import message from './xy-message.js';
 import { rgbToHsv,hslToHsv,parseToHSVA } from '../utils/color.js';

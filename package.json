@@ -1,6 +1,6 @@
 {
-  "name": "xy-ui",
-  "version": "1.10.1",
+  "name": "wbc-ui",
+  "version": "0.0.2",
   "description": "a front end cross-framework ui library based on web-components",
   "main": "index.js",
   "module": "index.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/XboxYan/xy-ui.git"
+    "url": "git+https://github.com/Plortinus/c-ui.git"
   },
   "keywords": [
     "web-components",
@@ -23,41 +23,44 @@
     "html5",
     "css3",
     "javascript",
-    "xy-button",
-    "xy-icon",
-    "xy-slider",
-    "xy-select",
-    "xy-loading",
-    "xy-switch",
-    "xy-checkbox",
-    "xy-radio",
-    "xy-tab",
-    "xy-layout",
-    "xy-tips",
-    "xy-message",
-    "xy-dialog",
-    "xy-input",
-    "xy-img",
-    "xy-rate",
-    "xy-popover",
-    "xy-color-picker",
-    "xy-color-pane",
-    "xy-form",
-    "xy-pagination",
-    "xy-date-picker",
-    "xy-date-pane",
-    "xy-table",
-    "xy-text",
-    "xy-view",
-    "xy-datalist"
+    "c-button",
+    "c-icon",
+    "c-slider",
+    "c-select",
+    "c-loading",
+    "c-switch",
+    "c-checkbox",
+    "c-radio",
+    "c-tab",
+    "c-layout",
+    "c-tips",
+    "c-message",
+    "c-dialog",
+    "c-input",
+    "c-img",
+    "c-rate",
+    "c-popover",
+    "c-color-picker",
+    "c-color-pane",
+    "c-form",
+    "c-pagination",
+    "c-date-picker",
+    "c-date-pane",
+    "c-table",
+    "c-text",
+    "c-view",
+    "c-datalist"
   ],
-  "author": "XboxYan",
+  "author": "Plortinus",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/XboxYan/xy-ui/issues"
+    "url": "https://github.com/Plortinus/c-ui/issues"
   },
-  "publishConfig": { 
-    "registry1": "https://npm.pkg.github.com/@XboxYan" 
+  "publishConfig": {
+    "registry1": "https://npm.pkg.github.com/@Plortinus"
   },
-  "homepage": "https://github.com/XboxYan/xy-ui#readme"
+  "homepage": "https://github.com/Plortinus/c-ui#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }

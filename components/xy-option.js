@@ -1,4 +1,4 @@
-import './xy-button.js';
+import './c-button.js';
 
 class XyOptionGroup extends HTMLElement {
     constructor() {

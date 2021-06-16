@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>xy-ui</title>
     <style>
-        xy-button,xy-checkbox,xy-radio,xy-input,xy-textarea,xy-color-picker,xy-select{ margin: 0 10px 15px 0; vertical-align: middle; }
+        c-button,xy-checkbox,xy-radio,xy-input,xy-textarea,xy-color-picker,xy-select{ margin: 0 10px 15px 0; vertical-align: middle; }
         xy-input:not([block]),xy-textarea:not([block]){ width:300px; }
         xy-tips>*{ margin: 0;}
         xy-popover>*{ margin: 0;}
@@ -101,7 +101,7 @@
     </style>
     <!-- <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/webcomponents-bundle.js"></script> -->
     <!--
-    <script type="module" src="./components/xy-button.js" async></script>
+    <script type="module" src="./components/c-button.js" async></script>
     <script type="module" src="./components/xy-slider.js" async></script>
     <script type="module" src="./components/xy-select.js" async></script>
     <script type="module" src="./components/xy-loading.js" async></script>
@@ -121,37 +121,37 @@
 
 <body>
     <h2>theme</h2>
-    <xy-button type="primary" class="theme-button" style="--themeColor:#1E90FF">#1E90FF</xy-button>
-    <xy-button type="primary" class="theme-button" style="--themeColor:#F44336">#F44336</xy-button>
-    <xy-button type="primary" class="theme-button" style="--themeColor:#9c27b0">#9c27b0</xy-button>
-    <xy-button type="primary" class="theme-button" style="--themeColor:#009688">#009688</xy-button>
-    <xy-button type="primary" class="theme-button" style="--themeColor:#3F51B5">#3F51B5</xy-button>
+    <c-button type="primary" class="theme-button" style="--themeColor:#1E90FF">#1E90FF</c-button>
+    <c-button type="primary" class="theme-button" style="--themeColor:#F44336">#F44336</c-button>
+    <c-button type="primary" class="theme-button" style="--themeColor:#9c27b0">#9c27b0</c-button>
+    <c-button type="primary" class="theme-button" style="--themeColor:#009688">#009688</c-button>
+    <c-button type="primary" class="theme-button" style="--themeColor:#3F51B5">#3F51B5</c-button>
     <h2>button</h2>
     <p>normal</p>
-    <xy-button type="primary" id="btn">primary</xy-button>
-    <xy-button type="dashed">dashed</xy-button>
-    <xy-button type="flat">flat</xy-button>
-    <xy-button>default</xy-button>
-    <xy-button type="primary" loading>loading</xy-button>
+    <c-button type="primary" id="btn">primary</c-button>
+    <c-button type="dashed">dashed</c-button>
+    <c-button type="flat">flat</c-button>
+    <c-button>default</c-button>
+    <c-button type="primary" loading>loading</c-button>
     <p>with icon</p>
-    <xy-button type="primary" icon="heart" shape="circle"></xy-button>
-    <xy-button type="dashed" icon="heart" shape="circle"></xy-button>
-    <xy-button type="flat" icon="heart" shape="circle"></xy-button>
-    <xy-button icon="heart" shape="circle"></xy-button>
-    <xy-button type="primary" icon="heart">like</xy-button>
-    <xy-button type="dashed" icon="search">search</xy-button>
-    <xy-button type="flat" icon="left">back</xy-button>
-    <xy-button icon="link">link</xy-button>
+    <c-button type="primary" icon="heart" shape="circle"></c-button>
+    <c-button type="dashed" icon="heart" shape="circle"></c-button>
+    <c-button type="flat" icon="heart" shape="circle"></c-button>
+    <c-button icon="heart" shape="circle"></c-button>
+    <c-button type="primary" icon="heart">like</c-button>
+    <c-button type="dashed" icon="search">search</c-button>
+    <c-button type="flat" icon="left">back</c-button>
+    <c-button icon="link">link</c-button>
     <p>block</p>
-    <xy-button type="primary" block><a>primary</a></xy-button>
-    <xy-button type="dashed" block>dashed</xy-button>
-    <xy-button type="flat" block>flat</xy-button>
-    <xy-button block>default</xy-button>
+    <c-button type="primary" block><a>primary</a></c-button>
+    <c-button type="dashed" block>dashed</c-button>
+    <c-button type="flat" block>flat</c-button>
+    <c-button block>default</c-button>
     <p>disabled</p>
-    <xy-button disabled type="primary" onclick="XyMessage.info('This a info message')"><a>primary</a></xy-button>
-    <xy-button disabled type="dashed">dashed</xy-button>
-    <xy-button disabled type="flat">flat</xy-button>
-    <xy-button disabled >default</xy-button>
+    <c-button disabled type="primary" onclick="XyMessage.info('This a info message')"><a>primary</a></c-button>
+    <c-button disabled type="dashed">dashed</c-button>
+    <c-button disabled type="flat">flat</c-button>
+    <c-button disabled >default</c-button>
     <h2>slider</h2>
     <xy-slider onchange="console.log(event)"></xy-slider>
     <xy-slider defaultvalue="100" min="0" max="300" step="5"></xy-slider>
@@ -194,25 +194,25 @@
     <xy-radio name="display" value="other">other</xy-radio>
     <h2>tips</h2>
     <p>normal</p>
-    <xy-tips tips="some tips"><xy-button>auto</xy-button></xy-tips>
-    <xy-tips tips="some tips" dir="top"><xy-button>top</xy-button></xy-tips>
-    <xy-tips tips="some tips" dir="right"><xy-button>right</xy-button></xy-tips>
-    <xy-tips tips="some tips" dir="bottom"><xy-button>bottom</xy-button></xy-tips>
-    <xy-tips tips="some tips" dir="left"><xy-button>left</xy-button></xy-tips>
-    <xy-tips tips="some some some some some some some some some some some some some some tips"><xy-button>some tips</xy-button></xy-tips>
-    <xy-tips tips="some tips" dir="topleft"><xy-button>topleft</xy-button></xy-tips>
-    <xy-tips tips="some tips" dir="topright"><xy-button>topright</xy-button></xy-tips>
-    <xy-tips tips="some some some some some some some some some some some some some some tips" dir="righttop"><xy-button>righttop</xy-button></xy-tips>
-    <xy-tips tips="some some some some some some some some some some some some some some tips" dir="rightbottom"><xy-button>rightbottom</xy-button></xy-tips>
-    <xy-tips tips="some tips" dir="bottomleft"><xy-button>bottomleft</xy-button></xy-tips>
-    <xy-tips tips="some tips" dir="bottomright"><xy-button>bottomright</xy-button></xy-tips>
-    <xy-tips tips="some some some some some some some some some some some some some some tips" dir="lefttop"><xy-button>lefttop</xy-button></xy-tips>
-    <xy-tips tips="some some some some some some some some some some some some some some tips" dir="leftbottom"><xy-button>leftbottom</xy-button></xy-tips>
+    <xy-tips tips="some tips"><c-button>auto</c-button></xy-tips>
+    <xy-tips tips="some tips" dir="top"><c-button>top</c-button></xy-tips>
+    <xy-tips tips="some tips" dir="right"><c-button>right</c-button></xy-tips>
+    <xy-tips tips="some tips" dir="bottom"><c-button>bottom</c-button></xy-tips>
+    <xy-tips tips="some tips" dir="left"><c-button>left</c-button></xy-tips>
+    <xy-tips tips="some some some some some some some some some some some some some some tips"><c-button>some tips</c-button></xy-tips>
+    <xy-tips tips="some tips" dir="topleft"><c-button>topleft</c-button></xy-tips>
+    <xy-tips tips="some tips" dir="topright"><c-button>topright</c-button></xy-tips>
+    <xy-tips tips="some some some some some some some some some some some some some some tips" dir="righttop"><c-button>righttop</c-button></xy-tips>
+    <xy-tips tips="some some some some some some some some some some some some some some tips" dir="rightbottom"><c-button>rightbottom</c-button></xy-tips>
+    <xy-tips tips="some tips" dir="bottomleft"><c-button>bottomleft</c-button></xy-tips>
+    <xy-tips tips="some tips" dir="bottomright"><c-button>bottomright</c-button></xy-tips>
+    <xy-tips tips="some some some some some some some some some some some some some some tips" dir="lefttop"><c-button>lefttop</c-button></xy-tips>
+    <xy-tips tips="some some some some some some some some some some some some some some tips" dir="leftbottom"><c-button>leftbottom</c-button></xy-tips>
     <p>status</p>
-    <xy-tips tips="some tips" type="success"><xy-button>success</xy-button></xy-tips>
-    <xy-tips tips="some tips" type="warning"><xy-button>warning</xy-button></xy-tips>
-    <xy-tips tips="some tips" type="error"><xy-button>error</xy-button></xy-tips>
-    <xy-tips tips="some tips" color="orangered"><xy-button>custom color</xy-button></xy-tips>
+    <xy-tips tips="some tips" type="success"><c-button>success</c-button></xy-tips>
+    <xy-tips tips="some tips" type="warning"><c-button>warning</c-button></xy-tips>
+    <xy-tips tips="some tips" type="error"><c-button>error</c-button></xy-tips>
+    <xy-tips tips="some tips" color="orangered"><c-button>custom color</c-button></xy-tips>
     <h2>select</h2>
     <xy-select onchange="console.log(event)">
         <xy-option value="1">Option1</xy-option>
@@ -310,13 +310,13 @@
         <xy-col span="16">22</xy-col>
     </xy-row>
     <h2>dialog</h2>
-    <xy-button type="primary" onclick="showDialog()">open dialog</xy-button>
-    <xy-button onclick="XyDialog.alert('alert')">alert</xy-button>
-    <xy-button id="confirm-btn">confirm</xy-button>
-    <xy-button onclick="XyDialog.info('info')">info</xy-button>
-    <xy-button onclick="XyDialog.success({title:'成功',content:'success',oktext:'send'})">success</xy-button>
-    <xy-button onclick="XyDialog.error('error')">error</xy-button>
-    <xy-button onclick="XyDialog.warning('warning')">warning</xy-button>
+    <c-button type="primary" onclick="showDialog()">open dialog</c-button>
+    <c-button onclick="XyDialog.alert('alert')">alert</c-button>
+    <c-button id="confirm-btn">confirm</c-button>
+    <c-button onclick="XyDialog.info('info')">info</c-button>
+    <c-button onclick="XyDialog.success({title:'成功',content:'success',oktext:'send'})">success</c-button>
+    <c-button onclick="XyDialog.error('error')">error</c-button>
+    <c-button onclick="XyDialog.warning('warning')">warning</c-button>
     <xy-dialog id="dialog02">232</xy-dialog>
     <xy-dialog id="dialog01" title="标题" oktext="确 定" canceltext="取消" >
         <xy-tab>
@@ -333,10 +333,10 @@
         </xy-tab>
     </xy-dialog>
     <h2>popover</h2>
-    <xy-popover type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><xy-button>pop confirm</xy-button></xy-popover>
-    <xy-popover disabled type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><xy-button>pop confirm disabled</xy-button></xy-popover>
+    <xy-popover type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>pop confirm</c-button></xy-popover>
+    <xy-popover disabled type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>pop confirm disabled</c-button></xy-popover>
     <xy-popover>
-        <xy-button>pop confirm</xy-button>
+        <c-button>pop confirm</c-button>
         <xy-popcon title="确定删除吗?" type="confirm" onsubmit="console.log('ok')">
             <div>
                 <div>自定义删除后无法撤销</div>
@@ -348,7 +348,7 @@
         </xy-popcon>
     </xy-popover>
     <xy-popover>
-        <xy-button>pop pane</xy-button>
+        <c-button>pop pane</c-button>
         <xy-popcon type="pane" title="提示">
             <div>
                 <div>这是一段提示提示提示提示提示</div>
@@ -360,7 +360,7 @@
         </xy-popcon>
     </xy-popover>
     <xy-popover>
-        <xy-button>pop flat</xy-button>
+        <c-button>pop flat</c-button>
         <xy-popcon>
             <div>
                 <div>这是一段提示提示提示</div>
@@ -372,18 +372,18 @@
         </xy-popcon>
     </xy-popover>
     <p>dir</p>
-    <xy-popover dir="top" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><xy-button>top</xy-button></xy-popover>
-    <xy-popover dir="right" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><xy-button>right</xy-button></xy-popover>
-    <xy-popover dir="bottom" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><xy-button>bottom</xy-button></xy-popover>
-    <xy-popover dir="left" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><xy-button>left</xy-button></xy-popover>
-    <xy-popover dir="lefttop" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><xy-button>lefttop</xy-button></xy-popover>
-    <xy-popover dir="leftbottom" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><xy-button>leftbottom</xy-button></xy-popover>
-    <xy-popover dir="topleft" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><xy-button>topleft</xy-button></xy-popover>
-    <xy-popover dir="topright" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><xy-button>topright</xy-button></xy-popover>
-    <xy-popover dir="righttop" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><xy-button>righttop</xy-button></xy-popover>
-    <xy-popover dir="rightbottom" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><xy-button>rightbottom</xy-button></xy-popover>
-    <xy-popover dir="bottomleft" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><xy-button>bottomleft</xy-button></xy-popover>
-    <xy-popover dir="bottomright" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><xy-button>bottomright</xy-button></xy-popover>
+    <xy-popover dir="top" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>top</c-button></xy-popover>
+    <xy-popover dir="right" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>right</c-button></xy-popover>
+    <xy-popover dir="bottom" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>bottom</c-button></xy-popover>
+    <xy-popover dir="left" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>left</c-button></xy-popover>
+    <xy-popover dir="lefttop" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>lefttop</c-button></xy-popover>
+    <xy-popover dir="leftbottom" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>leftbottom</c-button></xy-popover>
+    <xy-popover dir="topleft" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>topleft</c-button></xy-popover>
+    <xy-popover dir="topright" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>topright</c-button></xy-popover>
+    <xy-popover dir="righttop" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>righttop</c-button></xy-popover>
+    <xy-popover dir="rightbottom" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>rightbottom</c-button></xy-popover>
+    <xy-popover dir="bottomleft" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>bottomleft</c-button></xy-popover>
+    <xy-popover dir="bottomright" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>bottomright</c-button></xy-popover>
     <h2>color-picker</h2>
     <xy-color-picker defaultvalue="orangered" dir="righttop" onchange="console.log(event)"></xy-color-picker>
     <xy-color-pane defaultvalue="orangered" dir="righttop" onchange="console.log(event)"></xy-color-pane>
@@ -408,11 +408,11 @@
     <p>pane</p>
     <xy-date-pane style="width:400px"></xy-date-pane>
     <h2>message</h2>
-    <xy-button onclick="XyMessage.info('This a info message')">info</xy-button>
-    <xy-button onclick="XyMessage.success('This a success message')">success</xy-button>
-    <xy-button onclick="XyMessage.error('This a error message')">error</xy-button>
-    <xy-button onclick="XyMessage.warning('This a warning message')">warning</xy-button>
-    <xy-button onclick="XyMessage.loading('This a loading message')">loading</xy-button>
+    <c-button onclick="XyMessage.info('This a info message')">info</c-button>
+    <c-button onclick="XyMessage.success('This a success message')">success</c-button>
+    <c-button onclick="XyMessage.error('This a error message')">error</c-button>
+    <c-button onclick="XyMessage.warning('This a warning message')">warning</c-button>
+    <c-button onclick="XyMessage.loading('This a loading message')">loading</c-button>
     <h2>input</h2>
     <p>placeholder</p>
     <xy-input placeholder="user" defaultvalue="xboxyan"></xy-input>
@@ -522,8 +522,8 @@
             <xy-checkbox name="read" checked required value="read">I have read</xy-checkbox>
         </xy-form-item>
         <xy-form-item>
-            <xy-button type="primary" htmltype="submit">submit</xy-button>
-            <xy-button htmltype="reset">reset</xy-button>
+            <c-button type="primary" htmltype="submit">submit</c-button>
+            <c-button htmltype="reset">reset</c-button>
         </xy-form-item>
     </xy-form>
     <h2>view</h2>

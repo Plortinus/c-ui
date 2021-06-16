@@ -1,4 +1,4 @@
-import './xy-button.js';
+import './c-button.js';
 import './xy-popover.js';
 
 const toDate = (d) => {
