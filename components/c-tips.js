@@ -1,4 +1,4 @@
-export default class XyTips extends HTMLElement {
+export default class CTips extends HTMLElement {
 
     static get observedAttributes() { return ['color'] }
 
@@ -408,6 +408,6 @@ export default class XyTips extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-tips')){
-    customElements.define('xy-tips', XyTips);
+if(!customElements.get('c-tips')){
+    customElements.define('c-tips', CTips);
 }

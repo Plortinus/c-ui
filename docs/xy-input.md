@@ -1,4 +1,4 @@
-# xy-input
+# c-input
 
 输入框。用于替代原生`input`。
 
@@ -7,20 +7,20 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/xy-ui/components/xy-input.js';
+    import './node_modules/c-ui/components/c-input.js';
 </script>
 <!-- 使用 -->
-<xy-input></xy-input>
+<c-input></c-input>
 ```
 
 ## 初始值`defaultvalue`
 
 设置或返回输入框的默认值。
 
-<xy-input defaultvalue="XboxYan"></xy-input>
+<c-input defaultvalue="XboxYan"></c-input>
 
 ```html
-<xy-input defaultvalue="XboxYan"></xy-input>
+<c-input defaultvalue="XboxYan"></c-input>
 ```
 
 ## 标签`label`
@@ -29,42 +29,42 @@
 
 `label`属性提供了类似于`Metiral Design`的输入体验。
 
-<xy-input label="user"></xy-input>
+<c-input label="user"></c-input>
 
 
 ```html
-<xy-input label="user"></xy-input>
+<c-input label="user"></c-input>
 ```
 
 ## 占位`placeholder`
 
 与原生`placeholder`一致。当有`label`属性时无效。
 
-<xy-input placeholder="user"></xy-input>
+<c-input placeholder="user"></c-input>
 
 ```html
-<xy-input placeholder="user"></xy-input>
+<c-input placeholder="user"></c-input>
 ```
 
 ## 图标`icon`
 
 可以设置一个`icon`来表示标签标识，设置后`label`失效。
 
-<xy-input icon="user"></xy-input>
+<c-input icon="user"></c-input>
 
 ```html
-<xy-input icon="user"></xy-input>
+<c-input icon="user"></c-input>
 ```
 
 ## 禁用`disabled`
 
 通过`disabled`可以禁用输入框，禁用后该按钮上的事件失效。
 
-<xy-input label="user" disabled></xy-input>
-<xy-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></xy-switch>
+<c-input label="user" disabled></c-input>
+<c-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></c-switch>
 
 ```html
-<xy-input label="user" disabled></xy-input>
+<c-input label="user" disabled></c-input>
 ```
 
 JavaScript操作`get`、`set`
@@ -83,11 +83,11 @@ input.removeAttribute('disabled');
 
 通过`readonly`让输入框只读。
 
-<xy-input label="user" readonly defaultvalue="XboxYan"></xy-input>
-<xy-switch checked onchange="this.previousElementSibling.readonly = this.checked;"></xy-switch>
+<c-input label="user" readonly defaultvalue="XboxYan"></c-input>
+<c-switch checked onchange="this.previousElementSibling.readonly = this.checked;"></c-switch>
 
 ```html
-<xy-input label="user" readonly defaultvalue="XboxYan"></xy-input>
+<c-input label="user" readonly defaultvalue="XboxYan"></c-input>
 ```
 
 JavaScript操作`get`、`set`
@@ -106,20 +106,20 @@ input.removeAttribute('readonly');
 
 `block`属性将使按钮适合其父宽度。
 
-<xy-input label="user" block></xy-input>
+<c-input label="user" block></c-input>
 
 ```html
-<xy-input label="user" block></xy-input>
+<c-input label="user" block></c-input>
 ```
 
 ## 值`value`
 
 设置或返回输入框的`value`属性值。
-该属性值在`xy-input`标签上不可见。
+该属性值在`c-input`标签上不可见。
 
-<xy-input></xy-input>
-<xy-button type="primary" onclick="this.previousElementSibling.value='XboxYan'">设置value为XboxYan</xy-button>
-<xy-button type="primary" onclick="XyMessage.info('当前value: '+this.previousElementSibling.previousElementSibling.value)">显示当前value</xy-button>
+<c-input></c-input>
+<c-button type="primary" onclick="this.previousElementSibling.value='XboxYan'">设置value为XboxYan</c-button>
+<c-button type="primary" onclick="XyMessage.info('当前value: '+this.previousElementSibling.previousElementSibling.value)">显示当前value</c-button>
 
 JavaScript操作`get`、`set`
 
@@ -139,86 +139,86 @@ input.setAttribute('value','name');
 
 支持密码明文和密文切换。
 
-<xy-input icon="lock" type="password"></xy-input>
+<c-input icon="lock" type="password"></c-input>
 
 ```html
-<xy-input icon="lock" type="password"></xy-input>
+<c-input icon="lock" type="password"></c-input>
 ```
 
 ### type=search
 
 右侧出现`search`图标，点击会执行`onsubmit`事件
 
-<xy-input type="search" onsubmit="XyMessage.info(this.value)"></xy-input>
+<c-input type="search" onsubmit="XyMessage.info(this.value)"></c-input>
 
 ```html
-<xy-input type="search" onsubmit="XyMessage.info(this.value)"></xy-input>
+<c-input type="search" onsubmit="XyMessage.info(this.value)"></c-input>
 ```
 
 ### type=number
 
 数字输入框，类似于原生`input[type=number]`，支持`min`、`max`、`step`属性，支持键盘上下键切换数字。
 
-<xy-input icon="creditcard" type="number" min="-10" max="10" step="0.5" ></xy-input>
+<c-input icon="creditcard" type="number" min="-10" max="10" step="0.5" ></c-input>
 
 ```html
-<xy-input icon="creditcard" type="number" min="-10" max="10" step="0.5" ></xy-input>
+<c-input icon="creditcard" type="number" min="-10" max="10" step="0.5" ></c-input>
 ```
 
-## 组合`xy-input-group`
+## 组合`c-input-group`
 
-`<xy-input-group>`可以将表单元素组合起来，包括`xy-button`、`xy-input`、`xy-select`。
+`<c-input-group>`可以将表单元素组合起来，包括`c-button`、`c-input`、`c-select`。
 
-<xy-input-group>
-    <xy-select defaultvalue="https://">
-        <xy-option value="http://">http://</xy-option>
-        <xy-option value="https://">https://</xy-option>
-    </xy-select>
-    <xy-input></xy-input>
-    <xy-button type="primary">go</xy-button>
-</xy-input-group>
+<c-input-group>
+    <c-select defaultvalue="https://">
+        <c-option value="http://">http://</c-option>
+        <c-option value="https://">https://</c-option>
+    </c-select>
+    <c-input></c-input>
+    <c-button type="primary">go</c-button>
+</c-input-group>
 
 ```html
-<xy-input-group>
-    <xy-select defaultvalue="https://">
-        <xy-option value="http://">http://</xy-option>
-        <xy-option value="https://">https://</xy-option>
-    </xy-select>
-    <xy-input></xy-input>
-    <xy-button type="primary">go</xy-button>
-</xy-input-group>
+<c-input-group>
+    <c-select defaultvalue="https://">
+        <c-option value="http://">http://</c-option>
+        <c-option value="https://">https://</c-option>
+    </c-select>
+    <c-input></c-input>
+    <c-button type="primary">go</c-button>
+</c-input-group>
 ```
 
-<xy-input-group>
-    <xy-select defaultvalue="wuhan">
-        <xy-option value="wuhan">武汉</xy-option>
-        <xy-option value="shanghai">上海</xy-option>
-    </xy-select>
-    <xy-select defaultvalue="hongsan">
-        <xy-option value="hongsan">洪山区</xy-option>
-        <xy-option value="jiangxia">江夏区</xy-option>
-    </xy-select>
-    <xy-select defaultvalue="AAA">
-        <xy-option value="AAA">AAA</xy-option>
-        <xy-option value="BBB">BBB</xy-option>
-    </xy-select>
-</xy-input-group>
+<c-input-group>
+    <c-select defaultvalue="wuhan">
+        <c-option value="wuhan">武汉</c-option>
+        <c-option value="shanghai">上海</c-option>
+    </c-select>
+    <c-select defaultvalue="hongsan">
+        <c-option value="hongsan">洪山区</c-option>
+        <c-option value="jiangxia">江夏区</c-option>
+    </c-select>
+    <c-select defaultvalue="AAA">
+        <c-option value="AAA">AAA</c-option>
+        <c-option value="BBB">BBB</c-option>
+    </c-select>
+</c-input-group>
 
 ```html
-<xy-input-group>
-    <xy-select defaultvalue="wuhan">
-        <xy-option value="wuhan">武汉</xy-option>
-        <xy-option value="shanghai">上海</xy-option>
-    </xy-select>
-    <xy-select defaultvalue="hongsan">
-        <xy-option value="hongsan">洪山区</xy-option>
-        <xy-option value="jiangxia">江夏区</xy-option>
-    </xy-select>
-    <xy-select defaultvalue="AAA">
-        <xy-option value="AAA">AAA</xy-option>
-        <xy-option value="BBB">BBB</xy-option>
-    </xy-select>
-</xy-input-group>
+<c-input-group>
+    <c-select defaultvalue="wuhan">
+        <c-option value="wuhan">武汉</c-option>
+        <c-option value="shanghai">上海</c-option>
+    </c-select>
+    <c-select defaultvalue="hongsan">
+        <c-option value="hongsan">洪山区</c-option>
+        <c-option value="jiangxia">江夏区</c-option>
+    </c-select>
+    <c-select defaultvalue="AAA">
+        <c-option value="AAA">AAA</c-option>
+        <c-option value="BBB">BBB</c-option>
+    </c-select>
+</c-input-group>
 ```
 
 纯`CSS`布局实现。
@@ -231,28 +231,28 @@ input.setAttribute('value','name');
 
 #### 必填项`required`
 
-<xy-input icon="user" required placeholder="required"></xy-input>
+<c-input icon="user" required placeholder="required"></c-input>
 
 ```html
-<xy-input icon="user" required placeholder="required"></xy-input>
+<c-input icon="user" required placeholder="required"></c-input>
 ```
 
 #### 最小长度`minlength`、最大长度`minlength`
 
-<xy-input icon="user" placeholder="user" minlength="6" maxlength="10"></xy-input>
+<c-input icon="user" placeholder="user" minlength="6" maxlength="10"></c-input>
 
 ```html
-<xy-input icon="user" placeholder="user" minlength="6" maxlength="10"></xy-input>
+<c-input icon="user" placeholder="user" minlength="6" maxlength="10"></c-input>
 ```
 
 #### 邮箱email
 
 设置`type='email'`可以对邮箱格式进行校验。
 
-<xy-input icon="mail" type="email" placeholder="email"></xy-input>
+<c-input icon="mail" type="email" placeholder="email"></c-input>
 
 ```html
-<xy-input icon="mail" type="email" placeholder="email"></xy-input>
+<c-input icon="mail" type="email" placeholder="email"></c-input>
 ```
 
 这是原生支持的类型，如果不满足可以采用下面更为通用的正则校验。
@@ -261,50 +261,50 @@ input.setAttribute('value','name');
 
 设置`pattern`属性，这是一个正则。
 
-<xy-input icon="phone" pattern="^1(3|4|5|6|7|8|9)\d{9}$" placeholder="请输入手机号"></xy-input>
+<c-input icon="phone" pattern="^1(3|4|5|6|7|8|9)\d{9}$" placeholder="请输入手机号"></c-input>
 
 ```html
-<xy-input icon="phone" pattern="^1(3|4|5|6|7|8|9)\d{9}$" placeholder="请输入手机号"></xy-input>
+<c-input icon="phone" pattern="^1(3|4|5|6|7|8|9)\d{9}$" placeholder="请输入手机号"></c-input>
 ```
 
 默认提示信息可能不人性化，可以自定义提示信息`errortips`
 
-<xy-input icon="phone" pattern="^1(3|4|5|6|7|8|9)\d{9}$" placeholder="请输入手机号" errortips="手机号格式有误"></xy-input>
+<c-input icon="phone" pattern="^1(3|4|5|6|7|8|9)\d{9}$" placeholder="请输入手机号" errortips="手机号格式有误"></c-input>
 
 ```html
-<xy-input icon="phone" pattern="^1(3|4|5|6|7|8|9)\d{9}$" placeholder="请输入手机号" errortips="手机号格式有误"></xy-input>
+<c-input icon="phone" pattern="^1(3|4|5|6|7|8|9)\d{9}$" placeholder="请输入手机号" errortips="手机号格式有误"></c-input>
 ```
 
-可以设置提示信息的位置，默认为`top`，参考[`xy-tips`](xy-tips.md)。
+可以设置提示信息的位置，默认为`top`，参考[`c-tips`](c-tips.md)。
 
-<xy-input icon="mail" type="email" placeholder="email" errordir="right"></xy-input>
+<c-input icon="mail" type="email" placeholder="email" errordir="right"></c-input>
 
 ```html
-<xy-input icon="mail" type="email" placeholder="email" errordir="right"></xy-input>
+<c-input icon="mail" type="email" placeholder="email" errordir="right"></c-input>
 ```
 
 ### 3.自定义验证
 
 上面的校验均针对输入格式，如果需要对值进行校验，可使用`customValidity`，比如校验重复密码
 
-<xy-form>
-    <xy-form-item legend="password">
-        <xy-input name="password" id="pwd" required type="password" placeholder="password" minlength="6"></xy-input>
-    </xy-form-item>
-    <xy-form-item legend="password again">
-        <xy-input name="password_confirm" id="pwdAgain" required type="password" placeholder="password confirm"></xy-input>
-    </xy-form-item>
-<xy-form>
+<c-form>
+    <c-form-item legend="password">
+        <c-input name="password" id="pwd" required type="password" placeholder="password" minlength="6"></c-input>
+    </c-form-item>
+    <c-form-item legend="password again">
+        <c-input name="password_confirm" id="pwdAgain" required type="password" placeholder="password confirm"></c-input>
+    </c-form-item>
+<c-form>
 
 ```html
-<xy-form>
-    <xy-form-item legend="password">
-        <xy-input name="password" id="pwd" required type="password" placeholder="password" minlength="6"></xy-input>
-    </xy-form-item>
-    <xy-form-item legend="password again">
-        <xy-input name="password_confirm" id="pwdAgain" required type="password" placeholder="password confirm"></xy-input>
-    </xy-form-item>
-<xy-form>
+<c-form>
+    <c-form-item legend="password">
+        <c-input name="password" id="pwd" required type="password" placeholder="password" minlength="6"></c-input>
+    </c-form-item>
+    <c-form-item legend="password again">
+        <c-input name="password_confirm" id="pwdAgain" required type="password" placeholder="password confirm"></c-input>
+    </c-form-item>
+<c-form>
 ```
 
 自定义格式如下
@@ -322,18 +322,18 @@ pwdAgain.customValidity = {
 
 如果使用该属性，则输入时不进行验证。
 
-<xy-input icon="user" novalidate placeholder="user" minlength="6" maxlength="10"></xy-input>
+<c-input icon="user" novalidate placeholder="user" minlength="6" maxlength="10"></c-input>
 
 ```html
-<xy-input icon="user" novalidate placeholder="user" minlength="6" maxlength="10"></xy-input>
+<c-input icon="user" novalidate placeholder="user" minlength="6" maxlength="10"></c-input>
 ```
 
 ## 合法性`validity`
 
 可以通过属性`validity`来获取输入框内容的合法性。
 
-<xy-input required placeholder="required"></xy-input>
-<xy-button type="primary" onclick="XyMessage.info('合法性:'+this.previousElementSibling.validity)">合法性</xy-button>
+<c-input required placeholder="required"></c-input>
+<c-button type="primary" onclick="XyMessage.info('合法性:'+this.previousElementSibling.validity)">合法性</c-button>
 
 JavaScript操作`get`
 
@@ -349,10 +349,10 @@ input.validity;//获取
 
 当输入框文本改变的时候触发（失焦后）。
 
-<xy-input onchange="XyMessage.info(this.value)"></xy-input>
+<c-input onchange="XyMessage.info(this.value)"></c-input>
 
 ```html
-<xy-input onchange="fn(event)"></xy-input>
+<c-input onchange="fn(event)"></c-input>
 ```
 
 ```js
@@ -381,10 +381,10 @@ input.addEventListener('change',function(ev){
 
 当输入框在输入时触发。
 
-<xy-input oninput="XyMessage.info(this.value)"></xy-input>
+<c-input oninput="XyMessage.info(this.value)"></c-input>
 
 ```html
-<xy-input oninput="fn(event)"></xy-input>
+<c-input oninput="fn(event)"></c-input>
 ```
 
 ```js
@@ -411,20 +411,20 @@ input.addEventListener('input',function(ev){
 
 通常，配合`debounce`可以设置防抖，比如`debounce="300"`表示在`300ms`内无操作才会触发。
 
-<xy-input debounce="300" oninput="XyMessage.info(this.value)"></xy-input>
+<c-input debounce="300" oninput="XyMessage.info(this.value)"></c-input>
 
 ```html
-<xy-input debounce="300" oninput="fn(event)"></xy-input>
+<c-input debounce="300" oninput="fn(event)"></c-input>
 ```
 
 ### onsubmit
 
 当聚焦时，按回车键`Enter`触发。
 
-<xy-input onsubmit="XyMessage.info(this.value)" placeholder="Press Enter"></xy-input>
+<c-input onsubmit="XyMessage.info(this.value)" placeholder="Press Enter"></c-input>
 
 ```html
-<xy-input onsubmit="fn(event)"></xy-input>
+<c-input onsubmit="fn(event)"></c-input>
 ```
 
 ```js
@@ -453,7 +453,7 @@ input.addEventListener('submit',function(ev){
 
 `focus`、`blur`后的回调事件。
 
-与[`xy-button`](xy-button.md?id=onfocus、onblur)使用方式一致。
+与[`c-button`](c-button.md?id=onfocus、onblur)使用方式一致。
 
 ## 方法`function`
 
@@ -461,8 +461,8 @@ input.addEventListener('submit',function(ev){
 
 用于主动聚焦`focus`。
 
-<xy-input onfocus="XyMessage.info('focus')"></xy-input>
-<xy-button type="primary" onclick="this.previousElementSibling.focus()">主动聚焦</xy-button>
+<c-input onfocus="XyMessage.info('focus')"></c-input>
+<c-button type="primary" onclick="this.previousElementSibling.focus()">主动聚焦</c-button>
 
 ```js
 input.focus();
@@ -474,8 +474,8 @@ input.focus();
 
 用于主动校验，弹出提示信息。
 
-<xy-input required placeholder="required"></xy-input>
-<xy-button type="primary" onclick="this.previousElementSibling.checkValidity()">主动校验</xy-button>
+<c-input required placeholder="required"></c-input>
+<c-button type="primary" onclick="this.previousElementSibling.checkValidity()">主动校验</c-button>
 
 ```js
 input.checkValidity();

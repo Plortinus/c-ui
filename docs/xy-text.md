@@ -1,4 +1,4 @@
-# xy-text
+# c-text
 
 文本，集成了常见的几种状态。
 
@@ -7,10 +7,10 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/xy-ui/components/xy-text.js';
+    import './node_modules/c-ui/components/c-text.js';
 </script>
 <!-- 使用 -->
-<xy-text>text</xy-text>
+<c-text>text</c-text>
 ```
 
 内部仅仅集成了部分`css`样式，可随意嵌套，如果不满足完全可以通过`css`自定义。
@@ -19,31 +19,31 @@
 
 内置不同类型的文本，也就是颜色的区别。
 
-<xy-text>normal</xy-text>
+<c-text>normal</c-text>
 
-<xy-text type="warning">warning</xy-text>
+<c-text type="warning">warning</c-text>
 
-<xy-text type="error">error</xy-text>
+<c-text type="error">error</c-text>
 
-<xy-text type="success">success</xy-text>
+<c-text type="success">success</c-text>
 
 ```html
-<xy-text>normal</xy-text>
-<xy-text type="warning">warning</xy-text>
-<xy-text type="error">error</xy-text>
-<xy-text type="success">success</xy-text>
+<c-text>normal</c-text>
+<c-text type="warning">warning</c-text>
+<c-text type="error">error</c-text>
+<c-text type="success">success</c-text>
 ```
 
 ## 行数`rows`
 
 可以设置行数`rows`，超出部分会出现省略号。
 
-<xy-slider type="number" min="1" max="10" defaultvalue="3" showtips oninput="this.nextElementSibling.rows=this.value"></xy-slider>
-<xy-text rows="3">xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.xy-ui is a front end cross-framework ui library based on web-components.</xy-text>
+<c-slider type="number" min="1" max="10" defaultvalue="3" showtips oninput="this.nextElementSibling.rows=this.value"></c-slider>
+<c-text rows="3">c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.</c-text>
 
 
 ```html
-<xy-text rows="3">a front end cross-framework ui library based on web-components.</xy-text>
+<c-text rows="3">a front end cross-framework ui library based on web-components.</c-text>
 ```
 
 JavaScript操作`get`、`set`
@@ -56,13 +56,13 @@ text.getAttribute('rows');
 text.setAttribute('rows',5);
 ```
 
-另外，当出现省略号时，`xy-text`会自动添加上`truncated`属性。
+另外，当出现省略号时，`c-text`会自动添加上`truncated`属性。
 
 ```css
-xy-text+button::before{
+c-text+button::before{
     content:'收起'
 }
-xy-text[truncated]+button::before{
+c-text[truncated]+button::before{
     content:'展开'
 }
 ```
@@ -77,36 +77,36 @@ dropbox.addEventListener('drop',(event)=>{
 })
 ```
 
-<xy-text draggable>13299999999</xy-text>
+<c-text draggable>13299999999</c-text>
 
-<xy-input placeholder="drop in here"></xy-input>
+<c-input placeholder="drop in here"></c-input>
 
 ```html
-<xy-text draggable>13299999999</xy-text>
+<c-text draggable>13299999999</c-text>
 ```
 
 ## 其他
 
 其他还内置了`mark`、`code`属性。
 
-<xy-text mark>mark</xy-text>
+<c-text mark>mark</c-text>
 
-<xy-text code>code</xy-text>
+<c-text code>code</c-text>
 
 ```html
-<xy-text mark>mark</xy-text>
-<xy-text code>code</xy-text>
+<c-text mark>mark</c-text>
+<c-text code>code</c-text>
 ```
 
-<xy-text><xy-text mark>跨框架</xy-text>。无论是<xy-text code>react</xy-text>、<xy-text code>vue</xy-text>还是原生项目均可使用。</xy-text>
+<c-text><c-text mark>跨框架</c-text>。无论是<c-text code>react</c-text>、<c-text code>vue</c-text>还是原生项目均可使用。</c-text>
 
-<xy-text><xy-text mark>组件化</xy-text>。<xy-text code>shadow dom</xy-text>真正意义上实现了样式和功能的组件化。</xy-text>
+<c-text><c-text mark>组件化</c-text>。<c-text code>shadow dom</c-text>真正意义上实现了样式和功能的组件化。</c-text>
 
 ```html
-<xy-text>
-    <xy-text mark>跨框架</xy-text>。无论是<xy-text code>react</xy-text>、<xy-text code>vue</xy-text>还是原生项目均可使用。
-</xy-text>
-<xy-text>
-    <xy-text mark>组件化</xy-text>。<xy-text code>shadow dom</xy-text>真正意义上实现了样式和功能的组件化。
-</xy-text>
+<c-text>
+    <c-text mark>跨框架</c-text>。无论是<c-text code>react</c-text>、<c-text code>vue</c-text>还是原生项目均可使用。
+</c-text>
+<c-text>
+    <c-text mark>组件化</c-text>。<c-text code>shadow dom</c-text>真正意义上实现了样式和功能的组件化。
+</c-text>
 ```

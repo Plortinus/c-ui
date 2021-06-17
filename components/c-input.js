@@ -1,7 +1,7 @@
-import './xy-tips.js';
+import './c-tips.js';
 import './c-button.js';
 
-export default class XyInput extends HTMLElement {
+export default class CInput extends HTMLElement {
 
     static get observedAttributes() { return ['label','disabled','pattern','required','readonly','placeholder'] }
 
@@ -29,14 +29,14 @@ export default class XyInput extends HTMLElement {
         :host([block]){
             display:block
         }
-        xy-tips[show=show]{
+        c-tips[show=show]{
             color:var(--errorColor,#f4615c);
         }
         :host([invalid]){
             --themeColor:var(--errorColor,#f4615c);
             border-color:var(--errorColor,#f4615c);
         }
-        :host([invalid]) xy-icon{
+        :host([invalid]) c-icon{
             color:var(--errorColor,#f4615c);
         }
         :host(:focus-within:not([disabled])),:host(:not([disabled]):hover){
@@ -46,7 +46,7 @@ export default class XyInput extends HTMLElement {
             opacity:.8;
             cursor:not-allowed; 
         }
-        :host([disabled]) xy-tips{
+        :host([disabled]) c-tips{
             pointer-events:none;
             background:rgba(0,0,0,.1);
         }
@@ -56,11 +56,11 @@ export default class XyInput extends HTMLElement {
         :host .input::placeholder{
             color:#999;
         }
-        :host(xy-textarea){
+        :host(c-textarea){
             line-height:1.5;
             padding-right:.25em;
         }
-        xy-tips{  
+        c-tips{  
             display:flex;
             width: 100%;
             height: 100%;
@@ -70,7 +70,7 @@ export default class XyInput extends HTMLElement {
             font-family:inherit;
             transition:.3s background-color;
         }
-        :host(xy-textarea) xy-tips{
+        :host(c-textarea) c-tips{
             margin-right:-.25em;
             padding-right:.25em;
             align-items:flex-start;
@@ -93,7 +93,7 @@ export default class XyInput extends HTMLElement {
             transition: color .3s;
             animation: removeBg 0s forwards;
         }
-        :host(xy-textarea) .input{
+        :host(c-textarea) .input{
             margin:0;
         }
         input[type="number"]::-webkit-inner-spin-button{
@@ -131,7 +131,7 @@ export default class XyInput extends HTMLElement {
             margin-right:0.25em;
             color:#999;
         }
-        :host(xy-textarea) .icon-pre{
+        :host(c-textarea) .icon-pre{
             height:1.5em;
         }
         .btn-right{
@@ -181,10 +181,10 @@ export default class XyInput extends HTMLElement {
             }
         }
         </style>
-        <xy-tips id="input-con" dir="${this.errordir}" type="error">
+        <c-tips id="input-con" dir="${this.errordir}" type="error">
             ${
                 this.icon?
-                '<xy-icon class="icon-pre" name='+this.icon+'></xy-icon>'
+                '<c-icon class="icon-pre" name='+this.icon+'></c-icon>'
                 :
                 ''
             }
@@ -214,7 +214,7 @@ export default class XyInput extends HTMLElement {
                 :
                 ''
             }
-        </xy-tips>
+        </c-tips>
         `
     }
 
@@ -244,7 +244,7 @@ export default class XyInput extends HTMLElement {
     }
     
     connectedCallback() {
-        this.form = this.closest('xy-form');
+        this.form = this.closest('c-form');
         this.input = this.shadowRoot.getElementById('input');
         this.inputCon = this.shadowRoot.getElementById('input-con');
         this.input.addEventListener('input',(ev)=>{
@@ -654,20 +654,20 @@ export default class XyInput extends HTMLElement {
     
 }
 
-class XyTextarea extends XyInput {
+class CTextarea extends CInput {
     constructor() {
         super({multi:true});
     }
 }
 
-if(!customElements.get('xy-input')){
-    customElements.define('xy-input', XyInput);
+if(!customElements.get('c-input')){
+    customElements.define('c-input', CInput);
 }
-if(!customElements.get('xy-textarea')){
-    customElements.define('xy-textarea', XyTextarea);
+if(!customElements.get('c-textarea')){
+    customElements.define('c-textarea', CTextarea);
 }
 
-class XyInputGroup extends HTMLElement {
+class CInputGroup extends HTMLElement {
     constructor() {
         super();
         const shadowRoot = this.attachShadow({ mode: 'open' });
@@ -699,6 +699,6 @@ class XyInputGroup extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-input-group')){
-    customElements.define('xy-input-group', XyInputGroup);
+if(!customElements.get('c-input-group')){
+    customElements.define('c-input-group', CInputGroup);
 }

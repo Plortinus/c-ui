@@ -1,4 +1,4 @@
-# xy-ui
+# c-ui
 
 > :art: 面向未来的原生 Web Components UI组件库
 

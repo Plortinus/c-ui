@@ -1,4 +1,4 @@
-# xy-textarea
+# c-textarea
 
 多行输入框。用于替代原生`textarea`。
 
@@ -7,38 +7,38 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/xy-ui/components/xy-input.js';
+    import './node_modules/c-ui/components/c-input.js';
 </script>
 <!-- 使用 -->
-<xy-textarea></xy-textarea>
+<c-textarea></c-textarea>
 ```
 
-继承自`xy-input.js`。大部分属性通用，不支持`pattern`校验。
+继承自`c-input.js`。大部分属性通用，不支持`pattern`校验。
 
-<xy-textarea required  placeholder="required"></xy-textarea>
+<c-textarea required  placeholder="required"></c-textarea>
 
 ```html
-<xy-textarea required  placeholder="required"></xy-textarea>
+<c-textarea required  placeholder="required"></c-textarea>
 ```
 
-<xy-textarea label="info" placeholder="info" ></xy-textarea>
+<c-textarea label="info" placeholder="info" ></c-textarea>
 
 ```html
-<xy-textarea label="info" placeholder="info" ></xy-textarea>
+<c-textarea label="info" placeholder="info" ></c-textarea>
 ```
 
-<xy-textarea icon="location" placeholder="location" ></xy-textarea>
+<c-textarea icon="location" placeholder="location" ></c-textarea>
 
 ```html
-<xy-textarea icon="location" placeholder="location" ></xy-textarea>
+<c-textarea icon="location" placeholder="location" ></c-textarea>
 ```
 
 ## 行数`rows`
 
-可以通过`rows`指定`xy-textarea`最大显示行数。
+可以通过`rows`指定`c-textarea`最大显示行数。
 
-<xy-textarea placeholder="rows" rows="5" ></xy-textarea>
+<c-textarea placeholder="rows" rows="5" ></c-textarea>
 
 ```html
-<xy-textarea placeholder="rows" rows="5" ></xy-textarea>
+<c-textarea placeholder="rows" rows="5" ></c-textarea>
 ```

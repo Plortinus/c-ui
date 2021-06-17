@@ -1,4 +1,4 @@
-class XyRow extends HTMLElement {
+class CRow extends HTMLElement {
 
     static get observedAttributes() { return ['gutter'] }
 
@@ -34,11 +34,11 @@ class XyRow extends HTMLElement {
 
 }
 
-if(!customElements.get('xy-row')){
-    customElements.define('xy-row', XyRow);
+if(!customElements.get('c-row')){
+    customElements.define('c-row', CRow);
 }
 
-class XyCol extends HTMLElement {
+class CCol extends HTMLElement {
 
     constructor() {
         super();
@@ -58,11 +58,11 @@ class XyCol extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-col')){
-    customElements.define('xy-col', XyCol);
+if(!customElements.get('c-col')){
+    customElements.define('c-col', CCol);
 }
 
-export default class XyLayout extends HTMLElement {
+export default class CLayout extends HTMLElement {
 
     constructor() {
         super();
@@ -99,6 +99,6 @@ export default class XyLayout extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-layout')){
-    customElements.define('xy-layout', XyLayout);
+if(!customElements.get('c-layout')){
+    customElements.define('c-layout', CLayout);
 }

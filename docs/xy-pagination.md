@@ -1,4 +1,4 @@
-# xy-pagination
+# c-pagination
 
 分页。
 
@@ -7,10 +7,10 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/xy-ui/components/xy-pagination.js';
+    import './node_modules/c-ui/components/c-pagination.js';
 </script>
 <!-- 使用 -->
-<xy-pagination pagesize="3" total="50"></xy-pagination>
+<c-pagination pagesize="3" total="50"></c-pagination>
 ```
 
 支持键盘左右键向前一页和向后一页。
@@ -19,11 +19,11 @@
 
 设置或返回分页组件的数据总数和每页条数。
 
-<xy-pagination pagesize="3" total="50"></xy-pagination>
-<xy-button type="primary" onclick="this.previousElementSibling.pagesize=5">设置pagesize为5</xy-button>
+<c-pagination pagesize="3" total="50"></c-pagination>
+<c-button type="primary" onclick="this.previousElementSibling.pagesize=5">设置pagesize为5</c-button>
 
 ```html
-<xy-pagination pagesize="3" total="50">
+<c-pagination pagesize="3" total="50">
 ```
 
 JavaScript操作`get`、`set`
@@ -42,31 +42,31 @@ pagination.setAttribute('total',100);
 
 当页数较少时（不超过`10`页），则完整显示
 
-<xy-pagination pagesize="3" total="20"></xy-pagination>
+<c-pagination pagesize="3" total="20"></c-pagination>
 
 ```html
-<xy-pagination pagesize="3" total="20"></xy-pagination>
+<c-pagination pagesize="3" total="20"></c-pagination>
 ```
 
 ## 默认值`defaultcurrent`
 
 可以给分页指定一个初始值`defaultcurrent`，默认为`1`。
 
-<xy-pagination defaultcurrent="7" pagesize="3" total="50"></xy-pagination>
+<c-pagination defaultcurrent="7" pagesize="3" total="50"></c-pagination>
 
 ```html
-<xy-pagination defaultcurrent="7" pagesize="3" total="50"></xy-pagination>
+<c-pagination defaultcurrent="7" pagesize="3" total="50"></c-pagination>
 ```
 
 ## 当前页`current`
 
 设置或返回分页组件的当前页。
 
-该属性值在`xy-pagination`标签上不可见。
+该属性值在`c-pagination`标签上不可见。
 
-<xy-pagination pagesize="3" total="50"></xy-pagination>
-<xy-button type="primary" onclick="this.previousElementSibling.current=10">跳转到第10页</xy-button>
-<xy-button type="primary" onclick="XyMessage.info('当前value: '+this.previousElementSibling.previousElementSibling.current)">显示当前页数</xy-button>
+<c-pagination pagesize="3" total="50"></c-pagination>
+<c-button type="primary" onclick="this.previousElementSibling.current=10">跳转到第10页</c-button>
+<c-button type="primary" onclick="XyMessage.info('当前value: '+this.previousElementSibling.previousElementSibling.current)">显示当前页数</c-button>
 
 JavaScript操作`get`、`set`
 
@@ -84,10 +84,10 @@ pagination.setAttribute('current',2);
 
 可以添加`simple`属性，只展示当前页和总页数。
 
-<xy-pagination simple pagesize="3" total="50"></xy-pagination>
+<c-pagination simple pagesize="3" total="50"></c-pagination>
 
 ```html
-<xy-pagination simple pagesize="3" total="50"></xy-pagination>
+<c-pagination simple pagesize="3" total="50"></c-pagination>
 ```
 
 ## 链接`href`
@@ -106,10 +106,10 @@ pagination.setAttribute('current',2);
 list.html?page=1
 ```
 
-<xy-pagination href="?page" pagesize="3" total="50"></xy-pagination>
+<c-pagination href="?page" pagesize="3" total="50"></c-pagination>
 
 ```html
-<xy-pagination href="?page" pagesize="3" total="50"></xy-pagination>
+<c-pagination href="?page" pagesize="3" total="50"></c-pagination>
 ```
 
 > 一般传统项目可能会用到，如果不满足，也可以通过`onchange`实现跳转，更加灵活
@@ -123,7 +123,7 @@ list.html?page=1
     font-size:20px;
 }
 </style>
-<xy-pagination class="pagination-custom" pagesize="3" total="50"></xy-pagination>
+<c-pagination class="pagination-custom" pagesize="3" total="50"></c-pagination>
 
 ```html
 <style>
@@ -131,7 +131,7 @@ list.html?page=1
     font-size:20px;
 }
 </style>
-<xy-pagination class="pagination-custom" pagesize="3" total="50"></xy-pagination>
+<c-pagination class="pagination-custom" pagesize="3" total="50"></c-pagination>
 ```
 
 ## 事件`event`
@@ -142,10 +142,10 @@ list.html?page=1
 
 页码改变的回调。
 
-<xy-pagination  onchange="XyMessage.info('当前页: '+this.current)" pagesize="3" total="50"></xy-pagination>
+<c-pagination  onchange="XyMessage.info('当前页: '+this.current)" pagesize="3" total="50"></c-pagination>
 
 ```html
-<xy-pagination  onchange="XyMessage.info('当前页: '+this.current)" pagesize="3" total="50"></xy-pagination>
+<c-pagination  onchange="XyMessage.info('当前页: '+this.current)" pagesize="3" total="50"></c-pagination>
 ```
 
 其他触发方式
@@ -176,7 +176,7 @@ pagination.addEventListener('change',function(ev){
 
 ## 实例
 
-一个常见的完整分页组件，配合`xy-select`和`xy-input`实现。
+一个常见的完整分页组件，配合`c-select`和`c-input`实现。
 
 <style>
 .pagination-demo{
@@ -190,19 +190,19 @@ pagination.addEventListener('change',function(ev){
 .pagination-demo>span{
     margin-right:10px;
 }
-.pagination-demo xy-input{
+.pagination-demo c-input{
     width:50px;
 }
 </style>
 
 <div class="pagination-demo">
-    <xy-pagination id="pagination-demo" onchange="XyMessage.info('当前页: '+this.current)" pagesize="10" total="200"></xy-pagination>
-    <xy-select defaultvalue="10" onchange="this.previousElementSibling.pagesize=this.value">
-        <xy-option value="10">每页10条</xy-option>
-        <xy-option value="15">每页15条</xy-option>
-        <xy-option value="20">每页20条</xy-option>
-    </xy-select>
-    <span>跳转</span><xy-input type="number" defaultvalue="1" min="1" onchange="document.getElementById('pagination-demo').current = this.value"></xy-input><span>页</span>
+    <c-pagination id="pagination-demo" onchange="XyMessage.info('当前页: '+this.current)" pagesize="10" total="200"></c-pagination>
+    <c-select defaultvalue="10" onchange="this.previousElementSibling.pagesize=this.value">
+        <c-option value="10">每页10条</c-option>
+        <c-option value="15">每页15条</c-option>
+        <c-option value="20">每页20条</c-option>
+    </c-select>
+    <span>跳转</span><c-input type="number" defaultvalue="1" min="1" onchange="document.getElementById('pagination-demo').current = this.value"></c-input><span>页</span>
 </div>
 
 ```html
@@ -218,17 +218,17 @@ pagination.addEventListener('change',function(ev){
 .pagination-demo>span{
     margin-right:10px;
 }
-.pagination-demo xy-input{
+.pagination-demo c-input{
     width:50px;
 }
 </style>
 <div class="pagination-demo">
-    <xy-pagination id="pagination-demo" onchange="XyMessage.info('当前页: '+this.current)" pagesize="10" total="200"></xy-pagination>
-    <xy-select defaultvalue="10" onchange="document.getElementById('pagination-demo').pagesize=this.value">
-        <xy-option value="10">每页10条</xy-option>
-        <xy-option value="15">每页15条</xy-option>
-        <xy-option value="20">每页20条</xy-option>
-    </xy-select>
-    <span>跳转</span><xy-input type="number" defaultvalue="1" min="1" onchange="document.getElementById('pagination-demo').current = this.value"></xy-input><span>页</span>
+    <c-pagination id="pagination-demo" onchange="XyMessage.info('当前页: '+this.current)" pagesize="10" total="200"></c-pagination>
+    <c-select defaultvalue="10" onchange="document.getElementById('pagination-demo').pagesize=this.value">
+        <c-option value="10">每页10条</c-option>
+        <c-option value="15">每页15条</c-option>
+        <c-option value="20">每页20条</c-option>
+    </c-select>
+    <span>跳转</span><c-input type="number" defaultvalue="1" min="1" onchange="document.getElementById('pagination-demo').current = this.value"></c-input><span>页</span>
 </div>
 ```

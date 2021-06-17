@@ -1,5 +1,5 @@
-import './xy-loading.js';
-import './xy-icon.js';
+import './c-loading.js';
+import './c-icon.js';
 
 export default class CButton extends HTMLElement {
     //https://mladenplavsic.github.io/css-ripple-effect

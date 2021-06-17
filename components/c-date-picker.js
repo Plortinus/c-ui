@@ -1,5 +1,5 @@
 import './c-button.js';
-import './xy-popover.js';
+import './c-popover.js';
 
 const toDate = (d) => {
     const date = new Date(d);
@@ -26,7 +26,7 @@ const parseDate = (date,type="date") => {
     return value;
 }
 
-class XyDatePane extends HTMLElement {
+class CDatePane extends HTMLElement {
 
     static get observedAttributes() { return ['min','max','type'] }
 
@@ -767,11 +767,11 @@ class XyDatePane extends HTMLElement {
 
 }
 
-if (!customElements.get('xy-date-pane')) {
-    customElements.define('xy-date-pane', XyDatePane);
+if (!customElements.get('c-date-pane')) {
+    customElements.define('c-date-pane', CDatePane);
 }
 
-class XyDateRangePane extends HTMLElement {
+class CDateRangePane extends HTMLElement {
     static get observedAttributes() { return ['min','max','type'] }
 
     constructor() {
@@ -783,12 +783,12 @@ class XyDateRangePane extends HTMLElement {
             display:inline-flex;
             font-size: 14px;
         }
-        xy-date-pane{
+        c-date-pane{
             font-size: inherit;
         }
         </style>
-        <xy-date-pane id="date-left" range="left"></xy-date-pane>
-        <xy-date-pane id="date-right" range="right"></xy-date-pane>
+        <c-date-pane id="date-left" range="left"></c-date-pane>
+        <c-date-pane id="date-right" range="right"></c-date-pane>
         `
     }
 
@@ -917,11 +917,11 @@ class XyDateRangePane extends HTMLElement {
     
 }
 
-if (!customElements.get('xy-date-range-pane')) {
-    customElements.define('xy-date-range-pane', XyDateRangePane);
+if (!customElements.get('c-date-range-pane')) {
+    customElements.define('c-date-range-pane', CDateRangePane);
 }
 
-export default class XyDatePicker extends HTMLElement {
+export default class CDatePicker extends HTMLElement {
 
     static get observedAttributes() { return ['disabled','dir','min','max','type'] }
 
@@ -939,13 +939,13 @@ export default class XyDatePicker extends HTMLElement {
             display:block;
         }
         
-        :host(:focus-within) xy-popover,:host(:hover) xy-popover{ 
+        :host(:focus-within) c-popover,:host(:hover) c-popover{ 
             z-index: 2;
         }
         :host([disabled]){
             pointer-events:none;
         }
-        xy-popover{
+        c-popover{
             width:100%;
             height:100%;
         }
@@ -967,10 +967,10 @@ export default class XyDatePicker extends HTMLElement {
             height:1em;
             fill:currentColor;
         }
-        xy-popover{
+        c-popover{
             display:block;
         }
-        xy-popcon{
+        c-popcon{
             min-width:100%;
         }
         .pop-footer{
@@ -983,15 +983,15 @@ export default class XyDatePicker extends HTMLElement {
             margin-left: .8em;
         }
         </style>
-        <xy-popover class="date-picker" id="popover" ${this.dir? "dir='"+this.dir+"'" : ""}>
+        <c-popover class="date-picker" id="popover" ${this.dir? "dir='"+this.dir+"'" : ""}>
             <c-button id="select" ${this.disabled? "disabled" : ""}><span id="datetxt"></span><svg class="icon" viewBox="0 0 1024 1024"><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32z m-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z" p-id="8054"></path></svg></c-button>
-            <xy-popcon id="popcon" class="date-pane">
+            <c-popcon id="popcon" class="date-pane">
                 <div class="pop-footer">
                     <c-button autoclose>取 消</c-button>
                     <c-button type="primary" id="btn-submit" autoclose>确 认</c-button>
                 </div>
-            </xy-popcon>
-        </xy-popover>
+            </c-popcon>
+        </c-popover>
         `
     }
 
@@ -1009,9 +1009,9 @@ export default class XyDatePicker extends HTMLElement {
         this.select.addEventListener('click',()=>{
             if(!this.datePane){
                 if(this.range){
-                    this.datePane = new XyDateRangePane();
+                    this.datePane = new CDateRangePane();
                 }else{
-                    this.datePane = new XyDatePane();
+                    this.datePane = new CDatePane();
                 }
                 this.min && (this.datePane.min = this.min);
                 this.max && (this.datePane.max = this.max);
@@ -1169,6 +1169,6 @@ export default class XyDatePicker extends HTMLElement {
     }
 }
 
-if (!customElements.get('xy-date-picker')) {
-    customElements.define('xy-date-picker', XyDatePicker);
+if (!customElements.get('c-date-picker')) {
+    customElements.define('c-date-picker', CDatePicker);
 }

@@ -1,7 +1,7 @@
-import './xy-tips.js';
-import './xy-icon.js';
+import './c-tips.js';
+import './c-icon.js';
 
-export default class XyRate extends HTMLElement {
+export default class CRate extends HTMLElement {
 
     static get observedAttributes() { return ['color','size'] }
 
@@ -29,14 +29,14 @@ export default class XyRate extends HTMLElement {
          input[type="radio"]:checked~.star-item{
             color:var(--themeColor,#42b983);
         }
-        .star-item:hover xy-icon{
+        .star-item:hover c-icon{
             transform:scale(1.2)
         }
-        :host(:not([disabled]):hover) xy-tips.star-item{
+        :host(:not([disabled]):hover) c-tips.star-item{
             color:inherit;
         }
-        :host(:not([disabled])) xy-tips.star-item:hover,
-        :host(:not([disabled])) xy-tips.star-item:hover~.star-item{
+        :host(:not([disabled])) c-tips.star-item:hover,
+        :host(:not([disabled])) c-tips.star-item:hover~.star-item{
            color:var(--themeColor,#42b983);
         }
         :host([disabled]) input[type="radio"]{
@@ -47,35 +47,35 @@ export default class XyRate extends HTMLElement {
         }
         </style>
         <input tabindex="5" type="radio" name="item" id="item05" value="5" />
-        <xy-tips class="star-item" tips=${this.tips[4]}>
+        <c-tips class="star-item" tips=${this.tips[4]}>
             <label for="item05">
-                <xy-icon name=${this.icon}></xy-icon>
+                <c-icon name=${this.icon}></c-icon>
             </label>
-        </xy-tips>
+        </c-tips>
         <input tabindex="4" type="radio" name="item" id="item04" value="4" />
-        <xy-tips class="star-item" tips=${this.tips[3]}>
+        <c-tips class="star-item" tips=${this.tips[3]}>
             <label for="item04">
-                <xy-icon name=${this.icon}></xy-icon>
+                <c-icon name=${this.icon}></c-icon>
             </label>
-        </xy-tips>
+        </c-tips>
         <input tabindex="3" type="radio" name="item" id="item03" value="3" />
-        <xy-tips class="star-item" tips=${this.tips[2]}>
+        <c-tips class="star-item" tips=${this.tips[2]}>
             <label for="item03">
-                <xy-icon name=${this.icon}></xy-icon>
+                <c-icon name=${this.icon}></c-icon>
             </label>
-        </xy-tips>
+        </c-tips>
         <input tabindex="2" type="radio" name="item" id="item02" value="2" />
-        <xy-tips class="star-item" tips=${this.tips[1]}>
+        <c-tips class="star-item" tips=${this.tips[1]}>
             <label for="item02">
-                <xy-icon name=${this.icon}></xy-icon>
+                <c-icon name=${this.icon}></c-icon>
             </label>
-        </xy-tips>
+        </c-tips>
         <input tabindex="1" type="radio" name="item" id="item01" value="1" />
-        <xy-tips class="star-item" tips=${this.tips[0]}>
+        <c-tips class="star-item" tips=${this.tips[0]}>
             <label for="item01">
-                <xy-icon name=${this.icon}></xy-icon>
+                <c-icon name=${this.icon}></c-icon>
             </label>
-        </xy-tips>
+        </c-tips>
         `
     }
 
@@ -173,6 +173,6 @@ export default class XyRate extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-rate')){
-    customElements.define('xy-rate', XyRate);
+if(!customElements.get('c-rate')){
+    customElements.define('c-rate', CRate);
 }

@@ -1,4 +1,4 @@
-# xy-message
+# c-message
 
 全局展示操作反馈信息。
 
@@ -7,7 +7,7 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import XyMessage from './node_modules/xy-ui/components/xy-message.js';
+    import XyMessage from './node_modules/c-ui/components/c-message.js';
     window.XyMessage = XyMessage;
     //使用
     XyMessage.info('info);
@@ -31,13 +31,13 @@
 
 * `XyMessage.loading(text, duration, onclose)`
 
-所有方法返回均为`<xy-message></xy-message>`对象。
+所有方法返回均为`<c-message></c-message>`对象。
 
-<xy-button type="primary" onclick="XyMessage.info('This a info message')">info</xy-button>
-<xy-button type="primary" onclick="XyMessage.success('This a success message')">success</xy-button>
-<xy-button type="primary" onclick="XyMessage.error('This a error message')">error</xy-button>
-<xy-button type="primary" onclick="XyMessage.warning('This a warning message')">warning</xy-button>
-<xy-button type="primary" onclick="XyMessage.loading('This a loading message')">loading</xy-button>
+<c-button type="primary" onclick="XyMessage.info('This a info message')">info</c-button>
+<c-button type="primary" onclick="XyMessage.success('This a success message')">success</c-button>
+<c-button type="primary" onclick="XyMessage.error('This a error message')">error</c-button>
+<c-button type="primary" onclick="XyMessage.warning('This a warning message')">warning</c-button>
+<c-button type="primary" onclick="XyMessage.loading('This a loading message')">loading</c-button>
 
 |参数|说明|类型|默认值|
 |---|---|---|---|
@@ -47,8 +47,8 @@
 
 其中，`XyMessage.loading`默认`duration`为`0`，表示不自动关闭，如果需要手动关闭，可以设置属性`show=false`。
 
-<xy-button type="primary" onclick="this.loader = XyMessage.loading('This a loading message')">show loading</xy-button>
-<xy-button type="primary" onclick="this.previousElementSibling.loader.show = false">hide loading</xy-button>
+<c-button type="primary" onclick="this.loader = XyMessage.loading('This a loading message')">show loading</c-button>
+<c-button type="primary" onclick="this.previousElementSibling.loader.show = false">hide loading</c-button>
 
 ```js
 const loader = XyMessage.loading('This a loading message');
@@ -70,7 +70,7 @@ loader.onclose = function(){
 
 `XyMessage.show`是一个更为通用的方法，可以自定义`icon`。
 
-<xy-button type="primary" onclick="XyMessage.show({icon:'like',text:'I like it!'})">I like it!</xy-button>
+<c-button type="primary" onclick="XyMessage.show({icon:'like',text:'I like it!'})">I like it!</c-button>
 
 ```js
 XyMessage.show({

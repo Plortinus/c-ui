@@ -1,11 +1,11 @@
 # theme
 
-`xy-ui`的所有组件均可设置`themeColor`，不同于一些框架采用`less`、`sass`等预处理器， 这里采用`CSS`[自定义属性](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties)（`--themeColor`）实现。
+`c-ui`的所有组件均可设置`themeColor`，不同于一些框架采用`less`、`sass`等预处理器， 这里采用`CSS`[自定义属性](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties)（`--themeColor`）实现。
 
 每个组件可以单独设置（并不推荐，影响统一风格），也可以全局设置（推荐）。
 
 ```css
-xy-button{
+c-button{
     --themeColor: #42b983;/**单独设置**/
 }
 :root {
@@ -34,37 +34,37 @@ document.body.style.setProperty('--themeColor','#F44336');
 }
 ```
 
-<xy-color-pane defaultvalue="#42b983" onchange="changeColor(this.value)"><xy-color-pane>
+<c-color-pane defaultvalue="#42b983" onchange="changeColor(this.value)"><c-color-pane>
 
 实时预览
 
-<xy-button type="primary">primary</xy-button>
-<xy-button type="dashed">dashed</xy-button>
-<xy-button type="flat">flat</xy-button>
-<xy-button>default</xy-button>
-<xy-button type="primary" loading>loading</xy-button>
-<xy-slider defaultvalue="30" min="-100" max="100" step="1"></xy-slider>
+<c-button type="primary">primary</c-button>
+<c-button type="dashed">dashed</c-button>
+<c-button type="flat">flat</c-button>
+<c-button>default</c-button>
+<c-button type="primary" loading>loading</c-button>
+<c-slider defaultvalue="30" min="-100" max="100" step="1"></c-slider>
 <p></p>
-<xy-select>
-    <xy-option value="1">Option1</xy-option>
-    <xy-option value="2">Option2</xy-option>
-    <xy-option value="3">Option3</xy-option>
-</xy-select>
+<c-select>
+    <c-option value="1">Option1</c-option>
+    <c-option value="2">Option2</c-option>
+    <c-option value="3">Option3</c-option>
+</c-select>
 <p></p>
-<xy-switch checked></xy-switch>
+<c-switch checked></c-switch>
 <p></p>
-<xy-radio name="b" checked>React</xy-radio>
-<xy-radio name="b">Vue</xy-radio>
-<xy-radio name="b">Angular</xy-radio>
-<xy-radio name="b">Other</xy-radio>
+<c-radio name="b" checked>React</c-radio>
+<c-radio name="b">Vue</c-radio>
+<c-radio name="b">Angular</c-radio>
+<c-radio name="b">Other</c-radio>
 <p></p>
-<xy-checkbox name="a" checked>Html</xy-checkbox>
-<xy-checkbox name="a">Css</xy-checkbox>
-<xy-checkbox name="a">Javascript</xy-checkbox>
-<xy-checkbox name="a">Python</xy-checkbox>
-<xy-checkbox name="a">Php</xy-checkbox>
-<xy-checkbox name="a">Dart</xy-checkbox>
-<xy-checkbox name="a">Swift</xy-checkbox>
+<c-checkbox name="a" checked>Html</c-checkbox>
+<c-checkbox name="a">Css</c-checkbox>
+<c-checkbox name="a">Javascript</c-checkbox>
+<c-checkbox name="a">Python</c-checkbox>
+<c-checkbox name="a">Php</c-checkbox>
+<c-checkbox name="a">Dart</c-checkbox>
+<c-checkbox name="a">Swift</c-checkbox>
 
 可以通过`--themeBackground`来自定义背景（部分组件支持，如`button`、`switch`等），比如渐变色
 
@@ -75,21 +75,21 @@ document.body.style.setProperty('--themeColor','#F44336');
 ```
 
 <div style="--themeBackground:linear-gradient(-180deg,#2fcb53,#269f42 90%);--themeColor: #269f42">
-<xy-button type="primary">primary</xy-button>
-<xy-button type="dashed">dashed</xy-button>
-<xy-button type="flat">flat</xy-button>
-<xy-button>default</xy-button>
-<xy-button type="primary" loading>loading</xy-button>
+<c-button type="primary">primary</c-button>
+<c-button type="dashed">dashed</c-button>
+<c-button type="flat">flat</c-button>
+<c-button>default</c-button>
+<c-button type="primary" loading>loading</c-button>
 <p></p>
-<xy-select type="primary">
-    <xy-option value="1">Option1</xy-option>
-    <xy-option value="2">Option2</xy-option>
-    <xy-option value="3">Option3</xy-option>
-</xy-select>
+<c-select type="primary">
+    <c-option value="1">Option1</c-option>
+    <c-option value="2">Option2</c-option>
+    <c-option value="3">Option3</c-option>
+</c-select>
 <p></p>
-<xy-switch checked></xy-switch>
+<c-switch checked></c-switch>
 <p></p>
-<xy-date-pane style="width:400px"></xy-date-pane>
+<c-date-pane style="width:400px"></c-date-pane>
 </div>
 
 > 注意和`--themeColor`搭配使用，其他比如字体颜色仍取自`--themeColor`，只有背景部分才优先取自`--themeBackground`，同时，使用`--themeBackground`会失去动画效果。

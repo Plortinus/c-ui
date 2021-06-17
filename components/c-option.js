@@ -1,6 +1,6 @@
 import './c-button.js';
 
-class XyOptionGroup extends HTMLElement {
+class COptionGroup extends HTMLElement {
     constructor() {
         super();
         const shadowRoot = this.attachShadow({ mode: 'open' });
@@ -15,7 +15,7 @@ class XyOptionGroup extends HTMLElement {
                 opacity:.6;
                 font-size: .9em;
             }
-            ::slotted(xy-option){
+            ::slotted(c-option){
                 --paddingLeft:1em;
             }
         </style>
@@ -30,11 +30,11 @@ class XyOptionGroup extends HTMLElement {
 
 }
 
-if(!customElements.get('xy-optgroup')){
-    customElements.define('xy-optgroup', XyOptionGroup);
+if(!customElements.get('c-optgroup')){
+    customElements.define('c-optgroup', COptionGroup);
 }
 
-class XyOption extends HTMLElement {
+class COption extends HTMLElement {
     static get observedAttributes() { return ["value", "selected","disabled"]; }
     constructor() {
         super();
@@ -120,6 +120,6 @@ class XyOption extends HTMLElement {
 
 }
 
-if(!customElements.get('xy-option')){
-    customElements.define('xy-option', XyOption);
+if(!customElements.get('c-option')){
+    customElements.define('c-option', COption);
 }

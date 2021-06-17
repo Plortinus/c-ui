@@ -1,4 +1,4 @@
-# xy-radio
+# c-radio
 
 单项选择器。用于替代原生`input[type=radio]`。
 
@@ -7,21 +7,21 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/xy-ui/components/xy-radio.js';
+    import './node_modules/c-ui/components/c-radio.js';
 </script>
 <!-- 使用 -->
-<xy-radio>radio</xy-radio>
+<c-radio>radio</c-radio>
 ```
 
 ## 禁用`disabled`
 
 通过`disabled`可以禁用开关。
 
-<xy-radio disabled>radio</xy-radio>
-<xy-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></xy-switch>
+<c-radio disabled>radio</c-radio>
+<c-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></c-switch>
 
 ```html
-<xy-radio disabled>radio</xy-radio>
+<c-radio disabled>radio</c-radio>
 ```
 
 JavaScript操作`get`、`set`
@@ -39,14 +39,14 @@ radio.removeAttribute('disabled');
 
 返回`value`。
 
-通常`xy-radio`会有一个`value`属性，类似于`id`，如果不存在则返回文本内容`textContent`。
+通常`c-radio`会有一个`value`属性，类似于`id`，如果不存在则返回文本内容`textContent`。
 
-<xy-radio value="AAA">radio</xy-radio>
-<xy-button type="primary" onclick="XyMessage.info(this.previousElementSibling.value)">获取value</xy-button>
+<c-radio value="AAA">radio</c-radio>
+<c-button type="primary" onclick="XyMessage.info(this.previousElementSibling.value)">获取value</c-button>
 
 ```html
-<xy-radio value="AAA">radio</xy-radio>
-<xy-button type="primary" onclick="XyMessage.info(this.previousElementSibling.value)">获取value</xy-button>
+<c-radio value="AAA">radio</c-radio>
+<c-button type="primary" onclick="XyMessage.info(this.previousElementSibling.value)">获取value</c-button>
 ```
 
 JavaScript操作`get`
@@ -61,27 +61,27 @@ radio.getAttribute('value');
 
 `checked`属性表示选中，通常不可取消。
 
-<xy-radio>radio</xy-radio>
-<xy-button type="primary" onclick="this.previousElementSibling.checked = true;">选中</xy-button>
+<c-radio>radio</c-radio>
+<c-button type="primary" onclick="this.previousElementSibling.checked = true;">选中</c-button>
 
 ```html
-<xy-radio checked>radio</xy-radio>
+<c-radio checked>radio</c-radio>
 ```
 
 通常多个出现，有一个相同的`name`，表示同一组，可以通过`name`来获取当前组的选中（通过`dom`获取即可）。
 
-<xy-radio name="lib" checked>React</xy-radio>
-<xy-radio name="lib">Vue</xy-radio>
-<xy-radio name="lib">Angular</xy-radio>
-<xy-radio name="lib">Other</xy-radio>
-<xy-button type="primary" onclick="XyMessage.info(document.querySelector('xy-radio[name=lib][checked]').value)">获取选中状态</xy-button>
+<c-radio name="lib" checked>React</c-radio>
+<c-radio name="lib">Vue</c-radio>
+<c-radio name="lib">Angular</c-radio>
+<c-radio name="lib">Other</c-radio>
+<c-button type="primary" onclick="XyMessage.info(document.querySelector('c-radio[name=lib][checked]').value)">获取选中状态</c-button>
 
 ```html
-<xy-radio name="lib" checked>React</xy-radio>
-<xy-radio name="lib">Vue</xy-radio>
-<xy-radio name="lib">Angular</xy-radio>
-<xy-radio name="lib">Other</xy-radio>
-<xy-button type="primary" onclick="XyMessage.info(document.querySelector('xy-radio[name=lib][checked]').value)">获取选中状态</xy-button>
+<c-radio name="lib" checked>React</c-radio>
+<c-radio name="lib">Vue</c-radio>
+<c-radio name="lib">Angular</c-radio>
+<c-radio name="lib">Other</c-radio>
+<c-button type="primary" onclick="XyMessage.info(document.querySelector('c-radio[name=lib][checked]').value)">获取选中状态</c-button>
 ```
 
 JavaScript操作`get`、`set`
@@ -95,31 +95,31 @@ radio.setAttribute('checked','');
 radio.removeAttribute('checked');
 ```
 
-现新增`xy-radio-group`组件，表示同一组，
+现新增`c-radio-group`组件，表示同一组，
 
 * `defaultvalue`设置初始选中项
 * 设置和获取`disabled`
 * 设置和获取`vaule`
 * 支持`change`事件
 
-<xy-radio-group name="lan" disabled defaultvalue="Css">
-    <xy-radio>Html</xy-radio>
-    <xy-radio>Css</xy-radio>
-    <xy-radio>Javascript</xy-radio>
-    <xy-radio>Php</xy-radio>
-    <xy-radio>Dart</xy-radio>
-</xy-radio-group>
-<xy-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></xy-switch>
-<xy-button type="primary" onclick="this.previousElementSibling.previousElementSibling.value='Php'">选中Php</xy-button>
+<c-radio-group name="lan" disabled defaultvalue="Css">
+    <c-radio>Html</c-radio>
+    <c-radio>Css</c-radio>
+    <c-radio>Javascript</c-radio>
+    <c-radio>Php</c-radio>
+    <c-radio>Dart</c-radio>
+</c-radio-group>
+<c-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></c-switch>
+<c-button type="primary" onclick="this.previousElementSibling.previousElementSibling.value='Php'">选中Php</c-button>
 
 ```html
-<xy-radio-group name="lan" disabled defaultvalue="Css">
-    <xy-radio>Html</xy-radio>
-    <xy-radio>Css</xy-radio>
-    <xy-radio>Javascript</xy-radio>
-    <xy-radio>Php</xy-radio>
-    <xy-radio>Dart</xy-radio>
-</xy-radio-group>
+<c-radio-group name="lan" disabled defaultvalue="Css">
+    <c-radio>Html</c-radio>
+    <c-radio>Css</c-radio>
+    <c-radio>Javascript</c-radio>
+    <c-radio>Php</c-radio>
+    <c-radio>Dart</c-radio>
+</c-radio-group>
 ```
 
 JavaScript操作`get`、`set`
@@ -134,9 +134,9 @@ radiogroup.setAttribute('value','Css');
 
 ## 必填项`required`
 
-表单验证属性，表示必填，作用于`xy-radio-group`
+表单验证属性，表示必填，作用于`c-radio-group`
 
-配合[`checkValidity()`](xy-radio.md?id=checkValidity)方法可以主动校验
+配合[`checkValidity()`](c-radio.md?id=checkValidity)方法可以主动校验
 
 ## 事件`event`
 
@@ -144,10 +144,10 @@ radiogroup.setAttribute('value','Css');
 
 在切换完成时触发。
 
-<xy-radio onchange="XyMessage.info('当前状态checked:'+this.checked)">radio</xy-radio>
+<c-radio onchange="XyMessage.info('当前状态checked:'+this.checked)">radio</c-radio>
 
 ```html
-<xy-radio onchange="XyMessage.info('当前状态checked:'+this.checked)">radio</xy-radio>
+<c-radio onchange="XyMessage.info('当前状态checked:'+this.checked)">radio</c-radio>
 ```
 
 ```js
@@ -172,15 +172,15 @@ radio.addEventListener('change',function(ev){
 })
 ```
 
-`xy-radio-group`支持`change`事件
+`c-radio-group`支持`change`事件
 
-<xy-radio-group name="lan" defaultvalue="Javascript" onchange="XyMessage.info(this.value)">
-    <xy-radio>Html</xy-radio>
-    <xy-radio>Css</xy-radio>
-    <xy-radio>Javascript</xy-radio>
-    <xy-radio>Php</xy-radio>
-    <xy-radio>Dart</xy-radio>
-</xy-radio-group>
+<c-radio-group name="lan" defaultvalue="Javascript" onchange="XyMessage.info(this.value)">
+    <c-radio>Html</c-radio>
+    <c-radio>Css</c-radio>
+    <c-radio>Javascript</c-radio>
+    <c-radio>Php</c-radio>
+    <c-radio>Dart</c-radio>
+</c-radio-group>
 
 ```js
 radiogroup.onchange = function(ev){
@@ -208,7 +208,7 @@ radiogroup.addEventListener('change',function(ev){
 
 `focus`、`blur`后的回调事件。
 
-与[`xy-button`](xy-button.md?id=onfocus、onblur)使用方式一致。
+与[`c-button`](c-button.md?id=onfocus、onblur)使用方式一致。
 
 ## 方法`function`
 
@@ -216,8 +216,8 @@ radiogroup.addEventListener('change',function(ev){
 
 用于主动聚焦`focus`，聚焦以后可以响应键盘事件，`Enter`或者`Space`选中。
 
-<xy-radio onchange="XyMessage.info('当前状态checked:'+this.checked)">radio</xy-radio>
-<xy-button type="primary" onfocus="XyMessage.info('focus')" onclick="this.previousElementSibling.focus()">主动聚焦</xy-button>
+<c-radio onchange="XyMessage.info('当前状态checked:'+this.checked)">radio</c-radio>
+<c-button type="primary" onfocus="XyMessage.info('focus')" onclick="this.previousElementSibling.focus()">主动聚焦</c-button>
 
 ```js
 radio.focus();
@@ -227,14 +227,14 @@ radio.focus();
 
 复原选项，回到默认值。
 
-<xy-radio-group name="books" defaultvalue="React">
-    <xy-radio>React</xy-radio>
-    <xy-radio>Vue</xy-radio>
-    <xy-radio>Angular</xy-radio>
-    <xy-radio>Flutter</xy-radio>
-    <xy-radio>Swift</xy-radio>
-</xy-radio-group>
-<xy-button type="primary" onclick="this.previousElementSibling.reset()">reset</xy-button>
+<c-radio-group name="books" defaultvalue="React">
+    <c-radio>React</c-radio>
+    <c-radio>Vue</c-radio>
+    <c-radio>Angular</c-radio>
+    <c-radio>Flutter</c-radio>
+    <c-radio>Swift</c-radio>
+</c-radio-group>
+<c-button type="primary" onclick="this.previousElementSibling.reset()">reset</c-button>
 
 ```js
 radiogroup.reset();
@@ -244,14 +244,14 @@ radiogroup.reset();
 
 用于主动校验，弹出提示信息。
 
-<xy-radio-group required name="lan">
-    <xy-radio>Html</xy-radio>
-    <xy-radio>Css</xy-radio>
-    <xy-radio>Javascript</xy-radio>
-    <xy-radio>Php</xy-radio>
-    <xy-radio>Dart</xy-radio>
-</xy-radio-group>
-<xy-button type="primary" onclick="this.previousElementSibling.checkValidity()">主动校验</xy-button>
+<c-radio-group required name="lan">
+    <c-radio>Html</c-radio>
+    <c-radio>Css</c-radio>
+    <c-radio>Javascript</c-radio>
+    <c-radio>Php</c-radio>
+    <c-radio>Dart</c-radio>
+</c-radio-group>
+<c-button type="primary" onclick="this.previousElementSibling.checkValidity()">主动校验</c-button>
 
 ```js
 radiogroup.checkValidity();

@@ -1,6 +1,6 @@
-import './xy-icon.js';
+import './c-icon.js';
 
-class XyGallery extends HTMLElement {
+class CGallery extends HTMLElement {
     static get observedAttributes() { return ['open'] }
 
     constructor() {
@@ -67,7 +67,7 @@ class XyGallery extends HTMLElement {
         .dots{
             display: flex;
         }
-        .action xy-icon{
+        .action c-icon{
             font-size: 20px;
             cursor:pointer;
         }
@@ -83,7 +83,7 @@ class XyGallery extends HTMLElement {
             transition: .3s;
             opacity: .5;
         }
-        .dots i:hover,.action xy-icon:hover{
+        .dots i:hover,.action c-icon:hover{
             color:var(--themeColor,#42b983);
         }
         .dots i.current{
@@ -125,19 +125,19 @@ class XyGallery extends HTMLElement {
             z-index:-1;
             transform-origin: right top;
         }
-        .btn-close xy-icon{
+        .btn-close c-icon{
             transform: scaleY(.9);
         }
         .btn-close:hover::after,.btn-close:focus::after{
             transform: scale(1.3);
         }
-        .btn-close:hover xy-icon,.btn-close:focus xy-icon{
+        .btn-close:hover c-icon,.btn-close:focus c-icon{
             color:var(--errorColor,#f4615c);
         }
         </style>
-        <button id="close" class="btn-close"><xy-icon name="close"></xy-icon></button>
+        <button id="close" class="btn-close"><c-icon name="close"></c-icon></button>
         <slot id="slot"></slot>
-        <a class="action" id="dots"><xy-icon name="caret-left" class="left"></xy-icon><div class="dots"></div><xy-icon name="caret-right" class="right"></xy-icon></a>
+        <a class="action" id="dots"><c-icon name="caret-left" class="left"></c-icon><div class="dots"></div><c-icon name="caret-right" class="right"></c-icon></a>
         `
     }
 
@@ -255,7 +255,7 @@ class XyGallery extends HTMLElement {
     attributeChangedCallback(name, oldValue, newValue) {
         if (name == 'open' && this.shadowRoot) {
             if (newValue == null) {
-                document.querySelector(`xy-img[index="${this.indexlist[this.index]}"]`).focus();
+                document.querySelector(`c-img[index="${this.indexlist[this.index]}"]`).focus();
             }
         }
     }
@@ -263,11 +263,11 @@ class XyGallery extends HTMLElement {
 }
 
 
-if (!customElements.get('xy-gallery')) {
-    customElements.define('xy-gallery', XyGallery);
+if (!customElements.get('c-gallery')) {
+    customElements.define('c-gallery', CGallery);
 }
 
-export default class XyImg extends HTMLElement {
+export default class CImg extends HTMLElement {
 
     static get observedAttributes() { return ['lazy', 'src', 'defaultsrc', 'ratio'] }
 
@@ -395,7 +395,7 @@ export default class XyImg extends HTMLElement {
             opacity:0;
             visibility:hidden;
         }
-        .placeholder xy-icon {
+        .placeholder c-icon {
             font-size:1.15em;
             margin-right:.4em;
         }
@@ -499,8 +499,8 @@ export default class XyImg extends HTMLElement {
             }
         }
         </style>
-        <div class="placeholder" id="placeholder" style="${this.ratio ? 'padding-top:' + this.ratio : ''}"><div class="placeholder-icon"><xy-icon path="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32z m-40 632H136v-39.9l138.5-164.3 150.1 178L658.1 489 888 761.6V792z m0-129.8L664.2 396.8c-3.2-3.8-9-3.8-12.2 0L424.6 666.4l-144-170.7c-3.2-3.8-9-3.8-12.2 0L136 652.7V232h752v430.2z"></xy-icon>${this.alt}</div></div>
-        <xy-icon class="view" name='View'></xy-icon>
+        <div class="placeholder" id="placeholder" style="${this.ratio ? 'padding-top:' + this.ratio : ''}"><div class="placeholder-icon"><c-icon path="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32z m-40 632H136v-39.9l138.5-164.3 150.1 178L658.1 489 888 761.6V792z m0-129.8L664.2 396.8c-3.2-3.8-9-3.8-12.2 0L424.6 666.4l-144-170.7c-3.2-3.8-9-3.8-12.2 0L136 652.7V232h752v430.2z"></c-icon>${this.alt}</div></div>
+        <c-icon class="view" name='View'></c-icon>
         <img>
         <div class="loading">
             <div class="animation">
@@ -604,28 +604,28 @@ export default class XyImg extends HTMLElement {
                 this.default = true;
                 this.load(this.defaultsrc, true);
             }
-            //window['XyGallery' + this.gallery] && window['XyGallery' + this.gallery].remove(this.XyImgIndex);
+            //window['CGallery' + this.gallery] && window['CGallery' + this.gallery].remove(this.CImgIndex);
         }
     }
 
     initgallery() {
         if (this.gallery !== null) {
-            if (!window['XyGallery' + this.gallery]) {
-                window['XyGallery' + this.gallery] = new XyGallery();
-                document.body.appendChild(window['XyGallery' + this.gallery]);
+            if (!window['CGallery' + this.gallery]) {
+                window['CGallery' + this.gallery] = new CGallery();
+                document.body.appendChild(window['CGallery' + this.gallery]);
             }
             this.img.setAttribute('tabindex', 0);
-            this.setAttribute('index', this.XyImgIndex);
+            this.setAttribute('index', this.CImgIndex);
             this.img.addEventListener('click', () => {
                 if (!this.default) {
-                    window['XyGallery' + this.gallery].show(this.XyImgIndex);
+                    window['CGallery' + this.gallery].show(this.CImgIndex);
                 }
             })
             this.img.addEventListener('keydown', (ev) => {
                 switch (ev.keyCode) {
                     case 13://Enter
                         if (!this.default) {
-                            window['XyGallery' + this.gallery].show(this.XyImgIndex);
+                            window['CGallery' + this.gallery].show(this.CImgIndex);
                         }
                         break;
                     default:
@@ -634,19 +634,19 @@ export default class XyImg extends HTMLElement {
             })
             const img = this.img.cloneNode(true);
             img.removeAttribute('tabindex');
-            img.style.order = this.XyImgIndex;
-            img.dataset.index = this.XyImgIndex;
-            window['XyGallery' + this.gallery].add(img, this.XyImgIndex);
+            img.style.order = this.CImgIndex;
+            img.dataset.index = this.CImgIndex;
+            window['CGallery' + this.gallery].add(img, this.CImgIndex);
         }
     }
 
     connectedCallback() {
-        if (window.XyImgIndex > -1) {
-            window.XyImgIndex++;
+        if (window.CImgIndex > -1) {
+            window.CImgIndex++;
         } else {
-            window.XyImgIndex = 0;
+            window.CImgIndex = 0;
         }
-        this.XyImgIndex = window.XyImgIndex;
+        this.CImgIndex = window.CImgIndex;
         this.placeholder = this.shadowRoot.getElementById('placeholder');
         this.img = this.shadowRoot.querySelector('img');
         if (this.lazy) {
@@ -677,10 +677,10 @@ export default class XyImg extends HTMLElement {
     }
 
     disconnectedCallback() {
-        window['XyGallery' + this.gallery] && window['XyGallery' + this.gallery].remove(this.XyImgIndex);
+        window['CGallery' + this.gallery] && window['CGallery' + this.gallery].remove(this.CImgIndex);
     }
 }
 
-if (!customElements.get('xy-img')) {
-    customElements.define('xy-img', XyImg);
+if (!customElements.get('c-img')) {
+    customElements.define('c-img', CImg);
 }

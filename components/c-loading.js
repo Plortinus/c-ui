@@ -1,4 +1,4 @@
-export default class XyLoading extends HTMLElement {
+export default class CLoading extends HTMLElement {
 
     static get observedAttributes() { return ['color','size'] }
 
@@ -88,6 +88,6 @@ export default class XyLoading extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-loading')){
-    customElements.define('xy-loading', XyLoading);
+if(!customElements.get('c-loading')){
+    customElements.define('c-loading', CLoading);
 }

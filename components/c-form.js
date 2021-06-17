@@ -1,4 +1,4 @@
-export default class XyForm extends HTMLElement {
+export default class CForm extends HTMLElement {
 
     static get observedAttributes() { return ['disabled'] }
 
@@ -24,7 +24,7 @@ export default class XyForm extends HTMLElement {
         :host([type=none]) form{
             display:contents;
         }
-        :host(:not([type=full])) ::slotted(:not(xy-form-item)){
+        :host(:not([type=full])) ::slotted(:not(c-form-item)){
             justify-self: stretch;
             grid-column:span 2;
         }
@@ -195,7 +195,7 @@ export default class XyForm extends HTMLElement {
         })
         if(!this.novalidate){
             this.elements.forEach((el)=>{
-                if(el.tagName=="XY-INPUT"){
+                if(el.tagName=="C-INPUT"){
                     el.addEventListener('input',()=>{
                         this.invalid = !this.validity;
                     })
@@ -209,12 +209,12 @@ export default class XyForm extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-form')){
-    customElements.define('xy-form', XyForm);
+if(!customElements.get('c-form')){
+    customElements.define('c-form', CForm);
 }
 
 
-class XyFormItem extends HTMLElement {
+class CFormItem extends HTMLElement {
 
     constructor() {
         super();
@@ -249,7 +249,7 @@ class XyFormItem extends HTMLElement {
     }
 
     connectedCallback() {
-        this.form = this.closest('xy-form');
+        this.form = this.closest('c-form');
         this.labels = this.shadowRoot.querySelector('label');
         this.slots = this.shadowRoot.querySelector('slot');
         this.slots.addEventListener('slotchange',()=>{
@@ -261,6 +261,6 @@ class XyFormItem extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-form-item')){
-    customElements.define('xy-form-item', XyFormItem);
+if(!customElements.get('c-form-item')){
+    customElements.define('c-form-item', CFormItem);
 }

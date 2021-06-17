@@ -1,4 +1,4 @@
-# xy-rate
+# c-rate
 
 常见的评分组件。
 
@@ -7,31 +7,31 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/xy-ui/components/xy-rate.js';
+    import './node_modules/c-ui/components/c-rate.js';
 </script>
 <!-- 使用 -->
-<xy-rate></xy-rate>
+<c-rate></c-rate>
 ```
 
 ## 默认值`defaultvalue`
 
 可以给评分指定一个初始值`defaultvalue`，取值为`1~5`之间的整数。
 
-<xy-rate defaultvalue="2"></xy-rate>
+<c-rate defaultvalue="2"></c-rate>
 
 ```html
-<xy-rate defaultvalue="2"></xy-rate>
+<c-rate defaultvalue="2"></c-rate>
 ```
 
 ## 值`value`
 
 设置或返回评分组件的`value`属性值。仅能设置为`1~5`之间的整数。
 
-该属性值在`xy-rate`标签上不可见。
+该属性值在`c-rate`标签上不可见。
 
-<xy-rate defaultvalue="2"></xy-rate>
-<xy-button type="primary" onclick="this.previousElementSibling.value=3">设置value为3</xy-button>
-<xy-button type="primary" onclick="XyMessage.info('当前value: '+this.previousElementSibling.previousElementSibling.value)">显示当前value</xy-button>
+<c-rate defaultvalue="2"></c-rate>
+<c-button type="primary" onclick="this.previousElementSibling.value=3">设置value为3</c-button>
+<c-button type="primary" onclick="XyMessage.info('当前value: '+this.previousElementSibling.previousElementSibling.value)">显示当前value</c-button>
 
 JavaScript操作`get`、`set`
 
@@ -47,11 +47,11 @@ rate.setAttribute('value',2);
 
 通过`disabled`可以禁用，禁用后事件失效。
 
-<xy-rate disabled defaultvalue="2"></xy-rate>
-<xy-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></xy-switch>
+<c-rate disabled defaultvalue="2"></c-rate>
+<c-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></c-switch>
 
 ```html
-<xy-rate disabled defaultvalue="2"></xy-rate>
+<c-rate disabled defaultvalue="2"></c-rate>
 ```
 
 JavaScript操作`get`、`set`
@@ -70,49 +70,49 @@ rate.removeAttribute('disabled');
 
 默认图标为`star-fill`，可选择其他图标。
 
-关于`xy-icon`的取值可以查看[`xy-icon`](xy-icon.md)
+关于`c-icon`的取值可以查看[`c-icon`](c-icon.md)
 
-<xy-rate defaultvalue="2" icon="star"></xy-rate>
+<c-rate defaultvalue="2" icon="star"></c-rate>
 
-<xy-rate defaultvalue="2" icon="like-fill"></xy-rate>
+<c-rate defaultvalue="2" icon="like-fill"></c-rate>
 
-<xy-rate defaultvalue="2" icon="heart-fill"></xy-rate>
+<c-rate defaultvalue="2" icon="heart-fill"></c-rate>
 
-<xy-rate defaultvalue="2" icon="like"></xy-rate>
+<c-rate defaultvalue="2" icon="like"></c-rate>
 
-<xy-rate defaultvalue="2" icon="heart"></xy-rate>
+<c-rate defaultvalue="2" icon="heart"></c-rate>
 
 ```html
-<xy-rate defaultvalue="2" icon="star"></xy-rate>
-<xy-rate defaultvalue="2" icon="like-fill"></xy-rate>
-<xy-rate defaultvalue="2" icon="heart-fill"></xy-rate>
-<xy-rate defaultvalue="2" icon="like"></xy-rate>
-<xy-rate defaultvalue="2" icon="heart"></xy-rate>
+<c-rate defaultvalue="2" icon="star"></c-rate>
+<c-rate defaultvalue="2" icon="like-fill"></c-rate>
+<c-rate defaultvalue="2" icon="heart-fill"></c-rate>
+<c-rate defaultvalue="2" icon="like"></c-rate>
+<c-rate defaultvalue="2" icon="heart"></c-rate>
 ```
 
 ## 尺寸`size`
 
 通过`size`可以设置组件尺寸，默认为`font-size`大小（`20px`）。
 
-<xy-rate defaultvalue="2" size="20"></xy-rate>
+<c-rate defaultvalue="2" size="20"></c-rate>
 
-<xy-rate defaultvalue="2" size="25"></xy-rate>
+<c-rate defaultvalue="2" size="25"></c-rate>
 
-<xy-rate defaultvalue="2" size="30"></xy-rate>
+<c-rate defaultvalue="2" size="30"></c-rate>
 
-<xy-rate defaultvalue="2" size="35"></xy-rate>
+<c-rate defaultvalue="2" size="35"></c-rate>
 
 ```html
-<xy-rate defaultvalue="2" size="20"></xy-rate>
-<xy-rate defaultvalue="2" size="25"></xy-rate>
-<xy-rate defaultvalue="2" size="30"></xy-rate>
-<xy-rate defaultvalue="2" size="35"></xy-rate>
+<c-rate defaultvalue="2" size="20"></c-rate>
+<c-rate defaultvalue="2" size="25"></c-rate>
+<c-rate defaultvalue="2" size="30"></c-rate>
+<c-rate defaultvalue="2" size="35"></c-rate>
 ```
 
 CSS操作（推荐）
 
 ```css
-xy-rate{
+c-rate{
     font-size:30px;
 }
 ```
@@ -133,19 +133,19 @@ rate.setAttribute('size',30);
 
 通过`color`可以设置组件颜色，默认为主题颜色`themeColor`。
 
-<xy-rate defaultvalue="2" color="orangered"></xy-rate>
+<c-rate defaultvalue="2" color="orangered"></c-rate>
 
-<xy-rate defaultvalue="2" color="#1E90FF"></xy-rate>
+<c-rate defaultvalue="2" color="#1E90FF"></c-rate>
 
-<xy-rate defaultvalue="2" color="#F44336"></xy-rate>
+<c-rate defaultvalue="2" color="#F44336"></c-rate>
 
-<xy-rate defaultvalue="2" color="#3F51B5"></xy-rate>
+<c-rate defaultvalue="2" color="#3F51B5"></c-rate>
 
 ```html
-<xy-rate defaultvalue="2" color="orangered"></xy-rate>
-<xy-rate defaultvalue="2" color="#1E90FF"></xy-rate>
-<xy-rate defaultvalue="2" color="#F44336"></xy-rate>
-<xy-rate defaultvalue="2" color="#3F51B5"></xy-rate>
+<c-rate defaultvalue="2" color="orangered"></c-rate>
+<c-rate defaultvalue="2" color="#1E90FF"></c-rate>
+<c-rate defaultvalue="2" color="#F44336"></c-rate>
+<c-rate defaultvalue="2" color="#3F51B5"></c-rate>
 ```
 
 JavaScript操作`get`、`set`
@@ -165,7 +165,7 @@ rate.setAttribute('color','orangered');
     color:yellow
 }
 </style>
-<xy-rate defaultvalue="2" color="#F44336" class="rate-color"></xy-rate>
+<c-rate defaultvalue="2" color="#F44336" class="rate-color"></c-rate>
 
 ```html
 
@@ -174,17 +174,17 @@ rate.setAttribute('color','orangered');
     color:yellow
 }
 </style>
-<xy-rate defaultvalue="2" color="#F44336" class="rate-color"></xy-rate>
+<c-rate defaultvalue="2" color="#F44336" class="rate-color"></c-rate>
 ```
 
 ## 提示`tips`
 
 可以给评分指定一个提示，用于鼠标`hover`显示状态信息，格式形如`tips1,tips2,tips3,tips4,tips5`
 
-<xy-rate defaultvalue="1" tips="terrible,bad,normal,good,wonderful"></xy-rate>
+<c-rate defaultvalue="1" tips="terrible,bad,normal,good,wonderful"></c-rate>
 
 ```html
-<xy-rate defaultvalue="1" tips="terrible,bad,normal,good,wonderful"></xy-rate>
+<c-rate defaultvalue="1" tips="terrible,bad,normal,good,wonderful"></c-rate>
 ```
 
 ## 事件`event`
@@ -195,10 +195,10 @@ rate.setAttribute('color','orangered');
 
 评分组件在评分完成时触发，键盘左右操作同样触发。
 
-<xy-rate defaultvalue="1" onchange="XyMessage.info('当前value: '+this.value)"></xy-rate>
+<c-rate defaultvalue="1" onchange="XyMessage.info('当前value: '+this.value)"></c-rate>
 
 ```html
-<xy-rate defaultvalue="1" onchange="XyMessage.info('当前value: '+this.value)"></xy-rate>
+<c-rate defaultvalue="1" onchange="XyMessage.info('当前value: '+this.value)"></c-rate>
 ```
 
 其他触发方式
@@ -229,7 +229,7 @@ rate.addEventListener('change',function(ev){
 
 `focus`、`blur`后的回调事件。
 
-与[`xy-button`](xy-button.md?id=onfocus、onblur)使用方式一致。
+与[`c-button`](c-button.md?id=onfocus、onblur)使用方式一致。
 
 ## 方法`function`
 
@@ -237,8 +237,8 @@ rate.addEventListener('change',function(ev){
 
 用于主动聚焦`focus`，聚焦以后可以响应键盘事件，支持方向键。
 
-<xy-rate onfocus="XyMessage.info('focus')" onblur="XyMessage.info('blur')" onchange="XyMessage.info(this.value)"></xy-rate>
-<xy-button type="primary" onclick="this.previousElementSibling.focus()">主动聚焦</xy-button>
+<c-rate onfocus="XyMessage.info('focus')" onblur="XyMessage.info('blur')" onchange="XyMessage.info(this.value)"></c-rate>
+<c-button type="primary" onclick="this.previousElementSibling.focus()">主动聚焦</c-button>
 
 ```js
 rate.focus();

@@ -1,18 +1,18 @@
-# xy-color-picker
+# c-color-picker
 
 颜色选择器。
 
-![xy-color-picker](../screenshot/color-picker.png)
+![c-color-picker](../screenshot/color-picker.png)
 
 ## 使用方式
 
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/xy-ui/components/xy-color-picker.js';
+    import './node_modules/c-ui/components/c-color-picker.js';
 </script>
 <!-- 使用 -->
-<xy-color-picker></xy-color-picker>
+<c-color-picker></c-color-picker>
 ```
 
 ## 默认值`defaultvalue`
@@ -30,10 +30,10 @@
 
 > 其中，web支持颜色关键字、`hex(a)`、`rgb(a)`、`hls(a)`四种方式。
 
-<xy-color-picker defaultvalue="rgb(66, 185, 131)"></xy-color-picker>
+<c-color-picker defaultvalue="rgb(66, 185, 131)"></c-color-picker>
 
 ```html
-<xy-color-picker defaultvalue="rgb(66, 185, 131)"></xy-color-picker>
+<c-color-picker defaultvalue="rgb(66, 185, 131)"></c-color-picker>
 ```
 
 ## 值`value`、颜色`color`
@@ -59,12 +59,12 @@
 color.toRGBA().toString()//返回RGBA的颜色值
 ```
 
-该属性值在`xy-color-picker`标签上不可见。
+该属性值在`c-color-picker`标签上不可见。
 
-<xy-color-picker defaultvalue="rgb(66, 185, 131)" id="color-picker-value"></xy-color-picker>
+<c-color-picker defaultvalue="rgb(66, 185, 131)" id="color-picker-value"></c-color-picker>
 
-<xy-button type="primary" onclick="document.getElementById('color-picker-value').value='orangered'">设置value为orangered</xy-button>
-<xy-button type="primary" onclick="XyMessage.info('当前value: '+document.getElementById('color-picker-value').value)">显示当前value</xy-button>
+<c-button type="primary" onclick="document.getElementById('color-picker-value').value='orangered'">设置value为orangered</c-button>
+<c-button type="primary" onclick="XyMessage.info('当前value: '+document.getElementById('color-picker-value').value)">显示当前value</c-button>
 
 JavaScript操作`get`、`set`
 
@@ -82,11 +82,11 @@ color.setAttribute('value','orangered');
 
 通过`disabled`可以禁用，禁用后无法打开颜色选择面板。
 
-<xy-color-picker disabled defaultvalue="rgb(66, 185, 131)"></xy-color-picker>
-<xy-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></xy-switch>
+<c-color-picker disabled defaultvalue="rgb(66, 185, 131)"></c-color-picker>
+<c-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></c-switch>
 
 ```html
-<xy-color-picker disabled defaultvalue="rgb(66, 185, 131)"></xy-color-picker>
+<c-color-picker disabled defaultvalue="rgb(66, 185, 131)"></c-color-picker>
 ```
 
 JavaScript操作`get`、`set`
@@ -103,12 +103,12 @@ color.removeAttribute('disabled');
 
 ## 方向`dir`
 
-通过`dir`可以设置颜色悬浮层方向，默认为`bottomleft`，可以取值`top`、`right`、`bottom`、`left`、`topleft`、`topright`、`righttop`、`rightbottom`、`bottomleft`、`bottomright`、`lefttop`、`leftbottom`。同[`xy-popover`](xy-popover.md)。
+通过`dir`可以设置颜色悬浮层方向，默认为`bottomleft`，可以取值`top`、`right`、`bottom`、`left`、`topleft`、`topright`、`righttop`、`rightbottom`、`bottomleft`、`bottomright`、`lefttop`、`leftbottom`。同[`c-popover`](c-popover.md)。
 
-<xy-color-picker defaultvalue="rgb(66, 185, 131)" dir="topleft"></xy-color-picker>
+<c-color-picker defaultvalue="rgb(66, 185, 131)" dir="topleft"></c-color-picker>
 
 ```html
-<xy-color-picker defaultvalue="rgb(66, 185, 131)" dir="topleft"></xy-color-picker>
+<c-color-picker defaultvalue="rgb(66, 185, 131)" dir="topleft"></c-color-picker>
 ```
 
 JavaScript操作`get`、`set`
@@ -123,7 +123,7 @@ color.setAttribute('dir','right');
 
 ## 自定义尺寸
 
-默认情况下，`xy-color-picker`是一个圆角正方形，可以设置宽高
+默认情况下，`c-color-picker`是一个圆角正方形，可以设置宽高
 
 <style>
 .color-picker-custom{
@@ -131,7 +131,7 @@ color.setAttribute('dir','right');
     height:30px;
 }
 </style>
-<xy-color-picker class="color-picker-custom" defaultvalue="rgb(66, 185, 131)"></xy-color-picker>
+<c-color-picker class="color-picker-custom" defaultvalue="rgb(66, 185, 131)"></c-color-picker>
 
 ```html
 <style>
@@ -140,7 +140,7 @@ color.setAttribute('dir','right');
     height:30px;
 }
 </style>
-<xy-color-picker class="color-picker-custom" defaultvalue="rgb(66, 185, 131)"></xy-color-picker>
+<c-color-picker class="color-picker-custom" defaultvalue="rgb(66, 185, 131)"></c-color-picker>
 ```
 
 ## 事件`event`
@@ -151,10 +151,10 @@ color.setAttribute('dir','right');
 
 当选好颜色后，按确定按钮可以触发`change`回调。
 
-<xy-color-picker defaultvalue="rgb(66, 185, 131)" onchange="XyMessage.info('当前value: '+this.value)"></xy-color-picker>
+<c-color-picker defaultvalue="rgb(66, 185, 131)" onchange="XyMessage.info('当前value: '+this.value)"></c-color-picker>
 
 ```html
-<xy-color-picker defaultvalue="rgb(66, 185, 131)" onchange="XyMessage.info('当前value: '+this.value)"></xy-color-picker>
+<c-color-picker defaultvalue="rgb(66, 185, 131)" onchange="XyMessage.info('当前value: '+this.value)"></c-color-picker>
 ```
 
 其他触发方式
@@ -200,30 +200,30 @@ color.addEventListener('change',function(ev){
 
 ## 其他
 
-`xy-color-picker`内部基于`xy-popover`和`xy-color-pane`实现。
+`c-color-picker`内部基于`c-popover`和`c-color-pane`实现。
 
 ```html
-<xy-popover >
-    <xy-button class="color-btn"></xy-button>
-    <xy-popcon>
-        <xy-color-pane id="color-pane"></xy-color-pane>
+<c-popover >
+    <c-button class="color-btn"></c-button>
+    <c-popcon>
+        <c-color-pane id="color-pane"></c-color-pane>
         <div class="pop-footer">
-            <xy-button id="btn-cancel">取消</xy-button>
-            <xy-button type="primary" id="btn-submit">确认</xy-button>
+            <c-button id="btn-cancel">取消</c-button>
+            <c-button type="primary" id="btn-submit">确认</c-button>
         </div>
-    </xy-popcon>
-</xy-popover>
+    </c-popcon>
+</c-popover>
 ```
 
-其中，`xy-color-pane`为颜色选择面板，可独立使用。
+其中，`c-color-pane`为颜色选择面板，可独立使用。
 
-<xy-color-pane defaultvalue="rgb(66, 185, 131)"></xy-color-pane>
+<c-color-pane defaultvalue="rgb(66, 185, 131)"></c-color-pane>
 
 ```html
-<xy-color-pane defaultvalue="rgb(66, 185, 131)"></xy-color-pane>
+<c-color-pane defaultvalue="rgb(66, 185, 131)"></c-color-pane>
 ```
 
-事件和属性与`xy-color-picker`一致。
+事件和属性与`c-color-picker`一致。
 
 ```js
 colorPane.value = 'orangered';

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>xy-ui</title>
+  <title>c-ui</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
   <meta name="viewport"
@@ -16,35 +16,35 @@
       /*--themeBackground:linear-gradient(to right, #42b983 0%,#06b2a1 100%)*/
     }
 
-    xy-button,
-    xy-checkbox,
-    xy-radio,
-    xy-input,
-    xy-select,
-    xy-switch,
-    xy-color-picker,
-    xy-date-picker,
-    xy-textarea {
+    c-button,
+    c-checkbox,
+    c-radio,
+    c-input,
+    c-select,
+    c-switch,
+    c-color-picker,
+    c-date-picker,
+    c-textarea {
       vertical-align: middle;
       margin: 0 10px 10px 0;
     }
-    xy-slider{
+    c-slider{
       margin: 10px 0;
     }
-    xy-pagination{
+    c-pagination{
       margin-bottom: 10px;
     }
-    xy-form-item *{
+    c-form-item *{
       margin-bottom: 0;
     }
-    xy-img{ 
+    c-img{ 
       width: 200px; 
       height: 150px; 
       margin: 0 10px 10px 0;
     }
 
-    xy-input:not([block]),
-    xy-textarea:not([block]) {
+    c-input:not([block]),
+    c-textarea:not([block]) {
       width: 300px;
     }
 
@@ -52,11 +52,11 @@
       margin-right:0;
     }
 
-    xy-tips>*,xy-popover>*{
+    c-tips>*,c-popover>*{
       margin: 0;
     }
 
-    xy-tips, xy-popover{
+    c-tips, c-popover{
       margin: 0 10px 10px 0;
       vertical-align: middle;
     }
@@ -81,12 +81,12 @@
     .box-o{
       background: rgba(33, 243, 103, 0.5);
     }
-    xy-col{
+    c-col{
       padding: 20px;
       color: #fff;
       background: #42b983;
     }
-    xy-col:nth-child(odd){
+    c-col:nth-child(odd){
       background: #3ba2f4;
     }
 
@@ -119,7 +119,7 @@
     .gt-container .gt-comment-username,.gt-container a,.gt-container a:hover{
       color: var(--themeColor);
     }
-    xy-layout {
+    c-layout {
       background: rgba(33, 150, 243, 0.5);
     }
   </style>
@@ -137,19 +137,19 @@
   <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
   <script>
     window.$docsify = {
-      name: 'xy-ui',
-      repo: 'https://github.com/XboxYan/xy-ui',
+      name: 'c-ui',
+      repo: 'https://github.com/XboxYan/c-ui',
       coverpage: 'coverpage.md',
       loadSidebar: 'sidebar.md',
       subMaxLevel: 2,
       auto2top: true,
       plugins: [
-        EditOnGithubPlugin.create('https://github.com/XboxYan/xy-ui/tree/master/docs/'),
+        EditOnGithubPlugin.create('https://github.com/XboxYan/c-ui/tree/master/docs/'),
         function(hook, vm) {
           hook.doneEach(function(){
             document.getElementById('gitalk-container').innerHTML = "";
             NewGitalk().render('gitalk-container');
-            if(vm.route.file=='xy-input.md'||vm.route.file=='xy-form.md'){
+            if(vm.route.file=='c-input.md'||vm.route.file=='c-form.md'){
               document.getElementById('pwdAgain').customValidity = {
                   method:(el)=>{
                       return el.value == document.getElementById('pwd').value;
@@ -166,7 +166,7 @@
       return new Gitalk({
         clientID: 'aff209ab4dddd16afee0',
         clientSecret: '6be2c48694e28738bd0777eff1d0a0febb436704',
-        repo: 'xy-ui',
+        repo: 'c-ui',
         owner: 'XboxYan',
         admin: ['XboxYan'],
         // facebook-like distraction free mode

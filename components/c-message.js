@@ -1,7 +1,7 @@
-import './xy-icon.js';
-import './xy-loading.js';
+import './c-icon.js';
+import './c-loading.js';
 
-class XyMessage extends HTMLElement {
+class CMessage extends HTMLElement {
 
     static get observedAttributes() { return ['type','icon'] }
 
@@ -44,24 +44,24 @@ class XyMessage extends HTMLElement {
             margin-right:5px;
         }
 
-        xy-loading{
+        c-loading{
             display:none;
         }
 
-        :host([show][type="loading"]) xy-loading{
+        :host([show][type="loading"]) c-loading{
             display:block;
         }
-        :host([show][type="loading"]) xy-icon{
+        :host([show][type="loading"]) c-icon{
             display:none;
         }
-        :host xy-icon{
+        :host c-icon{
             color:var(--themeColor,#42b983);
         }
         
         </style>
         <div class="message">
-            <xy-icon id="message-type" class="message-type" size="16"></xy-icon>
-            <xy-loading></xy-loading>
+            <c-icon id="message-type" class="message-type" size="16"></c-icon>
+            <c-loading></c-loading>
             <slot></slot>
         </div>
         `
@@ -152,8 +152,8 @@ class XyMessage extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-message')){
-    customElements.define('xy-message', XyMessage);
+if(!customElements.get('c-message')){
+    customElements.define('c-message', CMessage);
 }
 
 let messageContent = document.getElementById('message-content');
@@ -167,7 +167,7 @@ if(!messageContent){
 export default {
 
     info: function(text='',duration,onclose) {
-        const message = new XyMessage();
+        const message = new CMessage();
         message.timer && clearTimeout(message.timer);
         messageContent.appendChild(message);
         message.type = 'info';
@@ -181,7 +181,7 @@ export default {
     },
 
     success: function(text='',duration,onclose) {
-        const message = new XyMessage();
+        const message = new CMessage();
         message.timer && clearTimeout(message.timer);
         messageContent.appendChild(message);
         message.type = 'success';
@@ -195,7 +195,7 @@ export default {
     },
 
     error: function(text='',duration,onclose) {
-        const message = new XyMessage();
+        const message = new CMessage();
         message.timer && clearTimeout(message.timer);
         messageContent.appendChild(message);
         message.type = 'error';
@@ -209,7 +209,7 @@ export default {
     },
 
     warning: function(text='',duration,onclose) {
-        const message = new XyMessage();
+        const message = new CMessage();
         message.timer && clearTimeout(message.timer);
         messageContent.appendChild(message);
         message.type = 'warning';
@@ -223,7 +223,7 @@ export default {
     },
 
     loading: function(text='',duration=0,onclose) {
-        const message = new XyMessage();
+        const message = new CMessage();
         message.timer && clearTimeout(message.timer);
         messageContent.appendChild(message);
         message.type = 'loading';
@@ -239,7 +239,7 @@ export default {
     },
 
     show: function({text,duration,onclose,icon}) {
-        const message = new XyMessage();
+        const message = new CMessage();
         message.timer && clearTimeout(message.timer);
         messageContent.appendChild(message);
         message.icon = icon;

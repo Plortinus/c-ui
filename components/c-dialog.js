@@ -1,7 +1,7 @@
 import './c-button.js';
-import './xy-input.js';
+import './c-input.js';
 
-class XyDialog extends HTMLElement {
+class CDialog extends HTMLElement {
 
     static get observedAttributes() { return ['open','title','oktext','canceltext','loading','type'] }
 
@@ -106,10 +106,10 @@ class XyDialog extends HTMLElement {
         :host([type="prompt"]) #btn-cancel{
             visibility:visible;
         }
-        xy-input{
+        c-input{
             width:100%;
         }
-        :host(:not(:empty)) xy-input{
+        :host(:not(:empty)) c-input{
             margin-top:10px;
         }
         :host(:empty) .dialog-body{
@@ -117,13 +117,13 @@ class XyDialog extends HTMLElement {
         }
         </style>
         <div class="dialog">
-            <xy-icon id="dialog-type" class="dialog-type"></xy-icon>
+            <c-icon id="dialog-type" class="dialog-type"></c-icon>
             <div class="dialog-content">
                 <div class="dialog-title" id="title">${this.title}</div>
                 <c-button class="btn-close" id="btn-close" icon="close"></c-button>
                 <div class="dialog-body">
                     <slot></slot>
-                    ${(type||this.type)==="prompt"?"<xy-input></xy-input>":""}
+                    ${(type||this.type)==="prompt"?"<c-input></c-input>":""}
                 </div>
                 <div class="dialog-footer">
                     <c-button id="btn-cancel">${this.canceltext}</c-button>
@@ -236,7 +236,7 @@ class XyDialog extends HTMLElement {
         this.btnCancel = this.shadowRoot.getElementById('btn-cancel');
         this.btnSubmit = this.shadowRoot.getElementById('btn-submit');
         this.dialogType = this.shadowRoot.getElementById('dialog-type');
-        this.input = this.shadowRoot.querySelector('xy-input');
+        this.input = this.shadowRoot.querySelector('c-input');
         this.clientWidth;
         this.shadowRoot.addEventListener('transitionend',(ev)=>{
             if(ev.propertyName === 'transform' && this.open){
@@ -313,14 +313,14 @@ class XyDialog extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-dialog')){
-    customElements.define('xy-dialog', XyDialog);
+if(!customElements.get('c-dialog')){
+    customElements.define('c-dialog', CDialog);
 }
 
 export default {
 
     alert: function() {
-        const dialog = new XyDialog();
+        const dialog = new CDialog();
         document.body.appendChild(dialog);
         dialog.remove = true;
         if( typeof arguments[0] === 'object' ){
@@ -340,7 +340,7 @@ export default {
     },
 
     info: function() {
-        const dialog = new XyDialog();
+        const dialog = new CDialog();
         document.body.appendChild(dialog);
         dialog.type = 'info';
         dialog.remove = true;
@@ -361,7 +361,7 @@ export default {
     },
 
     success: function() {
-        const dialog = new XyDialog();
+        const dialog = new CDialog();
         document.body.appendChild(dialog);
         dialog.type = 'success';
         dialog.remove = true;
@@ -382,7 +382,7 @@ export default {
     },
 
     error: function() {
-        const dialog = new XyDialog();
+        const dialog = new CDialog();
         document.body.appendChild(dialog);
         dialog.type = 'error';
         dialog.remove = true;
@@ -403,7 +403,7 @@ export default {
     },
 
     warning: function() {
-        const dialog = new XyDialog();
+        const dialog = new CDialog();
         document.body.appendChild(dialog);
         dialog.type = 'warning';
         dialog.remove = true;
@@ -424,8 +424,8 @@ export default {
     },
 
     confirm: function() {
-        //const dialog = document.createElement('xy-dialog');
-        const dialog = new XyDialog();
+        //const dialog = document.createElement('c-dialog');
+        const dialog = new CDialog();
         document.body.appendChild(dialog);
         dialog.remove = true;
         dialog.btnCancel.style.visibility = 'visible';
@@ -452,7 +452,7 @@ export default {
     },
 
     prompt: function() {
-        const dialog = new XyDialog({type:'prompt'});
+        const dialog = new CDialog({type:'prompt'});
         document.body.appendChild(dialog);
         dialog.type = 'prompt';
         dialog.remove = true;
@@ -469,7 +469,7 @@ export default {
                     ok&&ok(value);
                     dialog.open = false;
                 }else{
-                    XyMessage.error('内容不能为空');
+                    CMessage.error('内容不能为空');
                     dialog.input.focus();
                 }
             };
@@ -485,7 +485,7 @@ export default {
                     arguments[1]&&arguments[1](value);
                     dialog.open = false;
                 }else{
-                    XyMessage.error('内容不能为空');
+                    CMessage.error('内容不能为空');
                     dialog.input.focus();
                 }
             };

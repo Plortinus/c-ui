@@ -1,6 +1,6 @@
 import './c-button.js';
 
-class XyTabContent extends HTMLElement {
+class CTabContent extends HTMLElement {
     static get observedAttributes() { return ["label","key","disabled","icon"]; }
     constructor() {
         super();
@@ -56,11 +56,11 @@ class XyTabContent extends HTMLElement {
 
 }
 
-if(!customElements.get('xy-tab-content')){
-    customElements.define('xy-tab-content', XyTabContent);
+if(!customElements.get('c-tab-content')){
+    customElements.define('c-tab-content', CTabContent);
 }
 
-export default class XyTab extends HTMLElement {
+export default class CTab extends HTMLElement {
 
     static get observedAttributes() { return ['activekey'] }
 
@@ -165,7 +165,7 @@ export default class XyTab extends HTMLElement {
         :host([align="end"]) .tab-nav{
             justify-content:flex-end;
         }
-        ::slotted(xy-tab-content){
+        ::slotted(c-tab-content){
             box-sizing:border-box;
             width:100%;
             height:100%;
@@ -214,6 +214,7 @@ export default class XyTab extends HTMLElement {
 
     inittab() {
         const items = this.nav.querySelectorAll('.nav-item');
+        console.log('items: ', items);
         Array.from(items).forEach((item,index)=>{
             this.tabPos[item.dataset.key] = {
                 index:index,
@@ -253,7 +254,7 @@ export default class XyTab extends HTMLElement {
             const slots = this.slots.assignedElements();
             let html = ''
             slots.forEach((item,index)=>{
-                if( item.tagName === 'XY-TAB-CONTENT' ){
+                if( item.tagName === 'C-TAB-CONTENT' ){
                     if(item.key===null){
                         item.key = index;
                     }
@@ -311,7 +312,7 @@ export default class XyTab extends HTMLElement {
             this.tabline.style = `width:${active.width}px;transform:translateX(${active.left}px)`;
             this.tab.style.transform = `translateX(${-(active.index) * 100}%)`;
             this.filter.textContent = `
-            ::slotted(xy-tab-content:not([key="${this.activekey}"])){
+            ::slotted(c-tab-content:not([key="${this.activekey}"])){
                 height:0;
                 overflow:visible;
             }
@@ -339,6 +340,6 @@ export default class XyTab extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-tab')){
-    customElements.define('xy-tab', XyTab);
+if(!customElements.get('c-tab')){
+    customElements.define('c-tab', CTab);
 }

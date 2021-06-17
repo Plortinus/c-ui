@@ -1,4 +1,4 @@
-# xy-switch
+# c-switch
 
 开关选择器。
 
@@ -7,21 +7,21 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/xy-ui/components/xy-switch.js';
+    import './node_modules/c-ui/components/c-switch.js';
 </script>
 <!-- 使用 -->
-<xy-switch></xy-switch>
+<c-switch></c-switch>
 ```
 
 ## 禁用`disabled`
 
 通过`disabled`可以禁用开关。
 
-<xy-switch disabled></xy-switch>
-<xy-button type="primary" onclick="this.previousElementSibling.disabled=!this.previousElementSibling.disabled">禁用切换</xy-button>
+<c-switch disabled></c-switch>
+<c-button type="primary" onclick="this.previousElementSibling.disabled=!this.previousElementSibling.disabled">禁用切换</c-button>
 
 ```html
-<xy-switch disabled></xy-switch>
+<c-switch disabled></c-switch>
 ```
 
 JavaScript操作
@@ -39,11 +39,11 @@ switch.removeAttribute('disabled');
 
 `checked`属性表示选中。
 
-<xy-switch checked></xy-switch>
-<xy-button type="primary" onclick="this.previousElementSibling.checked=!this.previousElementSibling.checked">选中切换</xy-button>
+<c-switch checked></c-switch>
+<c-button type="primary" onclick="this.previousElementSibling.checked=!this.previousElementSibling.checked">选中切换</c-button>
 
 ```html
-<xy-switch checked></xy-switch>
+<c-switch checked></c-switch>
 ```
 
 JavaScript操作
@@ -61,16 +61,16 @@ switch.removeAttribute('checked');
 
 内部采用`em`相对尺寸，可通过`font-size`来控制大小。
 
-<xy-switch checked></xy-switch>
-<xy-slider min="10" max="50" defaultvalue="16" suffix="px" showtips oninput="this.previousElementSibling.style.fontSize=this.value+'px'" ></xy-slider>
+<c-switch checked></c-switch>
+<c-slider min="10" max="50" defaultvalue="16" suffix="px" showtips oninput="this.previousElementSibling.style.fontSize=this.value+'px'" ></c-slider>
 
 ```html
 <style>
-xy-switch{
+c-switch{
     font-size:20px;
 }
 </style>
-<xy-switch checked></xy-switch>
+<c-switch checked></c-switch>
 ```
 
 ## 事件`event`
@@ -79,10 +79,10 @@ xy-switch{
 
 在切换完成时触发。
 
-<xy-switch onchange="XyMessage.info('当前状态checked:'+this.checked)"></xy-switch>
+<c-switch onchange="XyMessage.info('当前状态checked:'+this.checked)"></c-switch>
 
 ```html
-<xy-switch onchange="XyMessage.info('当前状态checked:'+this.checked)"></xy-switch>
+<c-switch onchange="XyMessage.info('当前状态checked:'+this.checked)"></c-switch>
 ```
 
 ```js
@@ -111,7 +111,7 @@ switch.addEventListener('change',function(ev){
 
 `focus`、`blur`后的回调事件。
 
-与[`xy-button`](xy-button.md?id=onfocus、onblur)使用方式一致。
+与[`c-button`](c-button.md?id=onfocus、onblur)使用方式一致。
 
 ## 方法`function`
 
@@ -119,8 +119,8 @@ switch.addEventListener('change',function(ev){
 
 用于主动聚焦`focus`，聚焦以后可以响应键盘事件，`Enter`切换开关。
 
-<xy-switch onfocus="XyMessage.info('focus')" onchange="XyMessage.info('当前状态checked:'+this.checked)"></xy-switch>
-<xy-button type="primary" onclick="this.previousElementSibling.focus()">主动聚焦</xy-button>
+<c-switch onfocus="XyMessage.info('focus')" onchange="XyMessage.info('当前状态checked:'+this.checked)"></c-switch>
+<c-button type="primary" onclick="this.previousElementSibling.focus()">主动聚焦</c-button>
 
 ```js
 switch.focus();

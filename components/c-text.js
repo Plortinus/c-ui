@@ -1,4 +1,4 @@
-export default class XyText extends HTMLElement {
+export default class CText extends HTMLElement {
 
     static get observedAttributes() { return ['rows','draggable'] }
 
@@ -110,6 +110,6 @@ export default class XyText extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-text')){
-    customElements.define('xy-text', XyText);
+if(!customElements.get('c-text')){
+    customElements.define('c-text', CText);
 }

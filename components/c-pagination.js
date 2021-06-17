@@ -1,6 +1,6 @@
 import './c-button.js';
 
-export default class XyPagination extends HTMLElement {
+export default class CPagination extends HTMLElement {
 
     static get observedAttributes() { return ['pagesize','total'] }
 
@@ -30,7 +30,7 @@ export default class XyPagination extends HTMLElement {
             align-items: center;
             pointer-events: none;
         }
-        .page-ellipsis xy-icon{
+        .page-ellipsis c-icon{
             margin:auto;
         }
         c-button[current] {
@@ -235,6 +235,6 @@ export default class XyPagination extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-pagination')){
-    customElements.define('xy-pagination', XyPagination);
+if(!customElements.get('c-pagination')){
+    customElements.define('c-pagination', CPagination);
 }

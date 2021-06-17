@@ -1,6 +1,6 @@
-import './xy-loading.js';
+import './c-loading.js';
 
-class XyTr extends HTMLElement {
+class CTr extends HTMLElement {
 
     static get observedAttributes() { return ['checked'] }
 
@@ -12,7 +12,7 @@ class XyTr extends HTMLElement {
         :host {
             display:contents;
         }
-        :host(:hover) ::slotted(xy-td)::before{
+        :host(:hover) ::slotted(c-td)::before{
             opacity:.1;
         }
         :host(:hover) .select::before{
@@ -21,13 +21,13 @@ class XyTr extends HTMLElement {
         .select{
             display:var(--select,none);
         }
-        .select xy-checkbox{
+        .select c-checkbox{
             background-color: #fff;
             border-radius: 2px;
             z-index: 5;
         }
         </style>
-        <xy-td class="select"><xy-checkbox></xy-checkbox></xy-td>
+        <c-td class="select"><c-checkbox></c-checkbox></c-td>
         <slot></slot>
         `
     }
@@ -45,7 +45,7 @@ class XyTr extends HTMLElement {
     }
 
     connectedCallback() {
-        this.checkbox = this.shadowRoot.querySelector('xy-checkbox');
+        this.checkbox = this.shadowRoot.querySelector('c-checkbox');
         this.checkbox.addEventListener('change',()=>{
             this.checked = this.checkbox.checked;
             this.dispatchEvent(new CustomEvent('change', {
@@ -63,11 +63,11 @@ class XyTr extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-tr')){
-    customElements.define('xy-tr', XyTr);
+if(!customElements.get('c-tr')){
+    customElements.define('c-tr', CTr);
 }
 
-class XyTd extends HTMLElement {
+class CTd extends HTMLElement {
 
     constructor() {
         super();
@@ -107,11 +107,11 @@ class XyTd extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-td')){
-    customElements.define('xy-td', XyTd);
+if(!customElements.get('c-td')){
+    customElements.define('c-td', CTd);
 }
 
-export default class XyTable extends HTMLElement {
+export default class CTable extends HTMLElement {
 
     constructor() {
         super();
@@ -126,7 +126,7 @@ export default class XyTable extends HTMLElement {
             position:relative;
             --columns:${this.thead.length||1};
         }
-        ::slotted(xy-tr:nth-child(even)){
+        ::slotted(c-tr:nth-child(even)){
             --cellColor:var(--themeColor,#42b983);
         }
         .loading{
@@ -165,23 +165,23 @@ export default class XyTable extends HTMLElement {
             pointer-events:none;
             z-index: -1;
         }
-        :host([select]) ::slotted(xy-tr){
+        :host([select]) ::slotted(c-tr){
             --select: flex;
         }
-        .th xy-checkbox{
+        .th c-checkbox{
             background-color: #fff;
             border-radius: 2px;
             z-index: 5;
         }
         </style>
         ${
-            this.select?'<div class="th"><xy-checkbox></xy-checkbox></div>':''
+            this.select?'<div class="th"><c-checkbox></c-checkbox></div>':''
         }
         ${
             this.thead.map(el=>'<div class="th">'+el+'</div>').join('')
         }
         <slot></slot>
-        <xy-loading class="loading"></xy-loading>
+        <c-loading class="loading"></c-loading>
         `
     }
 
@@ -199,7 +199,7 @@ export default class XyTable extends HTMLElement {
     }
 
     get value() {
-        return Array.from(this.querySelectorAll('xy-tr[checked]'),el=>el.id||el.index);
+        return Array.from(this.querySelectorAll('c-tr[checked]'),el=>el.id||el.index);
     }
 
     set loading(value) {
@@ -212,10 +212,10 @@ export default class XyTable extends HTMLElement {
 
     connectedCallback() {
         if(this.select){
-            this.checkbox = this.shadowRoot.querySelector('xy-checkbox');
+            this.checkbox = this.shadowRoot.querySelector('c-checkbox');
             this.slots = this.shadowRoot.querySelector('slot');
             this.slots.addEventListener('slotchange',()=>{
-                this.cell = [...this.querySelectorAll('xy-tr')];
+                this.cell = [...this.querySelectorAll('c-tr')];
                 this.cell.forEach((el,i)=>{
                     !el.id && (el.index = i);
                     el.onchange = () => {
@@ -243,6 +243,6 @@ export default class XyTable extends HTMLElement {
 
 }
 
-if(!customElements.get('xy-table')){
-    customElements.define('xy-table', XyTable);
+if(!customElements.get('c-table')){
+    customElements.define('c-table', CTable);
 }

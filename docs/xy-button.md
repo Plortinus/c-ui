@@ -1,4 +1,4 @@
-# xy-button
+# c-button
 
 按钮。用于替代原生`button`。
 
@@ -7,78 +7,78 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/xy-ui/components/xy-button.js';
+    import './node_modules/c-ui/components/c-button.js';
 </script>
 <!-- 使用 -->
-<xy-button>button</xy-button>
+<c-button>button</c-button>
 ```
 
 ## 风格`type`
 
 按钮有5种风格，分别为`primary`，`dashed`，`flat`，`danger`和默认。
 
-<xy-button type="primary" id="btn">primary</xy-button>
-<xy-button type="dashed">dashed</xy-button>
-<xy-button type="flat">flat</xy-button>
-<xy-button type="danger">danger</xy-button>
-<xy-button>default</xy-button>
+<c-button type="primary" id="btn">primary</c-button>
+<c-button type="dashed">dashed</c-button>
+<c-button type="flat">flat</c-button>
+<c-button type="danger">danger</c-button>
+<c-button>default</c-button>
 
 ```html
-<xy-button type="primary">primary</xy-button>
-<xy-button type="dashed">dashed</xy-button>
-<xy-button type="flat">flat</xy-button>
-<xy-button type="danger">danger</xy-button>
-<xy-button>default</xy-button>
+<c-button type="primary">primary</c-button>
+<c-button type="dashed">dashed</c-button>
+<c-button type="flat">flat</c-button>
+<c-button type="danger">danger</c-button>
+<c-button>default</c-button>
 ```
 
 ## 链接`href`
 
-当设置`href`属性时，`xy-button`内部会渲染成`a`标签。
+当设置`href`属性时，`c-button`内部会渲染成`a`标签。
 
-<xy-button type="primary" href="https://github.com/XboxYan/xy-ui">visit xy-ui</xy-button>
-<xy-button type="dashed" href="https://github.com/XboxYan/xy-ui">visit xy-ui</xy-button>
-<xy-button type="flat" href="https://github.com/XboxYan/xy-ui">visit xy-ui</xy-button>
-<xy-button href="https://github.com/XboxYan/xy-ui">visit xy-ui</xy-button>
+<c-button type="primary" href="https://github.com/XboxYan/c-ui">visit c-ui</c-button>
+<c-button type="dashed" href="https://github.com/XboxYan/c-ui">visit c-ui</c-button>
+<c-button type="flat" href="https://github.com/XboxYan/c-ui">visit c-ui</c-button>
+<c-button href="https://github.com/XboxYan/c-ui">visit c-ui</c-button>
 
 
 ```html
-<xy-button href="https://github.com/XboxYan/xy-ui">visit xy-ui</xy-button>
+<c-button href="https://github.com/XboxYan/c-ui">visit c-ui</c-button>
 ```
 
 此外，还可以设置`download`、`target`和`rel`属性，同原生`a`标签。
 
-<xy-img src="/img/Gokou Ruri.gif"></xy-img>
+<c-img src="/img/Gokou Ruri.gif"></c-img>
 
-<xy-button href="/img/Gokou Ruri.gif" download="Gokou Ruri">download</xy-button>
+<c-button href="/img/Gokou Ruri.gif" download="Gokou Ruri">download</c-button>
 
 ```html
-<xy-button href="/img/Gokou Ruri.gif" download="Gokou Ruri">download</xy-button>
+<c-button href="/img/Gokou Ruri.gif" download="Gokou Ruri">download</c-button>
 ```
 
 ## 禁用`disabled`
 
 通过`disabled`可以禁用按钮，禁用后该按钮上的事件失效。
 
-<xy-button disabled type="primary">primary</xy-button>
-<xy-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></xy-switch>
+<c-button disabled type="primary">primary</c-button>
+<c-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></c-switch>
 
-<xy-button disabled type="dashed">dashed</xy-button>
-<xy-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></xy-switch>
+<c-button disabled type="dashed">dashed</c-button>
+<c-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></c-switch>
 
-<xy-button disabled type="flat">flat</xy-button>
-<xy-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></xy-switch>
+<c-button disabled type="flat">flat</c-button>
+<c-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></c-switch>
 
-<xy-button disabled >default</xy-button>
-<xy-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></xy-switch>
+<c-button disabled >default</c-button>
+<c-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></c-switch>
 
-<xy-button href="https://github.com/XboxYan/xy-ui" disabled>visit xy-ui</xy-button>
-<xy-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></xy-switch>
+<c-button href="https://github.com/XboxYan/c-ui" disabled>visit c-ui</c-button>
+<c-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></c-switch>
 
 ```html
-<xy-button disabled type="primary">primary</xy-button>
-<xy-button disabled type="dashed">dashed</xy-button>
-<xy-button disabled type="flat">flat</xy-button>
-<xy-button disabled >default</xy-button>
+<c-button disabled type="primary">primary</c-button>
+<c-button disabled type="dashed">dashed</c-button>
+<c-button disabled type="flat">flat</c-button>
+<c-button disabled >default</c-button>
 ```
 
 JavaScript操作`get`、`set`
@@ -103,60 +103,60 @@ com.setAttribute('props',newProps);
 com.removeAttribute('props');
 ```
 
-## 按钮组`xy-button-group`
+## 按钮组`c-button-group`
 
-`<xy-button-group>`可以将一组同类型的按钮组合起来。
+`<c-button-group>`可以将一组同类型的按钮组合起来。
 
-<xy-button-group>
-    <xy-button>button1</xy-button>
-    <xy-button>button2</xy-button>
-    <xy-button>button3</xy-button>
-    <xy-button>button4</xy-button>
-</xy-button-group>
-
-<p></p>
-
-<xy-button-group>
-    <xy-button type="primary">button1</xy-button>
-    <xy-button type="primary">button2</xy-button>
-    <xy-button type="primary">button3</xy-button>
-    <xy-button type="primary">button4</xy-button>
-</xy-button-group>
+<c-button-group>
+    <c-button>button1</c-button>
+    <c-button>button2</c-button>
+    <c-button>button3</c-button>
+    <c-button>button4</c-button>
+</c-button-group>
 
 <p></p>
 
-<xy-button-group>
-    <xy-button type="dashed">button1</xy-button>
-    <xy-button type="dashed">button2</xy-button>
-    <xy-button type="dashed">button3</xy-button>
-    <xy-button type="dashed">button4</xy-button>
-</xy-button-group>
+<c-button-group>
+    <c-button type="primary">button1</c-button>
+    <c-button type="primary">button2</c-button>
+    <c-button type="primary">button3</c-button>
+    <c-button type="primary">button4</c-button>
+</c-button-group>
 
 <p></p>
 
-<xy-button-group>
-    <xy-button type="flat">button1</xy-button>
-    <xy-button type="flat">button2</xy-button>
-    <xy-button type="flat">button3</xy-button>
-    <xy-button type="flat">button4</xy-button>
-</xy-button-group>
+<c-button-group>
+    <c-button type="dashed">button1</c-button>
+    <c-button type="dashed">button2</c-button>
+    <c-button type="dashed">button3</c-button>
+    <c-button type="dashed">button4</c-button>
+</c-button-group>
 
 <p></p>
 
-<xy-button-group>
-    <xy-button type="primary">button1</xy-button>
-    <xy-button type="primary">button2</xy-button>
-    <xy-button>button3</xy-button>
-    <xy-button>button4</xy-button>
-</xy-button-group>
+<c-button-group>
+    <c-button type="flat">button1</c-button>
+    <c-button type="flat">button2</c-button>
+    <c-button type="flat">button3</c-button>
+    <c-button type="flat">button4</c-button>
+</c-button-group>
+
+<p></p>
+
+<c-button-group>
+    <c-button type="primary">button1</c-button>
+    <c-button type="primary">button2</c-button>
+    <c-button>button3</c-button>
+    <c-button>button4</c-button>
+</c-button-group>
 
 ```html
-<xy-button-group>
-    <xy-button>button1</xy-button>
-    <xy-button>button2</xy-button>
-    <xy-button>button3</xy-button>
-    <xy-button>button4</xy-button>
-</xy-button-group>
+<c-button-group>
+    <c-button>button1</c-button>
+    <c-button>button2</c-button>
+    <c-button>button3</c-button>
+    <c-button>button4</c-button>
+</c-button-group>
 ```
 
 
@@ -172,7 +172,7 @@ com.removeAttribute('props');
     color:#fff;
 }
 </style>
-<xy-button toggle class="button-toggle">toggle button</xy-button>
+<c-button toggle class="button-toggle">toggle button</c-button>
 
 ```html
 <style>
@@ -181,12 +181,12 @@ com.removeAttribute('props');
     color:#fff;
 }
 </style>
-<xy-button toggle class="button-toggle">toggle button</xy-button>
+<c-button toggle class="button-toggle">toggle button</c-button>
 ```
 
 也可以通过`js`获取到`checked`属性。
 
-<xy-button toggle class="button-toggle" icon="like" onclick="XyMessage.show({icon:'like',text:this.checked?'I dislike it':'I like it'})">like</xy-button>
+<c-button toggle class="button-toggle" icon="like" onclick="XyMessage.show({icon:'like',text:this.checked?'I dislike it':'I like it'})">like</c-button>
 
 ```js
 btn.addEventListener('click',function(ev){
@@ -202,11 +202,11 @@ btn.addEventListener('click',function(ev){
 
 添加`loading`属性即可让按钮处于加载状态，处于加载状态所有事件会被禁用，类似于`disabled`
 
-<xy-button type="primary" loading>loading</xy-button>
-<xy-switch checked onchange="this.previousElementSibling.loading = this.checked;"></xy-switch>
+<c-button type="primary" loading>loading</c-button>
+<c-switch checked onchange="this.previousElementSibling.loading = this.checked;"></c-switch>
 
 ```html
-<xy-button type="primary" loading>loading</xy-button>
+<c-button type="primary" loading>loading</c-button>
 ```
 
 JavaScript操作`get`、`set`
@@ -223,20 +223,20 @@ btn.removeAttribute('loading');
 
 ## 图标`icon`
 
-当需要在`xy-button`内嵌入`xy-icon`时，可以设置`icon`属性。
+当需要在`c-button`内嵌入`c-icon`时，可以设置`icon`属性。
 
-关于`xy-icon`的取值可以查看[`xy-icon`](xy-icon.md)
+关于`c-icon`的取值可以查看[`c-icon`](c-icon.md)
 
-<xy-button type="primary" icon="heart">like</xy-button>
-<xy-button type="dashed" icon="search">search</xy-button>
-<xy-button type="flat" icon="left">back</xy-button>
-<xy-button icon="link">link</xy-button>
+<c-button type="primary" icon="heart">like</c-button>
+<c-button type="dashed" icon="search">search</c-button>
+<c-button type="flat" icon="left">back</c-button>
+<c-button icon="link">link</c-button>
 
 ```html
-<xy-button type="primary" icon="heart">like</xy-button>
-<xy-button type="dashed" icon="search">search</xy-button>
-<xy-button type="flat" icon="left">back</xy-button>
-<xy-button icon="link">link</xy-button>
+<c-button type="primary" icon="heart">like</c-button>
+<c-button type="dashed" icon="search">search</c-button>
+<c-button type="flat" icon="left">back</c-button>
+<c-button icon="link">link</c-button>
 ```
 
 JavaScript操作`set`
@@ -247,52 +247,52 @@ btn.icon = 'name';
 btn.setAttribute('icon','name');
 ```
 
-当然，上述图标均位于文字左侧，如果想位于文字右侧，你可以直接嵌套`xy-icon`组件。
+当然，上述图标均位于文字左侧，如果想位于文字右侧，你可以直接嵌套`c-icon`组件。
 
-<xy-button>heart<xy-icon name="heart"></xy-icon></xy-button>
-<xy-button>right<xy-icon name="right"></xy-icon></xy-button>
+<c-button>heart<c-icon name="heart"></c-icon></c-button>
+<c-button>right<c-icon name="right"></c-icon></c-button>
 
 ```html
-<xy-button>heart  <xy-icon name="heart"></xy-icon></xy-button>
-<xy-button>right  <xy-icon name="right"></xy-icon></xy-button>
+<c-button>heart  <c-icon name="heart"></c-icon></c-button>
+<c-button>right  <c-icon name="right"></c-icon></c-button>
 ```
 
 ## 形状`shape`
 
 当只有`icon`时，可配合`shape=circle`属性，实现圆形图标按钮。
 
-<xy-button type="primary" icon="heart" shape="circle"></xy-button>
-<xy-button type="dashed" icon="heart" shape="circle"></xy-button>
-<xy-button type="flat" icon="heart" shape="circle"></xy-button>
-<xy-button icon="heart" shape="circle"></xy-button>
+<c-button type="primary" icon="heart" shape="circle"></c-button>
+<c-button type="dashed" icon="heart" shape="circle"></c-button>
+<c-button type="flat" icon="heart" shape="circle"></c-button>
+<c-button icon="heart" shape="circle"></c-button>
 
 ```html
-<xy-button type="primary" icon="heart" shape="circle"></xy-button>
-<xy-button type="dashed" icon="heart" shape="circle"></xy-button>
-<xy-button type="flat" icon="heart" shape="circle"></xy-button>
-<xy-button icon="heart" shape="circle"></xy-button>
+<c-button type="primary" icon="heart" shape="circle"></c-button>
+<c-button type="dashed" icon="heart" shape="circle"></c-button>
+<c-button type="flat" icon="heart" shape="circle"></c-button>
+<c-button icon="heart" shape="circle"></c-button>
 ```
 
 ## 块状`block`
 
 `block`属性将使按钮适合其父宽度。
 
-<xy-button type="primary" block>primary</xy-button>
-<xy-button type="dashed" block>dashed</xy-button>
-<xy-button type="flat" block>flat</xy-button>
-<xy-button block>default</xy-button>
+<c-button type="primary" block>primary</c-button>
+<c-button type="dashed" block>dashed</c-button>
+<c-button type="flat" block>flat</c-button>
+<c-button block>default</c-button>
 
 ```html
-<xy-button type="primary" block>primary</xy-button>
-<xy-button type="dashed" block>dashed</xy-button>
-<xy-button type="flat" block>flat</xy-button>
-<xy-button block>default</xy-button>
+<c-button type="primary" block>primary</c-button>
+<c-button type="dashed" block>dashed</c-button>
+<c-button type="flat" block>flat</c-button>
+<c-button block>default</c-button>
 ```
 
 当然该属性只是样式的重置，你可以通过`CSS`来实现
 
 ```css
-xy-button{
+c-button{
     diplay:flex;
 }
 ```
@@ -305,10 +305,10 @@ xy-button{
 
 `focus`、`blur`后的回调事件。
 
-<xy-button onfocus="XyMessage.info('focus')" onblur="XyMessage.info('blur')">primary</xy-button>
+<c-button onfocus="XyMessage.info('focus')" onblur="XyMessage.info('blur')">primary</c-button>
 
 ```html
-<xy-button onfocus="XyMessage.info('focus')" onblur="XyMessage.info('blur')">primary</xy-button>
+<c-button onfocus="XyMessage.info('focus')" onblur="XyMessage.info('blur')">primary</c-button>
 ```
 
 其他触发方式
@@ -333,8 +333,8 @@ btn.addEventListener('focus',function(ev){
 
 用于主动聚焦`focus`，聚焦以后可以响应键盘事件，`Enter`可以触发`click`事件。
 
-<xy-button onclick="XyMessage.info('click')" onfocus="XyMessage.info('focus')" onblur="XyMessage.info('blur')" >primary</xy-button>
-<xy-button type="primary" onclick="this.previousElementSibling.focus()">主动聚焦</xy-button>
+<c-button onclick="XyMessage.info('click')" onfocus="XyMessage.info('focus')" onblur="XyMessage.info('blur')" >primary</c-button>
+<c-button type="primary" onclick="this.previousElementSibling.focus()">主动聚焦</c-button>
 
 ```js
 btn.focus();
@@ -369,7 +369,7 @@ btn.focus();
     width:100px;
 }
 </style>
-<xy-button type="primary" class="custom-button">primary</xy-button>
+<c-button type="primary" class="custom-button">primary</c-button>
 
 ```html
 <style>
@@ -380,7 +380,7 @@ btn.focus();
     width:100px;
 }
 </style>
-<xy-button type="primary" class="custom-button">primary</xy-button>
+<c-button type="primary" class="custom-button">primary</c-button>
 ```
 
 也可以通过修改`font-size`来控制按钮尺寸
@@ -390,7 +390,7 @@ btn.focus();
     font-size:30px;
 }
 </style>
-<xy-button type="primary" class="custom-button2">primary</xy-button>
+<c-button type="primary" class="custom-button2">primary</c-button>
 
 ```html
 <style>
@@ -398,7 +398,7 @@ btn.focus();
     font-size:30px;
 }
 </style>
-<xy-button type="primary" class="custom-button2">primary</xy-button>
+<c-button type="primary" class="custom-button2">primary</c-button>
 ```
 
 > 大部分组件均可通过`font-size`来控制组件尺寸

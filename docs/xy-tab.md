@@ -1,4 +1,4 @@
-# xy-tab
+# c-tab
 
 标签页。
 
@@ -7,42 +7,42 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/xy-ui/components/xy-tab.js';
+    import './node_modules/c-ui/components/c-tab.js';
 </script>
 <!-- 使用 -->
-<xy-tab>
-    <xy-tab-content label="tab1">tab1</xy-tab-content>
-    <xy-tab-content label="tab2">tab2</xy-tab-content>
-    <xy-tab-content label="tab3">tab3</xy-tab-content>
-</xy-tab>
+<c-tab>
+    <c-tab-content label="tab1">tab1</c-tab-content>
+    <c-tab-content label="tab2">tab2</c-tab-content>
+    <c-tab-content label="tab3">tab3</c-tab-content>
+</c-tab>
 ```
 
-`xy-tab`需和`xy-tab-content`组合使用。
+`c-tab`需和`c-tab-content`组合使用。
 
 ## 名称`label`
 
-每个`xy-tab-content`需要指定一个名称`label`，用于显示标签头。
+每个`c-tab-content`需要指定一个名称`label`，用于显示标签头。
 
-<xy-tab>
-    <xy-tab-content label="tab1">tab1</xy-tab-content>
-    <xy-tab-content label="tab2">tab2</xy-tab-content>
-    <xy-tab-content label="tab3">tab3</xy-tab-content>
-</xy-tab>
+<c-tab>
+    <c-tab-content label="tab1">tab1</c-tab-content>
+    <c-tab-content label="tab2">tab2</c-tab-content>
+    <c-tab-content label="tab3">tab3</c-tab-content>
+</c-tab>
 
 ```html
-<xy-tab>
-    <xy-tab-content label="tab1">tab1</xy-tab-content>
-    <xy-tab-content label="tab2">tab2</xy-tab-content>
-    <xy-tab-content label="tab3">tab3</xy-tab-content>
-</xy-tab>
+<c-tab>
+    <c-tab-content label="tab1">tab1</c-tab-content>
+    <c-tab-content label="tab2">tab2</c-tab-content>
+    <c-tab-content label="tab3">tab3</c-tab-content>
+</c-tab>
 ```
 
 JavaScript操作`get`、`set`
 
-> 作用于`xy-tab-content`
+> 作用于`c-tab-content`
 
 ```js
-//xy-tab-content
+//c-tab-content
 content.label;
 content.label = 'tab';
 //原生属性操作
@@ -52,29 +52,29 @@ content.setAttribute('label','tab');
 
 ## 禁用`disabled`
 
-每个`xy-tab-content`可以指定`disabled`属性，用来禁用该标签页。
+每个`c-tab-content`可以指定`disabled`属性，用来禁用该标签页。
 
-<xy-tab>
-    <xy-tab-content label="tab1">tab1</xy-tab-content>
-    <xy-tab-content id="tab-content-disabled" label="tab2" disabled>tab2</xy-tab-content>
-    <xy-tab-content label="tab3">tab3</xy-tab-content>
-</xy-tab>
-<xy-switch checked onchange="document.getElementById('tab-content-disabled').disabled = this.checked;"></xy-switch>
+<c-tab>
+    <c-tab-content label="tab1">tab1</c-tab-content>
+    <c-tab-content id="tab-content-disabled" label="tab2" disabled>tab2</c-tab-content>
+    <c-tab-content label="tab3">tab3</c-tab-content>
+</c-tab>
+<c-switch checked onchange="document.getElementById('tab-content-disabled').disabled = this.checked;"></c-switch>
 
 ```html
-<xy-tab>
-    <xy-tab-content label="tab1">tab1</xy-tab-content>
-    <xy-tab-content label="tab2" disabled>tab2</xy-tab-content>
-    <xy-tab-content label="tab3">tab3</xy-tab-content>
-</xy-tab>
+<c-tab>
+    <c-tab-content label="tab1">tab1</c-tab-content>
+    <c-tab-content label="tab2" disabled>tab2</c-tab-content>
+    <c-tab-content label="tab3">tab3</c-tab-content>
+</c-tab>
 ```
 
 JavaScript操作`get`、`set`
 
-> 作用于`xy-tab-content`
+> 作用于`c-tab-content`
 
 ```js
-//xy-tab-content
+//c-tab-content
 content.disabled;
 content.disabled = true;
 content.disabled = false;
@@ -86,24 +86,24 @@ content.removeAttribute('disabled');
 
 ## 标识`key`、`activekey`
 
-每个`xy-tab-content`需要指定一个标识`key`，没有会默认以序列号为`key`，
+每个`c-tab-content`需要指定一个标识`key`，没有会默认以序列号为`key`，
 
-`activekey`作用在`xy-tab`上，可以指定切换到具体标签页，也可以指定初始值。
+`activekey`作用在`c-tab`上，可以指定切换到具体标签页，也可以指定初始值。
 
-<xy-tab activekey="B">
-    <xy-tab-content label="tab1" key="A">tab1</xy-tab-content>
-    <xy-tab-content label="tab2" key="B">tab2</xy-tab-content>
-    <xy-tab-content label="tab3" key="C">tab3</xy-tab-content>
-</xy-tab>
-<xy-button type="primary" onclick="this.previousElementSibling.activekey='C'">跳转tab3</xy-button>
+<c-tab activekey="B">
+    <c-tab-content label="tab1" key="A">tab1</c-tab-content>
+    <c-tab-content label="tab2" key="B">tab2</c-tab-content>
+    <c-tab-content label="tab3" key="C">tab3</c-tab-content>
+</c-tab>
+<c-button type="primary" onclick="this.previousElementSibling.activekey='C'">跳转tab3</c-button>
 
 ```html
-<xy-tab activekey="B">
-    <xy-tab-content label="tab1" key="A">tab1</xy-tab-content>
-    <xy-tab-content label="tab2" key="B">tab2</xy-tab-content>
-    <xy-tab-content label="tab3" key="C">tab3</xy-tab-content>
-</xy-tab>
-<xy-button type="primary" onclick="this.previousElementSibling.activekey='C'">跳转tab3</xy-button>
+<c-tab activekey="B">
+    <c-tab-content label="tab1" key="A">tab1</c-tab-content>
+    <c-tab-content label="tab2" key="B">tab2</c-tab-content>
+    <c-tab-content label="tab3" key="C">tab3</c-tab-content>
+</c-tab>
+<c-button type="primary" onclick="this.previousElementSibling.activekey='C'">跳转tab3</c-button>
 ```
 
 JavaScript操作`get`、`set`
@@ -118,44 +118,44 @@ tab.setAttribute('activekey','key');
 
 ## 图标`icon`
 
-每个`xy-tab-content`可以指定`icon`，配合`label`实现图标加文字的效果。
+每个`c-tab-content`可以指定`icon`，配合`label`实现图标加文字的效果。
 
-<xy-tab>
-    <xy-tab-content label="home" icon="home">tab1</xy-tab-content>
-    <xy-tab-content label="message" icon="message">tab2</xy-tab-content>
-    <xy-tab-content label="user" icon="user">tab3</xy-tab-content>
-</xy-tab>
+<c-tab>
+    <c-tab-content label="home" icon="home">tab1</c-tab-content>
+    <c-tab-content label="message" icon="message">tab2</c-tab-content>
+    <c-tab-content label="user" icon="user">tab3</c-tab-content>
+</c-tab>
 
 ```html
-<xy-tab>
-    <xy-tab-content label="home" icon="home">tab1</xy-tab-content>
-    <xy-tab-content label="message" icon="message">tab2</xy-tab-content>
-    <xy-tab-content label="user" icon="user">tab3</xy-tab-content>
-</xy-tab>
+<c-tab>
+    <c-tab-content label="home" icon="home">tab1</c-tab-content>
+    <c-tab-content label="message" icon="message">tab2</c-tab-content>
+    <c-tab-content label="user" icon="user">tab3</c-tab-content>
+</c-tab>
 ```
 
 也可以单独指定`icon`，不使用`label`。
 
-<xy-tab>
-    <xy-tab-content icon="home">tab1</xy-tab-content>
-    <xy-tab-content icon="message">tab2</xy-tab-content>
-    <xy-tab-content icon="user">tab3</xy-tab-content>
-</xy-tab>
+<c-tab>
+    <c-tab-content icon="home">tab1</c-tab-content>
+    <c-tab-content icon="message">tab2</c-tab-content>
+    <c-tab-content icon="user">tab3</c-tab-content>
+</c-tab>
 
 ```html
-<xy-tab>
-    <xy-tab-content icon="home">tab1</xy-tab-content>
-    <xy-tab-content icon="message">tab2</xy-tab-content>
-    <xy-tab-content icon="user">tab3</xy-tab-content>
-</xy-tab>
+<c-tab>
+    <c-tab-content icon="home">tab1</c-tab-content>
+    <c-tab-content icon="message">tab2</c-tab-content>
+    <c-tab-content icon="user">tab3</c-tab-content>
+</c-tab>
 ```
 
 JavaScript操作`get`、`set`
 
-> 作用于`xy-tab-content`
+> 作用于`c-tab-content`
 
 ```js
-//xy-tab-content
+//c-tab-content
 content.icon;
 content.icon = 'name';
 //原生属性操作
@@ -170,32 +170,32 @@ content.setAttribute('icon','name');
 * `card`卡片式风格，通常适用于有背景的卡片中
 * `line`线框式风格
 
-<xy-radio-group onchange="this.nextElementSibling.type=this.value" defaultvalue="flat">
-    <xy-radio value="flat">flat</xy-radio>
-    <xy-radio value="card">card</xy-radio>
-    <xy-radio value="line">line</xy-radio>
-</xy-radio-group>
-<xy-tab type="flat" style="padding:.8em;">
-    <xy-tab-content label="home" icon="home">tab1</xy-tab-content>
-    <xy-tab-content label="message" icon="message">tab2</xy-tab-content>
-    <xy-tab-content label="user" icon="user">tab3</xy-tab-content>
-</xy-tab>
+<c-radio-group onchange="this.nextElementSibling.type=this.value" defaultvalue="flat">
+    <c-radio value="flat">flat</c-radio>
+    <c-radio value="card">card</c-radio>
+    <c-radio value="line">line</c-radio>
+</c-radio-group>
+<c-tab type="flat" style="padding:.8em;">
+    <c-tab-content label="home" icon="home">tab1</c-tab-content>
+    <c-tab-content label="message" icon="message">tab2</c-tab-content>
+    <c-tab-content label="user" icon="user">tab3</c-tab-content>
+</c-tab>
 <style>
-xy-tab[type="card"]{
+c-tab[type="card"]{
     background:#f1f1f1;
 }
 </style>
 
 ```css
-xy-tab[type="card"]{
+c-tab[type="card"]{
     padding:.8em; 
     background:#f1f1f1;
 }
 ```
 ```html
-<xy-tab type="card">
+<c-tab type="card">
     ...
-</xy-tab>
+</c-tab>
 ```
 
 > 纯`CSS`修改(属性选择器)，当设置成`card`或者`line`风格时，容器不再有滚动动画
@@ -205,29 +205,29 @@ xy-tab[type="card"]{
 
 设置标签头的对齐方式，默认为`start`(居左)，可设置`center`(居中)、`end`（居右）
 
-<xy-radio-group onchange="this.nextElementSibling.align=this.value" defaultvalue="start">
-    <xy-radio value="start">start</xy-radio>
-    <xy-radio value="center">center</xy-radio>
-    <xy-radio value="end">end</xy-radio>
-</xy-radio-group>
-<xy-tab type="card" style="padding:.8em; background:#f1f1f1">
-    <xy-tab-content label="home" icon="home">tab1</xy-tab-content>
-    <xy-tab-content label="message" icon="message">tab2</xy-tab-content>
-    <xy-tab-content label="user" icon="user">tab3</xy-tab-content>
-</xy-tab>
+<c-radio-group onchange="this.nextElementSibling.align=this.value" defaultvalue="start">
+    <c-radio value="start">start</c-radio>
+    <c-radio value="center">center</c-radio>
+    <c-radio value="end">end</c-radio>
+</c-radio-group>
+<c-tab type="card" style="padding:.8em; background:#f1f1f1">
+    <c-tab-content label="home" icon="home">tab1</c-tab-content>
+    <c-tab-content label="message" icon="message">tab2</c-tab-content>
+    <c-tab-content label="user" icon="user">tab3</c-tab-content>
+</c-tab>
 
 ```html
-<xy-tab type="card" align="center">
+<c-tab type="card" align="center">
     ...
-</xy-tab>
+</c-tab>
 ```
 
 JavaScript操作`get`、`set`
 
-> 作用于`xy-tab`
+> 作用于`c-tab`
 
 ```js
-//xy-tab
+//c-tab
 tab.align;
 tab.align = 'center';
 //原生属性操作
@@ -239,20 +239,20 @@ tab.setAttribute('align','center');
 
 ### onchange
 
-`xy-tab`切换完成时触发。
+`c-tab`切换完成时触发。
 
-<xy-tab onchange="XyMessage.info(event.detail.label)">
-    <xy-tab-content label="tab1">tab1</xy-tab-content>
-    <xy-tab-content label="tab2">tab2</xy-tab-content>
-    <xy-tab-content label="tab3">tab3</xy-tab-content>
-</xy-tab>
+<c-tab onchange="XyMessage.info(event.detail.label)">
+    <c-tab-content label="tab1">tab1</c-tab-content>
+    <c-tab-content label="tab2">tab2</c-tab-content>
+    <c-tab-content label="tab3">tab3</c-tab-content>
+</c-tab>
 
 ```html
-<xy-tab onchange="XyMessage.info(event.detail.label)">
-    <xy-tab-content label="tab1">tab1</xy-tab-content>
-    <xy-tab-content label="tab2">tab2</xy-tab-content>
-    <xy-tab-content label="tab3">tab3</xy-tab-content>
-</xy-tab>
+<c-tab onchange="XyMessage.info(event.detail.label)">
+    <c-tab-content label="tab1">tab1</c-tab-content>
+    <c-tab-content label="tab2">tab2</c-tab-content>
+    <c-tab-content label="tab3">tab3</c-tab-content>
+</c-tab>
 ```
 
 
@@ -282,44 +282,44 @@ tab.addEventListener('change',function(ev){
 
 当`tab`比较多时，超出范围，会自动滚动。
 
-<xy-tab>
-    <xy-tab-content label="tab11111111111111">tab1</xy-tab-content>
-    <xy-tab-content label="tab2222222222222">tab2</xy-tab-content>
-    <xy-tab-content label="tab333333333">tab3</xy-tab-content>
-    <xy-tab-content label="tab4">tab4</xy-tab-content>
-    <xy-tab-content label="tab5">tab5</xy-tab-content>
-    <xy-tab-content label="tab64444444444">tab6</xy-tab-content>
-    <xy-tab-content label="tab7">tab7</xy-tab-content>
-    <xy-tab-content label="tab855555555">tab8</xy-tab-content>
-    <xy-tab-content label="tab9">tab9</xy-tab-content>
-    <xy-tab-content label="tab106666666666">tab10</xy-tab-content>
-</xy-tab>
+<c-tab>
+    <c-tab-content label="tab11111111111111">tab1</c-tab-content>
+    <c-tab-content label="tab2222222222222">tab2</c-tab-content>
+    <c-tab-content label="tab333333333">tab3</c-tab-content>
+    <c-tab-content label="tab4">tab4</c-tab-content>
+    <c-tab-content label="tab5">tab5</c-tab-content>
+    <c-tab-content label="tab64444444444">tab6</c-tab-content>
+    <c-tab-content label="tab7">tab7</c-tab-content>
+    <c-tab-content label="tab855555555">tab8</c-tab-content>
+    <c-tab-content label="tab9">tab9</c-tab-content>
+    <c-tab-content label="tab106666666666">tab10</c-tab-content>
+</c-tab>
 
 各个组件相互独立，可以随意嵌套，如下。
 
-<xy-tab>
-    <xy-tab-content label="tab1">
-        <xy-tab>
-            <xy-tab-content label="1-tab1">1-tab1</xy-tab-content>
-            <xy-tab-content label="1-tab2">1-tab2</xy-tab-content>
-            <xy-tab-content label="1-tab3">1-tab3</xy-tab-content>
-        </xy-tab>
-    </xy-tab-content>
-    <xy-tab-content label="tab2">tab2</xy-tab-content>
-    <xy-tab-content label="tab3">tab3</xy-tab-content>
-</xy-tab>
+<c-tab>
+    <c-tab-content label="tab1">
+        <c-tab>
+            <c-tab-content label="1-tab1">1-tab1</c-tab-content>
+            <c-tab-content label="1-tab2">1-tab2</c-tab-content>
+            <c-tab-content label="1-tab3">1-tab3</c-tab-content>
+        </c-tab>
+    </c-tab-content>
+    <c-tab-content label="tab2">tab2</c-tab-content>
+    <c-tab-content label="tab3">tab3</c-tab-content>
+</c-tab>
 
 ```html
-<xy-tab>
-    <xy-tab-content label="tab1">
-        <xy-tab>
-            <xy-tab-content label="1-tab1">1-tab1</xy-tab-content>
-            <xy-tab-content label="1-tab2">1-tab2</xy-tab-content>
-            <xy-tab-content label="1-tab3">1-tab3</xy-tab-content>
-        </xy-tab>
-    </xy-tab-content>
-    <xy-tab-content label="tab2">tab2</xy-tab-content>
-    <xy-tab-content label="tab3">tab3</xy-tab-content>
-</xy-tab>
+<c-tab>
+    <c-tab-content label="tab1">
+        <c-tab>
+            <c-tab-content label="1-tab1">1-tab1</c-tab-content>
+            <c-tab-content label="1-tab2">1-tab2</c-tab-content>
+            <c-tab-content label="1-tab3">1-tab3</c-tab-content>
+        </c-tab>
+    </c-tab-content>
+    <c-tab-content label="tab2">tab2</c-tab-content>
+    <c-tab-content label="tab3">tab3</c-tab-content>
+</c-tab>
 ```
 
