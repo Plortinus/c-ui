@@ -9,7 +9,7 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/c-ui/components/c-icon.js';
+    import './node_modules/wbc-ui/components/c-icon.js';
 </script>
 <!-- 使用 -->
 <c-icon name="user" size="30" color="orangered"></c-icon>

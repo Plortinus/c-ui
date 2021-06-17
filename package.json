@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Plortinus/c-ui.git"
+    "url": "git+https://github.com/Plortinus/wbc-ui.git"
   },
   "keywords": [
     "web-components",
@@ -55,12 +55,12 @@
   "author": "Plortinus",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Plortinus/c-ui/issues"
+    "url": "https://github.com/Plortinus/wbc-ui/issues"
   },
   "publishConfig": {
     "registry1": "https://npm.pkg.github.com/@Plortinus"
   },
-  "homepage": "https://github.com/Plortinus/c-ui#readme",
+  "homepage": "https://github.com/Plortinus/wbc-ui#readme",
   "dependencies": {
     "express": "^4.17.1"
   },

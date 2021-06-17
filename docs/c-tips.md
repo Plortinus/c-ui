@@ -9,7 +9,7 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/c-ui/components/c-tips.js';
+    import './node_modules/wbc-ui/components/c-tips.js';
 </script>
 <!-- 使用 -->
 <c-tips tips="this is a tip">

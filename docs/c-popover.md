@@ -7,7 +7,7 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/c-ui/components/c-popover.js';
+    import './node_modules/wbc-ui/components/c-popover.js';
 </script>
 <!-- 使用 -->
 

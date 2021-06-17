@@ -7,7 +7,7 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/c-ui/components/c-table.js';
+    import './node_modules/wbc-ui/components/c-table.js';
 </script>
 <!-- 使用 -->
 <c-table thead="Name,Age,Address">

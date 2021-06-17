@@ -7,7 +7,7 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import XyMessage from './node_modules/c-ui/components/c-message.js';
+    import XyMessage from './node_modules/wbc-ui/components/c-message.js';
     window.XyMessage = XyMessage;
     //使用
     XyMessage.info('info);

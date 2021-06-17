@@ -7,7 +7,7 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/c-ui/components/c-switch.js';
+    import './node_modules/wbc-ui/components/c-switch.js';
 </script>
 <!-- 使用 -->
 <c-switch></c-switch>

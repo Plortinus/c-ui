@@ -7,7 +7,7 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/c-ui/components/c-slider.js';
+    import './node_modules/wbc-ui/components/c-slider.js';
 </script>
 <!-- 使用 -->
 <c-slider></c-slider>

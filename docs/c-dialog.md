@@ -7,7 +7,7 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import XyDialog from './node_modules/c-ui/components/c-dialog.js';
+    import XyDialog from './node_modules/wbc-ui/components/c-dialog.js';
     //使用
     XyDialog.alert('alert');
 </script>

@@ -7,7 +7,7 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/c-ui/components/c-img.js';
+    import './node_modules/wbc-ui/components/c-img.js';
 </script>
 <!-- 使用 -->
 <c-img src="img.jpg"></c-img>

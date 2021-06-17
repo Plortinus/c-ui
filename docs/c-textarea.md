@@ -7,7 +7,7 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/c-ui/components/c-input.js';
+    import './node_modules/wbc-ui/components/c-input.js';
 </script>
 <!-- 使用 -->
 <c-textarea></c-textarea>

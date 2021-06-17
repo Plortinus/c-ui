@@ -7,7 +7,7 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/c-ui/components/c-pagination.js';
+    import './node_modules/wbc-ui/components/c-pagination.js';
 </script>
 <!-- 使用 -->
 <c-pagination pagesize="3" total="50"></c-pagination>

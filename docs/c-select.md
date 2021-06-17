@@ -7,7 +7,7 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/c-ui/components/c-select.js';
+    import './node_modules/wbc-ui/components/c-select.js';
 </script>
 <!-- 使用 -->
 <c-select>

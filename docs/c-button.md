@@ -7,7 +7,7 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/c-ui/components/c-button.js';
+    import './node_modules/wbc-ui/components/c-button.js';
 </script>
 <!-- 使用 -->
 <c-button>button</c-button>
@@ -35,14 +35,14 @@
 
 当设置`href`属性时，`c-button`内部会渲染成`a`标签。
 
-<c-button type="primary" href="https://github.com/XboxYan/c-ui">visit c-ui</c-button>
-<c-button type="dashed" href="https://github.com/XboxYan/c-ui">visit c-ui</c-button>
-<c-button type="flat" href="https://github.com/XboxYan/c-ui">visit c-ui</c-button>
-<c-button href="https://github.com/XboxYan/c-ui">visit c-ui</c-button>
+<c-button type="primary" href="https://github.com/Plortinus/wbc-ui">visit wbc-ui</c-button>
+<c-button type="dashed" href="https://github.com/Plortinus/wbc-ui">visit wbc-ui</c-button>
+<c-button type="flat" href="https://github.com/Plortinus/wbc-ui">visit wbc-ui</c-button>
+<c-button href="https://github.com/Plortinus/wbc-ui">visit wbc-ui</c-button>
 
 
 ```html
-<c-button href="https://github.com/XboxYan/c-ui">visit c-ui</c-button>
+<c-button href="https://github.com/Plortinus/wbc-ui">visit wbc-ui</c-button>
 ```
 
 此外，还可以设置`download`、`target`和`rel`属性，同原生`a`标签。
@@ -71,7 +71,7 @@
 <c-button disabled >default</c-button>
 <c-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></c-switch>
 
-<c-button href="https://github.com/XboxYan/c-ui" disabled>visit c-ui</c-button>
+<c-button href="https://github.com/Plortinus/wbc-ui" disabled>visit wbc-ui</c-button>
 <c-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></c-switch>
 
 ```html

@@ -1,14 +1,14 @@
-# c-ui
+# wbc-ui
 
-[![NPM version](https://img.shields.io/npm/v/c-ui.svg?color=red)](https://www.npmjs.com/package/c-ui)
-![npm](https://img.shields.io/npm/dw/c-ui)
-![npm](https://img.shields.io/npm/dt/c-ui)
-[![GitHub stars](https://img.shields.io/github/stars/XboxYan/c-ui.svg?color=#42b983)](https://github.com/XboxYan/c-ui/stargazers)
-[![GitHub stars](https://img.shields.io/github/forks/XboxYan/c-ui.svg)](https://github.com/XboxYan/c-ui/network/members)
+[![NPM version](https://img.shields.io/npm/v/wbc-ui.svg?color=red)](https://www.npmjs.com/package/wbc-ui)
+![npm](https://img.shields.io/npm/dw/wbc-ui)
+![npm](https://img.shields.io/npm/dt/wbc-ui)
+[![GitHub stars](https://img.shields.io/github/stars/Plortinus/wbc-ui.svg?color=#42b983)](https://github.com/Plortinus/wbc-ui/stargazers)
+[![GitHub stars](https://img.shields.io/github/forks/Plortinus/wbc-ui.svg)](https://github.com/Plortinus/wbc-ui/network/members)
 
-`c-ui`是一套使用原生`Web Components`规范开发的跨框架UI组件库。[查看文档](https://c-ui.codelabo.cn/docs)
+`wbc-ui`是一套使用原生`Web Components`规范开发的跨框架UI组件库。[查看文档](https://wbc-ui.codelabo.cn/docs)
 
-[github项目地址](https://github.com/XboxYan/c-ui)
+[github项目地址](https://github.com/Plortinus/wbc-ui)
 
 ## 文档
 
@@ -37,21 +37,21 @@
 * npm
 
 ```shell
-npm i c-ui
+npm i wbc-ui
 ```
 
 * cdn
 
 ```html
 <script type="module">
-    import 'https://unpkg.com/c-ui';
+    import 'https://unpkg.com/wbc-ui';
 
-    import 'https://unpkg.com/c-ui@1.4.1';//指定版本号
+    import 'https://unpkg.com/wbc-ui@1.4.1';//指定版本号
 </script>
 
 <!--or-->
 
-<script type="module" src="https://unpkg.com/c-ui"></script>
+<script type="module" src="https://unpkg.com/wbc-ui"></script>
 ```
 
 * 直接在`github`上获取最新文件。
@@ -60,7 +60,7 @@ npm i c-ui
 
 ```text
 .
-└── c-ui
+└── wbc-ui
     ├── components //功能组件
     |   ├── c-icon.js
     |   └── ...
@@ -75,12 +75,12 @@ npm i c-ui
 
 ```html
 <script type="module">
-    import './node_modules/c-ui/index.js'; //推荐
+    import './node_modules/wbc-ui/index.js'; //推荐
     //如需单独使用，文档中都是单独使用的情况，推荐全部引用，即第一种方式。
-    import './node_modules/c-ui/components/c-button.js';
+    import './node_modules/wbc-ui/components/c-button.js';
 </script>
 <!-- or -->
-<script type="module" src="./node_modules/c-ui/index.js"></script>
+<script type="module" src="./node_modules/wbc-ui/index.js"></script>
 <c-button>button</c-button>
 ```
 
@@ -89,9 +89,9 @@ npm i c-ui
 ### react项目引用
 
 ```js
-import 'c-ui';//推荐
+import 'wbc-ui';//推荐
 //如需单独使用
-import 'c-ui/components/c-button.js';
+import 'wbc-ui/components/c-button.js';
 ReactDOM.render(<c-button>button</c-button>, document.body);
 ```
 
@@ -102,9 +102,9 @@ ReactDOM.render(<c-button>button</c-button>, document.body);
 ### vue项目引用
 
 ```js
-import 'c-ui';//推荐
+import 'wbc-ui';//推荐
 //如需单独使用
-import 'c-ui/components/c-button.js';
+import 'wbc-ui/components/c-button.js';
 ```
 
 使用同原生组件类似

@@ -9,7 +9,7 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/c-ui/components/c-color-picker.js';
+    import './node_modules/wbc-ui/components/c-color-picker.js';
 </script>
 <!-- 使用 -->
 <c-color-picker></c-color-picker>

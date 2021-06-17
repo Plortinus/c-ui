@@ -1,4 +1,4 @@
-# c-ui
+# wbc-ui
 
 > :art: 面向未来的原生 Web Components UI组件库
 
@@ -8,5 +8,5 @@
 * 无依赖。纯原生，无需任何预处理器编译。
 * 无障碍。支持键盘访问。
 
-[GitHub](https://github.com/XboxYan/XYUI)
+[GitHub](https://github.com/Plortinus/XYUI)
 [Get Started](README.md)

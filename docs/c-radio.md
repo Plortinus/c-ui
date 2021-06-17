@@ -7,7 +7,7 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/c-ui/components/c-radio.js';
+    import './node_modules/wbc-ui/components/c-radio.js';
 </script>
 <!-- 使用 -->
 <c-radio>radio</c-radio>

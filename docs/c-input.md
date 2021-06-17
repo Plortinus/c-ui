@@ -7,7 +7,7 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/c-ui/components/c-input.js';
+    import './node_modules/wbc-ui/components/c-input.js';
 </script>
 <!-- 使用 -->
 <c-input></c-input>
@@ -17,10 +17,10 @@
 
 设置或返回输入框的默认值。
 
-<c-input defaultvalue="XboxYan"></c-input>
+<c-input defaultvalue="Plortinus"></c-input>
 
 ```html
-<c-input defaultvalue="XboxYan"></c-input>
+<c-input defaultvalue="Plortinus"></c-input>
 ```
 
 ## 标签`label`
@@ -83,11 +83,11 @@ input.removeAttribute('disabled');
 
 通过`readonly`让输入框只读。
 
-<c-input label="user" readonly defaultvalue="XboxYan"></c-input>
+<c-input label="user" readonly defaultvalue="Plortinus"></c-input>
 <c-switch checked onchange="this.previousElementSibling.readonly = this.checked;"></c-switch>
 
 ```html
-<c-input label="user" readonly defaultvalue="XboxYan"></c-input>
+<c-input label="user" readonly defaultvalue="Plortinus"></c-input>
 ```
 
 JavaScript操作`get`、`set`
@@ -118,7 +118,7 @@ input.removeAttribute('readonly');
 该属性值在`c-input`标签上不可见。
 
 <c-input></c-input>
-<c-button type="primary" onclick="this.previousElementSibling.value='XboxYan'">设置value为XboxYan</c-button>
+<c-button type="primary" onclick="this.previousElementSibling.value='Plortinus'">设置value为Plortinus</c-button>
 <c-button type="primary" onclick="XyMessage.info('当前value: '+this.previousElementSibling.previousElementSibling.value)">显示当前value</c-button>
 
 JavaScript操作`get`、`set`

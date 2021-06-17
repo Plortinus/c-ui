@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>c-ui</title>
+  <title>wbc-ui</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
   <meta name="viewport"
@@ -137,14 +137,14 @@
   <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
   <script>
     window.$docsify = {
-      name: 'c-ui',
-      repo: 'https://github.com/XboxYan/c-ui',
+      name: 'wbc-ui',
+      repo: 'https://github.com/Plortinus/wbc-ui',
       coverpage: 'coverpage.md',
       loadSidebar: 'sidebar.md',
       subMaxLevel: 2,
       auto2top: true,
       plugins: [
-        EditOnGithubPlugin.create('https://github.com/XboxYan/c-ui/tree/master/docs/'),
+        EditOnGithubPlugin.create('https://github.com/Plortinus/wbc-ui/tree/master/docs/'),
         function(hook, vm) {
           hook.doneEach(function(){
             document.getElementById('gitalk-container').innerHTML = "";
@@ -166,9 +166,9 @@
       return new Gitalk({
         clientID: 'aff209ab4dddd16afee0',
         clientSecret: '6be2c48694e28738bd0777eff1d0a0febb436704',
-        repo: 'c-ui',
-        owner: 'XboxYan',
-        admin: ['XboxYan'],
+        repo: 'wbc-ui',
+        owner: 'Plortinus',
+        admin: ['Plortinus'],
         // facebook-like distraction free mode
         title: location.hash==''?'/README':location.hash.match(/#(.*?)([?]|$)/)[1],
         id: location.hash==''?'/README':location.hash.match(/#(.*?)([?]|$)/)[1],

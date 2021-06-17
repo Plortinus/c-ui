@@ -7,7 +7,7 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import './node_modules/c-ui/components/c-date-picker.js';
+    import './node_modules/wbc-ui/components/c-date-picker.js';
 </script>
 <!-- 使用 -->
 <c-date-picker></c-date-picker>
