@@ -1,103 +1,151 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>c-ui</title>
     <style>
-        c-button,c-checkbox,c-radio,c-input,c-textarea,c-color-picker,c-select{ margin: 0 10px 15px 0; vertical-align: middle; }
-        c-input:not([block]),c-textarea:not([block]){ width:300px; }
-        c-tips>*{ margin: 0;}
-        c-popover>*{ margin: 0;}
-        c-tips,c-popover{ margin: 0 10px 10px 0; }
-        p{  padding: 5px 10px; border-left: 4px solid olive; color: #666 }
-        .layout{ height: 300px; }
-        .side{ width: 200px; }
-        .main{ margin: 0 10px; }
-        .box{ width: 100px; height: 100px; color: #fff; }
-        .header,.footer{ padding: 5px 10px; color: #fff; }
-        c-layout{ background: #2196f380; }
-        c-img{ width: 200px; height: 150px; }
-        c-form-item *{
-            margin-bottom: 0;
-        }
-        c-col{
-            background: #2196f380;
-            color:#fff;
-        }
-        :not(:defined) {
-            opacity: 0;
-        }
-        :root{
-            /*--themeBackground:linear-gradient(to bottom, #42b983 0%,#06b2a1 100%)*/
-        }
-        .parent[coord]{
-            display: flex;
-            width: 500px;
-            height: 500px;
-            background: #fff;
-            color: #fff;
-            border: 10px solid #f1f1f1;
-            position: relative;
-        }
-        .child{
-            width: 50px;
-            height: 50px;
-            background: #42b983;
-            transition: 0.1s;
-            transform: translate(100px,100px);
-        }
-        c-view[draggable]{
-            width: 50px;
-            height: 50px;
-            background: #42b983;
-        }
-        .ball{
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #42b983;
-        }
-        .parent[coord]:hover .ball{
-            transform: translate( calc( var(--x) * 1px - 10px - 25px ) ,calc(var(--y) * 1px - 10px - 25px ))!important;
-        }
-  
-        .child:active{
-            background: #2c9666;
-            pointer-events: none;
-            transition: transform 0s;
-            transform-origin: 0 0;
-            transform: translate( calc( var(--x) * 1px - var(--_x) * 1px - 10px ) ,calc(var(--y) * 1px - var(--_y) * 1px - 10px ))!important;
-        }
-        c-view[coord] span{
-            margin: auto;
-        }
-        c-view[coord] span::after{
-            counter-reset: x var(--x) y var(--y);
-            content: counter(x) ',' counter(y);
-        }
-        .dropbox{
-            width: 200px;
-            height: 200px;
-            background: #fff;
-            color: #fff;
-            border: 10px solid #f1f1f1;
-        }
-        .dropbox-parent{
-            width: 500px;
-            height: 500px;
-        }
-        .dropbox[over],.dropbox:focus{
-            border-color: #2c9666;
-        }
-        c-view[resizable]{
-            width: 200px;
-            height: 200px;
-            background: #f1f1f1;
-        }
+      c-button,
+      c-checkbox,
+      c-radio,
+      c-input,
+      c-textarea,
+      c-color-picker,
+      c-select {
+        margin: 0 10px 15px 0;
+        vertical-align: middle;
+      }
+      c-input:not([block]),
+      c-textarea:not([block]) {
+        width: 300px;
+      }
+      c-tips > * {
+        margin: 0;
+      }
+      c-popover > * {
+        margin: 0;
+      }
+      c-tips,
+      c-popover {
+        margin: 0 10px 10px 0;
+      }
+      p {
+        padding: 5px 10px;
+        border-left: 4px solid olive;
+        color: #666;
+      }
+      .layout {
+        height: 300px;
+      }
+      .side {
+        width: 200px;
+      }
+      .main {
+        margin: 0 10px;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        color: #fff;
+      }
+      .header,
+      .footer {
+        padding: 5px 10px;
+        color: #fff;
+      }
+      c-layout {
+        background: #2196f380;
+      }
+      c-img {
+        width: 200px;
+        height: 150px;
+      }
+      c-form-item * {
+        margin-bottom: 0;
+      }
+      c-col {
+        background: #2196f380;
+        color: #fff;
+      }
+      :not(:defined) {
+        opacity: 0;
+      }
+      :root {
+        /*--themeBackground:linear-gradient(to bottom, #42b983 0%,#06b2a1 100%)*/
+      }
+      .parent[coord] {
+        display: flex;
+        width: 500px;
+        height: 500px;
+        background: #fff;
+        color: #fff;
+        border: 10px solid #f1f1f1;
+        position: relative;
+      }
+      .child {
+        width: 50px;
+        height: 50px;
+        background: #42b983;
+        transition: 0.1s;
+        transform: translate(100px, 100px);
+      }
+      c-view[draggable] {
+        width: 50px;
+        height: 50px;
+        background: #42b983;
+      }
+      .ball {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #42b983;
+      }
+      .parent[coord]:hover .ball {
+        transform: translate(
+          calc(var(--x) * 1px - 10px - 25px),
+          calc(var(--y) * 1px - 10px - 25px)
+        ) !important;
+      }
+
+      .child:active {
+        background: #2c9666;
+        pointer-events: none;
+        transition: transform 0s;
+        transform-origin: 0 0;
+        transform: translate(
+          calc(var(--x) * 1px - var(--_x) * 1px - 10px),
+          calc(var(--y) * 1px - var(--_y) * 1px - 10px)
+        ) !important;
+      }
+      c-view[coord] span {
+        margin: auto;
+      }
+      c-view[coord] span::after {
+        counter-reset: x var(--x) y var(--y);
+        content: counter(x) "," counter(y);
+      }
+      .dropbox {
+        width: 200px;
+        height: 200px;
+        background: #fff;
+        color: #fff;
+        border: 10px solid #f1f1f1;
+      }
+      .dropbox-parent {
+        width: 500px;
+        height: 500px;
+      }
+      .dropbox[over],
+      .dropbox:focus {
+        border-color: #2c9666;
+      }
+      c-view[resizable] {
+        width: 200px;
+        height: 200px;
+        background: #f1f1f1;
+      }
     </style>
     <!-- <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/webcomponents-bundle.js"></script> -->
     <!--
@@ -115,17 +163,27 @@
     <script type="module" src="./components/c-dialog.js" async></script>
     -->
     <!-- <script type="module" src="./components/c.js" async></script> -->
-    
-    <script type="module" src="./index.js"></script>
-</head>
 
-<body>
+    <script type="module" src="./index.js"></script>
+  </head>
+
+  <body>
     <h2>theme</h2>
-    <c-button type="primary" class="theme-button" style="--themeColor:#1E90FF">#1E90FF</c-button>
-    <c-button type="primary" class="theme-button" style="--themeColor:#F44336">#F44336</c-button>
-    <c-button type="primary" class="theme-button" style="--themeColor:#9c27b0">#9c27b0</c-button>
-    <c-button type="primary" class="theme-button" style="--themeColor:#009688">#009688</c-button>
-    <c-button type="primary" class="theme-button" style="--themeColor:#3F51B5">#3F51B5</c-button>
+    <c-button type="primary" class="theme-button" style="--themeColor: #1e90ff"
+      >#1E90FF</c-button
+    >
+    <c-button type="primary" class="theme-button" style="--themeColor: #f44336"
+      >#F44336</c-button
+    >
+    <c-button type="primary" class="theme-button" style="--themeColor: #9c27b0"
+      >#9c27b0</c-button
+    >
+    <c-button type="primary" class="theme-button" style="--themeColor: #009688"
+      >#009688</c-button
+    >
+    <c-button type="primary" class="theme-button" style="--themeColor: #3f51b5"
+      >#3F51B5</c-button
+    >
     <h2>button</h2>
     <p>normal</p>
     <c-button type="primary" id="btn">primary</c-button>
@@ -148,17 +206,42 @@
     <c-button type="flat" block>flat</c-button>
     <c-button block>default</c-button>
     <p>disabled</p>
-    <c-button disabled type="primary" onclick="CMessage.info('This a info message')"><a>primary</a></c-button>
+    <c-button
+      disabled
+      type="primary"
+      onclick="CMessage.info('This a info message')"
+      ><a>primary</a></c-button
+    >
     <c-button disabled type="dashed">dashed</c-button>
     <c-button disabled type="flat">flat</c-button>
-    <c-button disabled >default</c-button>
+    <c-button disabled>default</c-button>
     <h2>slider</h2>
     <c-slider onchange="console.log(event)"></c-slider>
     <c-slider defaultvalue="100" min="0" max="300" step="5"></c-slider>
     <c-slider defaultvalue="30" min="-100" max="100" step="1"></c-slider>
-    <c-slider defaultvalue="100" min="10" max="200" step="2" showtips></c-slider>
-    <c-slider defaultvalue="150" min="10" max="200" step="2" disabled></c-slider>
-    <c-slider style="height:200px" vertical showtips defaultvalue="150" min="10" max="200" step="2"></c-slider>
+    <c-slider
+      defaultvalue="100"
+      min="10"
+      max="200"
+      step="2"
+      showtips
+    ></c-slider>
+    <c-slider
+      defaultvalue="150"
+      min="10"
+      max="200"
+      step="2"
+      disabled
+    ></c-slider>
+    <c-slider
+      style="height: 200px"
+      vertical
+      showtips
+      defaultvalue="150"
+      min="10"
+      max="200"
+      step="2"
+    ></c-slider>
     <h2>loading</h2>
     <c-loading></c-loading>
     <c-loading size="40" color="green"></c-loading>
@@ -169,7 +252,9 @@
     <c-switch></c-switch>
     <c-switch disabled checked></c-switch>
     <h2>checkbox</h2>
-    <c-checkbox name="lang" onchange="console.log(event)" checked>Html</c-checkbox>
+    <c-checkbox name="lang" onchange="console.log(event)" checked
+      >Html</c-checkbox
+    >
     <c-checkbox name="lang">Css</c-checkbox>
     <c-checkbox name="lang" checked>Javascript</c-checkbox>
     <c-checkbox name="lang">Python</c-checkbox>
@@ -179,13 +264,17 @@
     <c-checkbox name="lang" disabled>Other</c-checkbox>
     <h2>radio</h2>
     <p>javascript</p>
-    <c-radio onchange="console.log(event)" name="library" checked>React</c-radio>
+    <c-radio onchange="console.log(event)" name="library" checked
+      >React</c-radio
+    >
     <c-radio name="library">Vue</c-radio>
     <c-radio name="library">Angular</c-radio>
     <c-radio name="library">Other</c-radio>
     <c-radio name="library" disabled>disabled</c-radio>
     <p>display</p>
-    <c-radio onchange="console.log(event)" name="display" checked>block</c-radio>
+    <c-radio onchange="console.log(event)" name="display" checked
+      >block</c-radio
+    >
     <c-radio name="display" value="inline-block">inline-block</c-radio>
     <c-radio name="display" value="inline">inline</c-radio>
     <c-radio name="display" value="flex">flex</c-radio>
@@ -199,37 +288,68 @@
     <c-tips tips="some tips" dir="right"><c-button>right</c-button></c-tips>
     <c-tips tips="some tips" dir="bottom"><c-button>bottom</c-button></c-tips>
     <c-tips tips="some tips" dir="left"><c-button>left</c-button></c-tips>
-    <c-tips tips="some some some some some some some some some some some some some some tips"><c-button>some tips</c-button></c-tips>
+    <c-tips
+      tips="some some some some some some some some some some some some some some tips"
+      ><c-button>some tips</c-button></c-tips
+    >
     <c-tips tips="some tips" dir="topleft"><c-button>topleft</c-button></c-tips>
-    <c-tips tips="some tips" dir="topright"><c-button>topright</c-button></c-tips>
-    <c-tips tips="some some some some some some some some some some some some some some tips" dir="righttop"><c-button>righttop</c-button></c-tips>
-    <c-tips tips="some some some some some some some some some some some some some some tips" dir="rightbottom"><c-button>rightbottom</c-button></c-tips>
-    <c-tips tips="some tips" dir="bottomleft"><c-button>bottomleft</c-button></c-tips>
-    <c-tips tips="some tips" dir="bottomright"><c-button>bottomright</c-button></c-tips>
-    <c-tips tips="some some some some some some some some some some some some some some tips" dir="lefttop"><c-button>lefttop</c-button></c-tips>
-    <c-tips tips="some some some some some some some some some some some some some some tips" dir="leftbottom"><c-button>leftbottom</c-button></c-tips>
+    <c-tips tips="some tips" dir="topright"
+      ><c-button>topright</c-button></c-tips
+    >
+    <c-tips
+      tips="some some some some some some some some some some some some some some tips"
+      dir="righttop"
+      ><c-button>righttop</c-button></c-tips
+    >
+    <c-tips
+      tips="some some some some some some some some some some some some some some tips"
+      dir="rightbottom"
+      ><c-button>rightbottom</c-button></c-tips
+    >
+    <c-tips tips="some tips" dir="bottomleft"
+      ><c-button>bottomleft</c-button></c-tips
+    >
+    <c-tips tips="some tips" dir="bottomright"
+      ><c-button>bottomright</c-button></c-tips
+    >
+    <c-tips
+      tips="some some some some some some some some some some some some some some tips"
+      dir="lefttop"
+      ><c-button>lefttop</c-button></c-tips
+    >
+    <c-tips
+      tips="some some some some some some some some some some some some some some tips"
+      dir="leftbottom"
+      ><c-button>leftbottom</c-button></c-tips
+    >
     <p>status</p>
-    <c-tips tips="some tips" type="success"><c-button>success</c-button></c-tips>
-    <c-tips tips="some tips" type="warning"><c-button>warning</c-button></c-tips>
+    <c-tips tips="some tips" type="success"
+      ><c-button>success</c-button></c-tips
+    >
+    <c-tips tips="some tips" type="warning"
+      ><c-button>warning</c-button></c-tips
+    >
     <c-tips tips="some tips" type="error"><c-button>error</c-button></c-tips>
-    <c-tips tips="some tips" color="orangered"><c-button>custom color</c-button></c-tips>
+    <c-tips tips="some tips" color="orangered"
+      ><c-button>custom color</c-button></c-tips
+    >
     <h2>select</h2>
     <c-select onchange="console.log(event)">
-        <c-option value="1">Option1</c-option>
-        <c-option value="2"><a>Option2</a></c-option>
-        <c-option value="3">Option3</c-option>
+      <c-option value="1">Option1</c-option>
+      <c-option value="2"><a>Option2</a></c-option>
+      <c-option value="3">Option3</c-option>
     </c-select>
     <c-select defaultvalue="2" id="select" type="flat">
-        <c-option value="1">Option1</c-option>
-        <c-option value="2">Option2</c-option>
-        <c-option value="3">Option3</c-option>
-        <c-option value="4">Option4444</c-option>
+      <c-option value="1">Option1</c-option>
+      <c-option value="2">Option2</c-option>
+      <c-option value="3">Option3</c-option>
+      <c-option value="4">Option4444</c-option>
     </c-select>
     <c-select defaultvalue="2" disabled>
-        <c-option value="1">Option1</c-option>
-        <c-option value="2">Option2</c-option>
-        <c-option value="3">Option3</c-option>
-        <c-option value="4">Option4444</c-option>
+      <c-option value="1">Option1</c-option>
+      <c-option value="2">Option2</c-option>
+      <c-option value="3">Option3</c-option>
+      <c-option value="4">Option4444</c-option>
     </c-select>
     <h2>icon</h2>
     <p>name</p>
@@ -241,33 +361,95 @@
     <c-icon name="comment" size="50" color="#3F51B5"></c-icon>
     <c-icon name="audio" size="50" color="#3F51B5"></c-icon>
     <p>path</p>
-    <c-icon size="50" color="#3F51B5" path="M858.5 763.6c-18.9-44.8-46.1-85-80.6-119.5-34.5-34.5-74.7-61.6-119.5-80.6-0.4-0.2-0.8-0.3-1.2-0.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-0.4 0.2-0.8 0.3-1.2 0.5-44.8 18.9-85 46-119.5 80.6-34.5 34.5-61.6 74.7-80.6 119.5C146.9 807.5 137 854 136 901.8c-0.1 4.5 3.5 8.2 8 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c0.1 4.4 3.6 7.8 8 7.8h60c4.5 0 8.1-3.7 8-8.2-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"></c-icon>
-    <c-icon size="50" color="#3F51B5" path="M923 283.6c-13.4-31.1-32.6-58.9-56.9-82.8-24.3-23.8-52.5-42.4-84-55.5-32.5-13.5-66.9-20.3-102.4-20.3-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5-24.4 23.9-43.5 51.7-56.9 82.8-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3 0.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"></c-icon>
-    <c-icon size="50" color="#3F51B5" view="48" path="M40 10H21.76L20 4H8C5.8 4 4 5.8 4 8v26c0 2.2 1.8 4 4 4h14l2 6h16c2.2 0 4-1.8 4-4V14c0-2.2-1.8-4-4-4zM14.33 29.17c-4.51 0-8.17-3.67-8.17-8.17s3.67-8.17 8.17-8.17c2.08 0 3.97.74 5.47 2.13l.13.13-2.44 2.36-.12-.11c-.57-.54-1.56-1.17-3.04-1.17-2.62 0-4.75 2.17-4.75 4.84s2.13 4.84 4.75 4.84c2.74 0 3.93-1.75 4.25-2.92h-4.42v-3.1h7.9l.03.14c.08.42.11.79.11 1.21-.01 4.71-3.24 7.99-7.87 7.99zm12.07-3.4c.67 1.2 1.48 2.35 2.38 3.4l-1.07 1.06-1.31-4.46zm1.54-1.54h-1.98l-.61-2.08h7.99s-.68 2.63-3.12 5.47c-1.07-1.23-1.81-2.43-2.28-3.39zM42 40c0 1.1-.9 2-2 2H26l4-4-1.63-5.53 1.84-1.84L35.58 36l1.46-1.46-5.41-5.37c1.8-2.07 3.2-4.5 3.83-7.01H38v-2.08h-7.27V18h-2.08v2.08h-3.92L22.35 12H40c1.1 0 2 .9 2 2v26z"></c-icon>
+    <c-icon
+      size="50"
+      color="#3F51B5"
+      path="M858.5 763.6c-18.9-44.8-46.1-85-80.6-119.5-34.5-34.5-74.7-61.6-119.5-80.6-0.4-0.2-0.8-0.3-1.2-0.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-0.4 0.2-0.8 0.3-1.2 0.5-44.8 18.9-85 46-119.5 80.6-34.5 34.5-61.6 74.7-80.6 119.5C146.9 807.5 137 854 136 901.8c-0.1 4.5 3.5 8.2 8 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c0.1 4.4 3.6 7.8 8 7.8h60c4.5 0 8.1-3.7 8-8.2-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+    ></c-icon>
+    <c-icon
+      size="50"
+      color="#3F51B5"
+      path="M923 283.6c-13.4-31.1-32.6-58.9-56.9-82.8-24.3-23.8-52.5-42.4-84-55.5-32.5-13.5-66.9-20.3-102.4-20.3-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5-24.4 23.9-43.5 51.7-56.9 82.8-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3 0.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z"
+    ></c-icon>
+    <c-icon
+      size="50"
+      color="#3F51B5"
+      view="48"
+      path="M40 10H21.76L20 4H8C5.8 4 4 5.8 4 8v26c0 2.2 1.8 4 4 4h14l2 6h16c2.2 0 4-1.8 4-4V14c0-2.2-1.8-4-4-4zM14.33 29.17c-4.51 0-8.17-3.67-8.17-8.17s3.67-8.17 8.17-8.17c2.08 0 3.97.74 5.47 2.13l.13.13-2.44 2.36-.12-.11c-.57-.54-1.56-1.17-3.04-1.17-2.62 0-4.75 2.17-4.75 4.84s2.13 4.84 4.75 4.84c2.74 0 3.93-1.75 4.25-2.92h-4.42v-3.1h7.9l.03.14c.08.42.11.79.11 1.21-.01 4.71-3.24 7.99-7.87 7.99zm12.07-3.4c.67 1.2 1.48 2.35 2.38 3.4l-1.07 1.06-1.31-4.46zm1.54-1.54h-1.98l-.61-2.08h7.99s-.68 2.63-3.12 5.47c-1.07-1.23-1.81-2.43-2.28-3.39zM42 40c0 1.1-.9 2-2 2H26l4-4-1.63-5.53 1.84-1.84L35.58 36l1.46-1.46-5.41-5.37c1.8-2.07 3.2-4.5 3.83-7.01H38v-2.08h-7.27V18h-2.08v2.08h-3.92L22.35 12H40c1.1 0 2 .9 2 2v26z"
+    ></c-icon>
     <h2>tab</h2>
     <p>label</p>
     <c-tab activekey="aaa" onchange="console.log(event)">
-        <c-tab-content label="tab1">
-            A placeholder inside a web
-            component that users can fill with their own markup,
-            with the effect of composing different DOM trees
-            together.
-        </c-tab-content>
-        <c-tab-content label="tab2" disabled>
-            A placeholder inside a web
-            component that users can fill with their own markup,
-            with the effect of composing different DOM trees
-            together.
-        </c-tab-content>
-        <c-tab-content label="tab3" key="aaa">
-            A placeholder inside a web
-            component that users can fill with their own markup,
-            with the effect of composing different DOM trees
-            together.
-        </c-tab-content>
+      <c-tab-content label="tab1">
+        A placeholder inside a web component that users can fill with their own
+        markup, with the effect of composing different DOM trees together.
+      </c-tab-content>
+      <c-tab-content label="tab2" disabled>
+        A placeholder inside a web component that users can fill with their own
+        markup, with the effect of composing different DOM trees together.
+      </c-tab-content>
+      <c-tab-content label="tab3" key="aaa">
+        A placeholder inside a web component that users can fill with their own
+        markup, with the effect of composing different DOM trees together.
+      </c-tab-content>
     </c-tab>
     <p>scrollable</p>
     <c-tab>
+      <c-tab-content label="tab1">tab1</c-tab-content>
+      <c-tab-content label="tab2">tab2</c-tab-content>
+      <c-tab-content label="tab3">tab3</c-tab-content>
+      <c-tab-content label="tab4">tab4</c-tab-content>
+      <c-tab-content label="tab5">tab5</c-tab-content>
+      <c-tab-content label="tab6">tab6</c-tab-content>
+      <c-tab-content label="tab7">tab7</c-tab-content>
+      <c-tab-content label="tab8">tab8</c-tab-content>
+      <c-tab-content label="tab9">tab9</c-tab-content>
+      <c-tab-content label="tab10">tab10</c-tab-content>
+    </c-tab>
+    <p>label with icon</p>
+    <c-tab>
+      <c-tab-content label="home" icon="home">tab1</c-tab-content>
+      <c-tab-content label="message" icon="message">tab2</c-tab-content>
+      <c-tab-content label="user" icon="user">tab3</c-tab-content>
+    </c-tab>
+    <p>only icon</p>
+    <c-tab>
+      <c-tab-content icon="home">tab1</c-tab-content>
+      <c-tab-content icon="message">tab2</c-tab-content>
+      <c-tab-content icon="user">tab3</c-tab-content>
+    </c-tab>
+    <h2>layout</h2>
+    <c-layout class="layout">
+      <c-layout class="header">HEADER</c-layout>
+      <c-layout row expand>
+        <c-layout class="side"></c-layout>
+        <c-layout expand center class="main">
+          <c-layout center class="box">c-layout</c-layout>
+        </c-layout>
+        <c-layout class="side"></c-layout>
+      </c-layout>
+      <c-layout class="footer">FOOTER</c-layout>
+    </c-layout>
+    <h2>grid</h2>
+    <c-row gutter="10">
+      <c-col span="8">11</c-col>
+      <c-col span="8">22</c-col>
+      <c-col span="16">22</c-col>
+    </c-row>
+    <h2>dialog</h2>
+    <c-button type="primary" onclick="showDialog()">open dialog</c-button>
+    <c-button onclick="CDialog.alert('alert')">alert</c-button>
+    <c-button id="confirm-btn">confirm</c-button>
+    <c-button onclick="CDialog.info('info')">info</c-button>
+    <c-button
+      onclick="CDialog.success({title:'成功',content:'success',oktext:'send'})"
+      >success</c-button
+    >
+    <c-button onclick="CDialog.error('error')">error</c-button>
+    <c-button onclick="CDialog.warning('warning')">warning</c-button>
+    <c-dialog id="dialog02">232</c-dialog>
+    <c-dialog id="dialog01" title="标题" oktext="确 定" canceltext="取消">
+      <c-tab>
         <c-tab-content label="tab1">tab1</c-tab-content>
         <c-tab-content label="tab2">tab2</c-tab-content>
         <c-tab-content label="tab3">tab3</c-tab-content>
@@ -278,119 +460,172 @@
         <c-tab-content label="tab8">tab8</c-tab-content>
         <c-tab-content label="tab9">tab9</c-tab-content>
         <c-tab-content label="tab10">tab10</c-tab-content>
-    </c-tab>
-    <p>label with icon</p>
-    <c-tab>
-        <c-tab-content label="home" icon="home">tab1</c-tab-content>
-        <c-tab-content label="message" icon="message">tab2</c-tab-content>
-        <c-tab-content label="user" icon="user">tab3</c-tab-content>
-    </c-tab>
-    <p>only icon</p>
-    <c-tab>
-        <c-tab-content icon="home">tab1</c-tab-content>
-        <c-tab-content icon="message">tab2</c-tab-content>
-        <c-tab-content icon="user">tab3</c-tab-content>
-    </c-tab>
-    <h2>layout</h2>
-    <c-layout class="layout">
-        <c-layout class="header">HEADER</c-layout>
-        <c-layout row expand>
-            <c-layout class="side"></c-layout>
-            <c-layout expand center class="main">
-                <c-layout center class="box">c-layout</c-layout>
-            </c-layout>
-            <c-layout class="side"></c-layout>
-        </c-layout>
-        <c-layout class="footer">FOOTER</c-layout>
-    </c-layout>
-    <h2>grid</h2>
-    <c-row gutter="10">
-        <c-col span="8">11</c-col>
-        <c-col span="8">22</c-col>
-        <c-col span="16">22</c-col>
-    </c-row>
-    <h2>dialog</h2>
-    <c-button type="primary" onclick="showDialog()">open dialog</c-button>
-    <c-button onclick="CDialog.alert('alert')">alert</c-button>
-    <c-button id="confirm-btn">confirm</c-button>
-    <c-button onclick="CDialog.info('info')">info</c-button>
-    <c-button onclick="CDialog.success({title:'成功',content:'success',oktext:'send'})">success</c-button>
-    <c-button onclick="CDialog.error('error')">error</c-button>
-    <c-button onclick="CDialog.warning('warning')">warning</c-button>
-    <c-dialog id="dialog02">232</c-dialog>
-    <c-dialog id="dialog01" title="标题" oktext="确 定" canceltext="取消" >
-        <c-tab>
-            <c-tab-content label="tab1">tab1</c-tab-content>
-            <c-tab-content label="tab2">tab2</c-tab-content>
-            <c-tab-content label="tab3">tab3</c-tab-content>
-            <c-tab-content label="tab4">tab4</c-tab-content>
-            <c-tab-content label="tab5">tab5</c-tab-content>
-            <c-tab-content label="tab6">tab6</c-tab-content>
-            <c-tab-content label="tab7">tab7</c-tab-content>
-            <c-tab-content label="tab8">tab8</c-tab-content>
-            <c-tab-content label="tab9">tab9</c-tab-content>
-            <c-tab-content label="tab10">tab10</c-tab-content>
-        </c-tab>
+      </c-tab>
     </c-dialog>
     <h2>popover</h2>
-    <c-popover type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>pop confirm</c-button></c-popover>
-    <c-popover disabled type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>pop confirm disabled</c-button></c-popover>
+    <c-popover
+      type="confirm"
+      onsubmit="console.log('ok')"
+      title="确定删除吗?"
+      content="删除后无法撤销"
+      ><c-button>pop confirm</c-button></c-popover
+    >
+    <c-popover
+      disabled
+      type="confirm"
+      onsubmit="console.log('ok')"
+      title="确定删除吗?"
+      content="删除后无法撤销"
+      ><c-button>pop confirm disabled</c-button></c-popover
+    >
     <c-popover>
-        <c-button>pop confirm</c-button>
-        <c-popcon title="确定删除吗?" type="confirm" onsubmit="console.log('ok')">
-            <div>
-                <div>自定义删除后无法撤销</div>
-                <div>删除后无法撤销</div>
-                <div>删除后无法撤销</div>
-                <div>删除后无法撤销</div>
-                <div>删除后无法撤销</div>
-            </div>
-        </c-popcon>
+      <c-button>pop confirm</c-button>
+      <c-popcon title="确定删除吗?" type="confirm" onsubmit="console.log('ok')">
+        <div>
+          <div>自定义删除后无法撤销</div>
+          <div>删除后无法撤销</div>
+          <div>删除后无法撤销</div>
+          <div>删除后无法撤销</div>
+          <div>删除后无法撤销</div>
+        </div>
+      </c-popcon>
     </c-popover>
     <c-popover>
-        <c-button>pop pane</c-button>
-        <c-popcon type="pane" title="提示">
-            <div>
-                <div>这是一段提示提示提示提示提示</div>
-                <div>这是一段提示</div>
-                <div>这是一段提示</div>
-                <div>这是一段提示</div>
-                <div>这是一段提示</div>
-            </div>
-        </c-popcon>
+      <c-button>pop pane</c-button>
+      <c-popcon type="pane" title="提示">
+        <div>
+          <div>这是一段提示提示提示提示提示</div>
+          <div>这是一段提示</div>
+          <div>这是一段提示</div>
+          <div>这是一段提示</div>
+          <div>这是一段提示</div>
+        </div>
+      </c-popcon>
     </c-popover>
     <c-popover>
-        <c-button>pop flat</c-button>
-        <c-popcon>
-            <div>
-                <div>这是一段提示提示提示</div>
-                <div>这是一段提示</div>
-                <div>这是一段提示</div>
-                <div>这是一段提示</div>
-                <div>这是一段提示</div>
-            </div>
-        </c-popcon>
+      <c-button>pop flat</c-button>
+      <c-popcon>
+        <div>
+          <div>这是一段提示提示提示</div>
+          <div>这是一段提示</div>
+          <div>这是一段提示</div>
+          <div>这是一段提示</div>
+          <div>这是一段提示</div>
+        </div>
+      </c-popcon>
     </c-popover>
     <p>dir</p>
-    <c-popover dir="top" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>top</c-button></c-popover>
-    <c-popover dir="right" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>right</c-button></c-popover>
-    <c-popover dir="bottom" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>bottom</c-button></c-popover>
-    <c-popover dir="left" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>left</c-button></c-popover>
-    <c-popover dir="lefttop" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>lefttop</c-button></c-popover>
-    <c-popover dir="leftbottom" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>leftbottom</c-button></c-popover>
-    <c-popover dir="topleft" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>topleft</c-button></c-popover>
-    <c-popover dir="topright" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>topright</c-button></c-popover>
-    <c-popover dir="righttop" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>righttop</c-button></c-popover>
-    <c-popover dir="rightbottom" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>rightbottom</c-button></c-popover>
-    <c-popover dir="bottomleft" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>bottomleft</c-button></c-popover>
-    <c-popover dir="bottomright" type="confirm" onsubmit="console.log('ok')" title="确定删除吗?" content="删除后无法撤销"><c-button>bottomright</c-button></c-popover>
+    <c-popover
+      dir="top"
+      type="confirm"
+      onsubmit="console.log('ok')"
+      title="确定删除吗?"
+      content="删除后无法撤销"
+      ><c-button>top</c-button></c-popover
+    >
+    <c-popover
+      dir="right"
+      type="confirm"
+      onsubmit="console.log('ok')"
+      title="确定删除吗?"
+      content="删除后无法撤销"
+      ><c-button>right</c-button></c-popover
+    >
+    <c-popover
+      dir="bottom"
+      type="confirm"
+      onsubmit="console.log('ok')"
+      title="确定删除吗?"
+      content="删除后无法撤销"
+      ><c-button>bottom</c-button></c-popover
+    >
+    <c-popover
+      dir="left"
+      type="confirm"
+      onsubmit="console.log('ok')"
+      title="确定删除吗?"
+      content="删除后无法撤销"
+      ><c-button>left</c-button></c-popover
+    >
+    <c-popover
+      dir="lefttop"
+      type="confirm"
+      onsubmit="console.log('ok')"
+      title="确定删除吗?"
+      content="删除后无法撤销"
+      ><c-button>lefttop</c-button></c-popover
+    >
+    <c-popover
+      dir="leftbottom"
+      type="confirm"
+      onsubmit="console.log('ok')"
+      title="确定删除吗?"
+      content="删除后无法撤销"
+      ><c-button>leftbottom</c-button></c-popover
+    >
+    <c-popover
+      dir="topleft"
+      type="confirm"
+      onsubmit="console.log('ok')"
+      title="确定删除吗?"
+      content="删除后无法撤销"
+      ><c-button>topleft</c-button></c-popover
+    >
+    <c-popover
+      dir="topright"
+      type="confirm"
+      onsubmit="console.log('ok')"
+      title="确定删除吗?"
+      content="删除后无法撤销"
+      ><c-button>topright</c-button></c-popover
+    >
+    <c-popover
+      dir="righttop"
+      type="confirm"
+      onsubmit="console.log('ok')"
+      title="确定删除吗?"
+      content="删除后无法撤销"
+      ><c-button>righttop</c-button></c-popover
+    >
+    <c-popover
+      dir="rightbottom"
+      type="confirm"
+      onsubmit="console.log('ok')"
+      title="确定删除吗?"
+      content="删除后无法撤销"
+      ><c-button>rightbottom</c-button></c-popover
+    >
+    <c-popover
+      dir="bottomleft"
+      type="confirm"
+      onsubmit="console.log('ok')"
+      title="确定删除吗?"
+      content="删除后无法撤销"
+      ><c-button>bottomleft</c-button></c-popover
+    >
+    <c-popover
+      dir="bottomright"
+      type="confirm"
+      onsubmit="console.log('ok')"
+      title="确定删除吗?"
+      content="删除后无法撤销"
+      ><c-button>bottomright</c-button></c-popover
+    >
     <h2>color-picker</h2>
-    <c-color-picker defaultvalue="orangered" dir="righttop" onchange="console.log(event)"></c-color-picker>
-    <c-color-pane defaultvalue="orangered" dir="righttop" onchange="console.log(event)"></c-color-pane>
+    <c-color-picker
+      defaultvalue="orangered"
+      dir="righttop"
+      onchange="console.log(event)"
+    ></c-color-picker>
+    <c-color-pane
+      defaultvalue="orangered"
+      dir="righttop"
+      onchange="console.log(event)"
+    ></c-color-pane>
     <h2>date-picker</h2>
     <p>type="date"</p>
     <c-date-picker></c-date-picker>
-    <c-date-picker  defaultvalue="2018-02-28"></c-date-picker>
+    <c-date-picker defaultvalue="2018-02-28"></c-date-picker>
     <p>type="month"</p>
     <c-date-picker type="month"></c-date-picker>
     <c-date-picker type="month" defaultvalue="2019-02"></c-date-picker>
@@ -402,17 +637,33 @@
     <c-date-picker type="month" min="2010-10" max="2025-3"></c-date-picker>
     <c-date-picker type="year" min="2010" max="2020"></c-date-picker>
     <p>range</p>
-    <c-date-picker range min="2016-10-20" max="2023-3-5" defaultvalue="2019-10-01~2019-12-25"></c-date-picker>
-    <c-date-picker range type="month" min="2010-10" max="2025-3"></c-date-picker>
+    <c-date-picker
+      range
+      min="2016-10-20"
+      max="2023-3-5"
+      defaultvalue="2019-10-01~2019-12-25"
+    ></c-date-picker>
+    <c-date-picker
+      range
+      type="month"
+      min="2010-10"
+      max="2025-3"
+    ></c-date-picker>
     <c-date-picker range type="year"></c-date-picker>
     <p>pane</p>
-    <c-date-pane style="width:400px"></c-date-pane>
+    <c-date-pane style="width: 400px"></c-date-pane>
     <h2>message</h2>
     <c-button onclick="CMessage.info('This a info message')">info</c-button>
-    <c-button onclick="CMessage.success('This a success message')">success</c-button>
+    <c-button onclick="CMessage.success('This a success message')"
+      >success</c-button
+    >
     <c-button onclick="CMessage.error('This a error message')">error</c-button>
-    <c-button onclick="CMessage.warning('This a warning message')">warning</c-button>
-    <c-button onclick="CMessage.loading('This a loading message')">loading</c-button>
+    <c-button onclick="CMessage.warning('This a warning message')"
+      >warning</c-button
+    >
+    <c-button onclick="CMessage.loading('This a loading message')"
+      >loading</c-button
+    >
     <h2>input</h2>
     <p>placeholder</p>
     <c-input placeholder="user" defaultvalue="xbocan"></c-input>
@@ -432,50 +683,127 @@
     <p>type[search]</p>
     <c-input type="search" onsubmit="console.log(event)"></c-input>
     <p>type[number]</p>
-    <c-input icon="creditcard" type="number" ></c-input>
-    <c-input icon="creditcard" type="number" min="-10" max="10" step="0.3" ></c-input>
+    <c-input icon="creditcard" type="number"></c-input>
+    <c-input
+      icon="creditcard"
+      type="number"
+      min="-10"
+      max="10"
+      step="0.3"
+    ></c-input>
     <p>validity</p>
     <c-input icon="creditcard" required placeholder="required"></c-input>
-    <c-input icon="user" required placeholder="minlength,maxlength" minlength="6" maxlength="10"></c-input>
-    <c-input icon="mail" type="email" placeholder="email" minlength="5" errordir="right"></c-input>
-    <c-input icon="phone" pattern="^1(3|4|5|6|7|8|9)\d{9}$" placeholder="pattern[^1(3|4|5|6|7|8|9)\d{9}$]" errortips="请输入手机号"></c-input>
+    <c-input
+      icon="user"
+      required
+      placeholder="minlength,maxlength"
+      minlength="6"
+      maxlength="10"
+    ></c-input>
+    <c-input
+      icon="mail"
+      type="email"
+      placeholder="email"
+      minlength="5"
+      errordir="right"
+    ></c-input>
+    <c-input
+      icon="phone"
+      pattern="^1(3|4|5|6|7|8|9)\d{9}$"
+      placeholder="pattern[^1(3|4|5|6|7|8|9)\d{9}$]"
+      errortips="请输入手机号"
+    ></c-input>
     <p>textarea</p>
-    <c-textarea required  placeholder="required"  minlength="10"></c-textarea>
-    <c-textarea placeholder="rows" rows="5" ></c-textarea>
-    <c-textarea label="info" placeholder="info" ></c-textarea>
-    <c-textarea icon="location" placeholder="location" ></c-textarea>
+    <c-textarea required placeholder="required" minlength="10"></c-textarea>
+    <c-textarea placeholder="rows" rows="5"></c-textarea>
+    <c-textarea label="info" placeholder="info"></c-textarea>
+    <c-textarea icon="location" placeholder="location"></c-textarea>
     <p>datalist</p>
     <c-input list="city"></c-input>
     <c-datalist id="city">
-        <c-option value="wuhan">武汉</c-option>
-        <c-option value="beijin">北京</c-option>
-        <c-option value="shanghai">上海</c-option>
+      <c-option value="wuhan">武汉</c-option>
+      <c-option value="beijin">北京</c-option>
+      <c-option value="shanghai">上海</c-option>
     </c-datalist>
     <c-input list="email"></c-input>
     <c-datalist id="email">
-        <c-option value="${value}@live.com">@live.com</c-option>
-        <c-option value="${value}@qq.com">@qq.com</c-option>
-        <c-option value="${value}@yuewen.com">@yuewen.com</c-option>
+      <c-option value="${value}@live.com">@live.com</c-option>
+      <c-option value="${value}@qq.com">@qq.com</c-option>
+      <c-option value="${value}@yuewen.com">@yuewen.com</c-option>
     </c-datalist>
     <h2>img</h2>
     <p>src</p>
-    <c-img src="https://images.pexels.com/photos/1274640/pexels-photo-1274640.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"></c-img>
+    <c-img
+      src="https://images.pexels.com/photos/1274640/pexels-photo-1274640.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+    ></c-img>
     <p>lazy</p>
-    <c-img lazy src="https://images.pexels.com/photos/698808/pexels-photo-698808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="image-keyboard"></c-img>
-    <c-img lazy src="https://images.pexels.com/photos/1440387/pexels-photo-1440387.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></c-img>
-    <c-img lazy src="https://images.pexels.com/xxx.jpg" alt="image-keyboard"></c-img>
+    <c-img
+      lazy
+      src="https://images.pexels.com/photos/698808/pexels-photo-698808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      alt="image-keyboard"
+    ></c-img>
+    <c-img
+      lazy
+      src="https://images.pexels.com/photos/1440387/pexels-photo-1440387.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    ></c-img>
+    <c-img
+      lazy
+      src="https://images.pexels.com/xxx.jpg"
+      alt="image-keyboard"
+    ></c-img>
     <p>ratio</p>
-    <c-img lazy ratio="16/9" src="https://images.pexels.com/photos/698808/pexels-photo-698808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="image-keyboard"></c-img>
-    <c-img lazy ratio="3/2" src="https://images.pexels.com/photos/1440387/pexels-photo-1440387.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></c-img>
-    <c-img lazy ratio="1/1" src="https://images.pexels.com/xxx.jpg" alt="image-keyboard"></c-img>
+    <c-img
+      lazy
+      ratio="16/9"
+      src="https://images.pexels.com/photos/698808/pexels-photo-698808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      alt="image-keyboard"
+    ></c-img>
+    <c-img
+      lazy
+      ratio="3/2"
+      src="https://images.pexels.com/photos/1440387/pexels-photo-1440387.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    ></c-img>
+    <c-img
+      lazy
+      ratio="1/1"
+      src="https://images.pexels.com/xxx.jpg"
+      alt="image-keyboard"
+    ></c-img>
     <p>defaultsrc</p>
-    <c-img lazy alt="image-keyboard" src="https://images.pexels.com/xxx.jpg" defaultsrc="https://images.pexels.com/photos/697662/pexels-photo-697662.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></c-img>
-    <c-img lazy src="https://images.pexels.com/xxx.jpg" defaultsrc="https://images.pexels.com/xxxx.jpg"></c-img>
+    <c-img
+      lazy
+      alt="image-keyboard"
+      src="https://images.pexels.com/xxx.jpg"
+      defaultsrc="https://images.pexels.com/photos/697662/pexels-photo-697662.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    ></c-img>
+    <c-img
+      lazy
+      src="https://images.pexels.com/xxx.jpg"
+      defaultsrc="https://images.pexels.com/xxxx.jpg"
+    ></c-img>
     <p>gallery</p>
-    <c-img lazy gallery src="https://images.pexels.com/photos/841228/pexels-photo-841228.jpeg?auto=compress&cs=tinysrgb&dpr=1&h=650&w=940"></c-img>
-    <c-img lazy gallery src="https://images.pexels.com/photos/698808/pexels-photo-698808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></c-img>
-    <c-img lazy gallery src="https://images.pexels.com/photos/1440387/pexels-photo-1440387.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></c-img>
-    <c-img lazy gallery alt="image-keyboard" src="https://images.pexels.com/xxx.jpg" defaultsrc="https://images.pexels.com/photos/697662/pexels-photo-697662.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></c-img>
+    <c-img
+      lazy
+      gallery
+      src="https://images.pexels.com/photos/841228/pexels-photo-841228.jpeg?auto=compress&cs=tinysrgb&dpr=1&h=650&w=940"
+    ></c-img>
+    <c-img
+      lazy
+      gallery
+      src="https://images.pexels.com/photos/698808/pexels-photo-698808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    ></c-img>
+    <c-img
+      lazy
+      gallery
+      src="https://images.pexels.com/photos/1440387/pexels-photo-1440387.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    ></c-img>
+    <c-img
+      lazy
+      gallery
+      alt="image-keyboard"
+      src="https://images.pexels.com/xxx.jpg"
+      defaultsrc="https://images.pexels.com/photos/697662/pexels-photo-697662.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    ></c-img>
     <h2>rate</h2>
     <c-rate onchange="console.log(event)"></c-rate>
     <p>tips</p>
@@ -484,178 +812,241 @@
     <c-rate disabled defaultvalue="2"></c-rate>
     <h2>form</h2>
     <c-form action="/login" method="post" labelwidth="100">
-        <c-form-item legend="user">
-            <c-input name="user" required placeholder="user"></c-input>
-        </c-form-item>
-        <c-form-item legend="password">
-            <c-input name="password" id="password" required type="password" placeholder="password" minlength="6"></c-input>
-        </c-form-item>
-        <c-form-item legend="password align">
-            <c-input name="password_confirm" id="password_confirm" required type="password" placeholder="password confirm"></c-input>
-        </c-form-item>
-        <c-form-item legend="city">
-            <c-select name="city">
-                <c-option value="wuhan">wuhan</c-option>
-                <c-option value="beijin">beijin</c-option>
-                <c-option value="shanghai">shanghai</c-option>
-            </c-select>
-        </c-form-item>
-        <c-form-item legend="books">
-            <c-checkbox-group name="books" required min="2" max="3" defaultvalue="Angular">
-                <c-checkbox>React</c-checkbox>
-                <c-checkbox>Vue</c-checkbox>
-                <c-checkbox>Angular</c-checkbox>
-                <c-checkbox>Flutter</c-checkbox>
-                <c-checkbox>Swift</c-checkbox>
-            </c-checkbox-group>
-        </c-form-item>
-        <c-form-item legend="lang">
-            <c-radio-group name="lan" required>
-                <c-radio>Html</c-radio>
-                <c-radio>Css</c-radio>
-                <c-radio>Javascript</c-radio>
-                <c-radio>Php</c-radio>
-                <c-radio>Dart</c-radio>
-            </c-radio-group>
-        </c-form-item>
-        <c-form-item>
-            <c-checkbox name="read" checked required value="read">I have read</c-checkbox>
-        </c-form-item>
-        <c-form-item>
-            <c-button type="primary" htmltype="submit">submit</c-button>
-            <c-button htmltype="reset">reset</c-button>
-        </c-form-item>
+      <c-form-item legend="user">
+        <c-input name="user" required placeholder="user"></c-input>
+      </c-form-item>
+      <c-form-item legend="password">
+        <c-input
+          name="password"
+          id="password"
+          required
+          type="password"
+          placeholder="password"
+          minlength="6"
+        ></c-input>
+      </c-form-item>
+      <c-form-item legend="password align">
+        <c-input
+          name="password_confirm"
+          id="password_confirm"
+          required
+          type="password"
+          placeholder="password confirm"
+        ></c-input>
+      </c-form-item>
+      <c-form-item legend="city">
+        <c-select name="city">
+          <c-option value="wuhan">wuhan</c-option>
+          <c-option value="beijin">beijin</c-option>
+          <c-option value="shanghai">shanghai</c-option>
+        </c-select>
+      </c-form-item>
+      <c-form-item legend="books">
+        <c-checkbox-group
+          name="books"
+          required
+          min="2"
+          max="3"
+          defaultvalue="Angular"
+        >
+          <c-checkbox>React</c-checkbox>
+          <c-checkbox>Vue</c-checkbox>
+          <c-checkbox>Angular</c-checkbox>
+          <c-checkbox>Flutter</c-checkbox>
+          <c-checkbox>Swift</c-checkbox>
+        </c-checkbox-group>
+      </c-form-item>
+      <c-form-item legend="lang">
+        <c-radio-group name="lan" required>
+          <c-radio>Html</c-radio>
+          <c-radio>Css</c-radio>
+          <c-radio>Javascript</c-radio>
+          <c-radio>Php</c-radio>
+          <c-radio>Dart</c-radio>
+        </c-radio-group>
+      </c-form-item>
+      <c-form-item>
+        <c-checkbox name="read" checked required value="read"
+          >I have read</c-checkbox
+        >
+      </c-form-item>
+      <c-form-item>
+        <c-button type="primary" htmltype="submit">submit</c-button>
+        <c-button htmltype="reset">reset</c-button>
+      </c-form-item>
     </c-form>
     <h2>view</h2>
     <p>coord</p>
     <c-view class="parent" coord>
-        <c-view class="child" coord="x2,y2"></c-view>
+      <c-view class="child" coord="x2,y2"></c-view>
     </c-view>
     <p>draggable & allowdrop</p>
     <c-view draggable></c-view>
     <c-view allowdrop class="dropbox dropbox-parent" ondrop="console.log(this)">
-        <c-view allowdrop class="dropbox" ondrop="console.log(this)"></c-view>
-        <div class="dropbox" ondrop="console.log(this)"></div>
+      <c-view allowdrop class="dropbox" ondrop="console.log(this)"></c-view>
+      <div class="dropbox" ondrop="console.log(this)"></div>
     </c-view>
     <button id="fakebutton">focus</button>
     <p>resizable</p>
     <c-view resizable draggable>edit</c-view>
     <h2>table</h2>
     <c-table thead="Name,Age,Address">
-        <c-tr>
-            <c-td>John Brown</c-td>
-            <c-td>32</c-td>
-            <c-td>New York No. 1 Lake Park</c-td>
-        </c-tr>
-        <c-tr>
-            <c-td>Jim Green</c-td>
-            <c-td>42</c-td>
-            <c-td>London No. 1 Lake Park</c-td>
-        </c-tr>
-        <c-tr>
-            <c-td>Jim Green</c-td>
-            <c-td>42</c-td>
-            <c-td>London No. 1 Lake Park</c-td>
-        </c-tr>
-        <c-tr>
-            <c-td>Jim Green</c-td>
-            <c-td>42</c-td>
-            <c-td>London No. 1 Lake Park</c-td>
-        </c-tr>
-        <c-tr>
-            <c-td>Jim Green</c-td>
-            <c-td>42</c-td>
-            <c-td>London No. 1 Lake Park</c-td>
-        </c-tr>
+      <c-tr>
+        <c-td>John Brown</c-td>
+        <c-td>32</c-td>
+        <c-td>New York No. 1 Lake Park</c-td>
+      </c-tr>
+      <c-tr>
+        <c-td>Jim Green</c-td>
+        <c-td>42</c-td>
+        <c-td>London No. 1 Lake Park</c-td>
+      </c-tr>
+      <c-tr>
+        <c-td>Jim Green</c-td>
+        <c-td>42</c-td>
+        <c-td>London No. 1 Lake Park</c-td>
+      </c-tr>
+      <c-tr>
+        <c-td>Jim Green</c-td>
+        <c-td>42</c-td>
+        <c-td>London No. 1 Lake Park</c-td>
+      </c-tr>
+      <c-tr>
+        <c-td>Jim Green</c-td>
+        <c-td>42</c-td>
+        <c-td>London No. 1 Lake Park</c-td>
+      </c-tr>
     </c-table>
     <h2>text</h2>
-    <c-text>c-ui is a front end cross-framework ui library based on web-components</c-text>
-    <br>
+    <c-text
+      >c-ui is a front end cross-framework ui library based on
+      web-components</c-text
+    >
+    <br />
     <c-text>c-ui</c-text>
-    <br>
+    <br />
     <c-text type="warning">c-ui</c-text>
-    <br>
+    <br />
     <c-text type="error">c-ui</c-text>
-    <br>
+    <br />
     <c-text type="success">c-ui</c-text>
-    <br>
+    <br />
     <c-text mark>c-ui</c-text>
-    <br>
+    <br />
     <c-text code>c-ui</c-text>
-    <br>
-    <c-text rows="3">c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.c-ui is a front end cross-framework ui library based on web-components.</c-text>
+    <br />
+    <c-text rows="3"
+      >c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.c-ui is a front end cross-framework ui library based on
+      web-components.</c-text
+    >
     <h2>pagination</h2>
-    <c-pagination onchange="console.log(this.current)" pagesize="3" total="50" defaultcurrent="9"></c-pagination>
-    <c-pagination simple onchange="console.log(this.current)" pagesize="3" total="50" defaultcurrent="9"></c-pagination>
-    
+    <c-pagination
+      onchange="console.log(this.current)"
+      pagesize="3"
+      total="50"
+      defaultcurrent="9"
+    ></c-pagination>
+    <c-pagination
+      simple
+      onchange="console.log(this.current)"
+      pagesize="3"
+      total="50"
+      defaultcurrent="9"
+    ></c-pagination>
+
     <script>
-        document.getElementById('btn').addEventListener('click',function(ev){
-            console.log(ev)
-        })
-        
-        document.getElementById('select').onchange = function(ev){
-            console.log(ev)
-        }
-        document.getElementById('dialog01').addEventListener('submit',function(){
-            
-        })
-        document.getElementById('dialog01').onsubmit = function(){
-            this.loading = true;
-            new Promise((resolve, reject) => {
-                setTimeout(resolve, 1000);
-            }).then(()=>{
-                this.open = false
-            })
-        }
-        document.getElementById('dialog01').oncancel = function(){
-            console.log('2')
-        }
-        document.getElementById('confirm-btn').onclick = function(ev){
-            /*
+      document.getElementById("btn").addEventListener("click", function (ev) {
+        console.log(ev);
+      });
+
+      document.getElementById("select").onchange = function (ev) {
+        console.log(ev);
+      };
+      document
+        .getElementById("dialog01")
+        .addEventListener("submit", function () {});
+      document.getElementById("dialog01").onsubmit = function () {
+        this.loading = true;
+        new Promise((resolve, reject) => {
+          setTimeout(resolve, 1000);
+        }).then(() => {
+          this.open = false;
+        });
+      };
+      document.getElementById("dialog01").oncancel = function () {
+        console.log("2");
+      };
+      document.getElementById("confirm-btn").onclick = function (ev) {
+        /*
             CDialog.confirm('assdd',function(){
                 console.log('ok')
             },function(){
                 console.log('cancel')
             })
             */
-            CDialog.confirm({
-                header:'确定要删除吗',
-                type:'error',
-                content:'一旦删除无法还原',
-                oktext:'删除',
+        CDialog.confirm({
+          header: "确定要删除吗",
+          type: "error",
+          content: "一旦删除无法还原",
+          oktext: "删除",
+        });
+      };
+      document.querySelectorAll(".theme-button").forEach((el) => {
+        el.addEventListener("click", function () {
+          const themeColor = window
+            .getComputedStyle(el)
+            .getPropertyValue("--themeColor");
+          document.body.style.setProperty("--themeColor", themeColor);
+        });
+      });
 
-            })
-        }
-        document.querySelectorAll('.theme-button').forEach((el)=>{
-            el.addEventListener('click',function(){
-                const themeColor = window.getComputedStyle(el).getPropertyValue('--themeColor');
-                document.body.style.setProperty('--themeColor',themeColor);
-            })
-        })
+      function showDialog() {
+        document.getElementById("dialog01").open = true;
+      }
 
-        function showDialog(){
-            document.getElementById('dialog01').open = true;
-        }
-
-        // document.getElementById('password_confirm').setcustomValidity(function(el){
-        //     return {
-        //         method:(el)=>{
-        //             console.log(this)
-        //             return this.value == document.getElementById('password').value;
-        //         },
-        //         tips:'前后密码不一致'
-        //     }
-        // })
-        document.getElementById('password_confirm').customValidity = {
-            method:(el)=>{
-                return el.value == document.getElementById('password').value;
-            },
-            tips:'前后密码不一致'
-        }
-
-        
+      // document.getElementById('password_confirm').setcustomValidity(function(el){
+      //     return {
+      //         method:(el)=>{
+      //             console.log(this)
+      //             return this.value == document.getElementById('password').value;
+      //         },
+      //         tips:'前后密码不一致'
+      //     }
+      // })
+      document.getElementById("password_confirm").customValidity = {
+        method: (el) => {
+          return el.value == document.getElementById("password").value;
+        },
+        tips: "前后密码不一致",
+      };
     </script>
-</body>
-
-
+  </body>
 </html>

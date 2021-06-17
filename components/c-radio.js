@@ -1,12 +1,12 @@
-
 export default class CRadio extends HTMLElement {
+  static get observedAttributes() {
+    return ["disabled", "checked"];
+  }
 
-    static get observedAttributes() { return ['disabled','checked'] }
-
-    constructor() {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.innerHTML = `
+  constructor() {
+    super();
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.innerHTML = `
         <style>
         :host{ 
             display:inline-block;
@@ -93,102 +93,108 @@ export default class CRadio extends HTMLElement {
         }
         </style>
         <input type="checkbox" id="radio" ><label id="label" for="radio"><span class="cheked"></span><slot></slot></label>
-        `
-    }
+        `;
+  }
 
-    get disabled() {
-        return this.getAttribute('disabled')!==null;
-    }
+  get disabled() {
+    return this.getAttribute("disabled") !== null;
+  }
 
-    get checked() {
-        return this.getAttribute('checked')!==null;
-    }
+  get checked() {
+    return this.getAttribute("checked") !== null;
+  }
 
-    get name() {
-        return this.getAttribute('name');
-    }
+  get name() {
+    return this.getAttribute("name");
+  }
 
-    get value() {
-        return this.getAttribute('value')||this.textContent;
-    }
+  get value() {
+    return this.getAttribute("value") || this.textContent;
+  }
 
-    set disabled(value) {
-        if(value===null||value===false){
-            this.removeAttribute('disabled');
-        }else{
-            this.setAttribute('disabled', '');
-        }
+  set disabled(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("disabled");
+    } else {
+      this.setAttribute("disabled", "");
     }
+  }
 
-    set checked(value) {
-        if(value===null||value===false){
-            this.removeAttribute('checked');
-        }else{
-            this.setAttribute('checked', '');
-        }
+  set checked(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("checked");
+    } else {
+      this.setAttribute("checked", "");
     }
+  }
 
-    set value(value) {
-        this.setAttribute('value', value);
-    }
+  set value(value) {
+    this.setAttribute("value", value);
+  }
 
-    focus() {
-        this.radio.focus();
-    }
-    
-    tocheck() {
-        const selector = this.group?`c-radio[checked]`:`c-radio[name="${this.name}"][checked]`;
-        const prev = this.parent.querySelector(selector);
-        if( prev ){
-            prev.checked = false;
-        }
-        this.checked = true;
-    }
+  focus() {
+    this.radio.focus();
+  }
 
-    connectedCallback() {
-        this.group = this.closest('c-radio-group');
-        this.parent = this.group||this.getRootNode();
-        this.radio = this.shadowRoot.getElementById('radio');
-        this.disabled = this.disabled;
-        this.checked = this.checked;
-        this.radio.addEventListener('change',(ev)=>{
-            this.tocheck();
-            this.dispatchEvent(new CustomEvent('change', {
-                detail: {
-                    checked: this.checked
-                }
-            }));
+  tocheck() {
+    const selector = this.group
+      ? `c-radio[checked]`
+      : `c-radio[name="${this.name}"][checked]`;
+    const prev = this.parent.querySelector(selector);
+    if (prev) {
+      prev.checked = false;
+    }
+    this.checked = true;
+  }
+
+  connectedCallback() {
+    this.group = this.closest("c-radio-group");
+    this.parent = this.group || this.getRootNode();
+    this.radio = this.shadowRoot.getElementById("radio");
+    this.disabled = this.disabled;
+    this.checked = this.checked;
+    this.radio.addEventListener("change", (ev) => {
+      this.tocheck();
+      this.dispatchEvent(
+        new CustomEvent("change", {
+          detail: {
+            checked: this.checked,
+          },
         })
-    }
+      );
+    });
+  }
 
-    attributeChangedCallback (name, oldValue, newValue) {
-        if( name == 'disabled' && this.radio){
-            if(newValue!==null){
-                this.radio.setAttribute('disabled', 'disabled');
-            }else{
-                this.radio.removeAttribute('disabled');
-            }
-        }
-        if( name == 'checked' && this.radio){
-            if(newValue!==null){
-                this.radio.checked = true;
-            }else{
-                this.radio.checked = false;
-            }
-        }
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name == "disabled" && this.radio) {
+      if (newValue !== null) {
+        this.radio.setAttribute("disabled", "disabled");
+      } else {
+        this.radio.removeAttribute("disabled");
+      }
     }
+    if (name == "checked" && this.radio) {
+      if (newValue !== null) {
+        this.radio.checked = true;
+      } else {
+        this.radio.checked = false;
+      }
+    }
+  }
 }
 
-if(!customElements.get('c-radio')){
-    customElements.define('c-radio', CRadio);
+if (!customElements.get("c-radio")) {
+  customElements.define("c-radio", CRadio);
 }
 
 class CRadioGroup extends HTMLElement {
-    static get observedAttributes() { return ['disabled','required'] }
-    constructor() {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.innerHTML = `
+  static get observedAttributes() {
+    return ["disabled", "required"];
+  }
+  constructor() {
+    super();
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.innerHTML = `
         <style>
         :host {
             display:inline-block;
@@ -217,147 +223,153 @@ class CRadioGroup extends HTMLElement {
         }
         </style>
         <c-tips id="tip" type="error"><slot></slot></c-tips>
-        `
-    }
+        `;
+  }
 
-    get name() {
-        return this.getAttribute('name');
-    }
+  get name() {
+    return this.getAttribute("name");
+  }
 
-    get required() {
-        return this.getAttribute('required')!==null;
-    }
+  get required() {
+    return this.getAttribute("required") !== null;
+  }
 
-    get defaultvalue() {
-        return this.getAttribute('defaultvalue')||"";
-    }
+  get defaultvalue() {
+    return this.getAttribute("defaultvalue") || "";
+  }
 
-    get value() {
-        const radio = this.querySelector('c-radio[checked]');
-        return radio?radio.value:'';
-    }
+  get value() {
+    const radio = this.querySelector("c-radio[checked]");
+    return radio ? radio.value : "";
+  }
 
-    get novalidate() {
-        return this.getAttribute('novalidate')!==null;
-    }
+  get novalidate() {
+    return this.getAttribute("novalidate") !== null;
+  }
 
-    get disabled() {
-        return this.getAttribute('disabled')!==null;
-    }
+  get disabled() {
+    return this.getAttribute("disabled") !== null;
+  }
 
-    get validity() {
-        return this.value!=='';
-    }
+  get validity() {
+    return this.value !== "";
+  }
 
-    get invalid() {
-        return this.getAttribute('invalid')!==null;
-    }
+  get invalid() {
+    return this.getAttribute("invalid") !== null;
+  }
 
-    set value(value) {
-        this.elements.forEach(el=>{
-            if(value == el.value){
-                el.checked = true;
-            }else{
-                el.checked = false;
-            }
-        })
-    }
+  set value(value) {
+    this.elements.forEach((el) => {
+      if (value == el.value) {
+        el.checked = true;
+      } else {
+        el.checked = false;
+      }
+    });
+  }
 
-    set required(value) {
-        if(value===null||value===false){
-            this.removeAttribute('required');
-        }else{
-            this.setAttribute('required', '');
-        }
+  set required(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("required");
+    } else {
+      this.setAttribute("required", "");
     }
+  }
 
-    set novalidate(value) {
-        if(value===null||value===false){
-            this.removeAttribute('novalidate');
-        }else{
-            this.setAttribute('novalidate', '');
-        }
+  set novalidate(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("novalidate");
+    } else {
+      this.setAttribute("novalidate", "");
     }
+  }
 
-    set disabled(value) {
-        if(value===null||value===false){
-            this.removeAttribute('disabled');
-        }else{
-            this.setAttribute('disabled', '');
-        }
+  set disabled(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("disabled");
+    } else {
+      this.setAttribute("disabled", "");
     }
+  }
 
-    set invalid(value) {
-        if(value===null||value===false){
-            this.removeAttribute('invalid');
-        }else{
-            this.setAttribute('invalid', '');
-        }
+  set invalid(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("invalid");
+    } else {
+      this.setAttribute("invalid", "");
     }
+  }
 
-    focus(){
-        if(getComputedStyle(this.tip).zIndex!=2){
-            this.elements[0].focus();
-        }
+  focus() {
+    if (getComputedStyle(this.tip).zIndex != 2) {
+      this.elements[0].focus();
     }
+  }
 
-    reset() {
-        this.value = this.defaultvalue;
-        this.invalid = false;
-        this.tip.show = false;
-    }
+  reset() {
+    this.value = this.defaultvalue;
+    this.invalid = false;
+    this.tip.show = false;
+  }
 
-    checkValidity(){
-        if(this.novalidate||this.disabled||this.form&&this.form.novalidate){
-            return true;
-        }
-        if(this.validity){
-            this.tip.show = false;
-            this.invalid = false;
-            return true;
-        }else{
-            this.focus();
-            this.invalid = true;
-            this.tip.show = 'show';
-            this.tip.tips = '请选择1项';
-            return false;
-        }
+  checkValidity() {
+    if (
+      this.novalidate ||
+      this.disabled ||
+      (this.form && this.form.novalidate)
+    ) {
+      return true;
     }
+    if (this.validity) {
+      this.tip.show = false;
+      this.invalid = false;
+      return true;
+    } else {
+      this.focus();
+      this.invalid = true;
+      this.tip.show = "show";
+      this.tip.tips = "请选择1项";
+      return false;
+    }
+  }
 
-    connectedCallback() {
-        this.form = this.closest('c-form');
-        this.tip  = this.shadowRoot.getElementById('tip');
-        this.slots = this.shadowRoot.querySelector('slot');
-        this.slots.addEventListener('slotchange',()=>{
-            this.elements  = this.querySelectorAll('c-radio');
-            this.value = this.defaultvalue;
-            this.elements.forEach(el=>{
-                el.addEventListener('change',()=>{
-                    if(el.checked){
-                        this.checkValidity();
-                        this.dispatchEvent(new CustomEvent('change',{
-                            detail:{
-                                value:this.value
-                            }
-                        }));
-                    }
-                })
-            })
-            this.init = true;
-        })
-    }
+  connectedCallback() {
+    this.form = this.closest("c-form");
+    this.tip = this.shadowRoot.getElementById("tip");
+    this.slots = this.shadowRoot.querySelector("slot");
+    this.slots.addEventListener("slotchange", () => {
+      this.elements = this.querySelectorAll("c-radio");
+      this.value = this.defaultvalue;
+      this.elements.forEach((el) => {
+        el.addEventListener("change", () => {
+          if (el.checked) {
+            this.checkValidity();
+            this.dispatchEvent(
+              new CustomEvent("change", {
+                detail: {
+                  value: this.value,
+                },
+              })
+            );
+          }
+        });
+      });
+      this.init = true;
+    });
+  }
 
-    attributeChangedCallback (name, oldValue, newValue) {
-        if( name == 'disabled' && this.tip){
-            if(newValue!==null){
-                this.tip.setAttribute('tabindex',-1);
-            }else{
-                this.tip.removeAttribute('tabindex');
-            }
-        }
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name == "disabled" && this.tip) {
+      if (newValue !== null) {
+        this.tip.setAttribute("tabindex", -1);
+      } else {
+        this.tip.removeAttribute("tabindex");
+      }
     }
+  }
 }
 
-if(!customElements.get('c-radio-group')){
-    customElements.define('c-radio-group', CRadioGroup);
+if (!customElements.get("c-radio-group")) {
+  customElements.define("c-radio-group", CRadioGroup);
 }

@@ -1,13 +1,14 @@
-import './c-loading.js';
+import "./c-loading.js";
 
 class CTr extends HTMLElement {
+  static get observedAttributes() {
+    return ["checked"];
+  }
 
-    static get observedAttributes() { return ['checked'] }
-
-    constructor() {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.innerHTML = `
+  constructor() {
+    super();
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.innerHTML = `
         <style>
         :host {
             display:contents;
@@ -29,50 +30,51 @@ class CTr extends HTMLElement {
         </style>
         <c-td class="select"><c-checkbox></c-checkbox></c-td>
         <slot></slot>
-        `
-    }
+        `;
+  }
 
-    get checked() {
-        return this.getAttribute('checked')!==null;
-    }
+  get checked() {
+    return this.getAttribute("checked") !== null;
+  }
 
-    set checked(value) {
-        if(value===null||value===false){
-            this.removeAttribute('checked');
-        }else{
-            this.setAttribute('checked', '');
-        }
+  set checked(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("checked");
+    } else {
+      this.setAttribute("checked", "");
     }
+  }
 
-    connectedCallback() {
-        this.checkbox = this.shadowRoot.querySelector('c-checkbox');
-        this.checkbox.addEventListener('change',()=>{
-            this.checked = this.checkbox.checked;
-            this.dispatchEvent(new CustomEvent('change', {
-                detail: {
-                    checked: this.checked
-                }
-            }));
+  connectedCallback() {
+    this.checkbox = this.shadowRoot.querySelector("c-checkbox");
+    this.checkbox.addEventListener("change", () => {
+      this.checked = this.checkbox.checked;
+      this.dispatchEvent(
+        new CustomEvent("change", {
+          detail: {
+            checked: this.checked,
+          },
         })
-    }
+      );
+    });
+  }
 
-    attributeChangedCallback (name, oldValue, newValue) {
-        if( name == 'checked' && this.checkbox){
-            this.checkbox.checked = newValue;
-        }
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name == "checked" && this.checkbox) {
+      this.checkbox.checked = newValue;
     }
+  }
 }
 
-if(!customElements.get('c-tr')){
-    customElements.define('c-tr', CTr);
+if (!customElements.get("c-tr")) {
+  customElements.define("c-tr", CTr);
 }
 
 class CTd extends HTMLElement {
-
-    constructor() {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.innerHTML = `
+  constructor() {
+    super();
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.innerHTML = `
         <style>
         :host {
             position:relative;
@@ -103,28 +105,29 @@ class CTd extends HTMLElement {
         }
         </style>
         <slot></slot>
-        `
-    }
+        `;
+  }
 }
 
-if(!customElements.get('c-td')){
-    customElements.define('c-td', CTd);
+if (!customElements.get("c-td")) {
+  customElements.define("c-td", CTd);
 }
 
 export default class CTable extends HTMLElement {
-
-    constructor() {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.innerHTML = `
+  constructor() {
+    super();
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.innerHTML = `
         <style>
         :host {
             line-height: 1.5;
             display:grid;
-            grid-template-columns:${this.select?'auto':''} repeat(var(--columns),1fr);
+            grid-template-columns:${
+              this.select ? "auto" : ""
+            } repeat(var(--columns),1fr);
             grid-row-gap: 1px;
             position:relative;
-            --columns:${this.thead.length||1};
+            --columns:${this.thead.length || 1};
         }
         ::slotted(c-tr:nth-child(even)){
             --cellColor:var(--themeColor,#42b983);
@@ -174,75 +177,73 @@ export default class CTable extends HTMLElement {
             z-index: 5;
         }
         </style>
-        ${
-            this.select?'<div class="th"><c-checkbox></c-checkbox></div>':''
-        }
-        ${
-            this.thead.map(el=>'<div class="th">'+el+'</div>').join('')
-        }
+        ${this.select ? '<div class="th"><c-checkbox></c-checkbox></div>' : ""}
+        ${this.thead.map((el) => '<div class="th">' + el + "</div>").join("")}
         <slot></slot>
         <c-loading class="loading"></c-loading>
-        `
-    }
+        `;
+  }
 
-    get thead(){
-        const thead = this.getAttribute('thead');
-        return thead?thead.split(','):[];
-    }
+  get thead() {
+    const thead = this.getAttribute("thead");
+    return thead ? thead.split(",") : [];
+  }
 
-    get select(){
-        return this.getAttribute('select')!==null;
-    }
+  get select() {
+    return this.getAttribute("select") !== null;
+  }
 
-    get loading() {
-        return this.getAttribute('loading')!==null;
-    }
+  get loading() {
+    return this.getAttribute("loading") !== null;
+  }
 
-    get value() {
-        return Array.from(this.querySelectorAll('c-tr[checked]'),el=>el.id||el.index);
-    }
+  get value() {
+    return Array.from(
+      this.querySelectorAll("c-tr[checked]"),
+      (el) => el.id || el.index
+    );
+  }
 
-    set loading(value) {
-        if(value===null||value===false){
-            this.removeAttribute('loading');
-        }else{
-            this.setAttribute('loading', '');
-        }
+  set loading(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("loading");
+    } else {
+      this.setAttribute("loading", "");
     }
+  }
 
-    connectedCallback() {
-        if(this.select){
-            this.checkbox = this.shadowRoot.querySelector('c-checkbox');
-            this.slots = this.shadowRoot.querySelector('slot');
-            this.slots.addEventListener('slotchange',()=>{
-                this.cell = [...this.querySelectorAll('c-tr')];
-                this.cell.forEach((el,i)=>{
-                    !el.id && (el.index = i);
-                    el.onchange = () => {
-                        let isAll = true;
-                        let isEmpty = true;
-                        this.cell.forEach(el=>{
-                            if(!el.checked){
-                                isAll = false;
-                            }else{
-                                isEmpty = false;
-                            }
-                        })
-                        this.checkbox.indeterminate = !isEmpty && !isAll;
-                        this.checkbox.checked = isAll;
-                    }
-                })
-            })
-            this.checkbox.addEventListener('change',()=>{
-                this.cell.forEach(el=>{
-                    el.checked = this.checkbox.checked;
-                })
-            })
-        }
+  connectedCallback() {
+    if (this.select) {
+      this.checkbox = this.shadowRoot.querySelector("c-checkbox");
+      this.slots = this.shadowRoot.querySelector("slot");
+      this.slots.addEventListener("slotchange", () => {
+        this.cell = [...this.querySelectorAll("c-tr")];
+        this.cell.forEach((el, i) => {
+          !el.id && (el.index = i);
+          el.onchange = () => {
+            let isAll = true;
+            let isEmpty = true;
+            this.cell.forEach((el) => {
+              if (!el.checked) {
+                isAll = false;
+              } else {
+                isEmpty = false;
+              }
+            });
+            this.checkbox.indeterminate = !isEmpty && !isAll;
+            this.checkbox.checked = isAll;
+          };
+        });
+      });
+      this.checkbox.addEventListener("change", () => {
+        this.cell.forEach((el) => {
+          el.checked = this.checkbox.checked;
+        });
+      });
     }
-
+  }
 }
 
-if(!customElements.get('c-table')){
-    customElements.define('c-table', CTable);
+if (!customElements.get("c-table")) {
+  customElements.define("c-table", CTable);
 }

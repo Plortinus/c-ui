@@ -1,12 +1,13 @@
-import './c-tips.js';
+import "./c-tips.js";
 export default class CCheckbox extends HTMLElement {
+  static get observedAttributes() {
+    return ["disabled", "checked", "required"];
+  }
 
-    static get observedAttributes() { return ['disabled','checked','required'] }
-
-    constructor() {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.innerHTML = `
+  constructor() {
+    super();
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.innerHTML = `
         <style>
         :host{ 
             display:inline-block;
@@ -123,202 +124,214 @@ export default class CCheckbox extends HTMLElement {
                 <slot></slot>
             </label>
         </c-tips>
-        `
-    }
+        `;
+  }
 
-    get disabled() {
-        return this.getAttribute('disabled')!==null;
-    }
+  get disabled() {
+    return this.getAttribute("disabled") !== null;
+  }
 
-    get novalidate() {
-        return this.getAttribute('novalidate')!==null;
-    }
+  get novalidate() {
+    return this.getAttribute("novalidate") !== null;
+  }
 
-    get required() {
-        return this.getAttribute('required')!==null;
-    }
+  get required() {
+    return this.getAttribute("required") !== null;
+  }
 
-    get name() {
-        return this.getAttribute('name');
-    }
+  get name() {
+    return this.getAttribute("name");
+  }
 
-    get checked() {
-        return this.getAttribute('checked')!==null;
-    }
+  get checked() {
+    return this.getAttribute("checked") !== null;
+  }
 
-    get indeterminate() {
-        return this.checkbox.indeterminate;
-    }
+  get indeterminate() {
+    return this.checkbox.indeterminate;
+  }
 
-    get value() {
-        return this.getAttribute('value')||this.textContent;
-    }
+  get value() {
+    return this.getAttribute("value") || this.textContent;
+  }
 
-    get invalid() {
-        return this.getAttribute('invalid')!==null;
-    }
+  get invalid() {
+    return this.getAttribute("invalid") !== null;
+  }
 
-    get validity() {
-        return this.checkbox.checkValidity();
-    }
+  get validity() {
+    return this.checkbox.checkValidity();
+  }
 
-    get errortips() {
-        return this.getAttribute('errortips');
-    }
+  get errortips() {
+    return this.getAttribute("errortips");
+  }
 
-    set disabled(value) {
-        if(value===null||value===false){
-            this.removeAttribute('disabled');
-        }else{
-            this.setAttribute('disabled', '');
-        }
+  set disabled(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("disabled");
+    } else {
+      this.setAttribute("disabled", "");
     }
+  }
 
-    set checked(value) {
-        if(value===null||value===false){
-            this.removeAttribute('checked');
-        }else{
-            this.setAttribute('checked', '');
-        }
+  set checked(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("checked");
+    } else {
+      this.setAttribute("checked", "");
     }
+  }
 
-    set indeterminate(value) {
-        if(value===null||value===false){
-            this.checkbox.indeterminate = false;
-        }else{
-            this.checkbox.indeterminate = true;
-        }
+  set indeterminate(value) {
+    if (value === null || value === false) {
+      this.checkbox.indeterminate = false;
+    } else {
+      this.checkbox.indeterminate = true;
     }
+  }
 
-    set required(value) {
-        if(value===null||value===false){
-            this.removeAttribute('required');
-        }else{
-            this.setAttribute('required', '');
-        }
+  set required(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("required");
+    } else {
+      this.setAttribute("required", "");
     }
+  }
+  s;
 
-    set novalidate(value) {
-        if(value===null||value===false){
-            this.removeAttribute('novalidate');
-        }else{
-            this.setAttribute('novalidate', '');
-        }
+  set novalidate(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("novalidate");
+    } else {
+      this.setAttribute("novalidate", "");
     }
+  }
 
-    set invalid(value) {
-        if(value===null||value===false){
-            this.removeAttribute('invalid');
-        }else{
-            this.setAttribute('invalid', '');
-        }
+  set invalid(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("invalid");
+    } else {
+      this.setAttribute("invalid", "");
     }
+  }
 
-    focus() {
-        this.checkbox.focus();
+  focus() {
+    this.checkbox.focus();
+  }
+
+  reset() {
+    this.checkbox.checked = false;
+    this.invalid = false;
+    this.tip.show = false;
+  }
+
+  checkValidity() {
+    if (
+      this.novalidate ||
+      this.disabled ||
+      (this.form && this.form.novalidate)
+    ) {
+      return true;
     }
+    if (this.validity) {
+      this.invalid = false;
+      this.tip.show = false;
+      return true;
+    } else {
+      this.focus();
+      this.invalid = true;
+      this.tip.show = "show";
+      this.tip.tips = this.errortips || this.checkbox.validationMessage;
+      return false;
+    }
+  }
 
-    reset() {
+  connectedCallback() {
+    this.form = this.closest("c-form");
+    this.checkbox = this.shadowRoot.getElementById("checkbox");
+    this.tip = this.shadowRoot.getElementById("tip");
+    this.disabled = this.disabled;
+    this.checked = this.checked;
+    this.checkbox.addEventListener("change", (ev) => {
+      this.checked = this.checkbox.checked;
+      this.checkValidity();
+      this.dispatchEvent(
+        new CustomEvent("change", {
+          detail: {
+            checked: this.checked,
+          },
+        })
+      );
+    });
+    this.checkbox.addEventListener("focus", (ev) => {
+      ev.stopPropagation();
+      if (!this.isfocus) {
+        this.dispatchEvent(
+          new CustomEvent("focus", {
+            detail: {
+              value: this.value,
+            },
+          })
+        );
+      }
+    });
+    this.checkbox.addEventListener("blur", (ev) => {
+      ev.stopPropagation();
+      if (getComputedStyle(this.checkbox).zIndex == 2) {
+        this.isfocus = true;
+      } else {
+        this.isfocus = false;
+        this.dispatchEvent(
+          new CustomEvent("blur", {
+            detail: {
+              value: this.value,
+            },
+          })
+        );
+      }
+    });
+    this.required = this.required;
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name == "disabled" && this.checkbox) {
+      if (newValue !== null) {
+        this.checkbox.setAttribute("disabled", "disabled");
+      } else {
+        this.checkbox.removeAttribute("disabled");
+      }
+    }
+    if (name == "checked" && this.checkbox) {
+      if (newValue !== null) {
+        this.checkbox.checked = true;
+      } else {
         this.checkbox.checked = false;
-        this.invalid = false;
-        this.tip.show = false;
+      }
     }
-
-    checkValidity(){
-        if(this.novalidate||this.disabled||this.form&&this.form.novalidate){
-            return true;
-        }
-        if(this.validity){
-            this.invalid = false;
-            this.tip.show = false;
-            return true;
-        }else{
-            this.focus();
-            this.invalid = true;
-            this.tip.show = 'show';
-            this.tip.tips = this.errortips||this.checkbox.validationMessage;
-            return false;
-        }
+    if (name == "required" && this.checkbox) {
+      if (newValue !== null) {
+        this.checkbox.setAttribute("required", "required");
+      } else {
+        this.checkbox.removeAttribute("required");
+      }
     }
-    
-    connectedCallback() {
-        this.form = this.closest('c-form');
-        this.checkbox = this.shadowRoot.getElementById('checkbox');
-        this.tip = this.shadowRoot.getElementById('tip');
-        this.disabled = this.disabled;
-        this.checked = this.checked;
-        this.checkbox.addEventListener('change',(ev)=>{
-            this.checked = this.checkbox.checked;
-            this.checkValidity();
-            this.dispatchEvent(new CustomEvent('change', {
-                detail: {
-                    checked: this.checked
-                }
-            }));
-        })
-        this.checkbox.addEventListener('focus',(ev)=>{
-            ev.stopPropagation();
-            if(!this.isfocus){
-                this.dispatchEvent(new CustomEvent('focus',{
-                    detail:{
-                        value:this.value
-                    }
-                }));
-            }
-        })
-        this.checkbox.addEventListener('blur',(ev)=>{
-            ev.stopPropagation();
-            if(getComputedStyle(this.checkbox).zIndex==2){
-                this.isfocus = true;
-            }else{
-                this.isfocus = false;
-                this.dispatchEvent(new CustomEvent('blur',{
-                    detail:{
-                        value:this.value
-                    }
-                }));
-            }
-        })
-        this.required = this.required;
-    }
-
-    attributeChangedCallback (name, oldValue, newValue) {
-        if( name == 'disabled' && this.checkbox){
-            if(newValue!==null){
-                this.checkbox.setAttribute('disabled', 'disabled');
-            }else{
-                this.checkbox.removeAttribute('disabled');
-            }
-        }
-        if( name == 'checked' && this.checkbox){
-            if(newValue!==null){
-                this.checkbox.checked = true;
-            }else{
-                this.checkbox.checked = false;
-            }
-        }
-        if(name == 'required' && this.checkbox){
-            if(newValue!==null){
-                this.checkbox.setAttribute('required', 'required');
-            }else{
-                this.checkbox.removeAttribute('required');
-            }
-        }
-    }
+  }
 }
 
-if(!customElements.get('c-checkbox')){
-    customElements.define('c-checkbox', CCheckbox);
+if (!customElements.get("c-checkbox")) {
+  customElements.define("c-checkbox", CCheckbox);
 }
-
 
 class CCheckboxGroup extends HTMLElement {
-    static get observedAttributes() { return ['disabled','required'] }
+  static get observedAttributes() {
+    return ["disabled", "required"];
+  }
 
-    constructor() {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.innerHTML = `
+  constructor() {
+    super();
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.innerHTML = `
         <style>
         :host {
             display:inline-block;
@@ -346,74 +359,78 @@ class CCheckboxGroup extends HTMLElement {
             --borderColor:var(--errorColor,#f4615c);
         }
         </style>
-        <c-tips id="tip" ${this.disabled?"tabindex='-1'":""} type="error"><slot></slot></c-tips>
-        `
-    }
+        <c-tips id="tip" ${
+          this.disabled ? "tabindex='-1'" : ""
+        } type="error"><slot></slot></c-tips>
+        `;
+  }
 
-    get name() {
-        return this.getAttribute('name');
-    }
+  get name() {
+    return this.getAttribute("name");
+  }
 
-    get min() {
-        const min = this.getAttribute('min')||0;
-        return this.required?Math.max(1,min):min;
-    }
+  get min() {
+    const min = this.getAttribute("min") || 0;
+    return this.required ? Math.max(1, min) : min;
+  }
 
-    get max() {
-        return this.getAttribute('max')||Infinity;
-    }
+  get max() {
+    return this.getAttribute("max") || Infinity;
+  }
 
-    get required() {
-        return this.getAttribute('required')!==null;
-    }
+  get required() {
+    return this.getAttribute("required") !== null;
+  }
 
-    get disabled() {
-        return this.getAttribute('disabled')!==null;
-    }
+  get disabled() {
+    return this.getAttribute("disabled") !== null;
+  }
 
-    get defaultvalue() {
-        const defaultvalue = this.getAttribute('defaultvalue');
-        return defaultvalue?defaultvalue.split(','):[];
-    }
+  get defaultvalue() {
+    const defaultvalue = this.getAttribute("defaultvalue");
+    return defaultvalue ? defaultvalue.split(",") : [];
+  }
 
-    get value() {
-        return [...this.querySelectorAll('c-checkbox[checked]')].map(el=>el.value);
-    }
+  get value() {
+    return [...this.querySelectorAll("c-checkbox[checked]")].map(
+      (el) => el.value
+    );
+  }
 
-    get novalidate() {
-        return this.getAttribute('novalidate')!==null;
-    }
+  get novalidate() {
+    return this.getAttribute("novalidate") !== null;
+  }
 
-    get validity() {
-        this.len = this.value.length;
-        if(!this.required && this.len==0){
-            return true;
-        }
-        return this.len>=this.min && this.len<=this.max;
+  get validity() {
+    this.len = this.value.length;
+    if (!this.required && this.len == 0) {
+      return true;
     }
+    return this.len >= this.min && this.len <= this.max;
+  }
 
-    get invalid() {
-        return this.getAttribute('invalid')!==null;
+  get invalid() {
+    return this.getAttribute("invalid") !== null;
+  }
+
+  set disabled(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("disabled");
+    } else {
+      this.setAttribute("disabled", "");
     }
+  }
 
-    set disabled(value) {
-        if(value===null||value===false){
-            this.removeAttribute('disabled');
-        }else{
-            this.setAttribute('disabled', '');
-        }
-    }
-
-    set value(value) {
-        //['html','js']
-        this.elements.forEach(el=>{
-            if(value.includes(el.value)){
-                el.checked = true;
-            }else{
-                el.checked = false;
-            }
-        })
-        /*
+  set value(value) {
+    //['html','js']
+    this.elements.forEach((el) => {
+      if (value.includes(el.value)) {
+        el.checked = true;
+      } else {
+        el.checked = false;
+      }
+    });
+    /*
         if(this.init){
             this.checkValidity();
             this.dispatchEvent(new CustomEvent('change',{
@@ -423,104 +440,110 @@ class CCheckboxGroup extends HTMLElement {
             }));
         }
         */
-    }
+  }
 
-    set required(value) {
-        if(value===null||value===false){
-            this.removeAttribute('required');
-        }else{
-            this.setAttribute('required', '');
-        }
+  set required(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("required");
+    } else {
+      this.setAttribute("required", "");
     }
+  }
 
-    set novalidate(value) {
-        if(value===null||value===false){
-            this.removeAttribute('novalidate');
-        }else{
-            this.setAttribute('novalidate', '');
-        }
+  set novalidate(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("novalidate");
+    } else {
+      this.setAttribute("novalidate", "");
     }
+  }
 
-    set invalid(value) {
-        if(value===null||value===false){
-            this.removeAttribute('invalid');
-        }else{
-            this.setAttribute('invalid', '');
-        }
+  set invalid(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("invalid");
+    } else {
+      this.setAttribute("invalid", "");
     }
+  }
 
-    focus(){
-        if(getComputedStyle(this.tip).zIndex!=2){
-            this.elements[0].focus();
-        }
+  focus() {
+    if (getComputedStyle(this.tip).zIndex != 2) {
+      this.elements[0].focus();
     }
+  }
 
-    reset() {
-        this.value = this.defaultvalue;
-        this.invalid = false;
-        this.tip.show = false;
+  reset() {
+    this.value = this.defaultvalue;
+    this.invalid = false;
+    this.tip.show = false;
+  }
+
+  checkall() {
+    this.elements.forEach((el) => {
+      el.checked = true;
+    });
+  }
+
+  checkValidity() {
+    if (
+      this.novalidate ||
+      this.disabled ||
+      (this.form && this.form.novalidate)
+    ) {
+      return true;
     }
-
-    checkall() {
-        this.elements.forEach(el=>{
-            el.checked = true;
-        })
+    if (this.validity) {
+      this.tip.show = false;
+      this.invalid = false;
+      return true;
+    } else {
+      this.focus();
+      this.tip.show = "show";
+      this.invalid = true;
+      if (this.len < this.min) {
+        this.tip.tips = `请至少选择${this.min}项`;
+      }
+      if (this.len > this.max) {
+        this.tip.tips = `至多选择${this.max}项`;
+      }
+      return false;
     }
+  }
 
-    checkValidity(){
-        if(this.novalidate||this.disabled||this.form&&this.form.novalidate){
-            return true;
-        }
-        if(this.validity){
-            this.tip.show = false;
-            this.invalid = false;
-            return true;
-        }else{
-            this.focus();
-            this.tip.show = 'show';
-            this.invalid = true;
-            if(this.len<this.min){
-                this.tip.tips = `请至少选择${this.min}项`;
-            }
-            if(this.len>this.max){
-                this.tip.tips = `至多选择${this.max}项`;
-            }
-            return false;
-        }
-    }
-
-    connectedCallback() {
-        this.form = this.closest('c-form');
-        this.tip  = this.shadowRoot.getElementById('tip');
-        this.slots = this.shadowRoot.querySelector('slot');
-        this.slots.addEventListener('slotchange',()=>{
-            this.elements  = this.querySelectorAll('c-checkbox');
-            this.value = this.defaultvalue;
-            this.elements.forEach(el=>{
-                el.addEventListener('change',()=>{
-                    this.checkValidity();
-                    this.dispatchEvent(new CustomEvent('change',{
-                        detail:{
-                            value:this.value
-                        }
-                    }));
-                })
+  connectedCallback() {
+    this.form = this.closest("c-form");
+    this.tip = this.shadowRoot.getElementById("tip");
+    this.slots = this.shadowRoot.querySelector("slot");
+    this.slots.addEventListener("slotchange", () => {
+      this.elements = this.querySelectorAll("c-checkbox");
+      this.value = this.defaultvalue;
+      this.elements.forEach((el) => {
+        el.addEventListener("change", () => {
+          this.checkValidity();
+          this.dispatchEvent(
+            new CustomEvent("change", {
+              detail: {
+                value: this.value,
+              },
             })
-            this.init = true;
-        })
-    }
+          );
+        });
+      });
+      this.init = true;
+    });
+  }
 
-    attributeChangedCallback (name, oldValue, newValue) {
-        if( name == 'disabled' && this.tip){
-            if(newValue!==null){
-                this.tip.setAttribute('tabindex',-1);
-            }else{
-                this.tip.removeAttribute('tabindex');
-            }
-        }
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name == "disabled" && this.tip) {
+      if (newValue !== null) {
+        this.tip.setAttribute("tabindex", -1);
+      } else {
+        this.tip.removeAttribute("tabindex");
+      }
     }
+  }
 }
 
-if(!customElements.get('c-checkbox-group')){
-    customElements.define('c-checkbox-group', CCheckboxGroup);
+if (!customElements.get("c-checkbox-group")) {
+  customElements.define("c-checkbox-group", CCheckboxGroup);
 }

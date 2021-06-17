@@ -1,39 +1,45 @@
-import './c-button.js';
-import './c-popover.js';
+import "./c-button.js";
+import "./c-popover.js";
 
 const toDate = (d) => {
-    const date = new Date(d);
-    const year = date.getFullYear();
-    const month = date.getMonth()+1;
-    const day = date.getDate();
-    return [year,month,day];
-}
+  const date = new Date(d);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return [year, month, day];
+};
 
-const parseDate = (date,type="date") => {
-    const [year,month,day] = toDate(date);
-    let value = '';
-    switch (type) {
-        case 'date':
-            value = year + '-' + (month+'').padStart(2,0) + '-' + (day+'').padStart(2,0);
-            break;
-        case 'month':
-            value = year + '-' + (month+'').padStart(2,0);
-            break;
-        default:
-            value = year + '';
-            break;
-    }
-    return value;
-}
+const parseDate = (date, type = "date") => {
+  const [year, month, day] = toDate(date);
+  let value = "";
+  switch (type) {
+    case "date":
+      value =
+        year +
+        "-" +
+        (month + "").padStart(2, 0) +
+        "-" +
+        (day + "").padStart(2, 0);
+      break;
+    case "month":
+      value = year + "-" + (month + "").padStart(2, 0);
+      break;
+    default:
+      value = year + "";
+      break;
+  }
+  return value;
+};
 
 class CDatePane extends HTMLElement {
+  static get observedAttributes() {
+    return ["min", "max", "type"];
+  }
 
-    static get observedAttributes() { return ['min','max','type'] }
-
-    constructor() {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.innerHTML = `
+  constructor() {
+    super();
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.innerHTML = `
         <style>
             :host{
                 display: block;
@@ -275,509 +281,604 @@ class CDatePane extends HTMLElement {
                         <span class="date-week-item">六</span>
                     </div>
                     <div class="date-body">
-                        ${
-                            Array.from({length:42},el=>'<button class="date-button date-day-item" type="flat"></button>').join('')
-                        }
+                        ${Array.from(
+                          { length: 42 },
+                          (el) =>
+                            '<button class="date-button date-day-item" type="flat"></button>'
+                        ).join("")}
                     </div>
                 </div>
                 <div class="date-mode date-month">
-                    ${
-                        this.getMonths().map((el,i)=>'<button class="date-button date-month-item" type="flat" data-month="'+((i+1).toString().padStart(2,0))+'">'+el+'</button>').join('')
-                    }
+                    ${this.getMonths()
+                      .map(
+                        (el, i) =>
+                          '<button class="date-button date-month-item" type="flat" data-month="' +
+                          (i + 1).toString().padStart(2, 0) +
+                          '">' +
+                          el +
+                          "</button>"
+                      )
+                      .join("")}
                 </div>
                 <div class="date-mode date-year">
-                    ${
-                        Array.from({length:20},el=>'<button class="date-button date-year-item" type="flat"></button>').join('')
-                    }
+                    ${Array.from(
+                      { length: 20 },
+                      (el) =>
+                        '<button class="date-button date-year-item" type="flat"></button>'
+                    ).join("")}
                 </div>
             </div>
         </div>
-        `
-    }
+        `;
+  }
 
-    get defaultvalue() {
-        return this.getAttribute('defaultvalue')||new Date;
-    }
+  get defaultvalue() {
+    return this.getAttribute("defaultvalue") || new Date();
+  }
 
-    get range() {
-        return this.getAttribute('range');
-    }
+  get range() {
+    return this.getAttribute("range");
+  }
 
-    get min() {
-        const min = this.getAttribute('min');
-        const d = [0,1,1];
-        d.default = true;
-        return min?toDate(min):d;
-    }
+  get min() {
+    const min = this.getAttribute("min");
+    const d = [0, 1, 1];
+    d.default = true;
+    return min ? toDate(min) : d;
+  }
 
-    get max() {
-        const max = this.getAttribute('max');
-        const d = [9999,12,31];
-        d.default = true;
-        return max?toDate(max):d;
-    }
+  get max() {
+    const max = this.getAttribute("max");
+    const d = [9999, 12, 31];
+    d.default = true;
+    return max ? toDate(max) : d;
+  }
 
-    get minormax(){
-        return !this.min.default || !this.max.default;
-    }
+  get minormax() {
+    return !this.min.default || !this.max.default;
+  }
 
-    set defaultvalue(value){
-        this.setAttribute('defaultvalue', value);
-    }
+  set defaultvalue(value) {
+    this.setAttribute("defaultvalue", value);
+  }
 
-    getDays(year,month){
-        const lastdays = new Date(year,month-1,0).getDate();
-        const days = new Date(year,month,0).getDate();
-        const week = new Date(year,month-1,1).getDay();
-        const prev = Array.from({length:week},(el,i)=>(month==1?year-1:year)+'-'+(month==1?12:month-1)+'-'+(lastdays+i-week+1));
-        const current = Array.from({length:days},(el,i)=>year+'-'+month+'-'+(i+1));
-        const next = Array.from({length:42 - days - week},(el,i)=>(month==12?year+1:year)+'-'+(month==12?1:month+1)+'-'+(i+1));
-        return [...prev,...current,...next];
-    }
+  getDays(year, month) {
+    const lastdays = new Date(year, month - 1, 0).getDate();
+    const days = new Date(year, month, 0).getDate();
+    const week = new Date(year, month - 1, 1).getDay();
+    const prev = Array.from(
+      { length: week },
+      (el, i) =>
+        (month == 1 ? year - 1 : year) +
+        "-" +
+        (month == 1 ? 12 : month - 1) +
+        "-" +
+        (lastdays + i - week + 1)
+    );
+    const current = Array.from(
+      { length: days },
+      (el, i) => year + "-" + month + "-" + (i + 1)
+    );
+    const next = Array.from(
+      { length: 42 - days - week },
+      (el, i) =>
+        (month == 12 ? year + 1 : year) +
+        "-" +
+        (month == 12 ? 1 : month + 1) +
+        "-" +
+        (i + 1)
+    );
+    return [...prev, ...current, ...next];
+  }
 
-    getMonths(){
-        return ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月']
-    }
+  getMonths() {
+    return [
+      "一月",
+      "二月",
+      "三月",
+      "四月",
+      "五月",
+      "六月",
+      "七月",
+      "八月",
+      "九月",
+      "十月",
+      "十一月",
+      "十二月",
+    ];
+  }
 
-    getYears(year){
-        const start = parseInt(year/20)*20;
-        return Array.from({length:20},(el,i)=>start+i);
-    }
+  getYears(year) {
+    const start = parseInt(year / 20) * 20;
+    return Array.from({ length: 20 }, (el, i) => start + i);
+  }
 
-    toDay(year,month,day){
-        const len = new Date(year,month+1,0).getDate();
-        day = day>len?len:day;
-        return [year,month,day];
-    }
+  toDay(year, month, day) {
+    const len = new Date(year, month + 1, 0).getDate();
+    day = day > len ? len : day;
+    return [year, month, day];
+  }
 
-    select(value){
-        this.dispatchEvent(new CustomEvent('select', {
+  select(value) {
+    this.dispatchEvent(
+      new CustomEvent("select", {
+        detail: {
+          value: value,
+          date: this.date,
+        },
+      })
+    );
+  }
+
+  render(date = this.$value) {
+    //console.log('render')
+    this.$value = date;
+    const [year, month, day] = toDate(date);
+    const [n_year, n_month, n_day] = toDate(new Date());
+    const left = this.range ? this.previousElementSibling : null;
+    const right = this.range ? this.nextElementSibling : null;
+    switch (this.mode) {
+      case "date":
+        const days = this.getDays(year, month);
+        this.days.forEach((el, i) => {
+          const [_year, _month, _day] = days[i].split("-");
+          el.dataset.date =
+            _year +
+            "-" +
+            _month.toString().padStart(2, 0) +
+            "-" +
+            _day.toString().padStart(2, 0);
+          el.dataset.year = _year;
+          el.dataset.month = _month.toString().padStart(2, 0);
+          el.dataset.day = _day.toString().padStart(2, 0);
+          el.textContent = _day;
+          if (n_year + "-" + n_month + "-" + n_day == days[i]) {
+            el.setAttribute("now", "");
+          } else {
+            el.removeAttribute("now");
+          }
+          if (_month != month) {
+            el.setAttribute("other", "");
+          } else {
+            el.removeAttribute("other");
+          }
+          if (this.minormax) {
+            el.disabled =
+              el.dataset.date < parseDate(this.min) ||
+              el.dataset.date > parseDate(this.max);
+          } else {
+            el.disabled = false;
+          }
+          if (this.range) {
+            if (
+              el.dataset.date > parseDate(this.rangedate[0]) &&
+              el.dataset.date < parseDate(this.rangedate[1])
+            ) {
+              el.setAttribute("select", "");
+            } else {
+              el.removeAttribute("select");
+            }
+            if (el.dataset.date == parseDate(this.rangedate[0])) {
+              el.setAttribute("selectstart", "");
+            } else {
+              el.removeAttribute("selectstart");
+            }
+            if (el.dataset.date == parseDate(this.rangedate[1])) {
+              el.setAttribute("selectend", "");
+            } else {
+              el.removeAttribute("selectend");
+            }
+            const disabled =
+              (this.range === "left" &&
+                right &&
+                parseDate(el.dataset.date, "month") >
+                  parseDate(right.value, "month")) ||
+              (this.range === "right" &&
+                left &&
+                parseDate(el.dataset.date, "month") <
+                  parseDate(left.value, "month"));
+            disabled && (el.disabled = true);
+          } else {
+            if (year + "-" + month + "-" + day == days[i]) {
+              el.setAttribute("current", "");
+            } else {
+              el.removeAttribute("current");
+            }
+          }
+        });
+        this.switch.textContent =
+          year + "年" + (month + "").padStart(2, 0) + "月";
+        this.switch.disabled = false;
+        if (this.minormax) {
+          this.prev.disabled =
+            parseDate(this.min, "month") >= parseDate(date, "month");
+          this.next.disabled =
+            parseDate(this.max, "month") <= parseDate(date, "month");
+        } else {
+          this.prev.disabled = false;
+          this.next.disabled = false;
+        }
+
+        if (this.range === "left") {
+          const disabled =
+            parseDate(date, "month") >= parseDate(right.value, "month");
+          disabled && (this.next.disabled = true);
+        }
+        if (this.range === "right") {
+          const disabled =
+            parseDate(date, "month") <= parseDate(left.value, "month");
+          disabled && (this.prev.disabled = true);
+        }
+        break;
+      case "month":
+        this.months.forEach((el, i) => {
+          el.dataset.date = year + "-" + el.dataset.month;
+          el.dataset.year = year;
+          if (n_year + "-" + n_month == year + "-" + Number(el.dataset.month)) {
+            el.setAttribute("now", "");
+          } else {
+            el.removeAttribute("now");
+          }
+          if (this.minormax) {
+            el.disabled =
+              el.dataset.date < parseDate(this.min, "month") ||
+              el.dataset.date > parseDate(this.max, "month");
+          } else {
+            el.disabled = false;
+          }
+          if (this.range) {
+            if (
+              el.dataset.date > parseDate(this.rangedate[0], "month") &&
+              el.dataset.date < parseDate(this.rangedate[1], "month")
+            ) {
+              el.setAttribute("select", "");
+            } else {
+              el.removeAttribute("select");
+            }
+            if (el.dataset.date == parseDate(this.rangedate[0], "month")) {
+              el.setAttribute("selectstart", "");
+            } else {
+              el.removeAttribute("selectstart");
+            }
+            if (el.dataset.date == parseDate(this.rangedate[1], "month")) {
+              el.setAttribute("selectend", "");
+            } else {
+              el.removeAttribute("selectend");
+            }
+            if (this.type == "date") {
+              const disabled =
+                (this.range === "left" &&
+                  parseDate(el.dataset.date, "month") >
+                    parseDate(right.value, "month")) ||
+                (this.range === "right" &&
+                  parseDate(el.dataset.date, "month") <
+                    parseDate(left.value, "month"));
+              disabled && (el.disabled = true);
+            }
+          } else {
+            if (el.dataset.month == month) {
+              el.setAttribute("current", "");
+            } else {
+              el.removeAttribute("current");
+            }
+          }
+        });
+        this.switch.textContent = year + "年";
+        this.switch.disabled = false;
+        if (this.minormax) {
+          this.prev.disabled = this.min[0] >= year;
+          this.next.disabled = this.max[0] <= year;
+        } else {
+          this.prev.disabled = false;
+          this.next.disabled = false;
+        }
+        if (this.range === "left") {
+          const right = this.nextElementSibling;
+          const disabled = year >= parseDate(right.value, "year");
+          disabled && (this.next.disabled = true);
+        }
+        if (this.range === "right") {
+          const left = this.previousElementSibling;
+          const disabled = year <= parseDate(left.value, "year");
+          disabled && (this.prev.disabled = true);
+        }
+        break;
+      case "year":
+        const years = this.getYears(year);
+        this.years.forEach((el, i) => {
+          el.dataset.year = years[i];
+          el.dataset.date = years[i];
+          el.textContent = years[i];
+          if (el.dataset.year == n_year) {
+            el.setAttribute("now", "");
+          } else {
+            el.removeAttribute("now");
+          }
+          if (this.minormax) {
+            el.disabled =
+              el.dataset.date < this.min[0] || el.dataset.date > this.max[0];
+          } else {
+            el.disabled = false;
+          }
+          if (this.range) {
+            if (
+              el.dataset.date > parseDate(this.rangedate[0], "year") &&
+              el.dataset.date < parseDate(this.rangedate[1], "year")
+            ) {
+              el.setAttribute("select", "");
+            } else {
+              el.removeAttribute("select");
+            }
+            if (el.dataset.date == parseDate(this.rangedate[0], "year")) {
+              el.setAttribute("selectstart", "");
+            } else {
+              el.removeAttribute("selectstart");
+            }
+            if (el.dataset.date == parseDate(this.rangedate[1], "year")) {
+              el.setAttribute("selectend", "");
+            } else {
+              el.removeAttribute("selectend");
+            }
+            if (this.type !== "year") {
+              const disabled =
+                (this.range === "left" &&
+                  el.dataset.year > parseDate(right.value, "year")) ||
+                (this.range === "right" &&
+                  el.dataset.year < parseDate(left.value, "year"));
+              disabled && (el.disabled = true);
+            }
+          } else {
+            if (el.dataset.year == year) {
+              el.setAttribute("current", "");
+            } else {
+              el.removeAttribute("current");
+            }
+          }
+        });
+        this.switch.textContent = years[0] + "年 - " + (years[0] + 19) + "年";
+        this.switch.disabled = true;
+        if (this.minormax) {
+          this.prev.disabled = this.min[0] >= this.years[0].dataset.year;
+          this.next.disabled = this.max[0] <= this.years[19].dataset.year;
+        } else {
+          this.prev.disabled = false;
+          this.next.disabled = false;
+        }
+        if (this.range === "left" && this.init) {
+          const right = this.nextElementSibling;
+          const disabled =
+            this.years[19].dataset.year >= right.years[0].dataset.year;
+          disabled && (this.next.disabled = true);
+        }
+        if (this.range === "right" && this.init) {
+          const left = this.previousElementSibling;
+          const disabled =
+            this.years[0].dataset.year <= left.years[19].dataset.year;
+          disabled && (this.prev.disabled = true);
+        }
+      default:
+        break;
+    }
+  }
+
+  connectedCallback() {
+    this.datePane = this.shadowRoot.getElementById("date-pane");
+    this.prev = this.datePane.querySelector(".prev");
+    this.next = this.datePane.querySelector(".next");
+    this.switch = this.datePane.querySelector(".date-switch");
+    this.dateBody = this.datePane.querySelector(".date-body");
+    this.dateCon = this.datePane.querySelector(".date-con");
+    this.dateMonth = this.datePane.querySelector(".date-month");
+    this.dateYear = this.datePane.querySelector(".date-year");
+    this.days = this.dateBody.querySelectorAll("button");
+    this.months = this.dateMonth.querySelectorAll("button");
+    this.years = this.dateYear.querySelectorAll("button");
+    this.mode = this.type;
+    this.value = this.defaultvalue;
+    this.prev.addEventListener("click", () => {
+      let [year, month, day] = toDate(this.$value);
+      this.nativeclick = true;
+      switch (this.mode) {
+        case "date":
+          this.value = new Date(...this.toDay(year, month - 2, day));
+          break;
+        case "month":
+          this.value = new Date(...this.toDay(year - 1, month - 1, day));
+          break;
+        case "year":
+          this.value = new Date(...this.toDay(year - 20, month - 1, day));
+        default:
+          break;
+      }
+    });
+    this.next.addEventListener("click", () => {
+      let [year, month, day] = toDate(this.$value);
+      this.nativeclick = true;
+      switch (this.mode) {
+        case "date":
+          this.value = new Date(...this.toDay(year, month, day));
+          break;
+        case "month":
+          this.value = new Date(...this.toDay(year + 1, month - 1, day));
+          break;
+        case "year":
+          this.value = new Date(...this.toDay(year + 20, month - 1, day));
+        default:
+          break;
+      }
+    });
+    this.switch.addEventListener("click", () => {
+      switch (this.mode) {
+        case "date":
+          this.mode = "month";
+          this.render();
+          break;
+        case "month":
+          this.mode = "year";
+          this.render();
+          break;
+        default:
+          break;
+      }
+    });
+    this.dateBody.addEventListener("click", (ev) => {
+      const item = ev.target.closest("button");
+      this.nativeclick = true;
+      if (item) {
+        this.select(item.dataset.date);
+        this.value = item.dataset.date;
+      }
+    });
+    this.dateMonth.addEventListener("click", (ev) => {
+      const item = ev.target.closest("button");
+      let [year, month, day] = toDate(this.$value);
+      this.nativeclick = true;
+      if (item) {
+        if (this.type == "date") {
+          const len = new Date(year, item.dataset.month, 0).getDate();
+          this.mode = "date";
+          this.value = item.dataset.date + "-" + (day > len ? len : day);
+        } else {
+          this.select(item.dataset.date);
+          this.value = item.dataset.date;
+        }
+      }
+    });
+    this.dateYear.addEventListener("click", (ev) => {
+      const item = ev.target.closest("button");
+      let [year, month, day] = toDate(this.$value);
+      this.nativeclick = true;
+      if (item) {
+        switch (this.type) {
+          case "date":
+            const len = new Date(item.dataset.year, month, 0).getDate();
+            this.mode = "month";
+            this.value =
+              item.dataset.date + "-" + month + "-" + (day > len ? len : day);
+            break;
+          case "month":
+            this.mode = "month";
+            this.value = item.dataset.date + "-" + month;
+            break;
+          default:
+            this.select(item.dataset.date + "");
+            this.value = item.dataset.date + "";
+            break;
+        }
+      }
+    });
+    this.init = true;
+  }
+
+  get value() {
+    return parseDate(this.$value, this.type);
+  }
+
+  get date() {
+    return new Date(this.$value);
+  }
+
+  get type() {
+    return this.getAttribute("type") || "date";
+  }
+
+  get rangedate() {
+    return this.$rangedate || [new Date(), new Date()];
+  }
+
+  set rangedate(value) {
+    this.$rangedate = value;
+    //this.render();
+  }
+
+  set min(value) {
+    this.setAttribute("min", value);
+  }
+
+  set max(value) {
+    this.setAttribute("max", value);
+  }
+
+  get mode() {
+    return this.$mode || this.type;
+  }
+
+  set type(value) {
+    this.setAttribute("type", value);
+  }
+
+  set mode(value) {
+    this.$mode = value;
+    this.dateCon.dataset.type = value;
+  }
+
+  set value(value) {
+    //'2019-1-1'
+    if (this.minormax) {
+      value = Math.max(
+        Math.min(new Date(value), new Date(this.max)),
+        new Date(this.min)
+      );
+    }
+    this.render(value);
+    if (this.init) {
+      if (this.range === "left") {
+        const right = this.nextElementSibling;
+        right.render();
+      }
+      if (this.range === "right") {
+        const left = this.previousElementSibling;
+        left.render();
+      }
+      if (this.nativeclick) {
+        this.nativeclick = false;
+        this.dispatchEvent(
+          new CustomEvent("change", {
             detail: {
-                value: value,
-                date: this.date,
-            }
-        }));
+              value: value,
+              date: this.date,
+            },
+          })
+        );
+      }
     }
+  }
 
-    render(date=this.$value){
-        //console.log('render')
-        this.$value = date;
-        const [year,month,day] = toDate(date);
-        const [n_year,n_month,n_day] = toDate(new Date);
-        const left = this.range?this.previousElementSibling:null;
-        const right = this.range?this.nextElementSibling:null;
-        switch (this.mode) {
-            case 'date':
-                const days = this.getDays(year,month);
-                this.days.forEach((el,i)=>{
-                    const [_year,_month,_day] = days[i].split('-');
-                    el.dataset.date = _year+'-'+_month.toString().padStart(2,0)+'-'+_day.toString().padStart(2,0);
-                    el.dataset.year = _year;
-                    el.dataset.month = _month.toString().padStart(2,0);
-                    el.dataset.day = _day.toString().padStart(2,0);
-                    el.textContent = _day;
-                    if(n_year+'-'+n_month+'-'+n_day==days[i]){
-                        el.setAttribute("now","");
-                    }else{
-                        el.removeAttribute("now");
-                    }
-                    if(_month!=month){
-                        el.setAttribute("other","");
-                    }else{
-                        el.removeAttribute("other");
-                    }
-                    if(this.minormax){
-                        el.disabled = el.dataset.date<parseDate(this.min) || el.dataset.date>parseDate(this.max);
-                    }else{
-                        el.disabled = false;
-                    }
-                    if(this.range){
-                        if( el.dataset.date>parseDate(this.rangedate[0]) && el.dataset.date<parseDate(this.rangedate[1]) ){
-                            el.setAttribute('select','');
-                        }else{
-                            el.removeAttribute('select');
-                        }
-                        if( el.dataset.date == parseDate(this.rangedate[0])){
-                            el.setAttribute('selectstart','');
-                        }else{
-                            el.removeAttribute('selectstart');
-                        }
-                        if( el.dataset.date == parseDate(this.rangedate[1])){
-                            el.setAttribute('selectend','');
-                        }else{
-                            el.removeAttribute('selectend');
-                        }
-                        const disabled = this.range === 'left' && right && parseDate(el.dataset.date,'month') > parseDate(right.value,'month') || this.range === 'right' && left && parseDate(el.dataset.date,'month') < parseDate(left.value,'month');
-                        disabled && ( el.disabled = true);
-                    }else{
-                        if(year+'-'+month+'-'+day==days[i]){
-                            el.setAttribute("current","");
-                        }else{
-                            el.removeAttribute("current");
-                        }
-                    }
-                })
-                this.switch.textContent = year + '年' + (month+'').padStart(2,0) + '月';
-                this.switch.disabled = false;
-                if(this.minormax){
-                    this.prev.disabled = parseDate(this.min,'month') >= parseDate(date,'month');
-                    this.next.disabled = parseDate(this.max,'month') <= parseDate(date,'month');
-                }else{
-                    this.prev.disabled = false;
-                    this.next.disabled = false;
-                }
-                
-                if(this.range === 'left'){
-                    const disabled = parseDate(date,'month') >= parseDate(right.value,'month');
-                    disabled && ( this.next.disabled = true);
-                }
-                if(this.range === 'right'){
-                    const disabled = parseDate(date,'month') <= parseDate(left.value,'month');
-                    disabled && ( this.prev.disabled = true);
-                }
-                break;
-            case 'month':
-                this.months.forEach((el,i)=>{
-                    el.dataset.date = year + '-' + el.dataset.month;
-                    el.dataset.year = year;
-                    if(n_year+'-'+(n_month) == year + '-' + Number(el.dataset.month)){
-                        el.setAttribute("now","");
-                    }else{
-                        el.removeAttribute("now");
-                    }
-                    if(this.minormax){
-                        el.disabled = el.dataset.date<parseDate(this.min,'month') || el.dataset.date>parseDate(this.max,'month');
-                    }else{
-                        el.disabled = false;
-                    }
-                    if(this.range){
-                        if( el.dataset.date>parseDate(this.rangedate[0],'month') && el.dataset.date<parseDate(this.rangedate[1],'month')){
-                            el.setAttribute('select','');
-                        }else{
-                            el.removeAttribute('select');
-                        }
-                        if( el.dataset.date == parseDate(this.rangedate[0],'month')){
-                            el.setAttribute('selectstart','');
-                        }else{
-                            el.removeAttribute('selectstart');
-                        }
-                        if( el.dataset.date == parseDate(this.rangedate[1],'month')){
-                            el.setAttribute('selectend','');
-                        }else{
-                            el.removeAttribute('selectend');
-                        }
-                        if(this.type=='date'){
-                            const disabled = this.range === 'left'&& parseDate(el.dataset.date,'month') > parseDate(right.value,'month') || this.range === 'right' && parseDate(el.dataset.date,'month') < parseDate(left.value,'month');
-                            disabled && ( el.disabled = true);
-                        }
-                    }else{
-                        if(el.dataset.month == month){
-                            el.setAttribute("current","");
-                        }else{
-                            el.removeAttribute("current");
-                        }
-                    }
-                })
-                this.switch.textContent = year + '年';
-                this.switch.disabled = false;
-                if(this.minormax){
-                    this.prev.disabled = this.min[0] >= year;
-                    this.next.disabled = this.max[0] <= year;
-                }else{
-                    this.prev.disabled = false;
-                    this.next.disabled = false;
-                }
-                if(this.range === 'left'){
-                    const right = this.nextElementSibling;
-                    const disabled = year >= parseDate(right.value,'year');
-                    disabled && ( this.next.disabled = true);
-                }
-                if(this.range === 'right'){
-                    const left = this.previousElementSibling;
-                    const disabled = year <= parseDate(left.value,'year');
-                    disabled && ( this.prev.disabled = true);
-                }
-                break;
-            case 'year':
-                const years = this.getYears(year);
-                this.years.forEach((el,i)=>{
-                    el.dataset.year = years[i];
-                    el.dataset.date = years[i];
-                    el.textContent = years[i];
-                    if(el.dataset.year == n_year){
-                        el.setAttribute("now","");
-                    }else{
-                        el.removeAttribute("now");
-                    }
-                    if(this.minormax){
-                        el.disabled = el.dataset.date<this.min[0] || el.dataset.date>this.max[0];
-                    }else{
-                        el.disabled = false;
-                    }
-                    if(this.range){
-                        if( el.dataset.date>parseDate(this.rangedate[0],'year') && el.dataset.date<parseDate(this.rangedate[1],'year')){
-                            el.setAttribute('select','');
-                        }else{
-                            el.removeAttribute('select');
-                        }
-                        if( el.dataset.date == parseDate(this.rangedate[0],'year')){
-                            el.setAttribute('selectstart','');
-                        }else{
-                            el.removeAttribute('selectstart');
-                        }
-                        if( el.dataset.date == parseDate(this.rangedate[1],'year')){
-                            el.setAttribute('selectend','');
-                        }else{
-                            el.removeAttribute('selectend');
-                        }
-                        if(this.type!=='year'){
-                            const disabled = this.range === 'left'&& el.dataset.year > parseDate(right.value,'year') || this.range === 'right' && el.dataset.year < parseDate(left.value,'year');
-                            disabled && ( el.disabled = true);
-                        }
-                    }else{
-                        if(el.dataset.year == year){
-                            el.setAttribute("current","");
-                        }else{
-                            el.removeAttribute("current");
-                        }
-                    }
-                })
-                this.switch.textContent = years[0] + '年 - '+ (years[0]+19) + '年';
-                this.switch.disabled = true;
-                if(this.minormax){
-                    this.prev.disabled = this.min[0] >= this.years[0].dataset.year;
-                    this.next.disabled = this.max[0] <= this.years[19].dataset.year;
-                }else{
-                    this.prev.disabled = false;
-                    this.next.disabled = false;
-                }
-                if(this.range === 'left' && this.init){
-                    const right = this.nextElementSibling;
-                    const disabled = this.years[19].dataset.year >= right.years[0].dataset.year;
-                    disabled && ( this.next.disabled = true);
-                }
-                if(this.range === 'right' && this.init){
-                    const left = this.previousElementSibling;
-                    const disabled = this.years[0].dataset.year <= left.years[19].dataset.year;
-                    disabled && ( this.prev.disabled = true);
-                }
-            default:
-                break;
-        }
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (!this.init) {
+      return;
     }
-
-    connectedCallback() {
-        this.datePane = this.shadowRoot.getElementById('date-pane');
-        this.prev = this.datePane.querySelector('.prev');
-        this.next = this.datePane.querySelector('.next');
-        this.switch = this.datePane.querySelector('.date-switch');
-        this.dateBody = this.datePane.querySelector('.date-body');
-        this.dateCon = this.datePane.querySelector('.date-con');
-        this.dateMonth = this.datePane.querySelector('.date-month');
-        this.dateYear = this.datePane.querySelector('.date-year');
-        this.days = this.dateBody.querySelectorAll('button');
-        this.months = this.dateMonth.querySelectorAll('button');
-        this.years = this.dateYear.querySelectorAll('button');
-        this.mode = this.type;
-        this.value = this.defaultvalue;
-        this.prev.addEventListener('click',()=>{
-            let [year,month,day] = toDate(this.$value);
-            this.nativeclick = true;
-            switch (this.mode) {
-                case 'date':
-                    this.value = new Date(...this.toDay(year,month-2,day));
-                    break;
-                case 'month':
-                    this.value = new Date(...this.toDay(year-1,month-1,day));
-                    break;
-                case 'year':
-                    this.value = new Date(...this.toDay(year-20,month-1,day));
-                default:
-                    break;
-            }
-            
-        })
-        this.next.addEventListener('click',()=>{
-            let [year,month,day] = toDate(this.$value);
-            this.nativeclick = true;
-            switch (this.mode) {
-                case 'date':
-                    this.value = new Date(...this.toDay(year,month,day));
-                    break;
-                case 'month':
-                    this.value = new Date(...this.toDay(year+1,month-1,day));
-                    break;
-                case 'year':
-                    this.value = new Date(...this.toDay(year+20,month-1,day));
-                default:
-                    break;
-            }
-        })
-        this.switch.addEventListener('click',()=>{
-            switch (this.mode) {
-                case 'date':
-                    this.mode = 'month';
-                    this.render();
-                    break;
-                case 'month':
-                    this.mode = 'year';
-                    this.render();
-                    break;
-                default:
-                    break;
-            }
-        })
-        this.dateBody.addEventListener('click',(ev)=>{
-            const item = ev.target.closest('button');
-            this.nativeclick = true;
-            if(item){
-                this.select(item.dataset.date);
-                this.value = item.dataset.date;
-            }
-        })
-        this.dateMonth.addEventListener('click',(ev)=>{
-            const item = ev.target.closest('button');
-            let [year,month,day] = toDate(this.$value);
-            this.nativeclick = true;
-            if(item){
-                if(this.type == 'date'){
-                    const len = new Date(year,item.dataset.month,0).getDate();
-                    this.mode = 'date';
-                    this.value = item.dataset.date+'-'+(day>len?len:day);
-                }else{
-                    this.select(item.dataset.date);
-                    this.value = item.dataset.date;
-                }
-            }
-        })
-        this.dateYear.addEventListener('click',(ev)=>{
-            const item = ev.target.closest('button');
-            let [year,month,day] = toDate(this.$value);
-            this.nativeclick = true;
-            if(item){
-                switch (this.type) {
-                    case 'date':
-                        const len = new Date(item.dataset.year,month,0).getDate();
-                        this.mode = 'month';
-                        this.value = item.dataset.date+'-'+month+'-'+(day>len?len:day);
-                        break;
-                    case 'month':
-                        this.mode = 'month';
-                        this.value = item.dataset.date+'-'+month;
-                        break;
-                    default:
-                        this.select(item.dataset.date+'');
-                        this.value = item.dataset.date+'';
-                        break;
-                }
-            }
-        })
-        this.init = true;
+    if (name == "min" && this.datePane) {
+      if (newValue !== null) {
+        this.render();
+      }
     }
-
-    get value() {
-        return parseDate(this.$value,this.type);
+    if (name == "max" && this.datePane) {
+      if (newValue !== null) {
+        this.render();
+      }
     }
-
-    get date() {
-        return new Date(this.$value);
+    if (name == "type" && this.datePane) {
+      if (newValue !== null) {
+        this.render();
+      }
     }
-
-    get type(){
-        return this.getAttribute('type')||'date';
-    }
-    
-    get rangedate(){
-        return this.$rangedate||[new Date,new Date];
-    }
-
-    set rangedate(value){
-        this.$rangedate = value;
-        //this.render();
-    }
-
-    set min(value){
-        this.setAttribute('min', value);
-    }
-
-    set max(value){
-        this.setAttribute('max', value);
-    }
-
-    get mode(){
-        return this.$mode||this.type;
-    }
-
-    set type(value){
-        this.setAttribute('type', value);
-    }
-
-    set mode(value){
-        this.$mode = value;
-        this.dateCon.dataset.type= value;
-    }
-
-    set value(value) {
-        //'2019-1-1'
-        if(this.minormax){
-            value = Math.max(Math.min(new Date(value),new Date(this.max)),new Date(this.min));
-        }
-        this.render(value);
-        if(this.init){
-            if(this.range === 'left'){
-                const right = this.nextElementSibling;
-                right.render();
-            }
-            if(this.range === 'right'){
-                const left = this.previousElementSibling;
-                left.render();
-            }
-            if(this.nativeclick){
-                this.nativeclick = false;
-                this.dispatchEvent(new CustomEvent('change', {
-                    detail: {
-                        value: value,
-                        date: this.date,
-                    }
-                }));
-            }
-        }
-    }
-
-    attributeChangedCallback (name, oldValue, newValue) {
-        if(!this.init){
-            return
-        }
-        if( name == 'min' && this.datePane){
-            if(newValue!==null){
-                this.render();
-            }
-        }
-        if( name == 'max' && this.datePane){
-            if(newValue!==null){
-                this.render();
-            }
-        }
-        if( name == 'type' && this.datePane){
-            if(newValue!==null){
-                this.render();
-            }
-        }
-    }
-
+  }
 }
 
-if (!customElements.get('c-date-pane')) {
-    customElements.define('c-date-pane', CDatePane);
+if (!customElements.get("c-date-pane")) {
+  customElements.define("c-date-pane", CDatePane);
 }
 
 class CDateRangePane extends HTMLElement {
-    static get observedAttributes() { return ['min','max','type'] }
+  static get observedAttributes() {
+    return ["min", "max", "type"];
+  }
 
-    constructor() {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.innerHTML = `
+  constructor() {
+    super();
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.innerHTML = `
         <style>
         :host{
             display:inline-flex;
@@ -789,147 +890,149 @@ class CDateRangePane extends HTMLElement {
         </style>
         <c-date-pane id="date-left" range="left"></c-date-pane>
         <c-date-pane id="date-right" range="right"></c-date-pane>
-        `
-    }
+        `;
+  }
 
-    choose(value){
-        if(!this.selected){
-            this.$date[0] = value;
-            this.$date[1] = value;
-        }else{
-            this.$date[1] = value;
-            if(this.$date[0]>this.$date[1]){
-                [this.$date[0],this.$date[1]] = [this.$date[1],this.$date[0]];
-            }
-        }
-        this.render(this.$date,this.selected);
-        this.selected = !this.selected;
+  choose(value) {
+    if (!this.selected) {
+      this.$date[0] = value;
+      this.$date[1] = value;
+    } else {
+      this.$date[1] = value;
+      if (this.$date[0] > this.$date[1]) {
+        [this.$date[0], this.$date[1]] = [this.$date[1], this.$date[0]];
+      }
     }
+    this.render(this.$date, this.selected);
+    this.selected = !this.selected;
+  }
 
-    render(value=this.$value,change){
-        this.date01.rangedate = value;
-        this.date02.rangedate = value;
-        if(change){
-            this.$value = value;
-            this.dispatchEvent(new CustomEvent('change', {
-                detail: {
-                    value: value,
-                    date: this.date,
-                }
-            }));
-        }
-    }
-
-    get defaultvalue() {
-        //2019-1-1~2019-1-2
-        const defaultvalue = this.getAttribute('defaultvalue');
-        return defaultvalue?defaultvalue.split('~'):[new Date,new Date];
-    }
-
-    get value() {
-        return this.$value.map(value=>parseDate(value,this.type));
-    }
-
-    get date(){
-        return this.$value.map(el=>new Date(el));
-    }
-
-    get min() {
-        return this.getAttribute('min');
-    }
-
-    get max() {
-        return this.getAttribute('max');
-    }
-
-    get type(){
-        return this.getAttribute('type')||'date';
-    }
-
-    set type(value){
-        this.setAttribute('type', value);
-    }
-
-    set defaultvalue(value){
-        this.setAttribute('defaultvalue', value.join('~'));
-    }
-
-    set min(value){
-        this.setAttribute('min', value);
-    }
-
-    set max(value){
-        this.setAttribute('max', value);
-    }
-
-    set value(value) {
-        if(parseDate(value[0])>parseDate(value[1])){
-            [value[0],value[1]] = [value[1],value[0]];
-        }
-        this.render(value);
-        this.date02.render(value[1]);
-        this.date01.render(value[0]);
-        this.selected = false;
-    }
-
-    set mode(value){
-        this.date01.mode = value;
-        this.date02.mode = value;
-    }
-
-    connectedCallback() {
-        this.$date = ['',''];
-        this.date01 = this.shadowRoot.getElementById('date-left');
-        this.date02 = this.shadowRoot.getElementById('date-right');
-        this.type = this.type;
-        this.min && (this.min = this.min);
-        this.max && (this.max = this.max);
-        this.value = this.defaultvalue;
-        this.date01.addEventListener('select',(ev)=>{
-            this.choose(ev.detail.value);
+  render(value = this.$value, change) {
+    this.date01.rangedate = value;
+    this.date02.rangedate = value;
+    if (change) {
+      this.$value = value;
+      this.dispatchEvent(
+        new CustomEvent("change", {
+          detail: {
+            value: value,
+            date: this.date,
+          },
         })
-        this.date02.addEventListener('select',(ev)=>{
-            this.choose(ev.detail.value);
-        })
-        this.init = true;
+      );
     }
+  }
 
-    attributeChangedCallback (name, oldValue, newValue) {
-        if( name == 'min' && this.date01){
-            if(newValue!==null){
-                this.date01.min = newValue;
-                this.date02.min = newValue;
-            }
-        }
-        if( name == 'max' && this.date01){
-            if(newValue!==null){
-                this.date01.max = newValue;
-                this.date02.max = newValue;
-            }
-        }
-        if( name == 'type' && this.date01){
-            if(newValue!==null){
-                this.date01.type = newValue;
-                this.date02.type = newValue;
-            }
-        }
+  get defaultvalue() {
+    //2019-1-1~2019-1-2
+    const defaultvalue = this.getAttribute("defaultvalue");
+    return defaultvalue ? defaultvalue.split("~") : [new Date(), new Date()];
+  }
+
+  get value() {
+    return this.$value.map((value) => parseDate(value, this.type));
+  }
+
+  get date() {
+    return this.$value.map((el) => new Date(el));
+  }
+
+  get min() {
+    return this.getAttribute("min");
+  }
+
+  get max() {
+    return this.getAttribute("max");
+  }
+
+  get type() {
+    return this.getAttribute("type") || "date";
+  }
+
+  set type(value) {
+    this.setAttribute("type", value);
+  }
+
+  set defaultvalue(value) {
+    this.setAttribute("defaultvalue", value.join("~"));
+  }
+
+  set min(value) {
+    this.setAttribute("min", value);
+  }
+
+  set max(value) {
+    this.setAttribute("max", value);
+  }
+
+  set value(value) {
+    if (parseDate(value[0]) > parseDate(value[1])) {
+      [value[0], value[1]] = [value[1], value[0]];
     }
-    
+    this.render(value);
+    this.date02.render(value[1]);
+    this.date01.render(value[0]);
+    this.selected = false;
+  }
+
+  set mode(value) {
+    this.date01.mode = value;
+    this.date02.mode = value;
+  }
+
+  connectedCallback() {
+    this.$date = ["", ""];
+    this.date01 = this.shadowRoot.getElementById("date-left");
+    this.date02 = this.shadowRoot.getElementById("date-right");
+    this.type = this.type;
+    this.min && (this.min = this.min);
+    this.max && (this.max = this.max);
+    this.value = this.defaultvalue;
+    this.date01.addEventListener("select", (ev) => {
+      this.choose(ev.detail.value);
+    });
+    this.date02.addEventListener("select", (ev) => {
+      this.choose(ev.detail.value);
+    });
+    this.init = true;
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name == "min" && this.date01) {
+      if (newValue !== null) {
+        this.date01.min = newValue;
+        this.date02.min = newValue;
+      }
+    }
+    if (name == "max" && this.date01) {
+      if (newValue !== null) {
+        this.date01.max = newValue;
+        this.date02.max = newValue;
+      }
+    }
+    if (name == "type" && this.date01) {
+      if (newValue !== null) {
+        this.date01.type = newValue;
+        this.date02.type = newValue;
+      }
+    }
+  }
 }
 
-if (!customElements.get('c-date-range-pane')) {
-    customElements.define('c-date-range-pane', CDateRangePane);
+if (!customElements.get("c-date-range-pane")) {
+  customElements.define("c-date-range-pane", CDateRangePane);
 }
 
 export default class CDatePicker extends HTMLElement {
+  static get observedAttributes() {
+    return ["disabled", "dir", "min", "max", "type"];
+  }
 
-    static get observedAttributes() { return ['disabled','dir','min','max','type'] }
+  constructor() {
+    super();
+    const shadowRoot = this.attachShadow({ mode: "open" });
 
-    constructor() {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-
-        shadowRoot.innerHTML = `
+    shadowRoot.innerHTML = `
         <style>
         :host{
             display:inline-block;
@@ -983,8 +1086,12 @@ export default class CDatePicker extends HTMLElement {
             margin-left: .8em;
         }
         </style>
-        <c-popover class="date-picker" id="popover" ${this.dir? "dir='"+this.dir+"'" : ""}>
-            <c-button id="select" ${this.disabled? "disabled" : ""}><span id="datetxt"></span><svg class="icon" viewBox="0 0 1024 1024"><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32z m-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z" p-id="8054"></path></svg></c-button>
+        <c-popover class="date-picker" id="popover" ${
+          this.dir ? "dir='" + this.dir + "'" : ""
+        }>
+            <c-button id="select" ${
+              this.disabled ? "disabled" : ""
+            }><span id="datetxt"></span><svg class="icon" viewBox="0 0 1024 1024"><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32z m-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z" p-id="8054"></path></svg></c-button>
             <c-popcon id="popcon" class="date-pane">
                 <div class="pop-footer">
                     <c-button autoclose>取 消</c-button>
@@ -992,183 +1099,185 @@ export default class CDatePicker extends HTMLElement {
                 </div>
             </c-popcon>
         </c-popover>
-        `
-    }
+        `;
+  }
 
-    focus() {
-        this.select.focus();
-    }
+  focus() {
+    this.select.focus();
+  }
 
-    connectedCallback() {
-        this.popover = this.shadowRoot.getElementById('popover');
-        this.popcon = this.shadowRoot.getElementById('popcon');
-        this.select = this.shadowRoot.getElementById('select');
-        this.datetxt = this.shadowRoot.getElementById('datetxt');
-        this.btnCancel = this.shadowRoot.getElementById('btn-cancel');
-        this.btnSubmit = this.shadowRoot.getElementById('btn-submit');
-        this.select.addEventListener('click',()=>{
-            if(!this.datePane){
-                if(this.range){
-                    this.datePane = new CDateRangePane();
-                }else{
-                    this.datePane = new CDatePane();
-                }
-                this.min && (this.datePane.min = this.min);
-                this.max && (this.datePane.max = this.max);
-                this.datePane.type = this.type;
-                this.datePane.defaultvalue = this.defaultvalue;
-                this.popcon.prepend(this.datePane);
-            }
-        })
-        this.btnSubmit.addEventListener('click',()=>{
-            this.nativeclick = true;
-            this.value = this.datePane.value;
-        })
-        this.popcon.addEventListener('close',()=>{
-            this.datePane.value = this.value;
-            this.datePane.mode = this.type;
-        })
-        this.value = this.defaultvalue;
-    }
-
-    get min() {
-        return this.getAttribute('min');
-    }
-
-    get max() {
-        return this.getAttribute('max');
-    }
-
-    get range() {
-        return this.getAttribute('range')!==null;
-    }
-
-    get defaultvalue() {
-        const defaultvalue = this.getAttribute('defaultvalue');
-        if(this.range){
-            if(defaultvalue){
-                const arr = defaultvalue.split('~');
-                if(arr[0]>arr[1]){
-                    return [arr[1],arr[0]]
-                }else{
-                    return arr
-                }
-            }else{
-                return [new Date,new Date]
-            }
-        }else{
-            return defaultvalue || new Date;
-        }
-    }
-
-    get value() {
-        if(this.range){
-            return this.$value.map(value=>parseDate(value,this.type));
-        }else{
-            return parseDate(this.$value,this.type);
-        }
-    }
-
-    get date() {
-        if(this.range){
-            return this.$value.map(el=>new Date(el));
-        }else{
-            return new Date(this.$value);
-        }
-    }
-
-    get type() {
-        return this.getAttribute('type')||'date';
-    }
-
-    get disabled() {
-        return this.getAttribute('disabled')!==null;
-    }
-
-    get dir() {
-        return this.getAttribute('dir');
-    }
-
-    set min(value){
-        this.setAttribute('min', value);
-    }
-
-    set max(value){
-        this.setAttribute('max', value);
-    }
-
-    set dir(value){
-        this.setAttribute('dir', value);
-    }
-
-    set type(value){
-        this.setAttribute('type', value);
-    }
-
-    set disabled(value) {
-        if (value === null || value === false) {
-            this.removeAttribute('disabled');
+  connectedCallback() {
+    this.popover = this.shadowRoot.getElementById("popover");
+    this.popcon = this.shadowRoot.getElementById("popcon");
+    this.select = this.shadowRoot.getElementById("select");
+    this.datetxt = this.shadowRoot.getElementById("datetxt");
+    this.btnCancel = this.shadowRoot.getElementById("btn-cancel");
+    this.btnSubmit = this.shadowRoot.getElementById("btn-submit");
+    this.select.addEventListener("click", () => {
+      if (!this.datePane) {
+        if (this.range) {
+          this.datePane = new CDateRangePane();
         } else {
-            this.setAttribute('disabled', '');
+          this.datePane = new CDatePane();
         }
-    }
+        this.min && (this.datePane.min = this.min);
+        this.max && (this.datePane.max = this.max);
+        this.datePane.type = this.type;
+        this.datePane.defaultvalue = this.defaultvalue;
+        this.popcon.prepend(this.datePane);
+      }
+    });
+    this.btnSubmit.addEventListener("click", () => {
+      this.nativeclick = true;
+      this.value = this.datePane.value;
+    });
+    this.popcon.addEventListener("close", () => {
+      this.datePane.value = this.value;
+      this.datePane.mode = this.type;
+    });
+    this.value = this.defaultvalue;
+  }
 
-    set defaultvalue(value){
-        this.setAttribute('defaultvalue', value);
-    }
+  get min() {
+    return this.getAttribute("min");
+  }
 
-    set value(value) {
-        this.$value = value;
-        this.datetxt.textContent = this.range?this.value.join('~'):this.value;
-        
-        if(this.nativeclick){
-            this.nativeclick = false;
-            this.dispatchEvent(new CustomEvent('change', {
-                detail: {
-                    value: this.value,
-                    date: this.date
-                }
-            }));
-        }else{
-            if(this.datePane){
-                this.datePane.value = this.value;
-            }else{
-                this.defaultvalue = this.range?this.value.join('~'):this.value;
-            }
-        }
-    }
+  get max() {
+    return this.getAttribute("max");
+  }
 
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (name == 'disabled' && this.select) {
-            if (newValue != null) {
-                this.select.setAttribute('disabled', 'disabled');
-            } else {
-                this.select.removeAttribute('disabled');
-            }
+  get range() {
+    return this.getAttribute("range") !== null;
+  }
+
+  get defaultvalue() {
+    const defaultvalue = this.getAttribute("defaultvalue");
+    if (this.range) {
+      if (defaultvalue) {
+        const arr = defaultvalue.split("~");
+        if (arr[0] > arr[1]) {
+          return [arr[1], arr[0]];
+        } else {
+          return arr;
         }
-        if (name == 'dir' && this.popover) {
-            if (newValue != null) {
-                this.popover.dir = newValue;
-            }
-        }
-        if( name == 'min' && this.datePane){
-            if(newValue!==null){
-                this.datePane.min = newValue;
-            }
-        }
-        if( name == 'max' && this.datePane){
-            if(newValue!==null){
-                this.datePane.max = newValue;
-            }
-        }
-        if( name == 'type' && this.datePane){
-            if(newValue!==null){
-                this.datePane.type = newValue;
-            }
-        }
+      } else {
+        return [new Date(), new Date()];
+      }
+    } else {
+      return defaultvalue || new Date();
     }
+  }
+
+  get value() {
+    if (this.range) {
+      return this.$value.map((value) => parseDate(value, this.type));
+    } else {
+      return parseDate(this.$value, this.type);
+    }
+  }
+
+  get date() {
+    if (this.range) {
+      return this.$value.map((el) => new Date(el));
+    } else {
+      return new Date(this.$value);
+    }
+  }
+
+  get type() {
+    return this.getAttribute("type") || "date";
+  }
+
+  get disabled() {
+    return this.getAttribute("disabled") !== null;
+  }
+
+  get dir() {
+    return this.getAttribute("dir");
+  }
+
+  set min(value) {
+    this.setAttribute("min", value);
+  }
+
+  set max(value) {
+    this.setAttribute("max", value);
+  }
+
+  set dir(value) {
+    this.setAttribute("dir", value);
+  }
+
+  set type(value) {
+    this.setAttribute("type", value);
+  }
+
+  set disabled(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("disabled");
+    } else {
+      this.setAttribute("disabled", "");
+    }
+  }
+
+  set defaultvalue(value) {
+    this.setAttribute("defaultvalue", value);
+  }
+
+  set value(value) {
+    this.$value = value;
+    this.datetxt.textContent = this.range ? this.value.join("~") : this.value;
+
+    if (this.nativeclick) {
+      this.nativeclick = false;
+      this.dispatchEvent(
+        new CustomEvent("change", {
+          detail: {
+            value: this.value,
+            date: this.date,
+          },
+        })
+      );
+    } else {
+      if (this.datePane) {
+        this.datePane.value = this.value;
+      } else {
+        this.defaultvalue = this.range ? this.value.join("~") : this.value;
+      }
+    }
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name == "disabled" && this.select) {
+      if (newValue != null) {
+        this.select.setAttribute("disabled", "disabled");
+      } else {
+        this.select.removeAttribute("disabled");
+      }
+    }
+    if (name == "dir" && this.popover) {
+      if (newValue != null) {
+        this.popover.dir = newValue;
+      }
+    }
+    if (name == "min" && this.datePane) {
+      if (newValue !== null) {
+        this.datePane.min = newValue;
+      }
+    }
+    if (name == "max" && this.datePane) {
+      if (newValue !== null) {
+        this.datePane.max = newValue;
+      }
+    }
+    if (name == "type" && this.datePane) {
+      if (newValue !== null) {
+        this.datePane.type = newValue;
+      }
+    }
+  }
 }
 
-if (!customElements.get('c-date-picker')) {
-    customElements.define('c-date-picker', CDatePicker);
+if (!customElements.get("c-date-picker")) {
+  customElements.define("c-date-picker", CDatePicker);
 }

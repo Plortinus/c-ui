@@ -1,73 +1,76 @@
-import './c-button.js';
+import "./c-button.js";
 
 class CTabContent extends HTMLElement {
-    static get observedAttributes() { return ["label","key","disabled","icon"]; }
-    constructor() {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.innerHTML = `
+  static get observedAttributes() {
+    return ["label", "key", "disabled", "icon"];
+  }
+  constructor() {
+    super();
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.innerHTML = `
         <slot></slot>
-        `
+        `;
+  }
+
+  get label() {
+    return this.getAttribute("label") || "";
+  }
+
+  get icon() {
+    return this.getAttribute("icon");
+  }
+
+  get key() {
+    return this.getAttribute("key");
+  }
+
+  get disabled() {
+    return this.getAttribute("disabled");
+  }
+
+  set disabled(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("disabled");
+    } else {
+      this.setAttribute("disabled", value);
     }
+  }
 
+  set label(value) {
+    this.setAttribute("label", value);
+  }
 
-    get label() {
-        return this.getAttribute('label')||'';
+  set key(value) {
+    this.setAttribute("key", value);
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (oldValue !== newValue && newValue !== undefined) {
+      if (name === "label") {
+        this.parentNode.updatalabel &&
+          this.parentNode.updatalabel(this.key, newValue);
+      }
+      if (name === "disabled") {
+        this.parentNode.updatadisabled &&
+          this.parentNode.updatadisabled(this.key, newValue);
+      }
     }
-
-    get icon() {
-        return this.getAttribute('icon');
-    }
-
-    get key() {
-        return this.getAttribute('key');
-    }
-
-    get disabled() {
-        return this.getAttribute('disabled');
-    }
-
-    set disabled(value) {
-        if(value===null||value===false){
-            this.removeAttribute('disabled');
-        }else{
-            this.setAttribute('disabled', value);
-        }
-    }
-
-    set label(value) {
-        this.setAttribute('label', value);
-    }
-
-    set key(value) {
-        this.setAttribute('key', value);
-    }
-
-    attributeChangedCallback (name, oldValue, newValue) {
-        if( oldValue!==newValue && newValue!==undefined ){
-            if( name === 'label'){
-                this.parentNode.updatalabel && this.parentNode.updatalabel(this.key,newValue);
-            }
-            if( name === 'disabled'){
-                this.parentNode.updatadisabled && this.parentNode.updatadisabled(this.key,newValue);
-            }
-        }
-    }
-
+  }
 }
 
-if(!customElements.get('c-tab-content')){
-    customElements.define('c-tab-content', CTabContent);
+if (!customElements.get("c-tab-content")) {
+  customElements.define("c-tab-content", CTabContent);
 }
 
 export default class CTab extends HTMLElement {
+  static get observedAttributes() {
+    return ["activekey"];
+  }
 
-    static get observedAttributes() { return ['activekey'] }
-
-    constructor() {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.innerHTML = `
+  constructor() {
+    super();
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.innerHTML = `
         <style>
         :host{
             display:block;
@@ -184,162 +187,171 @@ export default class CTab extends HTMLElement {
                 <div class="tab-content-wrap" id="tab-content"><slot id="slot">NEED CONTENT</slot></div>
             </div>
         </div>
-        `
-    }
+        `;
+  }
 
-    get align() {
-        return this.getAttribute('align')||'start';
-    }
+  get align() {
+    return this.getAttribute("align") || "start";
+  }
 
-    get type() {
-        return this.getAttribute('type')||'flat';
-    }
+  get type() {
+    return this.getAttribute("type") || "flat";
+  }
 
-    get activekey() {
-        return this.getAttribute('activekey');
-    }
+  get activekey() {
+    return this.getAttribute("activekey");
+  }
 
-    set align(value) {
-        this.setAttribute('align', value);
-        this.inittab();
-    }
+  set align(value) {
+    this.setAttribute("align", value);
+    this.inittab();
+  }
 
-    set activekey(value) {
-        this.setAttribute('activekey', value);
-    }
+  set activekey(value) {
+    this.setAttribute("activekey", value);
+  }
 
-    set type(value) {
-        this.setAttribute('type', value);
-    }
+  set type(value) {
+    this.setAttribute("type", value);
+  }
 
-    inittab() {
-        const items = this.nav.querySelectorAll('.nav-item');
-        console.log('items: ', items);
-        Array.from(items).forEach((item,index)=>{
-            this.tabPos[item.dataset.key] = {
-                index:index,
-                width:item.offsetWidth,
-                left:item.offsetLeft,
-                label:item.textContent
-            };
-        })
-        if(this.activekey){
-            this.tabline.style = `width:${this.tabPos[this.activekey].width}px;transform:translateX(${this.tabPos[this.activekey].left}px)`;
+  inittab() {
+    const items = this.nav.querySelectorAll(".nav-item");
+    console.log("items: ", items);
+    Array.from(items).forEach((item, index) => {
+      this.tabPos[item.dataset.key] = {
+        index: index,
+        width: item.offsetWidth,
+        left: item.offsetLeft,
+        label: item.textContent,
+      };
+    });
+    if (this.activekey) {
+      this.tabline.style = `width:${
+        this.tabPos[this.activekey].width
+      }px;transform:translateX(${this.tabPos[this.activekey].left}px)`;
+    }
+  }
+
+  updatalabel(key, label) {
+    const nav = this.nav.querySelector(`.nav-item[data-key='${key}']`);
+    if (nav) {
+      nav.innerHTML = label;
+      this.inittab();
+    }
+  }
+
+  updatadisabled(key, disabled) {
+    const nav = this.nav.querySelector(`.nav-item[data-key='${key}']`);
+    if (nav) {
+      nav.disabled = disabled;
+    }
+  }
+
+  connectedCallback() {
+    this.tabPos = {};
+    this.nav = this.shadowRoot.getElementById("nav");
+    this.tab = this.shadowRoot.getElementById("tab-content");
+    this.tabline = this.shadowRoot.getElementById("tab-line");
+    this.slots = this.shadowRoot.getElementById("slot");
+    this.filter = this.shadowRoot.getElementById("filter");
+    this.slots.addEventListener("slotchange", () => {
+      const slots = this.slots.assignedElements();
+      let html = "";
+      slots.forEach((item, index) => {
+        if (item.tagName === "C-TAB-CONTENT") {
+          if (item.key === null) {
+            item.key = index;
+          }
+          html += `<c-button class="nav-item ${
+            item.key === this.activekey ? "active" : ""
+          }" icon=${item.icon} ${
+            item.disabled !== null ? "disabled" : ""
+          } data-key=${item.key}>${item.label}</c-button>`;
         }
-    }
+      });
+      this.nav.innerHTML = html;
+      this.inittab();
+      if (this.activekey === null) {
+        this.activekey = slots[0].key;
+      } else {
+        this.activekey = this.activekey;
+      }
+      this.init = true;
+    });
+    this.nav.addEventListener("click", (ev) => {
+      const item = ev.target.closest("c-button");
+      if (item) {
+        this.activekey = item.dataset.key;
+      }
+    });
+    this.nav.addEventListener("keydown", (ev) => {
+      switch (ev.keyCode) {
+        case 37: //ArrowLeft
+          ev.preventDefault();
+          this.movein(-1);
+          break;
+        case 39: //ArrowRight
+          ev.preventDefault();
+          this.movein(1);
+          break;
+        default:
+          break;
+      }
+    });
+  }
 
-    updatalabel(key,label) {
-        const nav = this.nav.querySelector(`.nav-item[data-key='${key}']`);
-        if(nav){
-            nav.innerHTML = label;
-            this.inittab();
-        }
+  movein(index) {
+    const cur = this.nav.querySelector(`.nav-item.active`);
+    if (index > 0 && cur.nextElementSibling) {
+      this.activekey = cur.nextElementSibling.dataset.key;
     }
+    if (index < 0 && cur.previousElementSibling) {
+      this.activekey = cur.previousElementSibling.dataset.key;
+    }
+  }
 
-    updatadisabled(key,disabled) {
-        const nav = this.nav.querySelector(`.nav-item[data-key='${key}']`);
-        if(nav){
-            nav.disabled = disabled;
-        }
-    }
-    
-    connectedCallback() {
-        this.tabPos = {};
-        this.nav = this.shadowRoot.getElementById('nav');
-        this.tab = this.shadowRoot.getElementById('tab-content');
-        this.tabline = this.shadowRoot.getElementById('tab-line');
-        this.slots = this.shadowRoot.getElementById('slot');
-        this.filter = this.shadowRoot.getElementById('filter');
-        this.slots.addEventListener('slotchange', ()=>{
-            const slots = this.slots.assignedElements();
-            let html = ''
-            slots.forEach((item,index)=>{
-                if( item.tagName === 'C-TAB-CONTENT' ){
-                    if(item.key===null){
-                        item.key = index;
-                    }
-                    html += `<c-button class="nav-item ${item.key===this.activekey?'active':''}" icon=${item.icon} ${item.disabled!==null?"disabled":""} data-key=${item.key}>${item.label}</c-button>`;
-                }
-            })
-            this.nav.innerHTML = html;
-            this.inittab();
-            if(this.activekey===null){
-                this.activekey = slots[0].key;
-            }else{
-                this.activekey = this.activekey;
-            }
-            this.init = true;
-        });
-        this.nav.addEventListener('click',(ev)=>{
-            const item = ev.target.closest('c-button');
-            if(item){
-                this.activekey = item.dataset.key;
-            }
-        })
-        this.nav.addEventListener('keydown',(ev)=>{
-            switch (ev.keyCode) {
-                case 37://ArrowLeft
-                    ev.preventDefault();
-                    this.movein(-1);
-                    break;
-                case 39://ArrowRight
-                    ev.preventDefault();
-                    this.movein(1);
-                    break;
-                default:
-                    break;
-            }
-        })
-    }
-
-    movein (index){
-        const cur = this.nav.querySelector(`.nav-item.active`);
-        if(index>0 && cur.nextElementSibling){
-            this.activekey = cur.nextElementSibling.dataset.key;
-        }
-        if(index<0 && cur.previousElementSibling){
-            this.activekey = cur.previousElementSibling.dataset.key;
-        }
-    }
-
-    attributeChangedCallback (name, oldValue, newValue) {
-        if( name == 'activekey' && this.tab){
-            let active = this.tabPos[newValue];
-            if( active === undefined ){
-                this.activekey = this.slots.assignedElements()[0].key;
-                active = this.tabPos[this.activekey];
-            }
-            this.tabline.style = `width:${active.width}px;transform:translateX(${active.left}px)`;
-            this.tab.style.transform = `translateX(${-(active.index) * 100}%)`;
-            this.filter.textContent = `
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name == "activekey" && this.tab) {
+      let active = this.tabPos[newValue];
+      if (active === undefined) {
+        this.activekey = this.slots.assignedElements()[0].key;
+        active = this.tabPos[this.activekey];
+      }
+      this.tabline.style = `width:${active.width}px;transform:translateX(${active.left}px)`;
+      this.tab.style.transform = `translateX(${-active.index * 100}%)`;
+      this.filter.textContent = `
             ::slotted(c-tab-content:not([key="${this.activekey}"])){
                 height:0;
                 overflow:visible;
             }
-            `
-            if( oldValue!==newValue){
-                this.nav.parentNode.scrollLeft = active.left+active.width/2-this.nav.parentNode.offsetWidth/2;
-                const pre = this.nav.querySelector(`.nav-item.active`);
-                if(pre){
-                    pre.classList.remove('active');
-                }
-                const cur = this.nav.querySelector(`.nav-item[data-key='${newValue}']`);
-                cur.classList.add('active');
-                cur.focus();
-                if(this.init && oldValue!==null){
-                    this.dispatchEvent(new CustomEvent('change',{
-                        detail:{
-                            key:this.activekey,
-                            index:active.index,
-                            label:active.label,
-                        }
-                    }));
-                }
-            }
+            `;
+      if (oldValue !== newValue) {
+        this.nav.parentNode.scrollLeft =
+          active.left + active.width / 2 - this.nav.parentNode.offsetWidth / 2;
+        const pre = this.nav.querySelector(`.nav-item.active`);
+        if (pre) {
+          pre.classList.remove("active");
         }
+        const cur = this.nav.querySelector(`.nav-item[data-key='${newValue}']`);
+        cur.classList.add("active");
+        cur.focus();
+        if (this.init && oldValue !== null) {
+          this.dispatchEvent(
+            new CustomEvent("change", {
+              detail: {
+                key: this.activekey,
+                index: active.index,
+                label: active.label,
+              },
+            })
+          );
+        }
+      }
     }
+  }
 }
 
-if(!customElements.get('c-tab')){
-    customElements.define('c-tab', CTab);
+if (!customElements.get("c-tab")) {
+  customElements.define("c-tab", CTab);
 }

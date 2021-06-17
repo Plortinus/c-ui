@@ -1,17 +1,38 @@
-import './c-button.js';
-import './c-popover.js';
-import message from './c-message.js';
-import { rgbToHsv,hslToHsv,parseToHSVA } from '../utils/color.js';
-import { HSVaColor } from '../utils/hsvacolor.js';
+import "./c-button.js";
+import "./c-popover.js";
+import message from "./c-message.js";
+import { rgbToHsv, hslToHsv, parseToHSVA } from "../utils/color.js";
+import { HSVaColor } from "../utils/hsvacolor.js";
 
-const Material_colors = ['#f44336','#E91E63','#9C27B0','#673AB7','#3F51B5','#2196F3','#03A9F4','#00BCD4','#009688','#4CAF50','#8BC34A','#CDDC39','#FFEB3B','#FFC107','#FF9800','#FF5722','#795548','#9E9E9E','#607D8B','rgba(0,0,0,.65)','transparent']
+const Material_colors = [
+  "#f44336",
+  "#E91E63",
+  "#9C27B0",
+  "#673AB7",
+  "#3F51B5",
+  "#2196F3",
+  "#03A9F4",
+  "#00BCD4",
+  "#009688",
+  "#4CAF50",
+  "#8BC34A",
+  "#CDDC39",
+  "#FFEB3B",
+  "#FFC107",
+  "#FF9800",
+  "#FF5722",
+  "#795548",
+  "#9E9E9E",
+  "#607D8B",
+  "rgba(0,0,0,.65)",
+  "transparent",
+];
 
 class CColorPane extends HTMLElement {
-
-    constructor() {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.innerHTML = `
+  constructor() {
+    super();
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.innerHTML = `
         <style>
             :host{
                 display: block;
@@ -302,191 +323,208 @@ class CColorPane extends HTMLElement {
                 <button class="btn-switch" id="btn-switch" type="flat">HEXA</button>
             </div>
             <div class="color-sign" id="colors">
-                ${
-                    Material_colors.map(el=>'<button style="background-color:'+el+'" data-color='+el+'></button>').join('')
-                }
+                ${Material_colors.map(
+                  (el) =>
+                    '<button style="background-color:' +
+                    el +
+                    '" data-color=' +
+                    el +
+                    "></button>"
+                ).join("")}
             </div>
         </div>
-        `
-    }
+        `;
+  }
 
-    choose(ev){
-        const {x,y,width:w,height:h} = this.palette.getBoundingClientRect();
-        const value = [...this.$value];
-        const _x = Math.min(Math.max(0,(ev.clientX-x)/w*100),100);
-        const _y = Math.min(Math.max(0,(ev.clientY-y)/h*100),100);
-        value[1] = _x;
-        value[2] = 100-_y;
-        this.value = `hsva(${value[0]}, ${value[1]}%, ${value[2]}%, ${value[3]})`;
-    }
+  choose(ev) {
+    const { x, y, width: w, height: h } = this.palette.getBoundingClientRect();
+    const value = [...this.$value];
+    const _x = Math.min(Math.max(0, ((ev.clientX - x) / w) * 100), 100);
+    const _y = Math.min(Math.max(0, ((ev.clientY - y) / h) * 100), 100);
+    value[1] = _x;
+    value[2] = 100 - _y;
+    this.value = `hsva(${value[0]}, ${value[1]}%, ${value[2]}%, ${value[3]})`;
+  }
 
-    connectedCallback() {
-        this.type = ['HEXA','RGBA','HSLA'];
-        this.typeindex = 0;
-        this.palette = this.shadowRoot.getElementById('color-palette');
-        this.colors = this.shadowRoot.getElementById('colors');
-        this.pane = this.shadowRoot.getElementById('color-pane');
-        this.rangeHue = this.shadowRoot.getElementById('range-hue');
-        this.rangeOpacity = this.shadowRoot.getElementById('range-opacity');
-        this.copyBtn = this.shadowRoot.getElementById('copy-btn');
-        this.copyinfo = this.copyBtn.querySelector('input');
-        this.switch = this.shadowRoot.getElementById('btn-switch');
-        this.colorHexa = this.shadowRoot.getElementById('color-hexa').querySelectorAll('input');
-        this.colorRgba = this.shadowRoot.getElementById('color-rgba').querySelectorAll('input');
-        this.colorHlsa = this.shadowRoot.getElementById('color-hlsa').querySelectorAll('input');
-        this.value = this.defaultvalue;
-        this.rangeHue.addEventListener('input',()=>{
-            const value = [...this.$value];
-            value[0] = Number(this.rangeHue.value);
-            this.nativeclick = true;
-            this.value = `hsva(${value[0]}, ${value[1]}%, ${value[2]}%, ${value[3]})`;
+  connectedCallback() {
+    this.type = ["HEXA", "RGBA", "HSLA"];
+    this.typeindex = 0;
+    this.palette = this.shadowRoot.getElementById("color-palette");
+    this.colors = this.shadowRoot.getElementById("colors");
+    this.pane = this.shadowRoot.getElementById("color-pane");
+    this.rangeHue = this.shadowRoot.getElementById("range-hue");
+    this.rangeOpacity = this.shadowRoot.getElementById("range-opacity");
+    this.copyBtn = this.shadowRoot.getElementById("copy-btn");
+    this.copyinfo = this.copyBtn.querySelector("input");
+    this.switch = this.shadowRoot.getElementById("btn-switch");
+    this.colorHexa = this.shadowRoot
+      .getElementById("color-hexa")
+      .querySelectorAll("input");
+    this.colorRgba = this.shadowRoot
+      .getElementById("color-rgba")
+      .querySelectorAll("input");
+    this.colorHlsa = this.shadowRoot
+      .getElementById("color-hlsa")
+      .querySelectorAll("input");
+    this.value = this.defaultvalue;
+    this.rangeHue.addEventListener("input", () => {
+      const value = [...this.$value];
+      value[0] = Number(this.rangeHue.value);
+      this.nativeclick = true;
+      this.value = `hsva(${value[0]}, ${value[1]}%, ${value[2]}%, ${value[3]})`;
+    });
+    this.palette.addEventListener("mousedown", (ev) => {
+      this.start = true;
+      this.choose(ev);
+    });
+    document.addEventListener("mousemove", this.mousemove);
+
+    document.addEventListener("mouseup", this.mouseup);
+    this.rangeOpacity.addEventListener("input", () => {
+      const value = [...this.$value];
+      value[3] = Number(this.rangeOpacity.value);
+      this.nativeclick = true;
+      this.value = `hsva(${value[0]}, ${value[1]}%, ${value[2]}%, ${value[3]})`;
+    });
+    this.colors.addEventListener("click", (ev) => {
+      const item = ev.target.closest("button");
+      if (item) {
+        this.nativeclick = true;
+        this.value = item.dataset.color;
+      }
+    });
+    this.switch.addEventListener("click", () => {
+      this.typeindex++;
+      this.typeindex %= 3;
+      this.switch.textContent = this.type[this.typeindex];
+      this.nativeclick = true;
+      this.value = this.value;
+      this.switch.parentNode.dataset.type = this.type[this.typeindex];
+    });
+    this.copyBtn.addEventListener("click", () => {
+      this.copyinfo.select();
+      if (document.execCommand("copy")) {
+        document.execCommand("copy");
+        message.success(this.value);
+      }
+    });
+    this.colorHexa.forEach((el) => {
+      el.addEventListener("change", () => {
+        this.nativeclick = true;
+        this.value = el.value;
+      });
+    });
+    this.colorRgba.forEach((el, i) => {
+      el.addEventListener("change", () => {
+        const value = HSVaColor(...this.$value).toRGBA();
+        value[i] = Number(el.value);
+        this.nativeclick = true;
+        this.value = `rgba(${value[0]}, ${value[1]}, ${value[2]}, ${value[3]})`;
+      });
+    });
+    this.colorHlsa.forEach((el, i) => {
+      el.addEventListener("change", () => {
+        const value = HSVaColor(...this.$value).toHSLA();
+        value[i] = Number(el.value);
+        this.nativeclick = true;
+        this.value = `hsla(${value[0]}, ${value[1]}%, ${value[2]}%, ${value[3]})`;
+      });
+    });
+  }
+
+  mousemove = (ev) => {
+    if (this.start) {
+      this.choose(ev);
+    }
+  };
+
+  mouseup = () => {
+    if (getComputedStyle(this.palette).opacity !== 1 && this.start) {
+      this.dispatchEvent(
+        new CustomEvent("change", {
+          detail: {
+            value: this.value,
+            color: this.color,
+          },
         })
-        this.palette.addEventListener('mousedown',(ev)=>{
-            this.start = true;
-            this.choose(ev);
+      );
+    }
+    this.start = false;
+  };
+
+  disconnectedCallback() {
+    document.removeEventListener("mousemove", this.mousemove);
+    document.removeEventListener("mouseup", this.mouseup);
+  }
+
+  get value() {
+    return HSVaColor(...this.$value)
+      ["to" + this.type[this.typeindex]]()
+      .toString();
+  }
+
+  get color() {
+    return HSVaColor(...this.$value);
+  }
+
+  get defaultvalue() {
+    return this.getAttribute("defaultvalue") || "#ff0000";
+  }
+
+  set defaultvalue(value) {
+    this.setAttribute("defaultvalue", value);
+  }
+
+  set value(value) {
+    this.$value = parseToHSVA(value).values;
+    //[h,s,v,a]
+    const [h, s, v, a = 1] = this.$value;
+    this.pane.style.setProperty("--h", h);
+    this.pane.style.setProperty("--s", s);
+    this.pane.style.setProperty("--v", v);
+    this.pane.style.setProperty("--a", a);
+    this.pane.style.setProperty("--c", this.value);
+    this.copyinfo.value = this.value;
+    this.rangeHue.value = h;
+    this.rangeOpacity.value = a.toFixed(2);
+    const COLOR = HSVaColor(...this.$value);
+    this.colorHexa[0].value = COLOR.toHEXA().toString();
+    const RGBA = COLOR.toRGBA();
+    this.colorRgba[0].value = RGBA[0].toFixed(0);
+    this.colorRgba[1].value = RGBA[1].toFixed(0);
+    this.colorRgba[2].value = RGBA[2].toFixed(0);
+    this.colorRgba[3].value = RGBA[3].toFixed(2);
+    const HSLA = COLOR.toHSLA();
+    this.colorHlsa[0].value = HSLA[0].toFixed(0);
+    this.colorHlsa[1].value = HSLA[1].toFixed(0);
+    this.colorHlsa[2].value = HSLA[2].toFixed(0);
+    this.colorHlsa[3].value = HSLA[3].toFixed(2);
+    if (this.nativeclick) {
+      this.nativeclick = false;
+      this.dispatchEvent(
+        new CustomEvent("change", {
+          detail: {
+            value: this.value,
+            color: this.color,
+          },
         })
-        document.addEventListener('mousemove',this.mousemove);
-
-        document.addEventListener('mouseup',this.mouseup);
-        this.rangeOpacity.addEventListener('input',()=>{
-            const value = [...this.$value];
-            value[3] = Number(this.rangeOpacity.value);
-            this.nativeclick = true;
-            this.value = `hsva(${value[0]}, ${value[1]}%, ${value[2]}%, ${value[3]})`;
-        })
-        this.colors.addEventListener('click',(ev)=>{
-            const item = ev.target.closest('button');
-            if(item){
-                this.nativeclick = true;
-                this.value = item.dataset.color;
-            }
-        })
-        this.switch.addEventListener('click',()=>{
-            this.typeindex ++;
-            this.typeindex %= 3;
-            this.switch.textContent = this.type[this.typeindex];
-            this.nativeclick = true;
-            this.value = this.value;
-            this.switch.parentNode.dataset.type = this.type[this.typeindex];
-        })
-        this.copyBtn.addEventListener('click',()=>{
-            this.copyinfo.select();
-            if (document.execCommand('copy')) {
-                document.execCommand('copy');
-                message.success(this.value);
-            }
-        })
-        this.colorHexa.forEach(el=>{
-            el.addEventListener('change',()=>{
-                this.nativeclick = true;
-                this.value = el.value;
-            })
-        })
-        this.colorRgba.forEach((el,i)=>{
-            el.addEventListener('change',()=>{
-                const value = HSVaColor(...this.$value).toRGBA();
-                value[i] = Number(el.value);
-                this.nativeclick = true;
-                this.value = `rgba(${value[0]}, ${value[1]}, ${value[2]}, ${value[3]})`;
-            })
-        })
-        this.colorHlsa.forEach((el,i)=>{
-            el.addEventListener('change',()=>{
-                const value = HSVaColor(...this.$value).toHSLA();
-                value[i] = Number(el.value);
-                this.nativeclick = true;
-                this.value = `hsla(${value[0]}, ${value[1]}%, ${value[2]}%, ${value[3]})`;
-            })
-        })
+      );
     }
-
-    mousemove = (ev) => {
-        if(this.start){
-            this.choose(ev);
-        }
-    }
-
-    mouseup = () => {
-        if(getComputedStyle(this.palette).opacity!==1 &&　this.start){
-            this.dispatchEvent(new CustomEvent('change', {
-                detail: {
-                    value: this.value,
-                    color: this.color
-                }
-            }));
-        }
-        this.start = false;
-    }
-
-    disconnectedCallback() {
-        document.removeEventListener('mousemove', this.mousemove);
-        document.removeEventListener('mouseup', this.mouseup);
-    }
-
-    get value() {
-        return HSVaColor(...this.$value)['to'+this.type[this.typeindex]]().toString();
-    }
-
-    get color() {
-        return HSVaColor(...this.$value);
-    }
-
-    get defaultvalue() {
-        return this.getAttribute('defaultvalue')||'#ff0000';
-    }
-
-    set defaultvalue(value) {
-        this.setAttribute("defaultvalue",value);
-    }
-
-    set value(value) {
-        this.$value = parseToHSVA(value).values;
-        //[h,s,v,a]
-        const [h,s,v,a=1] = this.$value;
-        this.pane.style.setProperty('--h',h);
-        this.pane.style.setProperty('--s',s);
-        this.pane.style.setProperty('--v',v);
-        this.pane.style.setProperty('--a',a);
-        this.pane.style.setProperty('--c',this.value);
-        this.copyinfo.value = this.value;
-        this.rangeHue.value = h;
-        this.rangeOpacity.value = a.toFixed(2);
-        const COLOR = HSVaColor(...this.$value);
-        this.colorHexa[0].value = COLOR.toHEXA().toString();
-        const RGBA = COLOR.toRGBA();
-        this.colorRgba[0].value = RGBA[0].toFixed(0);
-        this.colorRgba[1].value = RGBA[1].toFixed(0);
-        this.colorRgba[2].value = RGBA[2].toFixed(0);
-        this.colorRgba[3].value = RGBA[3].toFixed(2);
-        const HSLA = COLOR.toHSLA();
-        this.colorHlsa[0].value = HSLA[0].toFixed(0);
-        this.colorHlsa[1].value = HSLA[1].toFixed(0);
-        this.colorHlsa[2].value = HSLA[2].toFixed(0);
-        this.colorHlsa[3].value = HSLA[3].toFixed(2);
-        if(this.nativeclick){
-            this.nativeclick = false;
-            this.dispatchEvent(new CustomEvent('change', {
-                detail: {
-                    value: this.value,
-                    color: this.color
-                }
-            }));
-        }
-    }
-
+  }
 }
 
-customElements.define('c-color-pane', CColorPane);
+customElements.define("c-color-pane", CColorPane);
 
 export default class CColorPicker extends HTMLElement {
+  static get observedAttributes() {
+    return ["disabled", "dir"];
+  }
 
-    static get observedAttributes() { return ['disabled','dir'] }
+  constructor() {
+    super();
+    const shadowRoot = this.attachShadow({ mode: "open" });
 
-    constructor() {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-
-        shadowRoot.innerHTML = `
+    shadowRoot.innerHTML = `
         <style>
         :host{
             display:inline-block;
@@ -547,8 +585,10 @@ export default class CColorPicker extends HTMLElement {
             background-size:10px 10px;
         }
         </style>
-        <c-popover id="popover" ${this.dir? "dir='"+this.dir+"'" : ""}>
-            <c-button class="color-btn" id="color-btn" ${this.disabled? "disabled" : ""}></c-button>
+        <c-popover id="popover" ${this.dir ? "dir='" + this.dir + "'" : ""}>
+            <c-button class="color-btn" id="color-btn" ${
+              this.disabled ? "disabled" : ""
+            }></c-button>
             <c-popcon id="popcon">
                 <div class="pop-footer">
                     <c-button autoclose>取 消</c-button>
@@ -556,113 +596,113 @@ export default class CColorPicker extends HTMLElement {
                 </div>
             </c-popcon>
         </c-popover>
-        `
-    }
+        `;
+  }
 
-    focus() {
-        this.colorBtn.focus();
-    }
+  focus() {
+    this.colorBtn.focus();
+  }
 
-    connectedCallback() {
-        this.popover = this.shadowRoot.getElementById('popover');
-        this.popcon = this.shadowRoot.getElementById('popcon');
-        this.colorBtn = this.shadowRoot.getElementById('color-btn');
-        this.btnSubmit = this.shadowRoot.getElementById('btn-submit');
-        this.colorBtn.addEventListener('click',()=>{
-            if(!this.colorPane){
-                this.colorPane = new CColorPane();
-                this.colorPane.defaultvalue = this.defaultvalue;
-                this.popcon.prepend(this.colorPane);
-            }
+  connectedCallback() {
+    this.popover = this.shadowRoot.getElementById("popover");
+    this.popcon = this.shadowRoot.getElementById("popcon");
+    this.colorBtn = this.shadowRoot.getElementById("color-btn");
+    this.btnSubmit = this.shadowRoot.getElementById("btn-submit");
+    this.colorBtn.addEventListener("click", () => {
+      if (!this.colorPane) {
+        this.colorPane = new CColorPane();
+        this.colorPane.defaultvalue = this.defaultvalue;
+        this.popcon.prepend(this.colorPane);
+      }
+    });
+    this.btnSubmit.addEventListener("click", () => {
+      this.nativeclick = true;
+      this.value = this.colorPane.value;
+    });
+    this.popcon.addEventListener("close", () => {
+      this.colorPane.value = this.value;
+    });
+    this.value = this.defaultvalue;
+  }
+
+  get defaultvalue() {
+    return this.getAttribute("defaultvalue") || "#42b983";
+  }
+
+  get value() {
+    return this.$value;
+  }
+
+  get color() {
+    return HSVaColor(...parseToHSVA(this.$value).values);
+  }
+
+  get type() {
+    return this.getAttribute("type");
+  }
+
+  get disabled() {
+    return this.getAttribute("disabled") !== null;
+  }
+
+  get dir() {
+    return this.getAttribute("dir");
+  }
+
+  set dir(value) {
+    this.setAttribute("dir", value);
+  }
+
+  set disabled(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("disabled");
+    } else {
+      this.setAttribute("disabled", "");
+    }
+  }
+
+  set defaultvalue(value) {
+    this.setAttribute("defaultvalue", value);
+  }
+
+  set value(value) {
+    this.colorBtn.style.setProperty("--themeColor", value);
+    this.$value = value;
+    if (this.nativeclick) {
+      this.nativeclick = false;
+      this.dispatchEvent(
+        new CustomEvent("change", {
+          detail: {
+            value: this.value,
+            color: this.color,
+          },
         })
-        this.btnSubmit.addEventListener('click',()=>{
-            this.nativeclick = true;
-            this.value = this.colorPane.value;
-        })
-        this.popcon.addEventListener('close',()=>{
-            this.colorPane.value = this.value;
-        })
-        this.value = this.defaultvalue;
+      );
+    } else {
+      if (this.colorPane) {
+        this.colorPane.value = this.value;
+      } else {
+        this.defaultvalue = this.value;
+      }
     }
+  }
 
-    
-
-    get defaultvalue() {
-        return this.getAttribute('defaultvalue')||'#42b983';
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name == "disabled" && this.colorBtn) {
+      if (newValue != null) {
+        this.colorBtn.setAttribute("disabled", "disabled");
+      } else {
+        this.colorBtn.removeAttribute("disabled");
+      }
     }
-
-    get value() {
-        return this.$value;
+    if (name == "dir" && this.popover) {
+      if (newValue != null) {
+        this.popover.dir = newValue;
+      }
     }
-
-    get color() {
-        return HSVaColor(...parseToHSVA(this.$value).values);
-    }
-
-    get type() {
-        return this.getAttribute('type');
-    }
-
-    get disabled() {
-        return this.getAttribute('disabled')!==null;
-    }
-
-    get dir() {
-        return this.getAttribute('dir');
-    }
-
-    set dir(value){
-        this.setAttribute('dir', value);
-    }
-
-    set disabled(value) {
-        if (value === null || value === false) {
-            this.removeAttribute('disabled');
-        } else {
-            this.setAttribute('disabled', '');
-        }
-    }
-
-    set defaultvalue(value){
-        this.setAttribute('defaultvalue', value);
-    }
-
-    set value(value) {
-        this.colorBtn.style.setProperty('--themeColor',value);
-        this.$value = value;
-        if(this.nativeclick){
-            this.nativeclick = false;
-            this.dispatchEvent(new CustomEvent('change', {
-                detail: {
-                    value: this.value,
-                    color: this.color
-                }
-            }));
-        }else{
-            if(this.colorPane){
-                this.colorPane.value = this.value;
-            }else{
-                this.defaultvalue = this.value;
-            }
-        }
-    }
-
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (name == 'disabled' && this.colorBtn) {
-            if (newValue != null) {
-                this.colorBtn.setAttribute('disabled', 'disabled');
-            } else {
-                this.colorBtn.removeAttribute('disabled');
-            }
-        }
-        if (name == 'dir' && this.popover) {
-            if (newValue != null) {
-                this.popover.dir = newValue;
-            }
-        }
-    }
+  }
 }
 
-if (!customElements.get('c-color-picker')) {
-    customElements.define('c-color-picker', CColorPicker);
+if (!customElements.get("c-color-picker")) {
+  customElements.define("c-color-picker", CColorPicker);
 }

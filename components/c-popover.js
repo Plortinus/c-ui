@@ -1,13 +1,14 @@
-import './c-button.js';
+import "./c-button.js";
 
 class CPopcon extends HTMLElement {
+  static get observedAttributes() {
+    return ["open", "title", "oktext", "canceltext", "loading", "type"];
+  }
 
-    static get observedAttributes() { return ['open','title','oktext','canceltext','loading','type'] }
-
-    constructor(type) {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.innerHTML = `
+  constructor(type) {
+    super();
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.innerHTML = `
         <style>
         :host{
             position:absolute;
@@ -86,188 +87,202 @@ class CPopcon extends HTMLElement {
         }
         </style>
             ${
-                (type||this.type)==='confirm'?'<c-icon id="popcon-type" class="popcon-type" name="question-circle" color="var(--waringColor,#faad14)"></c-icon>':''
+              (type || this.type) === "confirm"
+                ? '<c-icon id="popcon-type" class="popcon-type" name="question-circle" color="var(--waringColor,#faad14)"></c-icon>'
+                : ""
             }
             <div class="popcon-content">
                 ${
-                    (type||this.type)!==null?'<div class="popcon-title" id="title">'+this.title+'</div><c-button class="btn-close" id="btn-close" icon="close"></c-button>':''
+                  (type || this.type) !== null
+                    ? '<div class="popcon-title" id="title">' +
+                      this.title +
+                      '</div><c-button class="btn-close" id="btn-close" icon="close"></c-button>'
+                    : ""
                 }
                 <div class="popcon-body">
                     <slot></slot>
                 </div>
                 ${
-                    (type||this.type)==='confirm'?'<div class="popcon-footer"><c-button id="btn-cancel">'+this.canceltext+'</c-button><c-button id="btn-submit" type="primary">'+this.oktext+'</c-button></div>':''
+                  (type || this.type) === "confirm"
+                    ? '<div class="popcon-footer"><c-button id="btn-cancel">' +
+                      this.canceltext +
+                      '</c-button><c-button id="btn-submit" type="primary">' +
+                      this.oktext +
+                      "</c-button></div>"
+                    : ""
                 }
             </div>
-        `
-    }
+        `;
+  }
 
-    get open() {
-        return this.getAttribute('open')!==null;
-    }
+  get open() {
+    return this.getAttribute("open") !== null;
+  }
 
-    get stopfocus() {
-        return this.getAttribute('stopfocus')!==null;
-    }
+  get stopfocus() {
+    return this.getAttribute("stopfocus") !== null;
+  }
 
-    get title() {
-        return this.getAttribute('title')||'popcon';
-    }
+  get title() {
+    return this.getAttribute("title") || "popcon";
+  }
 
-    get type() {
-        return this.getAttribute('type');
-    }
+  get type() {
+    return this.getAttribute("type");
+  }
 
-    get oktext() {
-        return this.getAttribute('oktext')||'确 定';
-    }
+  get oktext() {
+    return this.getAttribute("oktext") || "确 定";
+  }
 
-    get canceltext() {
-        return this.getAttribute('canceltext')||'取 消';
-    }
+  get canceltext() {
+    return this.getAttribute("canceltext") || "取 消";
+  }
 
-    get loading() {
-        return this.getAttribute('loading')!==null;
-    }
+  get loading() {
+    return this.getAttribute("loading") !== null;
+  }
 
-    set title(value) {
-        this.setAttribute('title', value);
-    }
+  set title(value) {
+    this.setAttribute("title", value);
+  }
 
-    set type(value) {
-        if(value===null||value===false){
-            this.removeAttribute('type');
-        }else{
-            this.setAttribute('type', value);
+  set type(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("type");
+    } else {
+      this.setAttribute("type", value);
+    }
+  }
+
+  set oktext(value) {
+    this.setAttribute("oktext", value);
+  }
+
+  set canceltext(value) {
+    this.setAttribute("canceltext", value);
+  }
+
+  set open(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("open");
+      this.parentNode.removeAttribute("open");
+    } else {
+      this.setAttribute("open", "");
+      this.parentNode.setAttribute("open", "");
+      this.loading && (this.loading = false);
+    }
+  }
+
+  set loading(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("loading");
+    } else {
+      this.setAttribute("loading", "");
+    }
+  }
+
+  connectedCallback() {
+    this.remove = false;
+    if (this.type) {
+      this.titles = this.shadowRoot.getElementById("title");
+      this.btnClose = this.shadowRoot.getElementById("btn-close");
+    }
+    if (this.type == "confirm") {
+      this.btnCancel = this.shadowRoot.getElementById("btn-cancel");
+      this.btnSubmit = this.shadowRoot.getElementById("btn-submit");
+    }
+    this.addEventListener("transitionend", (ev) => {
+      if (ev.propertyName === "transform" && this.open) {
+        if (this.type == "confirm") {
+          this.btnSubmit.focus();
         }
+        if (this.type == "pane") {
+          this.btnClose.focus();
+        }
+        this.dispatchEvent(new CustomEvent("open"));
+      }
+    });
+    this.addEventListener("transitionend", (ev) => {
+      if (ev.propertyName === "transform" && !this.open) {
+        if (this.remove) {
+          this.parentNode.removeChild(this);
+          //document.body.removeChild(this);
+        }
+        this.dispatchEvent(new CustomEvent("close"));
+      }
+    });
+    this.addEventListener("click", (ev) => {
+      if (ev.target.closest("[autoclose]")) {
+        this.open = false;
+        window.xyActiveElement.focus();
+      }
+    });
+    if (this.type) {
+      this.btnClose.addEventListener("click", () => {
+        this.open = false;
+        window.xyActiveElement.focus();
+      });
     }
+    if (this.type == "confirm") {
+      this.btnCancel.addEventListener("click", async () => {
+        this.dispatchEvent(new CustomEvent("cancel"));
+        this.open = false;
+        window.xyActiveElement.focus();
+      });
+      this.btnSubmit.addEventListener("click", () => {
+        this.dispatchEvent(new CustomEvent("submit"));
+        if (!this.loading) {
+          this.open = false;
+          window.xyActiveElement.focus();
+        }
+      });
+    }
+  }
 
-    set oktext(value) {
-        this.setAttribute('oktext', value);
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name == "open" && this.shadowRoot) {
+      if (newValue == null && !this.stopfocus) {
+        //window.xyActiveElement.focus();
+      }
     }
-
-    set canceltext(value) {
-        this.setAttribute('canceltext', value);
+    if (name == "loading" && this.shadowRoot) {
+      if (newValue !== null) {
+        this.btnSubmit.loading = true;
+      } else {
+        this.btnSubmit.loading = false;
+      }
     }
-
-    set open(value) {
-        if(value===null||value===false){
-            this.removeAttribute('open');
-            this.parentNode.removeAttribute('open');
-        }else{
-            this.setAttribute('open', '');
-            this.parentNode.setAttribute('open','');
-            this.loading && (this.loading = false);
-        }
+    if (name == "title" && this.titles) {
+      if (newValue !== null) {
+        this.titles.innerHTML = newValue;
+      }
     }
-
-    set loading(value) {
-        if(value===null||value===false){
-            this.removeAttribute('loading');
-        }else{
-            this.setAttribute('loading', '');
-        }
+    if (name == "oktext" && this.btnSubmit) {
+      if (newValue !== null) {
+        this.btnSubmit.innerHTML = newValue;
+      }
     }
-    
-    connectedCallback() {
-        this.remove = false;
-        if(this.type){
-            this.titles = this.shadowRoot.getElementById('title');
-            this.btnClose = this.shadowRoot.getElementById('btn-close');
-        }
-        if(this.type=='confirm'){
-            this.btnCancel = this.shadowRoot.getElementById('btn-cancel');
-            this.btnSubmit = this.shadowRoot.getElementById('btn-submit');
-        }
-        this.addEventListener('transitionend',(ev)=>{
-            if(ev.propertyName === 'transform' && this.open){
-                if(this.type=='confirm'){
-                    this.btnSubmit.focus();
-                }
-                if(this.type=='pane'){
-                    this.btnClose.focus();
-                }
-                this.dispatchEvent(new CustomEvent('open'));
-            }
-        })
-        this.addEventListener('transitionend',(ev)=>{
-            if(ev.propertyName === 'transform' && !this.open){
-                if( this.remove ){
-                    this.parentNode.removeChild(this);
-                    //document.body.removeChild(this);
-                }
-                this.dispatchEvent(new CustomEvent('close'));
-            }
-        })
-        this.addEventListener('click',(ev)=>{
-            if( ev.target.closest('[autoclose]')){
-                this.open = false;
-                window.xyActiveElement.focus();
-            }
-        })
-        if(this.type){
-            this.btnClose.addEventListener('click',()=>{
-                this.open = false;
-                window.xyActiveElement.focus();
-            })
-        }
-        if(this.type=='confirm'){
-            this.btnCancel.addEventListener('click',async ()=>{
-                this.dispatchEvent(new CustomEvent('cancel'));
-                this.open = false;
-                window.xyActiveElement.focus();
-            })
-            this.btnSubmit.addEventListener('click',()=>{
-                this.dispatchEvent(new CustomEvent('submit'));
-                if(!this.loading){
-                    this.open = false;
-                    window.xyActiveElement.focus();
-                }
-            })
-        }
+    if (name == "canceltext" && this.btnCancel) {
+      if (newValue !== null) {
+        this.btnCancel.innerHTML = newValue;
+      }
     }
-
-    attributeChangedCallback (name, oldValue, newValue) {
-        if( name == 'open' && this.shadowRoot){
-            if(newValue==null && !this.stopfocus){
-                //window.xyActiveElement.focus();
-            }
-        }
-        if( name == 'loading' && this.shadowRoot){
-            if(newValue!==null){
-                this.btnSubmit.loading = true;
-            }else{
-                this.btnSubmit.loading = false;
-            }
-        }
-        if( name == 'title' && this.titles){
-            if(newValue!==null){
-                this.titles.innerHTML = newValue;
-            }
-        }
-        if( name == 'oktext' && this.btnSubmit){
-            if(newValue!==null){
-                this.btnSubmit.innerHTML = newValue;
-            }
-        }
-        if( name == 'canceltext' && this.btnCancel){
-            if(newValue!==null){
-                this.btnCancel.innerHTML = newValue;
-            }
-        }
-    }
+  }
 }
 
-if(!customElements.get('c-popcon')){
-    customElements.define('c-popcon', CPopcon);
+if (!customElements.get("c-popcon")) {
+  customElements.define("c-popcon", CPopcon);
 }
 
 class CPopover extends HTMLElement {
-    static get observedAttributes() { return ['title','oktext','canceltext','loading','type'] }
-    constructor() {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.innerHTML = `
+  static get observedAttributes() {
+    return ["title", "oktext", "canceltext", "loading", "type"];
+  }
+  constructor() {
+    super();
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.innerHTML = `
         <style>
         :host {
             display:inline-block;
@@ -433,178 +448,188 @@ class CPopover extends HTMLElement {
         }
         </style>
         <slot></slot>
-        `
-    }
+        `;
+  }
 
-    get title() {
-        return this.getAttribute('title')||'popcon';
-    }
+  get title() {
+    return this.getAttribute("title") || "popcon";
+  }
 
-    get trigger() {
-        return this.getAttribute('trigger');
-    }
+  get trigger() {
+    return this.getAttribute("trigger");
+  }
 
-    get disabled() {
-        return this.getAttribute('disabled')!==null;
-    }
+  get disabled() {
+    return this.getAttribute("disabled") !== null;
+  }
 
-    get type() {
-        return this.getAttribute('type');
-    }
+  get type() {
+    return this.getAttribute("type");
+  }
 
-    get accomplish() {
-        return this.getAttribute('accomplish')!==null;
-    }
+  get accomplish() {
+    return this.getAttribute("accomplish") !== null;
+  }
 
-    get content() {
-        return this.getAttribute('content');
-    }
+  get content() {
+    return this.getAttribute("content");
+  }
 
-    get oktext() {
-        return this.getAttribute('oktext');
-    }
+  get oktext() {
+    return this.getAttribute("oktext");
+  }
 
-    get canceltext() {
-        return this.getAttribute('canceltext');
-    }
+  get canceltext() {
+    return this.getAttribute("canceltext");
+  }
 
-    get dir() {
-        return this.getAttribute('dir');
-    }
+  get dir() {
+    return this.getAttribute("dir");
+  }
 
-    get loading() {
-        return this.getAttribute('loading')!==null;
-    }
+  get loading() {
+    return this.getAttribute("loading") !== null;
+  }
 
-    set dir(value) {
-        this.setAttribute('dir', value);
-    }
+  set dir(value) {
+    this.setAttribute("dir", value);
+  }
 
-    set title(value) {
-        this.setAttribute('title', value);
-    }
+  set title(value) {
+    this.setAttribute("title", value);
+  }
 
-    set type(value) {
-        this.setAttribute('type', value);
-    }
+  set type(value) {
+    this.setAttribute("type", value);
+  }
 
-    set oktext(value) {
-        this.setAttribute('oktext', value);
-    }
+  set oktext(value) {
+    this.setAttribute("oktext", value);
+  }
 
-    set canceltext(value) {
-        this.setAttribute('canceltext', value);
-    }
+  set canceltext(value) {
+    this.setAttribute("canceltext", value);
+  }
 
-    set loading(value) {
-        if(value===null||value===false){
-            this.removeAttribute('loading');
-        }else{
-            this.setAttribute('loading', '');
+  set loading(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("loading");
+    } else {
+      this.setAttribute("loading", "");
+    }
+  }
+
+  set disabled(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("disabled");
+    } else {
+      this.setAttribute("disabled", "");
+    }
+  }
+
+  show(ev) {
+    this.popcon = this.querySelector("c-popcon");
+    if (!this.disabled) {
+      if (!this.popcon) {
+        this.popcon = new CPopcon(this.type);
+        this.popcon.type = this.type;
+        this.appendChild(this.popcon);
+        this.popcon.title = this.title || "popover";
+        this.popcon.innerHTML = this.content || "";
+        if (this.type == "confirm") {
+          this.popcon.oktext = this.oktext || "确 定";
+          this.popcon.canceltext = this.canceltext || "取 消";
+          this.popcon.onsubmit = () =>
+            this.dispatchEvent(new CustomEvent("submit"));
+          this.popcon.oncancel = () =>
+            this.dispatchEvent(new CustomEvent("cancel"));
         }
-    }
-
-    set disabled(value) {
-        if (value === null || value === false) {
-            this.removeAttribute('disabled');
-        } else {
-            this.setAttribute('disabled', '');
-        }
-    }
-
-    show(ev){
-        this.popcon = this.querySelector('c-popcon');
-        if(!this.disabled){
-            if(!this.popcon){
-                this.popcon = new CPopcon(this.type);
-                this.popcon.type = this.type;
-                this.appendChild(this.popcon);
-                this.popcon.title = this.title||'popover';
-                this.popcon.innerHTML = this.content||'';
-                if(this.type == 'confirm'){
-                    this.popcon.oktext = this.oktext||'确 定';
-                    this.popcon.canceltext = this.canceltext||'取 消';
-                    this.popcon.onsubmit = ()=>this.dispatchEvent(new CustomEvent('submit'));
-                    this.popcon.oncancel = ()=>this.dispatchEvent(new CustomEvent('cancel'));
-                }
-            }
-            //this.popcon.remove = true;
-            this.popcon.clientWidth;
-            if(this.trigger==='contextmenu'){
-                const {x,y} = this.getBoundingClientRect()
-                this.popcon.style.setProperty('--x',ev.clientX-x+'px');
-                this.popcon.style.setProperty('--y',ev.clientY-y+'px');
-                this.popcon.open = true;
-            }else{
-                const path = ev.path || (ev.composedPath && ev.composedPath());
-                if(!path.includes(this.popcon)){
-                    window.xyActiveElement = document.activeElement;
-                    if(this.accomplish){
-                        this.popcon.open = true;
-                    }else{
-                        this.popcon.open = !this.popcon.open;
-                    }
-                }
-            }
-        }else{
-            (this.popcon||this).dispatchEvent(new CustomEvent('submit'));
-        }
-        return this.popcon;
-    }
-    connectedCallback() {
-        this.popcon = this.querySelector('c-popcon');
-        if(!(this.trigger&&this.trigger!=='click')){
-            this.addEventListener('click',this.show);
-        }
-        if(this.trigger==='contextmenu'){
-            this.addEventListener('contextmenu',(ev)=>{
-                ev.preventDefault();
-                const path = ev.path || (ev.composedPath && ev.composedPath());
-                if(!path.includes(this.popcon)){
-                    this.show(ev);
-                }
-            });
-        }
-        document.addEventListener('mousedown',this.setpop);
-    }
-
-    setpop = (ev) => {
+      }
+      //this.popcon.remove = true;
+      this.popcon.clientWidth;
+      if (this.trigger === "contextmenu") {
+        const { x, y } = this.getBoundingClientRect();
+        this.popcon.style.setProperty("--x", ev.clientX - x + "px");
+        this.popcon.style.setProperty("--y", ev.clientY - y + "px");
+        this.popcon.open = true;
+      } else {
         const path = ev.path || (ev.composedPath && ev.composedPath());
-        if( this.popcon && !path.includes(this.popcon) && !this.popcon.loading && !path.includes(this.children[0]) || (this.trigger==='contextmenu') && !path.includes(this.popcon) && ev.which == '1'){
-            this.popcon.open = false;
+        if (!path.includes(this.popcon)) {
+          window.xyActiveElement = document.activeElement;
+          if (this.accomplish) {
+            this.popcon.open = true;
+          } else {
+            this.popcon.open = !this.popcon.open;
+          }
         }
+      }
+    } else {
+      (this.popcon || this).dispatchEvent(new CustomEvent("submit"));
     }
+    return this.popcon;
+  }
+  connectedCallback() {
+    this.popcon = this.querySelector("c-popcon");
+    if (!(this.trigger && this.trigger !== "click")) {
+      this.addEventListener("click", this.show);
+    }
+    if (this.trigger === "contextmenu") {
+      this.addEventListener("contextmenu", (ev) => {
+        ev.preventDefault();
+        const path = ev.path || (ev.composedPath && ev.composedPath());
+        if (!path.includes(this.popcon)) {
+          this.show(ev);
+        }
+      });
+    }
+    document.addEventListener("mousedown", this.setpop);
+  }
 
-    disconnectedCallback() {
-        document.removeEventListener('mousedown', this.popcon);
+  setpop = (ev) => {
+    const path = ev.path || (ev.composedPath && ev.composedPath());
+    if (
+      (this.popcon &&
+        !path.includes(this.popcon) &&
+        !this.popcon.loading &&
+        !path.includes(this.children[0])) ||
+      (this.trigger === "contextmenu" &&
+        !path.includes(this.popcon) &&
+        ev.which == "1")
+    ) {
+      this.popcon.open = false;
     }
+  };
 
-    attributeChangedCallback (name, oldValue, newValue) {
-        if( name == 'loading' && this.popcon){
-            if(newValue!==null){
-                this.popcon.loading = true;
-            }else{
-                this.popcon.loading = false;
-            }
-        }
-        if( name == 'title' && this.popcon){
-            if(newValue!==null){
-                this.popcon.title = newValue;
-            }
-        }
-        if( name == 'oktext' && this.popcon){
-            if(newValue!==null){
-                this.popcon.oktext = newValue;
-            }
-        }
-        if( name == 'canceltext' && this.popcon){
-            if(newValue!==null){
-                this.popcon.canceltext = newValue;
-            }
-        }
+  disconnectedCallback() {
+    document.removeEventListener("mousedown", this.popcon);
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name == "loading" && this.popcon) {
+      if (newValue !== null) {
+        this.popcon.loading = true;
+      } else {
+        this.popcon.loading = false;
+      }
     }
+    if (name == "title" && this.popcon) {
+      if (newValue !== null) {
+        this.popcon.title = newValue;
+      }
+    }
+    if (name == "oktext" && this.popcon) {
+      if (newValue !== null) {
+        this.popcon.oktext = newValue;
+      }
+    }
+    if (name == "canceltext" && this.popcon) {
+      if (newValue !== null) {
+        this.popcon.canceltext = newValue;
+      }
+    }
+  }
 }
 
-if(!customElements.get('c-popover')){
-    customElements.define('c-popover', CPopover);
+if (!customElements.get("c-popover")) {
+  customElements.define("c-popover", CPopover);
 }

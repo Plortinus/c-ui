@@ -1,14 +1,15 @@
-import './c-tips.js';
-import './c-icon.js';
+import "./c-tips.js";
+import "./c-icon.js";
 
 export default class CRate extends HTMLElement {
+  static get observedAttributes() {
+    return ["color", "size"];
+  }
 
-    static get observedAttributes() { return ['color','size'] }
-
-    constructor() {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.innerHTML = `
+  constructor() {
+    super();
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.innerHTML = `
         <style>
         :host{
             display: inline-flex;
@@ -76,103 +77,107 @@ export default class CRate extends HTMLElement {
                 <c-icon name=${this.icon}></c-icon>
             </label>
         </c-tips>
-        `
-    }
+        `;
+  }
 
-    get icon() {
-        return this.getAttribute('icon')||'star-fill';
-    }
+  get icon() {
+    return this.getAttribute("icon") || "star-fill";
+  }
 
-    get value() {
-        return this.shadowRoot.value;
-    }
+  get value() {
+    return this.shadowRoot.value;
+  }
 
-    get defaultvalue() {
-        return this.getAttribute('defaultvalue')||0;
-    }
+  get defaultvalue() {
+    return this.getAttribute("defaultvalue") || 0;
+  }
 
-    get disabled() {
-        return this.getAttribute('disabled')!==null;
-    }
+  get disabled() {
+    return this.getAttribute("disabled") !== null;
+  }
 
-    get size() {
-        return this.getAttribute('size')||'';
-    }
+  get size() {
+    return this.getAttribute("size") || "";
+  }
 
-    get color() {
-        return this.getAttribute('color')||'';
-    }
+  get color() {
+    return this.getAttribute("color") || "";
+  }
 
-    get tips() {
-        const tips = this.getAttribute('tips');
-        if(tips){
-            return this.getAttribute('tips').split(',');
-        }else{
-            return ['','','','',''];
-        }
+  get tips() {
+    const tips = this.getAttribute("tips");
+    if (tips) {
+      return this.getAttribute("tips").split(",");
+    } else {
+      return ["", "", "", "", ""];
     }
-    
-    set disabled(value) {
-        if(value===null||value===false){
-            this.removeAttribute('disabled');
-        }else{
-            this.setAttribute('disabled', '');
-        }
-    }
+  }
 
-    set size(value) {
-        this.setAttribute('size', value);
+  set disabled(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("disabled");
+    } else {
+      this.setAttribute("disabled", "");
     }
+  }
 
-    set color(value) {
-        this.setAttribute('color', value);
-    }
+  set size(value) {
+    this.setAttribute("size", value);
+  }
 
-    set tips(value) {
-        this.setAttribute('tips', value);
-    }
+  set color(value) {
+    this.setAttribute("color", value);
+  }
 
-    set value(value) {
-        if(value === 0){
-            this.radio[this.value-1].checked = false;
-        }else{
-            this.radio[Number(value)-1].checked = true;
-        }
-        this.shadowRoot.value = value;
-    }
+  set tips(value) {
+    this.setAttribute("tips", value);
+  }
 
-    focus(){
-        this.shadowRoot.querySelector('input[type="radio"]').focus();
+  set value(value) {
+    if (value === 0) {
+      this.radio[this.value - 1].checked = false;
+    } else {
+      this.radio[Number(value) - 1].checked = true;
     }
+    this.shadowRoot.value = value;
+  }
 
-    connectedCallback() {
-        this.radio = [...this.shadowRoot.querySelectorAll('input[type="radio"]')].reverse();
-        if(this.defaultvalue){
-            this.shadowRoot.value = this.defaultvalue;
-            this.radio[Number(this.defaultvalue)-1].checked = true;
-        }
-        this.radio.forEach((el)=>{
-            el.addEventListener('change',(ev)=>{
-                this.value = el.value;
-                this.dispatchEvent(new CustomEvent('change',{
-                    detail:{
-                        value:this.value
-                    }
-                }));
-            })
-        })
-    }
+  focus() {
+    this.shadowRoot.querySelector('input[type="radio"]').focus();
+  }
 
-    attributeChangedCallback (name, oldValue, newValue) {
-        if( name == 'color' && this.shadowRoot){
-            this.style.setProperty('--themeColor',newValue);
-        }
-        if( name == 'size' && this.shadowRoot){
-            this.style.fontSize = newValue + 'px';
-        }
+  connectedCallback() {
+    this.radio = [
+      ...this.shadowRoot.querySelectorAll('input[type="radio"]'),
+    ].reverse();
+    if (this.defaultvalue) {
+      this.shadowRoot.value = this.defaultvalue;
+      this.radio[Number(this.defaultvalue) - 1].checked = true;
     }
+    this.radio.forEach((el) => {
+      el.addEventListener("change", (ev) => {
+        this.value = el.value;
+        this.dispatchEvent(
+          new CustomEvent("change", {
+            detail: {
+              value: this.value,
+            },
+          })
+        );
+      });
+    });
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name == "color" && this.shadowRoot) {
+      this.style.setProperty("--themeColor", newValue);
+    }
+    if (name == "size" && this.shadowRoot) {
+      this.style.fontSize = newValue + "px";
+    }
+  }
 }
 
-if(!customElements.get('c-rate')){
-    customElements.define('c-rate', CRate);
+if (!customElements.get("c-rate")) {
+  customElements.define("c-rate", CRate);
 }
