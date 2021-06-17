@@ -734,6 +734,7 @@
     <h2>img</h2>
     <p>src</p>
     <c-img
+      style="height: 200px;width: 200px;"
       src="https://images.pexels.com/photos/1274640/pexels-photo-1274640.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
     ></c-img>
     <p>lazy</p>
@@ -812,6 +813,9 @@
     <c-rate disabled defaultvalue="2"></c-rate>
     <h2>form</h2>
     <c-form action="/login" method="post" labelwidth="100">
+      <c-form-item legend="label值">
+        <c-date-picker name="111" required defaultvalue="2020-03-03"></c-date-picker>
+      </c-form-item>
       <c-form-item legend="user">
         <c-input name="user" required placeholder="user"></c-input>
       </c-form-item>

@@ -217,7 +217,6 @@ export default class CTab extends HTMLElement {
 
   inittab() {
     const items = this.nav.querySelectorAll(".nav-item");
-    console.log("items: ", items);
     Array.from(items).forEach((item, index) => {
       this.tabPos[item.dataset.key] = {
         index: index,

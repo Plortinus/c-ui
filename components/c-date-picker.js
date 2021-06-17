@@ -33,7 +33,7 @@ const parseDate = (date, type = "date") => {
 
 class CDatePane extends HTMLElement {
   static get observedAttributes() {
-    return ["min", "max", "type"];
+    return ["min", "max", "type", "required"];
   }
 
   constructor() {
@@ -314,6 +314,10 @@ class CDatePane extends HTMLElement {
 
   get defaultvalue() {
     return this.getAttribute("defaultvalue") || new Date();
+  }
+
+  get required() {
+    return this.getAttribute("required") !== null;
   }
 
   get range() {
@@ -1025,7 +1029,7 @@ if (!customElements.get("c-date-range-pane")) {
 
 export default class CDatePicker extends HTMLElement {
   static get observedAttributes() {
-    return ["disabled", "dir", "min", "max", "type"];
+    return ["disabled", "dir", "min", "max", "type", "required"];
   }
 
   constructor() {
@@ -1194,6 +1198,18 @@ export default class CDatePicker extends HTMLElement {
 
   get dir() {
     return this.getAttribute("dir");
+  }
+  
+  get required() {
+    return this.getAttribute("required") !== null;
+  }
+
+  set required(value) {
+    if (value === null || value === false) {
+      this.removeAttribute("required");
+    } else {
+      this.setAttribute("required", "");
+    }
   }
 
   set min(value) {
