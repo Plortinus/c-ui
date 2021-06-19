@@ -1,113 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>C-AdminPage</title>
-  <script type="module" src="https://cdn.jsdelivr.net/npm/wbc-ui/index.min.js"></script>
-  <style>
-    .HolyGrail {
-      display: flex;
-      min-height: 100vh;
-      flex-direction: column;
-      margin: 0;
-    }
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>C-AdminPage</title>
+		<script
+			type="module"
+			src="https://cdn.jsdelivr.net/npm/wbc-ui/index.min.js"
+		></script>
+		<style>
+			.HolyGrail {
+				display: flex;
+				min-height: 100vh;
+				flex-direction: column;
+				margin: 0;
+			}
 
-    header,
-    footer {
-      flex: 1;
-    }
+			header,
+			footer {
+				flex: 1;
+			}
 
-    .HolyGrail-body {
-      display: flex;
-      flex: 1;
-    }
+			.HolyGrail-body {
+				display: flex;
+				flex: 1;
+			}
 
-    .HolyGrail-content {
-      flex: 1;
-    }
+			.HolyGrail-content {
+				flex: 1;
+			}
 
-    .HolyGrail-nav, .HolyGrail-ads {
-      /* 两个边栏的宽度设为12em */
-      flex: 0 0 9em;
-    }
+			.HolyGrail-nav,
+			.HolyGrail-ads {
+				/* 两个边栏的宽度设为12em */
+				flex: 0 0 9em;
+			}
 
-    .HolyGrail-nav {
-      /* 导航放到最左边 */
-      order: -1;
-      background-color: #000;
-      color: rgba(255, 255, 255, 0.65);
-    }
-    .HolyGrail-nav ul,li {
-      list-style: none;
-      padding-left: 0;
-      text-align: center;
-    }
-    .cosmo-menu {
-      cursor: pointer;
-    }
-    .cosmo-menu-submenu {
-      line-height: 44px;
-      user-select: none;
-    }
-    .cosmo-menu-submenu a {
-      color: rgba(255, 255, 255, 0.65);
-      text-decoration: none;
-    }
-    .cosmo-menu-submenu a :hover {
-      color:rgba(255, 255, 255, 1);
-    }
-    .cosmo-menu-submenu-selected {
-      background-color: #1890ff;
-      color: #fff;
-    }
-    .cosmo-menu-submenu-selected a {
-      color: #fff;
-    }
-    
-    @media (max-width: 768px) {
-      .HolyGrail-body {
-        flex-direction: column;
-        flex: 1;
-      }
-      .HolyGrail-nav,
-      .HolyGrail-ads,
-      .HolyGrail-content {
-        flex: auto;
-      }
-    }
-    .title-name {
-      margin-top: 20px;
-      font-size: 24px;
-      font-weight: bold;
-      text-align: center;
-      color: #fff;
-    }
-  </style>
-</head>
-<body class="HolyGrail">
-  <div class="HolyGrail-body">
-    <main class="HolyGrail-content">${content}</main>
-    <nav class="HolyGrail-nav">
-      <div class="title-name">
-        管理后台
-      </div>
-      <ul class="cosmo-menu">
-        <li class="cosmo-menu-submenu cosmo-menu-submenu-selected">
-          <a href="#">客户列表</a>
-        </li>
-        <li class="cosmo-menu-submenu">
-          <a href="#">商品列表</a>
-        </li>
-        <li class="cosmo-menu-submenu">
-          <a href="#">客户列表</a>
-        </li>
-        <li class="cosmo-menu-submenu">
-          <a href="#">客户列表</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</body>
+			.HolyGrail-nav {
+				/* 导航放到最左边 */
+				order: -1;
+				background-color: #000;
+				color: rgba(255, 255, 255, 0.65);
+			}
+			.HolyGrail-nav ul,
+			li {
+				list-style: none;
+				padding-left: 0;
+				text-align: center;
+			}
+			.cosmo-menu {
+				cursor: pointer;
+			}
+			.cosmo-menu-submenu {
+				line-height: 44px;
+				user-select: none;
+			}
+			.cosmo-menu-submenu a {
+				color: rgba(255, 255, 255, 0.65);
+				text-decoration: none;
+			}
+			.cosmo-menu-submenu a :hover {
+				color: rgba(255, 255, 255, 1);
+			}
+			.cosmo-menu-submenu-selected {
+				background-color: #1890ff;
+				color: #fff;
+			}
+			.cosmo-menu-submenu-selected a {
+				color: #fff;
+			}
+
+			@media (max-width: 768px) {
+				.HolyGrail-body {
+					flex-direction: column;
+					flex: 1;
+				}
+				.HolyGrail-nav,
+				.HolyGrail-ads,
+				.HolyGrail-content {
+					flex: auto;
+				}
+			}
+			.title-name {
+				margin-top: 20px;
+				font-size: 24px;
+				font-weight: bold;
+				text-align: center;
+				color: #fff;
+			}
+		</style>
+	</head>
+	<body class="HolyGrail">
+		<div class="HolyGrail-body">
+			<main class="HolyGrail-content">${content}</main>
+			<nav class="HolyGrail-nav">
+				<div class="title-name">管理后台</div>
+				<ul class="cosmo-menu">
+					<li class="cosmo-menu-submenu cosmo-menu-submenu-selected">
+						<a href="#">客户列表</a>
+					</li>
+					<li class="cosmo-menu-submenu">
+						<a href="#">商品列表</a>
+					</li>
+					<li class="cosmo-menu-submenu">
+						<a href="#">客户列表</a>
+					</li>
+					<li class="cosmo-menu-submenu">
+						<a href="#">客户列表</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</body>
 </html>

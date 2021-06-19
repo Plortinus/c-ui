@@ -1,12 +1,12 @@
 export default class CLoading extends HTMLElement {
-  static get observedAttributes() {
-    return ["color", "size"];
-  }
+	static get observedAttributes() {
+		return ['color', 'size']
+	}
 
-  constructor() {
-    super();
-    const shadowRoot = this.attachShadow({ mode: "open" });
-    shadowRoot.innerHTML = `
+	constructor() {
+		super()
+		const shadowRoot = this.attachShadow({ mode: 'open' })
+		shadowRoot.innerHTML = `
         <style>
         :host{
             font-size:inherit;
@@ -54,41 +54,41 @@ export default class CLoading extends HTMLElement {
         </style>
         <svg class="loading" id="loading" viewBox="22 22 44 44"><circle class="circle" cx="44" cy="44" r="20.2" fill="none" stroke-width="3.6"></circle></svg>
         <slot></slot>
-        `;
-  }
+        `
+	}
 
-  get size() {
-    return this.getAttribute("size") || "";
-  }
+	get size() {
+		return this.getAttribute('size') || ''
+	}
 
-  get color() {
-    return this.getAttribute("color") || "";
-  }
+	get color() {
+		return this.getAttribute('color') || ''
+	}
 
-  set size(value) {
-    this.setAttribute("size", value);
-  }
+	set size(value) {
+		this.setAttribute('size', value)
+	}
 
-  set color(value) {
-    this.setAttribute("color", value);
-  }
+	set color(value) {
+		this.setAttribute('color', value)
+	}
 
-  connectedCallback() {
-    this.loading = this.shadowRoot.getElementById("loading");
-    this.size && (this.size = this.size);
-    this.color && (this.color = this.color);
-  }
+	connectedCallback() {
+		this.loading = this.shadowRoot.getElementById('loading')
+		this.size && (this.size = this.size)
+		this.color && (this.color = this.color)
+	}
 
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (name == "color" && this.loading) {
-      this.loading.style.color = newValue;
-    }
-    if (name == "size" && this.loading) {
-      this.loading.style.fontSize = newValue + "px";
-    }
-  }
+	attributeChangedCallback(name, oldValue, newValue) {
+		if (name == 'color' && this.loading) {
+			this.loading.style.color = newValue
+		}
+		if (name == 'size' && this.loading) {
+			this.loading.style.fontSize = newValue + 'px'
+		}
+	}
 }
 
-if (!customElements.get("c-loading")) {
-  customElements.define("c-loading", CLoading);
+if (!customElements.get('c-loading')) {
+	customElements.define('c-loading', CLoading)
 }

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>C-AdminPage</title>
+		<script
+			type="module"
+			src="https://cdn.jsdelivr.net/npm/wbc-ui/index.min.js"
+		></script>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+			}
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+			}
+
+			header {
+				width: 100%;
+				height: 50px;
+				background: #1a2940;
+				color: #fff;
+			}
+      .HolyGrail {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+
+      .HolyGrail-body {
+        display: flex;
+        flex: 1;
+      }
+
+      .HolyGrail-content {
+        flex: 1;
+      }
+
+      .HolyGrail-nav, .HolyGrail-ads {
+        /* 两个边栏的宽度设为12em */
+        flex: 0 0 12em;
+      }
+
+      .HolyGrail-nav {
+        /* 导航放到最左边 */
+        order: -1;
+      }
+			.box {
+        flex: 0 0 12em;
+        order: -1;
+				background-color: #001529;
+			}
+
+			menu {
+				width: 180px;
+				/*height: calc(height-50);*/
+				/*max-height: 100%;*/
+				overflow: auto;
+				background-color: #001529;
+			}
+			menu .menu-item {
+				position: relative;
+			}
+			menu .menu-item > input {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 46px;
+				opacity: 0;
+				cursor: pointer;
+			}
+      menu .menu-parent, .menu-child{
+        color: #fff;
+      }
+			menu .menu-parent:hover {
+				background: #1a2940;
+			}
+			menu .menu-parent:active {
+				color: #fff;
+				background-color: #1890ff;
+			}
+      .menu-selected {
+        color: #fff;
+				background-color: #1890ff;
+      }
+			menu .menu-parent:visited {
+				color: #fff;
+				background-color: #1890ff;
+			}
+			menu span {
+				display: block;
+				padding: 5px 10px;
+				font-size: 16px;
+				line-height: 36px;
+				cursor: pointer;
+			}
+			menu span:hover {
+				background: #1a2940;
+				color: #fff;
+			}
+			menu span:active {
+				color: #fff;
+				background-color: #1890ff;
+			}
+			menu span.menu-child {
+				font-size: 14px;
+				text-indent: 20px;
+			}
+			menu .menu-item-list {
+				max-height: 0;
+				overflow: hidden;
+				transition: all 0.3s ease;
+			}
+			menu :checked + .menu-item-list {
+				max-height: 500px;
+			}
+			.tdcolor {
+				color: red;
+			}
+		</style>
+	</head>
+
+	<body class="HolyGrail">
+		<header><img src="/" alt="预留图片">后台管理</header>
+    <div class="HolyGrail-body">
+      <div class="HolyGrail-content">content</div>
+      <div class="box HolyGrail-nav">
+        <menu>
+          <div class="menu-item">
+            <span class="menu-parent menu-selected">单菜单</span>
+          </div>
+          <div class="menu-item">
+            <span class="menu-parent">单菜单</span>
+          </div>
+          <div class="menu-item">
+            <span class="menu-parent">菜单1</span>
+            <input type="checkbox" name="" value="" />
+            <div class="menu-item-list">
+              <span class="menu-child">子菜单1</span>
+              <span class="menu-child">子菜单2</span>
+              <span class="menu-child">子菜单3</span>
+              <span class="menu-child">子菜单4</span>
+            </div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-parent">菜单2</span>
+            <input type="checkbox" name="" value="" />
+            <div class="menu-item-list">
+              <span class="menu-child">子菜单1</span>
+              <span class="menu-child">子菜单2</span>
+              <span class="menu-child">子菜单3</span>
+              <span class="menu-child">子菜单4</span>
+            </div>
+          </div>
+          <div class="menu-item">
+            <span class="menu-parent">菜单3</span>
+            <input type="checkbox" name="" value="" />
+            <div class="menu-item-list">
+              <span class="menu-child">子菜单1</span>
+              <span class="menu-child">子菜单2</span>
+              <span class="menu-child">子菜单3</span>
+              <span class="menu-child">子菜单4</span>
+            </div>
+          </div>
+        </menu>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+			var menu = document.getElementsByTagName('menu-parent')
+			window.onload = function () {
+				for (var i = 0; i < menu.length; i++) {
+					menu[i].onclick = function () {
+						menuOnclick(this)
+					}
+				}
+			}
+			function menuOnclick(obj) {
+				for (var j = 0; j < menu.length; j++) {
+					if (menu[j] == obj) {
+						menu[j].className = 'tdcolor'
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

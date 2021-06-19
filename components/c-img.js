@@ -1,15 +1,15 @@
-import "./c-icon.js";
+import './c-icon.js'
 
 class CGallery extends HTMLElement {
-  static get observedAttributes() {
-    return ["open"];
-  }
+	static get observedAttributes() {
+		return ['open']
+	}
 
-  constructor() {
-    super();
-    const shadowRoot = this.attachShadow({ mode: "open" });
-    this.setAttribute("tabindex", 0);
-    shadowRoot.innerHTML = `
+	constructor() {
+		super()
+		const shadowRoot = this.attachShadow({ mode: 'open' })
+		this.setAttribute('tabindex', 0)
+		shadowRoot.innerHTML = `
         <style>
         :host{
             position:fixed;
@@ -140,149 +140,149 @@ class CGallery extends HTMLElement {
         <button id="close" class="btn-close"><c-icon name="close"></c-icon></button>
         <slot id="slot"></slot>
         <a class="action" id="dots"><c-icon name="caret-left" class="left"></c-icon><div class="dots"></div><c-icon name="caret-right" class="right"></c-icon></a>
-        `;
-  }
+        `
+	}
 
-  get open() {
-    return this.getAttribute("open") !== null;
-  }
+	get open() {
+		return this.getAttribute('open') !== null
+	}
 
-  set open(value) {
-    if (value === null || value === false) {
-      this.removeAttribute("open");
-    } else {
-      this.setAttribute("open", "");
-    }
-  }
+	set open(value) {
+		if (value === null || value === false) {
+			this.removeAttribute('open')
+		} else {
+			this.setAttribute('open', '')
+		}
+	}
 
-  show(index) {
-    this.open = true;
-    this.change(index);
-  }
+	show(index) {
+		this.open = true
+		this.change(index)
+	}
 
-  change(index) {
-    this.index = this.indexlist.indexOf(Number(index));
-    const preimg = this.querySelector(`img.current`);
-    const predots = this.dots.querySelector(`i.current`);
-    if (preimg && predots) {
-      preimg.classList.remove("current");
-      predots.classList.remove("current");
-    }
-    this.querySelector(`img[data-index="${index}"]`).classList.add("current");
-    const curdot = this.dots.querySelector(`i[data-index="${index}"]`);
-    if (curdot) {
-      curdot.classList.add("current");
-    }
-  }
+	change(index) {
+		this.index = this.indexlist.indexOf(Number(index))
+		const preimg = this.querySelector(`img.current`)
+		const predots = this.dots.querySelector(`i.current`)
+		if (preimg && predots) {
+			preimg.classList.remove('current')
+			predots.classList.remove('current')
+		}
+		this.querySelector(`img[data-index="${index}"]`).classList.add('current')
+		const curdot = this.dots.querySelector(`i[data-index="${index}"]`)
+		if (curdot) {
+			curdot.classList.add('current')
+		}
+	}
 
-  add(img, index) {
-    this.indexlist.push(index);
-    this.appendChild(img);
-  }
+	add(img, index) {
+		this.indexlist.push(index)
+		this.appendChild(img)
+	}
 
-  go(step) {
-    this.index += step;
-    const len = this.indexlist.length;
-    if (this.index > len - 1) {
-      this.index = 0;
-    }
-    if (this.index < 0) {
-      this.index = len - 1;
-    }
-    this.change(this.indexlist[this.index]);
-  }
+	go(step) {
+		this.index += step
+		const len = this.indexlist.length
+		if (this.index > len - 1) {
+			this.index = 0
+		}
+		if (this.index < 0) {
+			this.index = len - 1
+		}
+		this.change(this.indexlist[this.index])
+	}
 
-  remove(index) {
-    this.indexlist = this.indexlist.filter((el) => el != index);
-    const child = this.querySelector(`img[data-index="${index}"]`);
-    child && this.removeChild(child);
-  }
+	remove(index) {
+		this.indexlist = this.indexlist.filter((el) => el != index)
+		const child = this.querySelector(`img[data-index="${index}"]`)
+		child && this.removeChild(child)
+	}
 
-  connectedCallback() {
-    this.indexlist = [];
-    this.slots = this.shadowRoot.getElementById("slot");
-    this.dots = this.shadowRoot.getElementById("dots");
-    this.close = this.shadowRoot.getElementById("close");
-    this.addEventListener("transitionend", (ev) => {
-      if (ev.propertyName === "transform" && this.open) {
-        this.focus();
-      }
-    });
-    this.slots.addEventListener("slotchange", () => {
-      if (this.indexlist.length > 1) {
-        this.dots.classList.remove("only");
-        this.indexlist = this.indexlist.sort((a, b) => a - b);
-        let html = "";
-        this.indexlist.forEach((el) => {
-          html +=
-            "<i data-index=" +
-            el +
-            " class=" +
-            (el == this.indexlist[this.index] ? "current" : "") +
-            "></i>";
-        });
-        this.dots.querySelector(".dots").innerHTML = html;
-      } else {
-        this.dots.classList.add("only");
-      }
-    });
-    this.dots.addEventListener("click", (ev) => {
-      if (ev.target.tagName === "I") {
-        this.change(ev.target.dataset.index);
-      }
-      if (ev.target.className === "left") {
-        this.go(-1);
-      }
-      if (ev.target.className === "right") {
-        this.go(1);
-      }
-    });
-    this.addEventListener("keydown", (ev) => {
-      switch (ev.keyCode) {
-        case 37: //Left
-          this.go(-1);
-          break;
-        case 39: //Right
-          this.go(1);
-          break;
-        case 8: //Backspace
-        case 27: //Esc
-          ev.preventDefault();
-          this.open = false;
-          break;
-        default:
-          break;
-      }
-    });
-    this.close.addEventListener("click", (ev) => {
-      this.open = false;
-    });
-  }
+	connectedCallback() {
+		this.indexlist = []
+		this.slots = this.shadowRoot.getElementById('slot')
+		this.dots = this.shadowRoot.getElementById('dots')
+		this.close = this.shadowRoot.getElementById('close')
+		this.addEventListener('transitionend', (ev) => {
+			if (ev.propertyName === 'transform' && this.open) {
+				this.focus()
+			}
+		})
+		this.slots.addEventListener('slotchange', () => {
+			if (this.indexlist.length > 1) {
+				this.dots.classList.remove('only')
+				this.indexlist = this.indexlist.sort((a, b) => a - b)
+				let html = ''
+				this.indexlist.forEach((el) => {
+					html +=
+						'<i data-index=' +
+						el +
+						' class=' +
+						(el == this.indexlist[this.index] ? 'current' : '') +
+						'></i>'
+				})
+				this.dots.querySelector('.dots').innerHTML = html
+			} else {
+				this.dots.classList.add('only')
+			}
+		})
+		this.dots.addEventListener('click', (ev) => {
+			if (ev.target.tagName === 'I') {
+				this.change(ev.target.dataset.index)
+			}
+			if (ev.target.className === 'left') {
+				this.go(-1)
+			}
+			if (ev.target.className === 'right') {
+				this.go(1)
+			}
+		})
+		this.addEventListener('keydown', (ev) => {
+			switch (ev.keyCode) {
+				case 37: //Left
+					this.go(-1)
+					break
+				case 39: //Right
+					this.go(1)
+					break
+				case 8: //Backspace
+				case 27: //Esc
+					ev.preventDefault()
+					this.open = false
+					break
+				default:
+					break
+			}
+		})
+		this.close.addEventListener('click', (ev) => {
+			this.open = false
+		})
+	}
 
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (name == "open" && this.shadowRoot) {
-      if (newValue == null) {
-        document
-          .querySelector(`c-img[index="${this.indexlist[this.index]}"]`)
-          .focus();
-      }
-    }
-  }
+	attributeChangedCallback(name, oldValue, newValue) {
+		if (name == 'open' && this.shadowRoot) {
+			if (newValue == null) {
+				document
+					.querySelector(`c-img[index="${this.indexlist[this.index]}"]`)
+					.focus()
+			}
+		}
+	}
 }
 
-if (!customElements.get("c-gallery")) {
-  customElements.define("c-gallery", CGallery);
+if (!customElements.get('c-gallery')) {
+	customElements.define('c-gallery', CGallery)
 }
 
 export default class CImg extends HTMLElement {
-  static get observedAttributes() {
-    return ["lazy", "src", "defaultsrc", "ratio"];
-  }
+	static get observedAttributes() {
+		return ['lazy', 'src', 'defaultsrc', 'ratio']
+	}
 
-  constructor() {
-    super();
-    const shadowRoot = this.attachShadow({ mode: "open" });
-    shadowRoot.innerHTML = `
+	constructor() {
+		super()
+		const shadowRoot = this.attachShadow({ mode: 'open' })
+		shadowRoot.innerHTML = `
         <style>
         :host {
             display:inline-block;
@@ -508,10 +508,10 @@ export default class CImg extends HTMLElement {
         }
         </style>
         <div class="placeholder" id="placeholder" style="${
-          this.ratio ? "padding-top:" + this.ratio : ""
-        }"><div class="placeholder-icon"><c-icon path="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32z m-40 632H136v-39.9l138.5-164.3 150.1 178L658.1 489 888 761.6V792z m0-129.8L664.2 396.8c-3.2-3.8-9-3.8-12.2 0L424.6 666.4l-144-170.7c-3.2-3.8-9-3.8-12.2 0L136 652.7V232h752v430.2z"></c-icon>${
-      this.alt
-    }</div></div>
+					this.ratio ? 'padding-top:' + this.ratio : ''
+				}"><div class="placeholder-icon"><c-icon path="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32z m-40 632H136v-39.9l138.5-164.3 150.1 178L658.1 489 888 761.6V792z m0-129.8L664.2 396.8c-3.2-3.8-9-3.8-12.2 0L424.6 666.4l-144-170.7c-3.2-3.8-9-3.8-12.2 0L136 652.7V232h752v430.2z"></c-icon>${
+			this.alt
+		}</div></div>
         <c-icon class="view" name='View'></c-icon>
         <img>
         <div class="loading">
@@ -522,178 +522,178 @@ export default class CImg extends HTMLElement {
                 <div class="shape shape4"></div>
             </div>
         </div>
-        `;
-  }
+        `
+	}
 
-  get src() {
-    return this.getAttribute("src");
-  }
+	get src() {
+		return this.getAttribute('src')
+	}
 
-  get defaultsrc() {
-    return this.getAttribute("defaultsrc");
-  }
+	get defaultsrc() {
+		return this.getAttribute('defaultsrc')
+	}
 
-  get ratio() {
-    //16/9
-    const ratio = this.getAttribute("ratio");
-    if (ratio && ratio.includes("/")) {
-      const r = ratio.split("/");
-      return (r[1] / r[0]) * 100 + "%";
-    }
-    return 0;
-  }
+	get ratio() {
+		//16/9
+		const ratio = this.getAttribute('ratio')
+		if (ratio && ratio.includes('/')) {
+			const r = ratio.split('/')
+			return (r[1] / r[0]) * 100 + '%'
+		}
+		return 0
+	}
 
-  get lazy() {
-    return this.getAttribute("lazy") !== null;
-  }
+	get lazy() {
+		return this.getAttribute('lazy') !== null
+	}
 
-  get fit() {
-    return this.getAttribute("fit");
-  }
+	get fit() {
+		return this.getAttribute('fit')
+	}
 
-  get gallery() {
-    return this.getAttribute("gallery");
-  }
+	get gallery() {
+		return this.getAttribute('gallery')
+	}
 
-  get error() {
-    return this.getAttribute("error") !== null;
-  }
+	get error() {
+		return this.getAttribute('error') !== null
+	}
 
-  get default() {
-    return this.getAttribute("default") !== null;
-  }
+	get default() {
+		return this.getAttribute('default') !== null
+	}
 
-  get alt() {
-    return this.getAttribute("alt") || "error";
-  }
+	get alt() {
+		return this.getAttribute('alt') || 'error'
+	}
 
-  set src(value) {
-    this.setAttribute("src", value);
-  }
+	set src(value) {
+		this.setAttribute('src', value)
+	}
 
-  set fit(value) {
-    this.setAttribute("fit", value);
-  }
-  set ratio(value) {
-    this.setAttribute("ratio", value);
-  }
+	set fit(value) {
+		this.setAttribute('fit', value)
+	}
+	set ratio(value) {
+		this.setAttribute('ratio', value)
+	}
 
-  set error(value) {
-    if (value) {
-      this.setAttribute("error", "");
-    } else {
-      this.removeAttribute("error");
-    }
-  }
+	set error(value) {
+		if (value) {
+			this.setAttribute('error', '')
+		} else {
+			this.removeAttribute('error')
+		}
+	}
 
-  set default(value) {
-    if (value) {
-      this.setAttribute("default", "");
-    } else {
-      this.removeAttribute("default");
-    }
-  }
+	set default(value) {
+		if (value) {
+			this.setAttribute('default', '')
+		} else {
+			this.removeAttribute('default')
+		}
+	}
 
-  focus() {
-    this.img.focus();
-  }
+	focus() {
+		this.img.focus()
+	}
 
-  load(src, hasload) {
-    const img = new Image();
-    img.src = src;
-    this.error = false;
-    img.onload = () => {
-      this.img.alt = this.alt;
-      this.img.src = src;
-      if (!this.default) {
-        this.initgallery();
-      }
-    };
-    img.onerror = () => {
-      this.error = true;
-      this.img.removeAttribute("tabindex");
-      if (this.defaultsrc && !hasload) {
-        this.default = true;
-        this.load(this.defaultsrc, true);
-      }
-      //window['CGallery' + this.gallery] && window['CGallery' + this.gallery].remove(this.CImgIndex);
-    };
-  }
+	load(src, hasload) {
+		const img = new Image()
+		img.src = src
+		this.error = false
+		img.onload = () => {
+			this.img.alt = this.alt
+			this.img.src = src
+			if (!this.default) {
+				this.initgallery()
+			}
+		}
+		img.onerror = () => {
+			this.error = true
+			this.img.removeAttribute('tabindex')
+			if (this.defaultsrc && !hasload) {
+				this.default = true
+				this.load(this.defaultsrc, true)
+			}
+			//window['CGallery' + this.gallery] && window['CGallery' + this.gallery].remove(this.CImgIndex);
+		}
+	}
 
-  initgallery() {
-    if (this.gallery !== null) {
-      if (!window["CGallery" + this.gallery]) {
-        window["CGallery" + this.gallery] = new CGallery();
-        document.body.appendChild(window["CGallery" + this.gallery]);
-      }
-      this.img.setAttribute("tabindex", 0);
-      this.setAttribute("index", this.CImgIndex);
-      this.img.addEventListener("click", () => {
-        if (!this.default) {
-          window["CGallery" + this.gallery].show(this.CImgIndex);
-        }
-      });
-      this.img.addEventListener("keydown", (ev) => {
-        switch (ev.keyCode) {
-          case 13: //Enter
-            if (!this.default) {
-              window["CGallery" + this.gallery].show(this.CImgIndex);
-            }
-            break;
-          default:
-            break;
-        }
-      });
-      const img = this.img.cloneNode(true);
-      img.removeAttribute("tabindex");
-      img.style.order = this.CImgIndex;
-      img.dataset.index = this.CImgIndex;
-      window["CGallery" + this.gallery].add(img, this.CImgIndex);
-    }
-  }
+	initgallery() {
+		if (this.gallery !== null) {
+			if (!window['CGallery' + this.gallery]) {
+				window['CGallery' + this.gallery] = new CGallery()
+				document.body.appendChild(window['CGallery' + this.gallery])
+			}
+			this.img.setAttribute('tabindex', 0)
+			this.setAttribute('index', this.CImgIndex)
+			this.img.addEventListener('click', () => {
+				if (!this.default) {
+					window['CGallery' + this.gallery].show(this.CImgIndex)
+				}
+			})
+			this.img.addEventListener('keydown', (ev) => {
+				switch (ev.keyCode) {
+					case 13: //Enter
+						if (!this.default) {
+							window['CGallery' + this.gallery].show(this.CImgIndex)
+						}
+						break
+					default:
+						break
+				}
+			})
+			const img = this.img.cloneNode(true)
+			img.removeAttribute('tabindex')
+			img.style.order = this.CImgIndex
+			img.dataset.index = this.CImgIndex
+			window['CGallery' + this.gallery].add(img, this.CImgIndex)
+		}
+	}
 
-  connectedCallback() {
-    if (window.CImgIndex > -1) {
-      window.CImgIndex++;
-    } else {
-      window.CImgIndex = 0;
-    }
-    this.CImgIndex = window.CImgIndex;
-    this.placeholder = this.shadowRoot.getElementById("placeholder");
-    this.img = this.shadowRoot.querySelector("img");
-    if (this.lazy) {
-      this.observer = new IntersectionObserver((ioes) => {
-        ioes.forEach((ioe) => {
-          const el = ioe.target;
-          const intersectionRatio = ioe.intersectionRatio;
-          if (intersectionRatio > 0 && intersectionRatio <= 1) {
-            this.load(this.src);
-            this.observer.unobserve(el);
-          }
-        });
-      });
-      this.observer.observe(this.img);
-    } else {
-      this.load(this.src);
-    }
-  }
+	connectedCallback() {
+		if (window.CImgIndex > -1) {
+			window.CImgIndex++
+		} else {
+			window.CImgIndex = 0
+		}
+		this.CImgIndex = window.CImgIndex
+		this.placeholder = this.shadowRoot.getElementById('placeholder')
+		this.img = this.shadowRoot.querySelector('img')
+		if (this.lazy) {
+			this.observer = new IntersectionObserver((ioes) => {
+				ioes.forEach((ioe) => {
+					const el = ioe.target
+					const intersectionRatio = ioe.intersectionRatio
+					if (intersectionRatio > 0 && intersectionRatio <= 1) {
+						this.load(this.src)
+						this.observer.unobserve(el)
+					}
+				})
+			})
+			this.observer.observe(this.img)
+		} else {
+			this.load(this.src)
+		}
+	}
 
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (name == "src" && this.img) {
-      this.placeholder.classList.remove("show");
-      this.load(newValue);
-    }
-    if (name == "ratio" && this.img) {
-      this.placeholder.style.paddingTop = this.ratio;
-    }
-  }
+	attributeChangedCallback(name, oldValue, newValue) {
+		if (name == 'src' && this.img) {
+			this.placeholder.classList.remove('show')
+			this.load(newValue)
+		}
+		if (name == 'ratio' && this.img) {
+			this.placeholder.style.paddingTop = this.ratio
+		}
+	}
 
-  disconnectedCallback() {
-    window["CGallery" + this.gallery] &&
-      window["CGallery" + this.gallery].remove(this.CImgIndex);
-  }
+	disconnectedCallback() {
+		window['CGallery' + this.gallery] &&
+			window['CGallery' + this.gallery].remove(this.CImgIndex)
+	}
 }
 
-if (!customElements.get("c-img")) {
-  customElements.define("c-img", CImg);
+if (!customElements.get('c-img')) {
+	customElements.define('c-img', CImg)
 }

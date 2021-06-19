@@ -1,27 +1,27 @@
-import "./components/c-button.js";
-import "./components/c-slider.js";
-import "./components/c-select.js";
-import "./components/c-loading.js";
-import "./components/c-tab.js";
-import "./components/c-switch.js";
-import "./components/c-checkbox.js";
-import "./components/c-radio.js";
-import "./components/c-tips.js";
-import "./components/c-icon.js";
-import "./components/c-layout.js";
-import "./components/c-input.js";
-import "./components/c-img.js";
-import "./components/c-rate.js";
-import "./components/c-popover.js";
-import "./components/c-color-picker.js";
-import "./components/c-form.js";
-import "./components/c-pagination.js";
-import "./components/c-date-picker.js";
-import "./components/c-table.js";
-import "./components/c-text.js";
-import "./components/c-view.js";
-import "./components/c-datalist.js";
-import CDialog from "./components/c-dialog.js";
-import CMessage from "./components/c-message.js";
-window.CDialog = CDialog;
-window.CMessage = CMessage;
+import './components/c-button.js'
+import './components/c-slider.js'
+import './components/c-select.js'
+import './components/c-loading.js'
+import './components/c-tab.js'
+import './components/c-switch.js'
+import './components/c-checkbox.js'
+import './components/c-radio.js'
+import './components/c-tips.js'
+import './components/c-icon.js'
+import './components/c-layout.js'
+import './components/c-input.js'
+import './components/c-img.js'
+import './components/c-rate.js'
+import './components/c-popover.js'
+import './components/c-color-picker.js'
+import './components/c-form.js'
+import './components/c-pagination.js'
+import './components/c-date-picker.js'
+import './components/c-table.js'
+import './components/c-text.js'
+import './components/c-view.js'
+import './components/c-datalist.js'
+import CDialog from './components/c-dialog.js'
+import CMessage from './components/c-message.js'
+window.CDialog = CDialog
+window.CMessage = CMessage

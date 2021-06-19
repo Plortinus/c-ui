@@ -40,9 +40,9 @@ npm i wbc-ui
 
 ```html
 <script type="module">
-  import "https://unpkg.com/wbc-ui";
+	import 'https://unpkg.com/wbc-ui'
 
-  import "https://unpkg.com/wbc-ui@0.0.3"; //指定版本号
+	import 'https://unpkg.com/wbc-ui@0.0.3' //指定版本号
 </script>
 
 <!--or-->
@@ -69,9 +69,9 @@ npm i wbc-ui
 
 ```html
 <script type="module">
-  import "./node_modules/wbc-ui/index.js"; //推荐
-  //如需单独使用，文档中都是单独使用的情况，推荐全部引用，即第一种方式。
-  import "./node_modules/wbc-ui/components/c-button.js";
+	import './node_modules/wbc-ui/index.js' //推荐
+	//如需单独使用，文档中都是单独使用的情况，推荐全部引用，即第一种方式。
+	import './node_modules/wbc-ui/components/c-button.js'
 </script>
 
 <!--or-->
@@ -85,10 +85,10 @@ npm i wbc-ui
 ### react 项目引用
 
 ```js
-import "wbc-ui"; //推荐
+import 'wbc-ui' //推荐
 //如需单独使用
-import "wbc-ui/components/c-button.js";
-ReactDOM.render(<c-button>button</c-button>, document.body);
+import 'wbc-ui/components/c-button.js'
+ReactDOM.render(<c-button>button</c-button>, document.body)
 ```
 
 > 关于`react`中使用`Web Components`的注意细节可参考[https://react.docschina.org/docs/web-components.html](https://react.docschina.org/docs/web-components.html)
@@ -96,9 +96,9 @@ ReactDOM.render(<c-button>button</c-button>, document.body);
 ### vue 项目引用
 
 ```js
-import "wbc-ui"; //推荐
+import 'wbc-ui' //推荐
 //如需单独使用
-import "wbc-ui/components/c-button.js";
+import 'wbc-ui/components/c-button.js'
 ```
 
 使用同原生组件类似
@@ -109,12 +109,12 @@ import "wbc-ui/components/c-button.js";
 
 ```js
 Vue.config.ignoredElements = [
-  "my-custom-web-component",
-  "another-web-component",
-  // 用一个 `RegExp` 忽略所有“ion-”开头的元素
-  // 仅在 2.5+ 支持
-  /^ion-/,
-];
+	'my-custom-web-component',
+	'another-web-component',
+	// 用一个 `RegExp` 忽略所有“ion-”开头的元素
+	// 仅在 2.5+ 支持
+	/^ion-/,
+]
 ```
 
 其他事件绑定可自行搜索~
@@ -131,12 +131,12 @@ Vue.config.ignoredElements = [
 
 ```js
 btn.onclick = function () {
-  alert(5);
-};
+	alert(5)
+}
 
-btn.addEventListener("click", function () {
-  alert(5);
-});
+btn.addEventListener('click', function () {
+	alert(5)
+})
 ```
 
 > 自定义事件只能通过`addEventListener`绑定
@@ -145,15 +145,15 @@ btn.addEventListener("click", function () {
 
 ```html
 <c-tab>
-  <c-tab-content label="tab1">tab1</c-tab-content>
-  <c-tab-content label="tab2">tab2</c-tab-content>
-  <c-tab-content label="tab3" id="tab3">tab3</c-tab-content>
+	<c-tab-content label="tab1">tab1</c-tab-content>
+	<c-tab-content label="tab2">tab2</c-tab-content>
+	<c-tab-content label="tab3" id="tab3">tab3</c-tab-content>
 </c-tab>
 ```
 
 ```js
-const tab3 = document.getElementById("tab3");
-tab3.parentNode; //c-tab
+const tab3 = document.getElementById('tab3')
+tab3.parentNode //c-tab
 ```
 
 组件的布尔类型的属性也遵从原生规范（添加和移除属性），比如

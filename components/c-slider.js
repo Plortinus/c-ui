@@ -1,20 +1,20 @@
-import "./c-tips.js";
+import './c-tips.js'
 
 export default class CSlider extends HTMLElement {
-  static get observedAttributes() {
-    return ["min", "max", "step", "disabled", "showtips", "suffix"];
-  }
+	static get observedAttributes() {
+		return ['min', 'max', 'step', 'disabled', 'showtips', 'suffix']
+	}
 
-  constructor() {
-    super();
-    const shadowRoot = this.attachShadow({ mode: "open" });
-    shadowRoot.innerHTML = `
+	constructor() {
+		super()
+		const shadowRoot = this.attachShadow({ mode: 'open' })
+		shadowRoot.innerHTML = `
         <style>
         :host{ 
             box-sizing:border-box; 
             display:flex; 
             padding:0 5px;
-            ${this.vertical ? "height:var(--h,300px)" : ""}
+            ${this.vertical ? 'height:var(--h,300px)' : ''}
         }
         :host([disabled]){ 
             opacity:.8; 
@@ -132,204 +132,204 @@ export default class CSlider extends HTMLElement {
         }
         </style>
         <c-tips id='slider-con' dir=${
-          this.vertical ? "right" : "top"
-        } style="--percent:${
-      (this.defaultvalue - this.min) / (this.max - this.min)
-    }" tips="${
-      this.showtips && !this.disabled ? this.defaultvalue : ""
-    }" suffix="${this.suffix}" prefix="${
-      this.prefix
-    }"><input id='slider' value=${this.defaultvalue} min=${this.min} max=${
-      this.max
-    } step=${this.step} ${
-      this.disabled ? "disabled" : ""
-    } type='range'></c-tips>
-        `;
-  }
+					this.vertical ? 'right' : 'top'
+				} style="--percent:${
+			(this.defaultvalue - this.min) / (this.max - this.min)
+		}" tips="${
+			this.showtips && !this.disabled ? this.defaultvalue : ''
+		}" suffix="${this.suffix}" prefix="${
+			this.prefix
+		}"><input id='slider' value=${this.defaultvalue} min=${this.min} max=${
+			this.max
+		} step=${this.step} ${
+			this.disabled ? 'disabled' : ''
+		} type='range'></c-tips>
+        `
+	}
 
-  focus() {
-    this.slider.focus();
-  }
+	focus() {
+		this.slider.focus()
+	}
 
-  connectedCallback() {
-    this.slider = this.shadowRoot.getElementById("slider");
-    this.sliderCon = this.shadowRoot.getElementById("slider-con");
-    if (this.vertical) {
-      this.resizeObserver = new ResizeObserver((entries) => {
-        for (let entry of entries) {
-          const { height } = entry.contentRect;
-          this.sliderCon.style.setProperty("--h", height + "px");
-        }
-      });
-      this.resizeObserver.observe(this);
-    }
-    this.slider.addEventListener("input", (ev) => {
-      this.value = this.slider.value;
-      this._oninput = true;
-      ev.stopPropagation();
-      this.dispatchEvent(
-        new CustomEvent("input", {
-          detail: {
-            value: this.slider.value,
-          },
-        })
-      );
-    });
-    this.slider.addEventListener("change", (ev) => {
-      this.value = this.slider.value;
-      this._oninput = false;
-      this.dispatchEvent(
-        new CustomEvent("change", {
-          detail: {
-            value: this.slider.value,
-          },
-        })
-      );
-    });
-    this.addEventListener(
-      "wheel",
-      (ev) => {
-        if (getComputedStyle(this.slider).zIndex == 2) {
-          ev.preventDefault();
-          if (
-            (ev.deltaY < 0 && !this.vertical) ||
-            (ev.deltaY > 0 && this.vertical)
-          ) {
-            this.value -= this.step * 5;
-          } else {
-            this.value += this.step * 5;
-          }
-          this.dispatchEvent(
-            new CustomEvent("change", {
-              detail: {
-                value: this.value,
-              },
-            })
-          );
-        }
-      },
-      true
-    );
-  }
+	connectedCallback() {
+		this.slider = this.shadowRoot.getElementById('slider')
+		this.sliderCon = this.shadowRoot.getElementById('slider-con')
+		if (this.vertical) {
+			this.resizeObserver = new ResizeObserver((entries) => {
+				for (let entry of entries) {
+					const { height } = entry.contentRect
+					this.sliderCon.style.setProperty('--h', height + 'px')
+				}
+			})
+			this.resizeObserver.observe(this)
+		}
+		this.slider.addEventListener('input', (ev) => {
+			this.value = this.slider.value
+			this._oninput = true
+			ev.stopPropagation()
+			this.dispatchEvent(
+				new CustomEvent('input', {
+					detail: {
+						value: this.slider.value,
+					},
+				})
+			)
+		})
+		this.slider.addEventListener('change', (ev) => {
+			this.value = this.slider.value
+			this._oninput = false
+			this.dispatchEvent(
+				new CustomEvent('change', {
+					detail: {
+						value: this.slider.value,
+					},
+				})
+			)
+		})
+		this.addEventListener(
+			'wheel',
+			(ev) => {
+				if (getComputedStyle(this.slider).zIndex == 2) {
+					ev.preventDefault()
+					if (
+						(ev.deltaY < 0 && !this.vertical) ||
+						(ev.deltaY > 0 && this.vertical)
+					) {
+						this.value -= this.step * 5
+					} else {
+						this.value += this.step * 5
+					}
+					this.dispatchEvent(
+						new CustomEvent('change', {
+							detail: {
+								value: this.value,
+							},
+						})
+					)
+				}
+			},
+			true
+		)
+	}
 
-  disconnectedCallback() {
-    if (this.vertical) {
-      this.resizeObserver.unobserve(this);
-    }
-  }
+	disconnectedCallback() {
+		if (this.vertical) {
+			this.resizeObserver.unobserve(this)
+		}
+	}
 
-  get value() {
-    return Number(this.slider.value);
-  }
+	get value() {
+		return Number(this.slider.value)
+	}
 
-  get defaultvalue() {
-    return this.getAttribute("defaultvalue") || 0;
-  }
+	get defaultvalue() {
+		return this.getAttribute('defaultvalue') || 0
+	}
 
-  get suffix() {
-    return this.getAttribute("suffix") || "";
-  }
+	get suffix() {
+		return this.getAttribute('suffix') || ''
+	}
 
-  get prefix() {
-    return this.getAttribute("prefix") || "";
-  }
+	get prefix() {
+		return this.getAttribute('prefix') || ''
+	}
 
-  get min() {
-    return this.getAttribute("min") || 0;
-  }
+	get min() {
+		return this.getAttribute('min') || 0
+	}
 
-  get max() {
-    return this.getAttribute("max") || 100;
-  }
+	get max() {
+		return this.getAttribute('max') || 100
+	}
 
-  get disabled() {
-    return this.getAttribute("disabled") !== null;
-  }
+	get disabled() {
+		return this.getAttribute('disabled') !== null
+	}
 
-  get showtips() {
-    return this.getAttribute("showtips") !== null;
-  }
+	get showtips() {
+		return this.getAttribute('showtips') !== null
+	}
 
-  get vertical() {
-    return this.getAttribute("vertical") !== null;
-  }
+	get vertical() {
+		return this.getAttribute('vertical') !== null
+	}
 
-  set disabled(value) {
-    if (value === null || value === false) {
-      this.removeAttribute("disabled");
-    } else {
-      this.setAttribute("disabled", "");
-    }
-  }
+	set disabled(value) {
+		if (value === null || value === false) {
+			this.removeAttribute('disabled')
+		} else {
+			this.setAttribute('disabled', '')
+		}
+	}
 
-  set showtips(value) {
-    if (value === null || value === false) {
-      this.removeAttribute("showtips");
-    } else {
-      this.setAttribute("showtips", "");
-    }
-  }
+	set showtips(value) {
+		if (value === null || value === false) {
+			this.removeAttribute('showtips')
+		} else {
+			this.setAttribute('showtips', '')
+		}
+	}
 
-  get step() {
-    return this.getAttribute("step") || 1;
-  }
+	get step() {
+		return this.getAttribute('step') || 1
+	}
 
-  set value(value) {
-    this.slider.value = value;
-    this.sliderCon.style.setProperty(
-      "--percent",
-      (this.value - this.min) / (this.max - this.min)
-    );
-    if (this.showtips && !this.disabled) {
-      this.sliderCon.tips = this.value;
-    } else {
-      this.sliderCon.tips = "";
-    }
-  }
+	set value(value) {
+		this.slider.value = value
+		this.sliderCon.style.setProperty(
+			'--percent',
+			(this.value - this.min) / (this.max - this.min)
+		)
+		if (this.showtips && !this.disabled) {
+			this.sliderCon.tips = this.value
+		} else {
+			this.sliderCon.tips = ''
+		}
+	}
 
-  set min(value) {
-    this.setAttribute("min", value);
-  }
+	set min(value) {
+		this.setAttribute('min', value)
+	}
 
-  set max(value) {
-    this.setAttribute("max", value);
-  }
+	set max(value) {
+		this.setAttribute('max', value)
+	}
 
-  set step(value) {
-    this.setAttribute("step", value);
-  }
+	set step(value) {
+		this.setAttribute('step', value)
+	}
 
-  set prefix(value) {
-    this.setAttribute("prefix", value);
-  }
+	set prefix(value) {
+		this.setAttribute('prefix', value)
+	}
 
-  set suffix(value) {
-    this.setAttribute("suffix", value);
-  }
+	set suffix(value) {
+		this.setAttribute('suffix', value)
+	}
 
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (this.slider && oldValue !== newValue && !this._oninput) {
-      if (name == "disabled") {
-        if (newValue !== null) {
-          this.slider.setAttribute("disabled", "disabled");
-        } else {
-          this.slider.removeAttribute("disabled");
-        }
-      } else {
-        this.slider[name] = newValue;
-        this[name] = newValue;
-        this.sliderCon.style.setProperty(
-          "--percent",
-          (this.value - this.min) / (this.max - this.min)
-        );
-        if (name === "suffix") {
-          this.sliderCon.suffix = newValue;
-        }
-      }
-    }
-  }
+	attributeChangedCallback(name, oldValue, newValue) {
+		if (this.slider && oldValue !== newValue && !this._oninput) {
+			if (name == 'disabled') {
+				if (newValue !== null) {
+					this.slider.setAttribute('disabled', 'disabled')
+				} else {
+					this.slider.removeAttribute('disabled')
+				}
+			} else {
+				this.slider[name] = newValue
+				this[name] = newValue
+				this.sliderCon.style.setProperty(
+					'--percent',
+					(this.value - this.min) / (this.max - this.min)
+				)
+				if (name === 'suffix') {
+					this.sliderCon.suffix = newValue
+				}
+			}
+		}
+	}
 }
 
-if (!customElements.get("c-slider")) {
-  customElements.define("c-slider", CSlider);
+if (!customElements.get('c-slider')) {
+	customElements.define('c-slider', CSlider)
 }

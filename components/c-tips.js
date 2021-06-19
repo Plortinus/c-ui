@@ -1,12 +1,12 @@
 export default class CTips extends HTMLElement {
-  static get observedAttributes() {
-    return ["color"];
-  }
+	static get observedAttributes() {
+		return ['color']
+	}
 
-  constructor() {
-    super();
-    const shadowRoot = this.attachShadow({ mode: "open" });
-    shadowRoot.innerHTML = `
+	constructor() {
+		super()
+		const shadowRoot = this.attachShadow({ mode: 'open' })
+		shadowRoot.innerHTML = `
         <style>
         :host {
             display:inline-block;
@@ -322,93 +322,93 @@ export default class CTips extends HTMLElement {
         }
         </style>
         <slot></slot>
-        `;
-  }
+        `
+	}
 
-  get color() {
-    return this.getAttribute("color") || "";
-  }
+	get color() {
+		return this.getAttribute('color') || ''
+	}
 
-  get dir() {
-    return this.getAttribute("dir") || "top";
-  }
+	get dir() {
+		return this.getAttribute('dir') || 'top'
+	}
 
-  get tips() {
-    return this.getAttribute("tips");
-  }
+	get tips() {
+		return this.getAttribute('tips')
+	}
 
-  get type() {
-    return this.getAttribute("tips");
-  }
+	get type() {
+		return this.getAttribute('tips')
+	}
 
-  get suffix() {
-    return this.getAttribute("suffix") || "";
-  }
+	get suffix() {
+		return this.getAttribute('suffix') || ''
+	}
 
-  get prefix() {
-    return this.getAttribute("prefix") || "";
-  }
+	get prefix() {
+		return this.getAttribute('prefix') || ''
+	}
 
-  get show() {
-    return this.getAttribute("show") !== null;
-  }
+	get show() {
+		return this.getAttribute('show') !== null
+	}
 
-  set color(value) {
-    this.setAttribute("color", value);
-  }
+	set color(value) {
+		this.setAttribute('color', value)
+	}
 
-  set dir(value) {
-    this.setAttribute("dir", value);
-  }
+	set dir(value) {
+		this.setAttribute('dir', value)
+	}
 
-  set tips(value) {
-    this.setAttribute("tips", value);
-  }
+	set tips(value) {
+		this.setAttribute('tips', value)
+	}
 
-  set suffix(value) {
-    this.setAttribute("suffix", value);
-  }
+	set suffix(value) {
+		this.setAttribute('suffix', value)
+	}
 
-  set prefix(value) {
-    this.setAttribute("prefix", value);
-  }
+	set prefix(value) {
+		this.setAttribute('prefix', value)
+	}
 
-  set show(value) {
-    this.setAttribute("show", value);
-  }
+	set show(value) {
+		this.setAttribute('show', value)
+	}
 
-  set type(value) {
-    this.setAttribute("type", value);
-  }
+	set type(value) {
+		this.setAttribute('type', value)
+	}
 
-  connectedCallback() {
-    if (this.dir === "auto") {
-      const { left, top, width, height } = this.getBoundingClientRect();
-      const w = document.body.scrollWidth;
-      const h = document.body.scrollHeight;
-      const TIP_SIZE = 50;
-      if (top < TIP_SIZE) {
-        this.dir = "bottom";
-      }
-      if (h - top - height < TIP_SIZE) {
-        this.dir = "top";
-      }
-      if (left < TIP_SIZE) {
-        this.dir = "right";
-      }
-      if (w - left - width < TIP_SIZE) {
-        this.dir = "left";
-      }
-    }
-  }
+	connectedCallback() {
+		if (this.dir === 'auto') {
+			const { left, top, width, height } = this.getBoundingClientRect()
+			const w = document.body.scrollWidth
+			const h = document.body.scrollHeight
+			const TIP_SIZE = 50
+			if (top < TIP_SIZE) {
+				this.dir = 'bottom'
+			}
+			if (h - top - height < TIP_SIZE) {
+				this.dir = 'top'
+			}
+			if (left < TIP_SIZE) {
+				this.dir = 'right'
+			}
+			if (w - left - width < TIP_SIZE) {
+				this.dir = 'left'
+			}
+		}
+	}
 
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (name == "color" && this.shadowRoot) {
-      this.style.setProperty("--color", newValue);
-    }
-  }
+	attributeChangedCallback(name, oldValue, newValue) {
+		if (name == 'color' && this.shadowRoot) {
+			this.style.setProperty('--color', newValue)
+		}
+	}
 }
 
-if (!customElements.get("c-tips")) {
-  customElements.define("c-tips", CTips);
+if (!customElements.get('c-tips')) {
+	customElements.define('c-tips', CTips)
 }

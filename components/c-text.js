@@ -1,12 +1,12 @@
 export default class CText extends HTMLElement {
-  static get observedAttributes() {
-    return ["rows", "draggable"];
-  }
+	static get observedAttributes() {
+		return ['rows', 'draggable']
+	}
 
-  constructor() {
-    super();
-    const shadowRoot = this.attachShadow({ mode: "open" });
-    shadowRoot.innerHTML = `
+	constructor() {
+		super()
+		const shadowRoot = this.attachShadow({ mode: 'open' })
+		shadowRoot.innerHTML = `
         <style>
         :host {
             font-size:14px;
@@ -48,69 +48,69 @@ export default class CText extends HTMLElement {
         }
         </style>
         <span id="txt"><slot></slot></span>
-        `;
-  }
+        `
+	}
 
-  get rows() {
-    return this.getAttribute("rows");
-  }
+	get rows() {
+		return this.getAttribute('rows')
+	}
 
-  get draggable() {
-    return this.getAttribute("draggable") !== null;
-  }
+	get draggable() {
+		return this.getAttribute('draggable') !== null
+	}
 
-  get truncated() {
-    return this.getAttribute("truncated") !== null;
-  }
+	get truncated() {
+		return this.getAttribute('truncated') !== null
+	}
 
-  set rows(value) {
-    this.setAttribute("rows", value);
-  }
+	set rows(value) {
+		this.setAttribute('rows', value)
+	}
 
-  set truncated(value) {
-    if (value === null || value === false) {
-      this.removeAttribute("truncated");
-    } else {
-      this.setAttribute("truncated", "");
-    }
-  }
+	set truncated(value) {
+		if (value === null || value === false) {
+			this.removeAttribute('truncated')
+		} else {
+			this.setAttribute('truncated', '')
+		}
+	}
 
-  set draggable(value) {
-    if (value === null || value === false) {
-      this.removeAttribute("draggable");
-    } else {
-      this.setAttribute("draggable", true);
-    }
-  }
+	set draggable(value) {
+		if (value === null || value === false) {
+			this.removeAttribute('draggable')
+		} else {
+			this.setAttribute('draggable', true)
+		}
+	}
 
-  connectedCallback() {
-    this.txt = this.shadowRoot.getElementById("txt");
-    this.resizeObserver = new ResizeObserver((entries) => {
-      for (let entry of entries) {
-        const { height } = entry.contentRect;
-        this.truncated = this.txt.scrollHeight > height;
-      }
-    });
-    this.draggable = this.draggable;
-    if (this.draggable) {
-      this.addEventListener("dragstart", (ev) => {
-        ev.dataTransfer.setData("text", this.textContent);
-      });
-    }
-    this.resizeObserver.observe(this.txt);
-  }
+	connectedCallback() {
+		this.txt = this.shadowRoot.getElementById('txt')
+		this.resizeObserver = new ResizeObserver((entries) => {
+			for (let entry of entries) {
+				const { height } = entry.contentRect
+				this.truncated = this.txt.scrollHeight > height
+			}
+		})
+		this.draggable = this.draggable
+		if (this.draggable) {
+			this.addEventListener('dragstart', (ev) => {
+				ev.dataTransfer.setData('text', this.textContent)
+			})
+		}
+		this.resizeObserver.observe(this.txt)
+	}
 
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (name == "rows" && this.txt) {
-      this.txt.style.setProperty("--rows", newValue);
-    }
-  }
+	attributeChangedCallback(name, oldValue, newValue) {
+		if (name == 'rows' && this.txt) {
+			this.txt.style.setProperty('--rows', newValue)
+		}
+	}
 
-  disconnectedCallback() {
-    this.resizeObserver.unobserve(this.txt);
-  }
+	disconnectedCallback() {
+		this.resizeObserver.unobserve(this.txt)
+	}
 }
 
-if (!customElements.get("c-text")) {
-  customElements.define("c-text", CText);
+if (!customElements.get('c-text')) {
+	customElements.define('c-text', CText)
 }

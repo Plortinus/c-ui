@@ -1,293 +1,428 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>wbc-ui</title>
-    <style>
-        c-button,c-checkbox,c-radio,c-input,c-textarea,c-color-picker,c-select{ margin: 0 10px 15px 0; vertical-align: middle; }
-        c-input:not([block]),c-textarea:not([block]){ width:300px; }
-        c-tips>*{ margin: 0;}
-        c-popover>*{ margin: 0;}
-        c-tips,c-popover{ margin: 0 10px 10px 0; }
-        p{  padding: 5px 10px; border-left: 4px solid olive; color: #666 }
-        .layout{ height: 300px; }
-        .side{ width: 200px; }
-        .main{ margin: 0 10px; }
-        .box{ width: 100px; height: 100px; color: #fff; }
-        .header,.footer{ padding: 5px 10px; color: #fff; }
-        c-layout{ background: #2196f380; }
-        c-img{ width: 200px; height: 150px; }
-        c-form-item *{
-            margin-bottom: 0;
-        }
-        c-col{
-            background: #2196f380;
-            color:#fff;
-        }
-        :not(:defined) {
-            opacity: 0;
-        }
-        :root{
-            /*--themeBackground:linear-gradient(to bottom, #42b983 0%,#06b2a1 100%)*/
-        }
-        .parent[coord]{
-            display: flex;
-            width: 500px;
-            height: 500px;
-            background: #fff;
-            color: #fff;
-            border: 10px solid #f1f1f1;
-            position: relative;
-        }
-        .child{
-            width: 50px;
-            height: 50px;
-            background: #42b983;
-            transition: 0.1s;
-            transform: translate(100px,100px);
-        }
-        c-view[draggable]{
-            width: 50px;
-            height: 50px;
-            background: #42b983;
-        }
-        .ball{
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #42b983;
-        }
-        .parent[coord]:hover .ball{
-            transform: translate( calc( var(--x) * 1px - 10px - 25px ) ,calc(var(--y) * 1px - 10px - 25px ))!important;
-        }
-  
-        .child:active{
-            background: #2c9666;
-            pointer-events: none;
-            transition: transform 0s;
-            transform-origin: 0 0;
-            transform: translate( calc( var(--x) * 1px - var(--_x) * 1px - 10px ) ,calc(var(--y) * 1px - var(--_y) * 1px - 10px ))!important;
-        }
-        c-view[coord] span{
-            margin: auto;
-        }
-        c-view[coord] span::after{
-            counter-reset: x var(--x) y var(--y);
-            content: counter(x) ',' counter(y);
-        }
-        .dropbox{
-            width: 200px;
-            height: 200px;
-            background: #fff;
-            color: #fff;
-            border: 10px solid #f1f1f1;
-        }
-        .dropbox-parent{
-            width: 500px;
-            height: 500px;
-        }
-        .dropbox[over],.dropbox:focus{
-            border-color: #2c9666;
-        }
-        c-view[resizable]{
-            width: 200px;
-            height: 200px;
-            background: #f1f1f1;
-        }
-    </style>
-    <!-- <script type="module">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>wbc-ui</title>
+		<style>
+			c-button,
+			c-checkbox,
+			c-radio,
+			c-input,
+			c-textarea,
+			c-color-picker,
+			c-select {
+				margin: 0 10px 15px 0;
+				vertical-align: middle;
+			}
+			c-input:not([block]),
+			c-textarea:not([block]) {
+				width: 300px;
+			}
+			c-tips > * {
+				margin: 0;
+			}
+			c-popover > * {
+				margin: 0;
+			}
+			c-tips,
+			c-popover {
+				margin: 0 10px 10px 0;
+			}
+			p {
+				padding: 5px 10px;
+				border-left: 4px solid olive;
+				color: #666;
+			}
+			.layout {
+				height: 300px;
+			}
+			.side {
+				width: 200px;
+			}
+			.main {
+				margin: 0 10px;
+			}
+			.box {
+				width: 100px;
+				height: 100px;
+				color: #fff;
+			}
+			.header,
+			.footer {
+				padding: 5px 10px;
+				color: #fff;
+			}
+			c-layout {
+				background: #2196f380;
+			}
+			c-img {
+				width: 200px;
+				height: 150px;
+			}
+			c-form-item * {
+				margin-bottom: 0;
+			}
+			c-col {
+				background: #2196f380;
+				color: #fff;
+			}
+			:not(:defined) {
+				opacity: 0;
+			}
+			:root {
+				/*--themeBackground:linear-gradient(to bottom, #42b983 0%,#06b2a1 100%)*/
+			}
+			.parent[coord] {
+				display: flex;
+				width: 500px;
+				height: 500px;
+				background: #fff;
+				color: #fff;
+				border: 10px solid #f1f1f1;
+				position: relative;
+			}
+			.child {
+				width: 50px;
+				height: 50px;
+				background: #42b983;
+				transition: 0.1s;
+				transform: translate(100px, 100px);
+			}
+			c-view[draggable] {
+				width: 50px;
+				height: 50px;
+				background: #42b983;
+			}
+			.ball {
+				position: absolute;
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				background: #42b983;
+			}
+			.parent[coord]:hover .ball {
+				transform: translate(
+					calc(var(--x) * 1px - 10px - 25px),
+					calc(var(--y) * 1px - 10px - 25px)
+				) !important;
+			}
+
+			.child:active {
+				background: #2c9666;
+				pointer-events: none;
+				transition: transform 0s;
+				transform-origin: 0 0;
+				transform: translate(
+					calc(var(--x) * 1px - var(--_x) * 1px - 10px),
+					calc(var(--y) * 1px - var(--_y) * 1px - 10px)
+				) !important;
+			}
+			c-view[coord] span {
+				margin: auto;
+			}
+			c-view[coord] span::after {
+				counter-reset: x var(--x) y var(--y);
+				content: counter(x) ',' counter(y);
+			}
+			.dropbox {
+				width: 200px;
+				height: 200px;
+				background: #fff;
+				color: #fff;
+				border: 10px solid #f1f1f1;
+			}
+			.dropbox-parent {
+				width: 500px;
+				height: 500px;
+			}
+			.dropbox[over],
+			.dropbox:focus {
+				border-color: #2c9666;
+			}
+			c-view[resizable] {
+				width: 200px;
+				height: 200px;
+				background: #f1f1f1;
+			}
+		</style>
+		<!-- <script type="module">
       import 'https://unpkg.com/wbc-ui'
     </script>
      -->
-    <script type="module" src="../index.js"></script>
-</head>
+		<script type="module" src="../index.js"></script>
+	</head>
 
-<body>
-    <h2>input</h2>
-    <p>placeholder</p>
-    <c-input placeholder="user" defaultvalue="xbocan"></c-input>
-    <c-input placeholder="location"></c-input>
-    <p>label</p>
-    <c-input label="user" defaultvalue="xbocan"></c-input>
-    <c-input label="location"></c-input>
-    <p>icon</p>
-    <c-input icon="user"></c-input>
-    <c-input icon="location" onchange="console.log(event)"></c-input>
-    <p>block</p>
-    <c-input label="info" block></c-input>
-    <p>disabled</p>
-    <c-input icon="lock" type="password" disabled></c-input>
-    <p>type[password]</p>
-    <c-input icon="lock" type="password"></c-input>
-    <p>type[search]</p>
-    <c-input type="search" onsubmit="console.log(event)"></c-input>
-    <p>type[number]</p>
-    <c-input icon="creditcard" type="number" ></c-input>
-    <c-input icon="creditcard" type="number" min="-10" max="10" step="0.3" ></c-input>
-    <p>validity</p>
-    <c-input icon="creditcard" required placeholder="required"></c-input>
-    <c-input icon="user" required placeholder="minlength,maxlength" minlength="6" maxlength="10"></c-input>
-    <c-input icon="mail" type="email" placeholder="email" minlength="5" errordir="right"></c-input>
-    <c-input icon="phone" pattern="^1(3|4|5|6|7|8|9)\d{9}$" placeholder="pattern[^1(3|4|5|6|7|8|9)\d{9}$]" errortips="请输入手机号"></c-input>
-    <p>textarea</p>
-    <c-textarea required  placeholder="required"  minlength="10"></c-textarea>
-    <c-textarea placeholder="rows" rows="5" ></c-textarea>
-    <c-textarea label="info" placeholder="info" ></c-textarea>
-    <c-textarea icon="location" placeholder="location" ></c-textarea>
-    <p>datalist</p>
-    <c-input list="city"></c-input>
-    <c-datalist id="city">
-        <c-option value="wuhan">武汉</c-option>
-        <c-option value="beijin">北京</c-option>
-        <c-option value="shanghai">上海</c-option>
-    </c-datalist>
-    <c-input list="email"></c-input>
-    <c-datalist id="email">
-        <c-option value="${value}@live.com">@live.com</c-option>
-        <c-option value="${value}@qq.com">@qq.com</c-option>
-        <c-option value="${value}@yuewen.com">@yuewen.com</c-option>
-    </c-datalist>
-    <h2>form</h2>
-    <c-form action="/login" method="post" labelwidth="100">
-        <c-form-item legend="user">
-            <c-input name="user" required placeholder="user"></c-input>
-        </c-form-item>
-        <c-form-item legend="password">
-            <c-input name="password" id="password" required type="password" placeholder="password" minlength="6"></c-input>
-        </c-form-item>
-        <c-form-item legend="password align">
-            <c-input name="password_confirm" id="password_confirm" required type="password" placeholder="password confirm"></c-input>
-        </c-form-item>
-        <c-form-item legend="city">
-            <c-select name="city">
-                <c-option value="wuhan">wuhan</c-option>
-                <c-option value="beijin">beijin</c-option>
-                <c-option value="shanghai">shanghai</c-option>
-            </c-select>
-        </c-form-item>
-        <c-form-item legend="books">
-            <c-checkbox-group name="books" required min="2" max="3" defaultvalue="Angular">
-                <c-checkbox>React</c-checkbox>
-                <c-checkbox>Vue</c-checkbox>
-                <c-checkbox>Angular</c-checkbox>
-                <c-checkbox>Flutter</c-checkbox>
-                <c-checkbox>Swift</c-checkbox>
-            </c-checkbox-group>
-        </c-form-item>
-        <c-form-item legend="lang">
-            <c-radio-group name="lan" required>
-                <c-radio>Html</c-radio>
-                <c-radio>Css</c-radio>
-                <c-radio>Javascript</c-radio>
-                <c-radio>Php</c-radio>
-                <c-radio>Dart</c-radio>
-            </c-radio-group>
-        </c-form-item>
-        <c-form-item>
-            <c-checkbox name="read" checked required value="read">I have read</c-checkbox>
-        </c-form-item>
-        <c-form-item>
-            <c-button type="primary" htmltype="submit">submit</c-button>
-            <c-button htmltype="reset">reset</c-button>
-        </c-form-item>
-    </c-form>
-    <h2>view</h2>
-    <p>coord</p>
-    <c-view class="parent" coord>
-        <c-view class="child" coord="x2,y2"></c-view>
-    </c-view>
-    <p>draggable & allowdrop</p>
-    <c-view draggable></c-view>
-    <c-view allowdrop class="dropbox dropbox-parent" ondrop="console.log(this)">
-        <c-view allowdrop class="dropbox" ondrop="console.log(this)"></c-view>
-        <div class="dropbox" ondrop="console.log(this)"></div>
-    </c-view>
-    <button id="fakebutton">focus</button>
-    <p>resizable</p>
-    <c-view resizable draggable>edit</c-view>
-    <h2>table</h2>
-    <c-table thead="Name,Age,Address">
-        <c-tr>
-            <c-td>John Brown</c-td>
-            <c-td>32</c-td>
-            <c-td>New York No. 1 Lake Park</c-td>
-        </c-tr>
-        <c-tr>
-            <c-td>Jim Green</c-td>
-            <c-td>42</c-td>
-            <c-td>London No. 1 Lake Park</c-td>
-        </c-tr>
-        <c-tr>
-            <c-td>Jim Green</c-td>
-            <c-td>42</c-td>
-            <c-td>London No. 1 Lake Park</c-td>
-        </c-tr>
-        <c-tr>
-            <c-td>Jim Green</c-td>
-            <c-td>42</c-td>
-            <c-td>London No. 1 Lake Park</c-td>
-        </c-tr>
-        <c-tr>
-            <c-td>Jim Green</c-td>
-            <c-td>42</c-td>
-            <c-td>London No. 1 Lake Park</c-td>
-        </c-tr>
-    </c-table>
-    <h2>text</h2>
-    <c-text>wbc-ui is a front end cross-framework ui library based on web-components</c-text>
-    <br>
-    <c-text>wbc-ui</c-text>
-    <br>
-    <c-text type="warning">wbc-ui</c-text>
-    <br>
-    <c-text type="error">wbc-ui</c-text>
-    <br>
-    <c-text type="success">wbc-ui</c-text>
-    <br>
-    <c-text mark>wbc-ui</c-text>
-    <br>
-    <c-text code>wbc-ui</c-text>
-    <br>
-    <c-text rows="3">wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.wbc-ui is a front end cross-framework ui library based on web-components.</c-text>
-    <h2>pagination</h2>
-    <c-pagination onchange="console.log(this.current)" pagesize="3" total="50" defaultcurrent="9"></c-pagination>
-    <c-pagination simple onchange="console.log(this.current)" pagesize="3" total="50" defaultcurrent="9"></c-pagination>
-    
-    <script>
-        document.querySelectorAll('.theme-button').forEach((el)=>{
-            el.addEventListener('click',function(){
-                const themeColor = window.getComputedStyle(el).getPropertyValue('--themeColor');
-                document.body.style.setProperty('--themeColor',themeColor);
-            })
-        })
+	<body>
+		<h2>input</h2>
+		<p>placeholder</p>
+		<c-input placeholder="user" defaultvalue="xbocan"></c-input>
+		<c-input placeholder="location"></c-input>
+		<p>label</p>
+		<c-input label="user" defaultvalue="xbocan"></c-input>
+		<c-input label="location"></c-input>
+		<p>icon</p>
+		<c-input icon="user"></c-input>
+		<c-input icon="location" onchange="console.log(event)"></c-input>
+		<p>block</p>
+		<c-input label="info" block></c-input>
+		<p>disabled</p>
+		<c-input icon="lock" type="password" disabled></c-input>
+		<p>type[password]</p>
+		<c-input icon="lock" type="password"></c-input>
+		<p>type[search]</p>
+		<c-input type="search" onsubmit="console.log(event)"></c-input>
+		<p>type[number]</p>
+		<c-input icon="creditcard" type="number"></c-input>
+		<c-input
+			icon="creditcard"
+			type="number"
+			min="-10"
+			max="10"
+			step="0.3"
+		></c-input>
+		<p>validity</p>
+		<c-input icon="creditcard" required placeholder="required"></c-input>
+		<c-input
+			icon="user"
+			required
+			placeholder="minlength,maxlength"
+			minlength="6"
+			maxlength="10"
+		></c-input>
+		<c-input
+			icon="mail"
+			type="email"
+			placeholder="email"
+			minlength="5"
+			errordir="right"
+		></c-input>
+		<c-input
+			icon="phone"
+			pattern="^1(3|4|5|6|7|8|9)\d{9}$"
+			placeholder="pattern[^1(3|4|5|6|7|8|9)\d{9}$]"
+			errortips="请输入手机号"
+		></c-input>
+		<p>textarea</p>
+		<c-textarea required placeholder="required" minlength="10"></c-textarea>
+		<c-textarea placeholder="rows" rows="5"></c-textarea>
+		<c-textarea label="info" placeholder="info"></c-textarea>
+		<c-textarea icon="location" placeholder="location"></c-textarea>
+		<p>datalist</p>
+		<c-input list="city"></c-input>
+		<c-datalist id="city">
+			<c-option value="wuhan">武汉</c-option>
+			<c-option value="beijin">北京</c-option>
+			<c-option value="shanghai">上海</c-option>
+		</c-datalist>
+		<c-input list="email"></c-input>
+		<c-datalist id="email">
+			<c-option value="${value}@live.com">@live.com</c-option>
+			<c-option value="${value}@qq.com">@qq.com</c-option>
+			<c-option value="${value}@yuewen.com">@yuewen.com</c-option>
+		</c-datalist>
+		<h2>form</h2>
+		<c-form action="/login" method="post" labelwidth="100">
+			<c-form-item legend="user">
+				<c-input name="user" required placeholder="user"></c-input>
+			</c-form-item>
+			<c-form-item legend="password">
+				<c-input
+					name="password"
+					id="password"
+					required
+					type="password"
+					placeholder="password"
+					minlength="6"
+				></c-input>
+			</c-form-item>
+			<c-form-item legend="password align">
+				<c-input
+					name="password_confirm"
+					id="password_confirm"
+					required
+					type="password"
+					placeholder="password confirm"
+				></c-input>
+			</c-form-item>
+			<c-form-item legend="city">
+				<c-select name="city">
+					<c-option value="wuhan">wuhan</c-option>
+					<c-option value="beijin">beijin</c-option>
+					<c-option value="shanghai">shanghai</c-option>
+				</c-select>
+			</c-form-item>
+			<c-form-item legend="books">
+				<c-checkbox-group
+					name="books"
+					required
+					min="2"
+					max="3"
+					defaultvalue="Angular"
+				>
+					<c-checkbox>React</c-checkbox>
+					<c-checkbox>Vue</c-checkbox>
+					<c-checkbox>Angular</c-checkbox>
+					<c-checkbox>Flutter</c-checkbox>
+					<c-checkbox>Swift</c-checkbox>
+				</c-checkbox-group>
+			</c-form-item>
+			<c-form-item legend="lang">
+				<c-radio-group name="lan" required>
+					<c-radio>Html</c-radio>
+					<c-radio>Css</c-radio>
+					<c-radio>Javascript</c-radio>
+					<c-radio>Php</c-radio>
+					<c-radio>Dart</c-radio>
+				</c-radio-group>
+			</c-form-item>
+			<c-form-item>
+				<c-checkbox name="read" checked required value="read"
+					>I have read</c-checkbox
+				>
+			</c-form-item>
+			<c-form-item>
+				<c-button type="primary" htmltype="submit">submit</c-button>
+				<c-button htmltype="reset">reset</c-button>
+			</c-form-item>
+		</c-form>
+		<h2>view</h2>
+		<p>coord</p>
+		<c-view class="parent" coord>
+			<c-view class="child" coord="x2,y2"></c-view>
+		</c-view>
+		<p>draggable & allowdrop</p>
+		<c-view draggable></c-view>
+		<c-view allowdrop class="dropbox dropbox-parent" ondrop="console.log(this)">
+			<c-view allowdrop class="dropbox" ondrop="console.log(this)"></c-view>
+			<div class="dropbox" ondrop="console.log(this)"></div>
+		</c-view>
+		<button id="fakebutton">focus</button>
+		<p>resizable</p>
+		<c-view resizable draggable>edit</c-view>
+		<h2>table</h2>
+		<c-table thead="Name,Age,Address">
+			<c-tr>
+				<c-td>John Brown</c-td>
+				<c-td>32</c-td>
+				<c-td>New York No. 1 Lake Park</c-td>
+			</c-tr>
+			<c-tr>
+				<c-td>Jim Green</c-td>
+				<c-td>42</c-td>
+				<c-td>London No. 1 Lake Park</c-td>
+			</c-tr>
+			<c-tr>
+				<c-td>Jim Green</c-td>
+				<c-td>42</c-td>
+				<c-td>London No. 1 Lake Park</c-td>
+			</c-tr>
+			<c-tr>
+				<c-td>Jim Green</c-td>
+				<c-td>42</c-td>
+				<c-td>London No. 1 Lake Park</c-td>
+			</c-tr>
+			<c-tr>
+				<c-td>Jim Green</c-td>
+				<c-td>42</c-td>
+				<c-td>London No. 1 Lake Park</c-td>
+			</c-tr>
+		</c-table>
+		<h2>text</h2>
+		<c-text
+			>wbc-ui is a front end cross-framework ui library based on
+			web-components</c-text
+		>
+		<br />
+		<c-text>wbc-ui</c-text>
+		<br />
+		<c-text type="warning">wbc-ui</c-text>
+		<br />
+		<c-text type="error">wbc-ui</c-text>
+		<br />
+		<c-text type="success">wbc-ui</c-text>
+		<br />
+		<c-text mark>wbc-ui</c-text>
+		<br />
+		<c-text code>wbc-ui</c-text>
+		<br />
+		<c-text rows="3"
+			>wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.wbc-ui is a front end cross-framework ui library based on
+			web-components.</c-text
+		>
+		<h2>pagination</h2>
+		<c-pagination
+			onchange="console.log(this.current)"
+			pagesize="3"
+			total="50"
+			defaultcurrent="9"
+		></c-pagination>
+		<c-pagination
+			simple
+			onchange="console.log(this.current)"
+			pagesize="3"
+			total="50"
+			defaultcurrent="9"
+		></c-pagination>
 
-        function showDialog(){
-            document.getElementById('dialog01').open = true;
-        }
+		<script>
+			document.querySelectorAll('.theme-button').forEach((el) => {
+				el.addEventListener('click', function () {
+					const themeColor = window
+						.getComputedStyle(el)
+						.getPropertyValue('--themeColor')
+					document.body.style.setProperty('--themeColor', themeColor)
+				})
+			})
 
-        // document.getElementById('password_confirm').setcustomValidity(function(el){
-        //     return {
-        //         method:(el)=>{
-        //             console.log(this)
-        //             return this.value == document.getElementById('password').value;
-        //         },
-        //         tips:'前后密码不一致'
-        //     }
-        // })
-        document.getElementById('password_confirm').customValidity = {
-            method:(el)=>{
-                return el.value == document.getElementById('password').value;
-            },
-            tips:'前后密码不一致'
-        }
+			function showDialog() {
+				document.getElementById('dialog01').open = true
+			}
 
-        
-    </script>
-</body>
-
-
+			// document.getElementById('password_confirm').setcustomValidity(function(el){
+			//     return {
+			//         method:(el)=>{
+			//             console.log(this)
+			//             return this.value == document.getElementById('password').value;
+			//         },
+			//         tips:'前后密码不一致'
+			//     }
+			// })
+			document.getElementById('password_confirm').customValidity = {
+				method: (el) => {
+					return el.value == document.getElementById('password').value
+				},
+				tips: '前后密码不一致',
+			}
+		</script>
+	</body>
 </html>
