@@ -241,14 +241,14 @@ tab.setAttribute('align','center');
 
 `c-tab`切换完成时触发。
 
-<c-tab onchange="XyMessage.info(event.detail.label)">
+<c-tab onchange="CMessage.info(event.detail.label)">
     <c-tab-content label="tab1">tab1</c-tab-content>
     <c-tab-content label="tab2">tab2</c-tab-content>
     <c-tab-content label="tab3">tab3</c-tab-content>
 </c-tab>
 
 ```html
-<c-tab onchange="XyMessage.info(event.detail.label)">
+<c-tab onchange="CMessage.info(event.detail.label)">
     <c-tab-content label="tab1">tab1</c-tab-content>
     <c-tab-content label="tab2">tab2</c-tab-content>
     <c-tab-content label="tab3">tab3</c-tab-content>

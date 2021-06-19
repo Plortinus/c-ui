@@ -7,43 +7,43 @@
 ```html
 <!-- 引入 -->
 <script type="module">
-    import XyDialog from './node_modules/wbc-ui/components/c-dialog.js';
+    import CDialog from './node_modules/wbc-ui/components/c-dialog.js';
     //使用
-    XyDialog.alert('alert');
+    CDialog.alert('alert');
 </script>
 <!-- 使用 -->
 <c-dialog>
     <div>dialog</div>
 </c-dialog>
 ```
-!> `<script type="module"></script>`中的变量是局部变量，如果需要`XyDialog`在全局范围内使用，可以执行`window.XyDialog = XyDialog;`。
+!> `<script type="module"></script>`中的变量是局部变量，如果需要`CDialog`在全局范围内使用，可以执行`window.CDialog = CDialog;`。
 
 > 如果是全部引用则没有这个问题，已经默认挂载在`window`对象上了
 
-## XyDialog[level]
+## CDialog[level]
 
-与`c-message`类似，`XyDialog`也提供了几个静态`API`方法。
+与`c-message`类似，`CDialog`也提供了几个静态`API`方法。
 
-* `XyDialog.alert(config)`
+* `CDialog.alert(config)`
 
-* `XyDialog.success(config)`
+* `CDialog.success(config)`
 
-* `XyDialog.error(config)`
+* `CDialog.error(config)`
 
-* `XyDialog.warning(config)`
+* `CDialog.warning(config)`
 
-* `XyDialog.confirm(config)`
+* `CDialog.confirm(config)`
 
-* `XyDialog.prompt(config)`
+* `CDialog.prompt(config)`
 
 所有方法返回均为`<c-dialog></c-dialog>`对象。
 
 `config`支持两种类型的参数。
 
 ```js
-XyDialog.alert(title, ok);
+CDialog.alert(title, ok);
 //object传入
-XyDialog.alert({
+CDialog.alert({
     title:'title',//标题
     oktext:'ok',//确定键文本
     canceltext:'cancel',//取消键文本
@@ -55,18 +55,18 @@ XyDialog.alert({
 
 ```
 
-<c-button type="primary" onclick="XyDialog.alert('alert')">alert</c-button>
-<c-button type="primary" onclick="XyDialog.info('info')">info</c-button>
-<c-button type="primary" onclick="XyDialog.success({title:'成功',content:'success',oktext:'send'})">success</c-button>
-<c-button type="primary" onclick="XyDialog.error('error')">error</c-button>
-<c-button type="primary" onclick="XyDialog.warning('warning')">warning</c-button>
+<c-button type="primary" onclick="CDialog.alert('alert')">alert</c-button>
+<c-button type="primary" onclick="CDialog.info('info')">info</c-button>
+<c-button type="primary" onclick="CDialog.success({title:'成功',content:'success',oktext:'send'})">success</c-button>
+<c-button type="primary" onclick="CDialog.error('error')">error</c-button>
+<c-button type="primary" onclick="CDialog.warning('warning')">warning</c-button>
 
-`XyDialog.confirm`有两个按钮，确定键和取消键
+`CDialog.confirm`有两个按钮，确定键和取消键
 
 ```js
-XyDialog.confirm(title, ok, cancel);
+CDialog.confirm(title, ok, cancel);
 //object传入
-XyDialog.confirm({
+CDialog.confirm({
     title:'title',//标题
     oktext:'ok',//确定键文本
     canceltext:'cancel',//取消键文本
@@ -80,15 +80,15 @@ XyDialog.confirm({
     content:'content',//内容
 });
 ```
-<c-button type="primary" onclick="XyDialog.confirm('this is a question',()=>{XyMessage.info('ok')},()=>{XyMessage.info('cancel')})">confirm</c-button>
-<c-button type="primary" onclick="XyDialog.confirm({type:'error',content:'this is a danger confirm'})">danger confirm</c-button>
+<c-button type="primary" onclick="CDialog.confirm('this is a question',()=>{CMessage.info('ok')},()=>{CMessage.info('cancel')})">confirm</c-button>
+<c-button type="primary" onclick="CDialog.confirm({type:'error',content:'this is a danger confirm'})">danger confirm</c-button>
 
-`XyDialog.prompt`用于显示可提示用户进行输入的对话框。
+`CDialog.prompt`用于显示可提示用户进行输入的对话框。
 
 ```js
-XyDialog.prompt(title, ok, cancel);
+CDialog.prompt(title, ok, cancel);
 //object传入
-XyDialog.prompt({
+CDialog.prompt({
     title:'title',//标题
     oktext:'ok',//确定键文本
     ok:function(value){
@@ -103,12 +103,12 @@ XyDialog.prompt({
 });
 ```
 
-<c-button type="primary" onclick="XyDialog.prompt('',(value)=>{XyMessage.info(value)},()=>{XyMessage.info('cancel')})">prompt</c-button>
-<c-button type="primary" onclick="XyDialog.prompt({content:'please input your name',ok:(value)=>{XyMessage.info(value)}})">prompt with content</c-button>
+<c-button type="primary" onclick="CDialog.prompt('',(value)=>{CMessage.info(value)},()=>{CMessage.info('cancel')})">prompt</c-button>
+<c-button type="primary" onclick="CDialog.prompt({content:'please input your name',ok:(value)=>{CMessage.info(value)}})">prompt with content</c-button>
 
 ## 显示`open`
 
-当`XyDialog`内容比较复杂时，可以直接写在页面`body`上，通过`open`属性来控制显示。
+当`CDialog`内容比较复杂时，可以直接写在页面`body`上，通过`open`属性来控制显示。
 
 <c-dialog id="dialog01" title="自定义弹窗内容" oktext="确 定">
     <c-tab>
@@ -180,7 +180,7 @@ dialog.setAttribute('loading',true);
 
 在点击取消操作时执行。
 
-<c-button type="primary" onclick="XyDialog.confirm('confirm',()=>{XyMessage.info('submit')},()=>{XyMessage.info('cancel')})">confirm</c-button>
+<c-button type="primary" onclick="CDialog.confirm('confirm',()=>{CMessage.info('submit')},()=>{CMessage.info('cancel')})">confirm</c-button>
 
 ```js
 dialog.onsubmit = function(){

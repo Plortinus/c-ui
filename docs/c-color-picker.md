@@ -64,7 +64,7 @@ color.toRGBA().toString()//返回RGBA的颜色值
 <c-color-picker defaultvalue="rgb(66, 185, 131)" id="color-picker-value"></c-color-picker>
 
 <c-button type="primary" onclick="document.getElementById('color-picker-value').value='orangered'">设置value为orangered</c-button>
-<c-button type="primary" onclick="XyMessage.info('当前value: '+document.getElementById('color-picker-value').value)">显示当前value</c-button>
+<c-button type="primary" onclick="CMessage.info('当前value: '+document.getElementById('color-picker-value').value)">显示当前value</c-button>
 
 JavaScript操作`get`、`set`
 
@@ -151,10 +151,10 @@ color.setAttribute('dir','right');
 
 当选好颜色后，按确定按钮可以触发`change`回调。
 
-<c-color-picker defaultvalue="rgb(66, 185, 131)" onchange="XyMessage.info('当前value: '+this.value)"></c-color-picker>
+<c-color-picker defaultvalue="rgb(66, 185, 131)" onchange="CMessage.info('当前value: '+this.value)"></c-color-picker>
 
 ```html
-<c-color-picker defaultvalue="rgb(66, 185, 131)" onchange="XyMessage.info('当前value: '+this.value)"></c-color-picker>
+<c-color-picker defaultvalue="rgb(66, 185, 131)" onchange="CMessage.info('当前value: '+this.value)"></c-color-picker>
 ```
 
 其他触发方式

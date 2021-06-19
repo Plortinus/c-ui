@@ -152,7 +152,7 @@ slider{
 
 <c-slider showtips></c-slider>
 <c-button type="primary" onclick="this.previousElementSibling.value=50">设置value为50</c-button>
-<c-button type="primary" onclick="XyMessage.info('当前value: '+this.previousElementSibling.previousElementSibling.value)">显示当前value</c-button>
+<c-button type="primary" onclick="CMessage.info('当前value: '+this.previousElementSibling.previousElementSibling.value)">显示当前value</c-button>
 
 JavaScript操作`get`、`set`
 
@@ -172,10 +172,10 @@ slider.setAttribute('value',50);
 
 滑动条在滑动完成时触发。
 
-<c-slider onchange="XyMessage.info('当前value: '+this.value)"></c-slider>
+<c-slider onchange="CMessage.info('当前value: '+this.value)"></c-slider>
 
 ```html
-<c-slider onchange="XyMessage.info('当前value: '+this.value)"></c-slider>
+<c-slider onchange="CMessage.info('当前value: '+this.value)"></c-slider>
 ```
 
 其他触发方式
@@ -206,7 +206,7 @@ slider.addEventListener('change',function(ev){
 
 滑动条在滑动时触发。
 
-<c-slider oninput="XyMessage.info('当前value: '+this.value)"></c-slider>
+<c-slider oninput="CMessage.info('当前value: '+this.value)"></c-slider>
 
 ```html
 <c-slider oninput="fn(event)"></c-slider>
@@ -240,7 +240,7 @@ slider.addEventListener('input',function(ev){
 
 现支持鼠标滚轮操作，滚动速率是`step`的`5`倍，也就是说，如果`step`是`1`，那么每次滚动会增加（或减少）`5`
 
-<c-slider onfocus="XyMessage.info('focus')" onchange="XyMessage.info(this.value)"></c-slider>
+<c-slider onfocus="CMessage.info('focus')" onchange="CMessage.info(this.value)"></c-slider>
 <c-button type="primary" onclick="this.previousElementSibling.focus()">主动聚焦</c-button>
 
 ```js

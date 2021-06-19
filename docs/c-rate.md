@@ -31,7 +31,7 @@
 
 <c-rate defaultvalue="2"></c-rate>
 <c-button type="primary" onclick="this.previousElementSibling.value=3">设置value为3</c-button>
-<c-button type="primary" onclick="XyMessage.info('当前value: '+this.previousElementSibling.previousElementSibling.value)">显示当前value</c-button>
+<c-button type="primary" onclick="CMessage.info('当前value: '+this.previousElementSibling.previousElementSibling.value)">显示当前value</c-button>
 
 JavaScript操作`get`、`set`
 
@@ -195,10 +195,10 @@ rate.setAttribute('color','orangered');
 
 评分组件在评分完成时触发，键盘左右操作同样触发。
 
-<c-rate defaultvalue="1" onchange="XyMessage.info('当前value: '+this.value)"></c-rate>
+<c-rate defaultvalue="1" onchange="CMessage.info('当前value: '+this.value)"></c-rate>
 
 ```html
-<c-rate defaultvalue="1" onchange="XyMessage.info('当前value: '+this.value)"></c-rate>
+<c-rate defaultvalue="1" onchange="CMessage.info('当前value: '+this.value)"></c-rate>
 ```
 
 其他触发方式
@@ -237,7 +237,7 @@ rate.addEventListener('change',function(ev){
 
 用于主动聚焦`focus`，聚焦以后可以响应键盘事件，支持方向键。
 
-<c-rate onfocus="XyMessage.info('focus')" onblur="XyMessage.info('blur')" onchange="XyMessage.info(this.value)"></c-rate>
+<c-rate onfocus="CMessage.info('focus')" onblur="CMessage.info('blur')" onchange="CMessage.info(this.value)"></c-rate>
 <c-button type="primary" onclick="this.previousElementSibling.focus()">主动聚焦</c-button>
 
 ```js

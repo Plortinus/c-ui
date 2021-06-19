@@ -211,7 +211,7 @@ img.setAttribute('fit','contain');
 
 用于主动聚焦`focus`，聚焦以后可以响应键盘事件，按`Enter`打开画廊。
 
-<c-img gallery="C"  onfocus="XyMessage.info('focus')" onblur="XyMessage.info('blur')" src="https://images.pexels.com/photos/698808/pexels-photo-698808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></c-img>
+<c-img gallery="C"  onfocus="CMessage.info('focus')" onblur="CMessage.info('blur')" src="https://images.pexels.com/photos/698808/pexels-photo-698808.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></c-img>
 <c-button type="primary" onclick="this.previousElementSibling.focus()">主动聚焦</c-button>
 
 ```js

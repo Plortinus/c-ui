@@ -12,17 +12,6 @@
 
 ![wbc-ui](./screenshot/wbc-ui.png)
 
-## 更新
-
-- ## 1.10.1
-  - disconnectedCallback 移除 document 事件监听
-- ## 1.10.0
-  - 新增[`c-datalist`](./docs/c-datalist.md)数据列表组件
-  - 重新独立`c-option`
-  - `c-checkbox`、`c-raido`键盘触发事件优化
-
-[update](./docs/update.md)
-
 ## 特性
 
 - 跨框架。无论是`react`、`vue`还是原生项目均可使用。
@@ -53,7 +42,7 @@ npm i wbc-ui
 <script type="module">
   import "https://unpkg.com/wbc-ui";
 
-  import "https://unpkg.com/wbc-ui@1.4.1"; //指定版本号
+  import "https://unpkg.com/wbc-ui@0.0.3"; //指定版本号
 </script>
 
 <!--or-->
@@ -101,8 +90,6 @@ import "wbc-ui"; //推荐
 import "wbc-ui/components/c-button.js";
 ReactDOM.render(<c-button>button</c-button>, document.body);
 ```
-
-[demo](https://codepen.io/xboxyan/pen/mNKWaN)
 
 > 关于`react`中使用`Web Components`的注意细节可参考[https://react.docschina.org/docs/web-components.html](https://react.docschina.org/docs/web-components.html)
 

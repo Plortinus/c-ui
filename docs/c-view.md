@@ -91,7 +91,7 @@
 
 <c-text draggable>this is a draggable text</c-text>
 
-<c-view allowdrop class="dropbox" ondrop="XyMessage.info(event.dataTransfer.getData('text'))"></c-view>
+<c-view allowdrop class="dropbox" ondrop="CMessage.info(event.dataTransfer.getData('text'))"></c-view>
 
 以上仅仅是对原生的美化，具体功能实现仍需借助原生事件
 

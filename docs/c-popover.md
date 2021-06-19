@@ -44,12 +44,12 @@
 
 当设置`type=comfirm`时，`c-popover`为一个确认提示层。
 
-<c-popover type="confirm" onsubmit="XyMessage.success('next')" oncancel="XyMessage.warning('cancel')" title="确定删除吗?" content="删除后无法撤销">
+<c-popover type="confirm" onsubmit="CMessage.success('next')" oncancel="CMessage.warning('cancel')" title="确定删除吗?" content="删除后无法撤销">
     <c-button>pop confirm</c-button>
 </c-popover>
 
 ```html
-<c-popover type="confirm" title="确定删除吗?" content="删除后无法撤销" onsubmit="XyMessage.success('next')" oncancel="XyMessage.warning('cancel')" >
+<c-popover type="confirm" title="确定删除吗?" content="删除后无法撤销" onsubmit="CMessage.success('next')" oncancel="CMessage.warning('cancel')" >
     <c-button>pop confirm</c-button>
 </c-popover>
 ```
@@ -95,7 +95,7 @@ popover.addEventListener('cancel',function(){
 
 <c-popover>
     <c-button>pop confirm</c-button>
-    <c-popcon title="确定删除吗?" type="confirm" onsubmit="XyMessage.success('next')">
+    <c-popcon title="确定删除吗?" type="confirm" onsubmit="CMessage.success('next')">
         <div>
             <div>自定义删除后无法撤销</div>
             <div>删除后无法撤销</div>
@@ -109,7 +109,7 @@ popover.addEventListener('cancel',function(){
 ```html
 <c-popover>
     <c-button>pop confirm</c-button>
-    <c-popcon title="确定删除吗?" type="confirm" onsubmit="XyMessage.success('next')">
+    <c-popcon title="确定删除吗?" type="confirm" onsubmit="CMessage.success('next')">
         <div>
             <div>自定义删除后无法撤销</div>
             <div>删除后无法撤销</div>
@@ -236,7 +236,7 @@ popcon.addEventListener('cancel',function(){
 
 当设置`disabled`时，可以禁用悬浮层，对于`type=confirm`可以直接触发`submit`事件。
 
-<c-popover disabled type="confirm" onsubmit="XyMessage.success('next')" oncancel="XyMessage.warning('cancel')" title="确定删除吗?" content="删除后无法撤销">
+<c-popover disabled type="confirm" onsubmit="CMessage.success('next')" oncancel="CMessage.warning('cancel')" title="确定删除吗?" content="删除后无法撤销">
     <c-button>pop confirm</c-button>
 </c-popover>
 <c-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></c-switch>
@@ -258,7 +258,7 @@ popcon.addEventListener('cancel',function(){
 <c-switch checked onchange="this.previousElementSibling.disabled = this.checked;"></c-switch>
 
 ```html
-<c-popover disabled type="confirm" onsubmit="XyMessage.success('next')" oncancel="XyMessage.warning('cancel')" title="确定删除吗?" content="删除后无法撤销">
+<c-popover disabled type="confirm" onsubmit="CMessage.success('next')" oncancel="CMessage.warning('cancel')" title="确定删除吗?" content="删除后无法撤销">
     <c-button>pop confirm</c-button>
 </c-popover>
 
@@ -294,10 +294,10 @@ popover.removeAttribute('disabled');
 
 通过`dir`可以设置悬浮层方向，默认为`bottomleft`，可以取值`top`、`right`、`bottom`、`left`、`topleft`、`topright`、`righttop`、`rightbottom`、`bottomleft`、`bottomright`、`lefttop`、`leftbottom`。同[`c-tips`](c-tips.md)。
 
-<c-popover dir="top" type="confirm" onsubmit="XyMessage.success('next')" title="确定删除吗?" content="删除后无法撤销"><c-button>top</c-button></c-popover>
+<c-popover dir="top" type="confirm" onsubmit="CMessage.success('next')" title="确定删除吗?" content="删除后无法撤销"><c-button>top</c-button></c-popover>
 
 ```html
-<c-popover dir="top" type="confirm" onsubmit="XyMessage.success('next')" title="确定删除吗?" content="删除后无法撤销"><c-button>top</c-button></c-popover>
+<c-popover dir="top" type="confirm" onsubmit="CMessage.success('next')" title="确定删除吗?" content="删除后无法撤销"><c-button>top</c-button></c-popover>
 
 ```
 

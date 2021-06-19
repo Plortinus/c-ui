@@ -79,10 +79,10 @@ c-switch{
 
 在切换完成时触发。
 
-<c-switch onchange="XyMessage.info('当前状态checked:'+this.checked)"></c-switch>
+<c-switch onchange="CMessage.info('当前状态checked:'+this.checked)"></c-switch>
 
 ```html
-<c-switch onchange="XyMessage.info('当前状态checked:'+this.checked)"></c-switch>
+<c-switch onchange="CMessage.info('当前状态checked:'+this.checked)"></c-switch>
 ```
 
 ```js
@@ -119,7 +119,7 @@ switch.addEventListener('change',function(ev){
 
 用于主动聚焦`focus`，聚焦以后可以响应键盘事件，`Enter`切换开关。
 
-<c-switch onfocus="XyMessage.info('focus')" onchange="XyMessage.info('当前状态checked:'+this.checked)"></c-switch>
+<c-switch onfocus="CMessage.info('focus')" onchange="CMessage.info('当前状态checked:'+this.checked)"></c-switch>
 <c-button type="primary" onclick="this.previousElementSibling.focus()">主动聚焦</c-button>
 
 ```js

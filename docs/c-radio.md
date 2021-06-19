@@ -42,11 +42,11 @@ radio.removeAttribute('disabled');
 通常`c-radio`会有一个`value`属性，类似于`id`，如果不存在则返回文本内容`textContent`。
 
 <c-radio value="AAA">radio</c-radio>
-<c-button type="primary" onclick="XyMessage.info(this.previousElementSibling.value)">获取value</c-button>
+<c-button type="primary" onclick="CMessage.info(this.previousElementSibling.value)">获取value</c-button>
 
 ```html
 <c-radio value="AAA">radio</c-radio>
-<c-button type="primary" onclick="XyMessage.info(this.previousElementSibling.value)">获取value</c-button>
+<c-button type="primary" onclick="CMessage.info(this.previousElementSibling.value)">获取value</c-button>
 ```
 
 JavaScript操作`get`
@@ -74,14 +74,14 @@ radio.getAttribute('value');
 <c-radio name="lib">Vue</c-radio>
 <c-radio name="lib">Angular</c-radio>
 <c-radio name="lib">Other</c-radio>
-<c-button type="primary" onclick="XyMessage.info(document.querySelector('c-radio[name=lib][checked]').value)">获取选中状态</c-button>
+<c-button type="primary" onclick="CMessage.info(document.querySelector('c-radio[name=lib][checked]').value)">获取选中状态</c-button>
 
 ```html
 <c-radio name="lib" checked>React</c-radio>
 <c-radio name="lib">Vue</c-radio>
 <c-radio name="lib">Angular</c-radio>
 <c-radio name="lib">Other</c-radio>
-<c-button type="primary" onclick="XyMessage.info(document.querySelector('c-radio[name=lib][checked]').value)">获取选中状态</c-button>
+<c-button type="primary" onclick="CMessage.info(document.querySelector('c-radio[name=lib][checked]').value)">获取选中状态</c-button>
 ```
 
 JavaScript操作`get`、`set`
@@ -144,10 +144,10 @@ radiogroup.setAttribute('value','Css');
 
 在切换完成时触发。
 
-<c-radio onchange="XyMessage.info('当前状态checked:'+this.checked)">radio</c-radio>
+<c-radio onchange="CMessage.info('当前状态checked:'+this.checked)">radio</c-radio>
 
 ```html
-<c-radio onchange="XyMessage.info('当前状态checked:'+this.checked)">radio</c-radio>
+<c-radio onchange="CMessage.info('当前状态checked:'+this.checked)">radio</c-radio>
 ```
 
 ```js
@@ -174,7 +174,7 @@ radio.addEventListener('change',function(ev){
 
 `c-radio-group`支持`change`事件
 
-<c-radio-group name="lan" defaultvalue="Javascript" onchange="XyMessage.info(this.value)">
+<c-radio-group name="lan" defaultvalue="Javascript" onchange="CMessage.info(this.value)">
     <c-radio>Html</c-radio>
     <c-radio>Css</c-radio>
     <c-radio>Javascript</c-radio>
@@ -216,8 +216,8 @@ radiogroup.addEventListener('change',function(ev){
 
 用于主动聚焦`focus`，聚焦以后可以响应键盘事件，`Enter`或者`Space`选中。
 
-<c-radio onchange="XyMessage.info('当前状态checked:'+this.checked)">radio</c-radio>
-<c-button type="primary" onfocus="XyMessage.info('focus')" onclick="this.previousElementSibling.focus()">主动聚焦</c-button>
+<c-radio onchange="CMessage.info('当前状态checked:'+this.checked)">radio</c-radio>
+<c-button type="primary" onfocus="CMessage.info('focus')" onclick="this.previousElementSibling.focus()">主动聚焦</c-button>
 
 ```js
 radio.focus();

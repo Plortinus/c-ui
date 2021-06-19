@@ -186,7 +186,7 @@ com.removeAttribute('props');
 
 也可以通过`js`获取到`checked`属性。
 
-<c-button toggle class="button-toggle" icon="like" onclick="XyMessage.show({icon:'like',text:this.checked?'I dislike it':'I like it'})">like</c-button>
+<c-button toggle class="button-toggle" icon="like" onclick="CMessage.show({icon:'like',text:this.checked?'I dislike it':'I like it'})">like</c-button>
 
 ```js
 btn.addEventListener('click',function(ev){
@@ -305,10 +305,10 @@ c-button{
 
 `focus`、`blur`后的回调事件。
 
-<c-button onfocus="XyMessage.info('focus')" onblur="XyMessage.info('blur')">primary</c-button>
+<c-button onfocus="CMessage.info('focus')" onblur="CMessage.info('blur')">primary</c-button>
 
 ```html
-<c-button onfocus="XyMessage.info('focus')" onblur="XyMessage.info('blur')">primary</c-button>
+<c-button onfocus="CMessage.info('focus')" onblur="CMessage.info('blur')">primary</c-button>
 ```
 
 其他触发方式
@@ -333,7 +333,7 @@ btn.addEventListener('focus',function(ev){
 
 用于主动聚焦`focus`，聚焦以后可以响应键盘事件，`Enter`可以触发`click`事件。
 
-<c-button onclick="XyMessage.info('click')" onfocus="XyMessage.info('focus')" onblur="XyMessage.info('blur')" >primary</c-button>
+<c-button onclick="CMessage.info('click')" onfocus="CMessage.info('focus')" onblur="CMessage.info('blur')" >primary</c-button>
 <c-button type="primary" onclick="this.previousElementSibling.focus()">主动聚焦</c-button>
 
 ```js

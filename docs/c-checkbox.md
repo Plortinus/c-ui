@@ -42,11 +42,11 @@ checkbox.removeAttribute('disabled');
 通常`c-checkbox`会有一个`value`属性，类似于`id`，如果不存在则返回文本内容`textContent`。
 
 <c-checkbox value="AAA">checkbox</c-checkbox>
-<c-button type="primary" onclick="XyMessage.info(this.previousElementSibling.value)">获取value</c-button>
+<c-button type="primary" onclick="CMessage.info(this.previousElementSibling.value)">获取value</c-button>
 
 ```html
 <c-checkbox value="AAA">checkbox</c-checkbox>
-<c-button type="primary" onclick="XyMessage.info(this.previousElementSibling.value)">获取value</c-button>
+<c-button type="primary" onclick="CMessage.info(this.previousElementSibling.value)">获取value</c-button>
 ```
 
 JavaScript操作
@@ -77,7 +77,7 @@ checkbox.getAttribute('value');
 <c-checkbox name="lang">Php</c-checkbox>
 <c-checkbox name="lang">Dart</c-checkbox>
 <c-checkbox name="lang">Swift</c-checkbox>
-<c-button type="primary" onclick="XyMessage.info(Array.from(document.querySelectorAll('c-checkbox[name=lang][checked]')).map(el=>el.textContent))">获取选中状态</c-button>
+<c-button type="primary" onclick="CMessage.info(Array.from(document.querySelectorAll('c-checkbox[name=lang][checked]')).map(el=>el.textContent))">获取选中状态</c-button>
 
 ```html
 <c-checkbox name="lang" checked>Html</c-checkbox>
@@ -87,7 +87,7 @@ checkbox.getAttribute('value');
 <c-checkbox name="lang">Php</c-checkbox>
 <c-checkbox name="lang">Dart</c-checkbox>
 <c-checkbox name="lang">Swift</c-checkbox>
-<c-button type="primary" onclick="XyMessage.info(Array.from(document.querySelectorAll('c-checkbox[name=lang][checked]')).map(el=>el.textContent))">获取选中状态</c-button>
+<c-button type="primary" onclick="CMessage.info(Array.from(document.querySelectorAll('c-checkbox[name=lang][checked]')).map(el=>el.textContent))">获取选中状态</c-button>
 ```
 
 
@@ -203,7 +203,7 @@ checkbox.indeterminate = true;
     <c-checkbox>Flutter</c-checkbox>
     <c-checkbox>Swift</c-checkbox>
 </c-checkbox-group>
-<c-button type="primary" onclick="XyMessage.info('合法性:'+this.previousElementSibling.validity)">合法性</c-button>
+<c-button type="primary" onclick="CMessage.info('合法性:'+this.previousElementSibling.validity)">合法性</c-button>
 
 JavaScript操作`get`
 
@@ -217,10 +217,10 @@ checkbox.validity;//获取
 
 在切换完成时触发。
 
-<c-checkbox onchange="XyMessage.info('当前状态checked:'+this.checked)">checkbox</c-checkbox>
+<c-checkbox onchange="CMessage.info('当前状态checked:'+this.checked)">checkbox</c-checkbox>
 
 ```html
-<c-checkbox onchange="XyMessage.info('当前状态checked:'+this.checked)">checkbox</c-checkbox>
+<c-checkbox onchange="CMessage.info('当前状态checked:'+this.checked)">checkbox</c-checkbox>
 ```
 
 ```js
@@ -247,7 +247,7 @@ checkbox.addEventListener('change',function(ev){
 
 `c-checkbox-group`支持`change`事件
 
-<c-checkbox-group name="books" required min="2" max="3" defaultvalue="React,Angular" onchange="XyMessage.info(this.value)">
+<c-checkbox-group name="books" required min="2" max="3" defaultvalue="React,Angular" onchange="CMessage.info(this.value)">
     <c-checkbox>React</c-checkbox>
     <c-checkbox>Vue</c-checkbox>
     <c-checkbox>Angular</c-checkbox>
@@ -290,7 +290,7 @@ checkboxgroup.addEventListener('change',function(ev){
 
 用于主动聚焦`focus`，聚焦以后可以响应键盘事件，`Enter`或者`Space`切换选中状态。
 
-<c-checkbox onfocus="XyMessage.info('focus')" onchange="XyMessage.info('当前状态checked:'+this.checked)">checkbox</c-checkbox>
+<c-checkbox onfocus="CMessage.info('focus')" onchange="CMessage.info('当前状态checked:'+this.checked)">checkbox</c-checkbox>
 <c-button type="primary" onclick="this.previousElementSibling.focus()">主动聚焦</c-button>
 
 ```js

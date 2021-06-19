@@ -185,7 +185,7 @@ select.removeAttribute('disabled');
     <c-option value="3">Option3</c-option>
 </c-select>
 <c-button type="primary" onclick="this.previousElementSibling.value='3'">选中Option3</c-button>
-<c-button type="primary" onclick="XyMessage.info('当前选中: '+this.previousElementSibling.previousElementSibling.text)">获取当前选中textContent</c-button>
+<c-button type="primary" onclick="CMessage.info('当前选中: '+this.previousElementSibling.previousElementSibling.text)">获取当前选中textContent</c-button>
 
 JavaScript操作`get`、`set`
 
@@ -310,7 +310,7 @@ select.getAttribute('value');
     <c-option value="2">Option2</c-option>
     <c-option value="3">Option3</c-option>
 </c-select>
-<c-button type="primary" onclick="XyMessage.info('合法性:'+this.previousElementSibling.validity)">合法性</c-button>
+<c-button type="primary" onclick="CMessage.info('合法性:'+this.previousElementSibling.validity)">合法性</c-button>
 
 JavaScript操作`get`
 
@@ -354,14 +354,14 @@ select.validity;//获取
 
 在下拉选中完成时触发。
 
-<c-select onchange="XyMessage.info('当前选中value:'+this.value)">
+<c-select onchange="CMessage.info('当前选中value:'+this.value)">
     <c-option value="1">Option1</c-option>
     <c-option value="2">Option2</c-option>
     <c-option value="3">Option3</c-option>
 </c-select>
 
 ```html
-<c-select onchange="XyMessage.info('当前选中value:'+this.value)">
+<c-select onchange="CMessage.info('当前选中value:'+this.value)">
     <c-option value="1">Option1</c-option>
     <c-option value="2">Option2</c-option>
     <c-option value="3">Option3</c-option>
@@ -409,7 +409,7 @@ select.addEventListener('change',function(ev){
 
 用于主动聚焦`focus`，聚焦以后可以响应键盘事件，支持方向键。
 
-<c-select onfocus="XyMessage.info('focus')" onblur="XyMessage.info('blur')" onchange="XyMessage.info('当前选中value:'+this.value)">
+<c-select onfocus="CMessage.info('focus')" onblur="CMessage.info('blur')" onchange="CMessage.info('当前选中value:'+this.value)">
     <c-option value="1">Option1</c-option>
     <c-option value="2">Option2</c-option>
     <c-option value="3">Option3</c-option>

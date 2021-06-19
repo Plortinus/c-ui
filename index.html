@@ -165,9 +165,12 @@
     <!-- <script type="module" src="./components/c.js" async></script> -->
 
     <script type="module" src="./index.js"></script>
+    <!-- <script  type="module" src="https://cdn.jsdelivr.net/npm/wbc-ui@0.0.3/index.min.js"></script> -->
   </head>
 
   <body>
+    <c-button href="/about">默认跳转新页面打开</c-button>
+    <c-button href="/about" target="_self">当前页面打开</c-button>
     <h2>theme</h2>
     <c-button type="primary" class="theme-button" style="--themeColor: #1e90ff"
       >#1E90FF</c-button
@@ -814,6 +817,10 @@
     <h2>form</h2>
     <c-form action="/login" method="post" labelwidth="100">
       <c-form-item legend="label值">
+        <c-switch checked></c-switch>
+      </c-form-item>
+      
+      <c-form-item legend="label值">
         <c-date-picker name="111" required defaultvalue="2020-03-03"></c-date-picker>
       </c-form-item>
       <c-form-item legend="user">
@@ -898,7 +905,7 @@
       <c-tr>
         <c-td>John Brown</c-td>
         <c-td>32</c-td>
-        <c-td>New York No. 1 Lake Park</c-td>
+        <c-td onClick="alert('1')">New York No. 1 Lake Park</c-td>
       </c-tr>
       <c-tr>
         <c-td>Jim Green</c-td>

@@ -119,7 +119,7 @@ input.removeAttribute('readonly');
 
 <c-input></c-input>
 <c-button type="primary" onclick="this.previousElementSibling.value='Plortinus'">设置value为Plortinus</c-button>
-<c-button type="primary" onclick="XyMessage.info('当前value: '+this.previousElementSibling.previousElementSibling.value)">显示当前value</c-button>
+<c-button type="primary" onclick="CMessage.info('当前value: '+this.previousElementSibling.previousElementSibling.value)">显示当前value</c-button>
 
 JavaScript操作`get`、`set`
 
@@ -149,10 +149,10 @@ input.setAttribute('value','name');
 
 右侧出现`search`图标，点击会执行`onsubmit`事件
 
-<c-input type="search" onsubmit="XyMessage.info(this.value)"></c-input>
+<c-input type="search" onsubmit="CMessage.info(this.value)"></c-input>
 
 ```html
-<c-input type="search" onsubmit="XyMessage.info(this.value)"></c-input>
+<c-input type="search" onsubmit="CMessage.info(this.value)"></c-input>
 ```
 
 ### type=number
@@ -333,7 +333,7 @@ pwdAgain.customValidity = {
 可以通过属性`validity`来获取输入框内容的合法性。
 
 <c-input required placeholder="required"></c-input>
-<c-button type="primary" onclick="XyMessage.info('合法性:'+this.previousElementSibling.validity)">合法性</c-button>
+<c-button type="primary" onclick="CMessage.info('合法性:'+this.previousElementSibling.validity)">合法性</c-button>
 
 JavaScript操作`get`
 
@@ -349,7 +349,7 @@ input.validity;//获取
 
 当输入框文本改变的时候触发（失焦后）。
 
-<c-input onchange="XyMessage.info(this.value)"></c-input>
+<c-input onchange="CMessage.info(this.value)"></c-input>
 
 ```html
 <c-input onchange="fn(event)"></c-input>
@@ -381,7 +381,7 @@ input.addEventListener('change',function(ev){
 
 当输入框在输入时触发。
 
-<c-input oninput="XyMessage.info(this.value)"></c-input>
+<c-input oninput="CMessage.info(this.value)"></c-input>
 
 ```html
 <c-input oninput="fn(event)"></c-input>
@@ -411,7 +411,7 @@ input.addEventListener('input',function(ev){
 
 通常，配合`debounce`可以设置防抖，比如`debounce="300"`表示在`300ms`内无操作才会触发。
 
-<c-input debounce="300" oninput="XyMessage.info(this.value)"></c-input>
+<c-input debounce="300" oninput="CMessage.info(this.value)"></c-input>
 
 ```html
 <c-input debounce="300" oninput="fn(event)"></c-input>
@@ -421,7 +421,7 @@ input.addEventListener('input',function(ev){
 
 当聚焦时，按回车键`Enter`触发。
 
-<c-input onsubmit="XyMessage.info(this.value)" placeholder="Press Enter"></c-input>
+<c-input onsubmit="CMessage.info(this.value)" placeholder="Press Enter"></c-input>
 
 ```html
 <c-input onsubmit="fn(event)"></c-input>
@@ -461,7 +461,7 @@ input.addEventListener('submit',function(ev){
 
 用于主动聚焦`focus`。
 
-<c-input onfocus="XyMessage.info('focus')"></c-input>
+<c-input onfocus="CMessage.info('focus')"></c-input>
 <c-button type="primary" onclick="this.previousElementSibling.focus()">主动聚焦</c-button>
 
 ```js

@@ -210,7 +210,7 @@ table.removeAttribute('loading');
         <c-td>London No. 1 Lake Park</c-td>
     </c-tr>
 </c-table>
-<c-button type="primary" onclick="XyMessage.info(this.previousElementSibling.value)">获取当前选中表格</c-button>
+<c-button type="primary" onclick="CMessage.info(this.previousElementSibling.value)">获取当前选中表格</c-button>
 
 ```html
 <c-table thead="Name,Age,Address" select>

@@ -8,5 +8,5 @@
 * 无依赖。纯原生，无需任何预处理器编译。
 * 无障碍。支持键盘访问。
 
-[GitHub](https://github.com/Plortinus/XYUI)
+[GitHub](https://github.com/Plortinus/CUI)
 [Get Started](README.md)

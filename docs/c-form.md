@@ -241,7 +241,7 @@ sumbitBtn.onclick = function(){
 sumbitBtn.onclick = function(){
     if(form.checkValidity()){
         //全部验证通过
-        XyDialog.success({
+        CDialog.success({
             title:"全部验证通过",
             content:JSON.stringify(form.formdata.json)
         })

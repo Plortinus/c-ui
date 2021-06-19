@@ -68,7 +68,7 @@
 <c-date-picker id="date-picker-value"></c-date-picker>
 
 <c-button type="primary" onclick="document.getElementById('date-picker-value').value='2019-10-10'">设置日期为2019-10-10</c-button>
-<c-button type="primary" onclick="XyMessage.info('当前日期: '+document.getElementById('date-picker-value').value)">显示当前日期</c-button>
+<c-button type="primary" onclick="CMessage.info('当前日期: '+document.getElementById('date-picker-value').value)">显示当前日期</c-button>
 
 JavaScript操作`get`、`set`
 
@@ -226,10 +226,10 @@ date.setAttribute('dir','right');
 
 当选好日期后，按确定按钮可以触发`change`回调。
 
-<c-date-picker onchange="XyMessage.info('当前选择日期: '+this.value)"></c-date-picker>
+<c-date-picker onchange="CMessage.info('当前选择日期: '+this.value)"></c-date-picker>
 
 ```html
-<c-date-picker onchange="XyMessage.info('当前选择日期: '+this.value)"></c-date-picker>
+<c-date-picker onchange="CMessage.info('当前选择日期: '+this.value)"></c-date-picker>
 ```
 
 其他触发方式

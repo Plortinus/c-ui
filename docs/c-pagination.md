@@ -66,7 +66,7 @@ pagination.setAttribute('total',100);
 
 <c-pagination pagesize="3" total="50"></c-pagination>
 <c-button type="primary" onclick="this.previousElementSibling.current=10">跳转到第10页</c-button>
-<c-button type="primary" onclick="XyMessage.info('当前value: '+this.previousElementSibling.previousElementSibling.current)">显示当前页数</c-button>
+<c-button type="primary" onclick="CMessage.info('当前value: '+this.previousElementSibling.previousElementSibling.current)">显示当前页数</c-button>
 
 JavaScript操作`get`、`set`
 
@@ -142,10 +142,10 @@ list.html?page=1
 
 页码改变的回调。
 
-<c-pagination  onchange="XyMessage.info('当前页: '+this.current)" pagesize="3" total="50"></c-pagination>
+<c-pagination  onchange="CMessage.info('当前页: '+this.current)" pagesize="3" total="50"></c-pagination>
 
 ```html
-<c-pagination  onchange="XyMessage.info('当前页: '+this.current)" pagesize="3" total="50"></c-pagination>
+<c-pagination  onchange="CMessage.info('当前页: '+this.current)" pagesize="3" total="50"></c-pagination>
 ```
 
 其他触发方式
@@ -196,7 +196,7 @@ pagination.addEventListener('change',function(ev){
 </style>
 
 <div class="pagination-demo">
-    <c-pagination id="pagination-demo" onchange="XyMessage.info('当前页: '+this.current)" pagesize="10" total="200"></c-pagination>
+    <c-pagination id="pagination-demo" onchange="CMessage.info('当前页: '+this.current)" pagesize="10" total="200"></c-pagination>
     <c-select defaultvalue="10" onchange="this.previousElementSibling.pagesize=this.value">
         <c-option value="10">每页10条</c-option>
         <c-option value="15">每页15条</c-option>
@@ -223,7 +223,7 @@ pagination.addEventListener('change',function(ev){
 }
 </style>
 <div class="pagination-demo">
-    <c-pagination id="pagination-demo" onchange="XyMessage.info('当前页: '+this.current)" pagesize="10" total="200"></c-pagination>
+    <c-pagination id="pagination-demo" onchange="CMessage.info('当前页: '+this.current)" pagesize="10" total="200"></c-pagination>
     <c-select defaultvalue="10" onchange="document.getElementById('pagination-demo').pagesize=this.value">
         <c-option value="10">每页10条</c-option>
         <c-option value="15">每页15条</c-option>
