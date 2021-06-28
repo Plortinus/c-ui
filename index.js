@@ -21,6 +21,7 @@ import './components/c-table.js'
 import './components/c-text.js'
 import './components/c-view.js'
 import './components/c-datalist.js'
+import './components/c-space.js'
 import CDialog from './components/c-dialog.js'
 import CMessage from './components/c-message.js'
 window.CDialog = CDialog
