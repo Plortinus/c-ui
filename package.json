@@ -1,6 +1,6 @@
 {
 	"name": "wbc-ui",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "a front end cross-framework ui library based on web-components",
 	"main": "index.js",
 	"module": "index.js",
